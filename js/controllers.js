@@ -2054,7 +2054,7 @@ angular.module('starter.controllers', [])
 		$location.path("app/fsa")
 	}
 })
-.controller('newclaimCtrl', function($scope,$ionicPlatform,$cordovaNetwork,$cordovaDatePicker,$http,$location,$ionicModal,$cordovaDialogs,$ionicLoading,$cordovaNetwork,$ionicScrollDelegate,$rootScope,$cordovaCamera,$ionicPopup) {
+.controller('newclaimCtrl', function($scope,$ionicPlatform,$cordovaNetwork,$cordovaDatePicker,$http,$location,$ionicModal,$cordovaDialogs,$ionicLoading,$cordovaNetwork,$ionicScrollDelegate,$rootScope,$cordovaCamera,$ionicPopup,$filter) {
 	$rootScope.hidecontent=true;
 	localStorage.setItem("backCount","3");
 	$scope.access_token = localStorage.getItem('access_token');
@@ -2068,6 +2068,7 @@ angular.module('starter.controllers', [])
 	$scope.newclaimvalues={taxid:'',amount:'',dependent:'',patient:'',Bankaccount:'',startTransDate:'',endTransDate:''};
 	$scope.imgSrc=[];
 	$scope.floatlabel=false;
+	$scope.date = $filter('date')(new Date(),'MM/dd/yyyy');
 	$ionicScrollDelegate.scrollBottom(true);
 	
 	$scope.SelectFloat = function ()
@@ -2269,6 +2270,37 @@ angular.module('starter.controllers', [])
 				.then(function() {
 				});
 			}
+		}
+		else if($scope.newclaimvalues.startTransDate > $scope.newclaimvalues.endTransDate){
+			if($rootScope.IOS==true){
+				var alertPopup = $ionicPopup.alert({
+					title: 'Sorry',
+					template: 'End Date should not be less than start Date'
+				});
+
+				alertPopup.then(function(res) {
+				});
+			}else{
+				$cordovaDialogs.alert('End Date should not be less than start Date')
+				.then(function() {
+				});
+			}
+		}
+		else if($scope.newclaimvalues.endTransDate >$scope.date){
+			if($rootScope.IOS==true){
+				var alertPopup = $ionicPopup.alert({
+					title: 'Sorry',
+					template: 'Cannot select future date in End date'
+				});
+
+				alertPopup.then(function(res) {
+				});
+			}else{
+				$cordovaDialogs.alert('Cannot select future date in End date')
+				.then(function() {
+				});
+			}
+
 		}else{
 			$ionicLoading.show({
 			template: '<ion-spinner icon="ios"></ion-spinner><br>Loading...'
@@ -2493,7 +2525,7 @@ angular.module('starter.controllers', [])
 		$location.path("app/fsa");
 	}
 })
-.controller('fsadependentCtrl', function($scope,$ionicPlatform,$cordovaNetwork,$cordovaDatePicker,$http,$location,$ionicModal,$cordovaDialogs,$ionicLoading,$cordovaNetwork,$ionicScrollDelegate,$rootScope,$cordovaCamera,$ionicPopup) {
+.controller('fsadependentCtrl', function($scope,$ionicPlatform,$cordovaNetwork,$cordovaDatePicker,$http,$location,$ionicModal,$cordovaDialogs,$ionicLoading,$cordovaNetwork,$ionicScrollDelegate,$rootScope,$cordovaCamera,$ionicPopup,$filter) {
 	$rootScope.hidecontent=true;
 	localStorage.setItem("backCount","3");
 	$scope.access_token = localStorage.getItem('access_token');
@@ -2507,6 +2539,7 @@ angular.module('starter.controllers', [])
     $scope.newclaimvalues={taxid:'',amount:'',dependent:'',patient:'',Bankaccount:'',startTransDate:'',endTransDate:''};
 	$scope.imgSrc=[];
 	$scope.floatlabel=false;
+	$scope.date = $filter('date')(new Date(),'MM/dd/yyyy');
 	 $ionicScrollDelegate.scrollBottom(true);
 	
 	$scope.SelectFloat = function ()
@@ -2607,6 +2640,37 @@ angular.module('starter.controllers', [])
 			$cordovaDialogs.alert('Please enter the amount greater than 0','Sorry','OK')
 			.then(function() {
 			});
+		}
+		else if($scope.newclaimvalues.startTransDate > $scope.newclaimvalues.endTransDate){
+			if($rootScope.IOS==true){
+				var alertPopup = $ionicPopup.alert({
+					title: 'Sorry',
+					template: 'End Date should not be less than start Date'
+				});
+
+				alertPopup.then(function(res) {
+				});
+			}else{
+				$cordovaDialogs.alert('End Date should not be less than start Date')
+				.then(function() {
+				});
+			}
+		}
+		else if($scope.newclaimvalues.endTransDate >$scope.date){
+			if($rootScope.IOS==true){
+				var alertPopup = $ionicPopup.alert({
+					title: 'Sorry',
+					template: 'Cannot select future date in End date'
+				});
+
+				alertPopup.then(function(res) {
+				});
+			}else{
+				$cordovaDialogs.alert('Cannot select future date in End date')
+				.then(function() {
+				});
+			}
+
 		}else{
 			$ionicLoading.show({
 			template: '<ion-spinner icon="ios"></ion-spinner><br>Loading...'
