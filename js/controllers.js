@@ -1350,16 +1350,11 @@ angular.module('starter.controllers', [])
 	$scope.access_token = localStorage.getItem('access_token');
 	$http.get('http://app.sterlinghsa.com/api/v1/accounts/portfolio',{headers: {'Content-Type':'application/json;  charset=utf-8','Authorization':$scope.access_token} })
 	.success(function(data){
-		localStorage.setItem('account_types',data.account_types.HSA);
 		localStorage.setItem('account_types',data.account_types.FSA);
 		$rootScope.acctype=data.account_types;
-		$scope.account_type=data.account_types.HSA;
 		$scope.account_types=data.account_types.FSA;
-		$rootScope.hsaaccno=data.account_types.HSA.ACCT_NUM;
 		$rootScope.fsaaccno=data.account_types.FSA.ACCT_NUM;
-		$rootScope.hsaaccId=data.account_types.HSA.ACCT_ID;
 		$rootScope.fsaaccId=data.account_types.FSA.ACCT_ID;
-		$rootScope.cobrassn=data.account_types.COBRA.SSN;
 	}).error(function(err){
 		$ionicLoading.hide();
 		if($rootScope.IOS==true){
@@ -2172,7 +2167,7 @@ angular.module('starter.controllers', [])
 
 	});
    
-	$http.get("http://app.sterlinghsa.com/api/v1/accounts/bankdetails",{params:{'type':'hsa', 'acc_num':$scope.hsaaccno},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
+	$http.get("http://app.sterlinghsa.com/api/v1/accounts/bankdetails",{params:{'type':'fsa', 'acc_num':$scope.fsaaccno},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
 	.success(function(data){
 		$scope.bank_details=data.bank_details;
 	}).error(function(err){
@@ -2301,7 +2296,23 @@ angular.module('starter.controllers', [])
 				});
 			}
 
-		}else{
+		}else if(document.getElementsByName('imgValue').length==0){
+			if($rootScope.IOS==true){
+				var alertPopup = $ionicPopup.alert({
+					title: 'Sorry',
+					template: 'Please upload one receipt'
+				});
+
+				alertPopup.then(function(res) {
+				});
+			}else{
+				$cordovaDialogs.alert('Please upload one receipt')
+				.then(function() {
+				});
+			}
+
+		}
+		else{
 			$ionicLoading.show({
 			template: '<ion-spinner icon="ios"></ion-spinner><br>Loading...'
 			});
@@ -2327,6 +2338,7 @@ angular.module('starter.controllers', [])
 			if(data.status == "SUCCESS"){
 				$ionicLoading.hide();
 				$scope.claim_id = data.claim_id;
+				$location.path("/new");
 				if($rootScope.IOS==true){
 					var alertPopup = $ionicPopup.alert({
 						title: 'Claim Submitted Successfully',
@@ -2353,6 +2365,7 @@ angular.module('starter.controllers', [])
 				}	
 			}else if(data.status == "FAILED"){
 				$ionicLoading.hide();
+				$location.path("/new");
 				if($rootScope.IOS==true){
 					var alertPopup = $ionicPopup.alert({
 						title: 'Sorry',
@@ -2448,12 +2461,16 @@ angular.module('starter.controllers', [])
 			$rootScope.dependentName=false;
 			$rootScope.taxcontent=false;
 			$location.path("/newclaim");
+		}else if(claim.MEANING === 'HRACFC'){
+			$rootScope.patientname=true;
+			$rootScope.dependentName=false;
+			$rootScope.taxcontent=false;
+			$location.path("/newclaim");
 		}else if(claim.MEANING === 'Parking FSA'){
 			$rootScope.patientname=false;
 			$rootScope.dependentName=false;
 			$rootScope.taxcontent=false;
 			$location.path("/newclaim");
-
 		}
 		$scope.plan_type={};
 
@@ -2507,6 +2524,11 @@ angular.module('starter.controllers', [])
 			$location.path("/fsadependent");
 
 		}else if(claim.MEANING === 'Limited Purpose Healthcare FSA'){
+			$rootScope.patientname=true;
+			$rootScope.dependentName=false;
+			$rootScope.taxcontent=false;
+			$location.path("/fsadependent");
+		}else if(claim.MEANING === 'HRACFC'){
 			$rootScope.patientname=true;
 			$rootScope.dependentName=false;
 			$rootScope.taxcontent=false;
@@ -2671,6 +2693,21 @@ angular.module('starter.controllers', [])
 				});
 			}
 
+		}else if(document.getElementsByName('imgValue').length==0){
+			if($rootScope.IOS==true){
+				var alertPopup = $ionicPopup.alert({
+					title: 'Sorry',
+					template: 'Please upload one receipt'
+				});
+
+				alertPopup.then(function(res) {
+				});
+			}else{
+				$cordovaDialogs.alert('Please upload one receipt')
+				.then(function() {
+				});
+			}
+
 		}else{
 			$ionicLoading.show({
 			template: '<ion-spinner icon="ios"></ion-spinner><br>Loading...'
@@ -2696,6 +2733,7 @@ angular.module('starter.controllers', [])
 			if(data.status == "SUCCESS"){
 				$ionicLoading.hide();
 				$scope.claim_id = data.claim_id;
+				$location.path("/fsapayprovider");
 				if($rootScope.IOS==true){
 						var alertPopup = $ionicPopup.alert({
 							title: 'Claim Submitted Successfully',
@@ -2722,6 +2760,7 @@ angular.module('starter.controllers', [])
 				}	
 			}else if(data.status == "FAILED"){
 				$ionicLoading.hide();
+				$location.path("/fsapayprovider");
 				if($rootScope.IOS==true){
 						var alertPopup = $ionicPopup.alert({
 							title: 'Sorry',
@@ -2978,20 +3017,20 @@ angular.module('starter.controllers', [])
 		{
 			$scope.hidehsa=true; 
 			$scope.showHsamenu=true;
-			$location.path('/app/hra');
-			$scope.homePath="#/app/hra";
+			$location.path('/app/hsa');
+			$scope.homePath="#/app/hsa";
 		}
 		if($scope.acctype.FSA!=null){
 			$scope.hidefsa=true;
 			$scope.showFsamenu=true;
-			$location.path('/app/hra');
-			$scope.homePath="#/app/hra";
+			$location.path('/app/fsa');
+			$scope.homePath="#/app/fsa";
 		}
 		if($scope.acctype.COBRA!=null){
 			$scope.hidecobra=true;
 			$scope.showCobramenu=true;							 
-			$location.path('/app/hsa');
-			$scope.homePath="#/app/hsa";
+			$location.path('/app/cobra');
+			$scope.homePath="#/app/cobra";
 		}
 		if($scope.acctype.HRA!=null){
 			$scope.hidehra=true;
@@ -3488,6 +3527,8 @@ angular.module('starter.controllers', [])
 		}
 		if(claim.MEANING === 'HR4INDE'){
 			$location.path("/paymeacoinde");
+		}else if(claim.MEANING === 'HRAFirmenich'){
+			$location.path("/paymeacoinde");
 		}
 	}
 	
@@ -3522,6 +3563,8 @@ angular.module('starter.controllers', [])
 		}
 		if(claim.MEANING === 'HR4INDE'){
 			$location.path("/payprovideracoinde");
+		}else if(claim.MEANING === 'HRAFirmenich'){
+			$location.path("/paymeacoinde");
 		}
 	}
 	$scope.goback=function()
