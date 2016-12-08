@@ -786,6 +786,21 @@ angular.module('starter.controllers', [])
 				.then(function() {
 				});
 			}
+		}else if(document.getElementsByName('imgValue').length==0){
+			if($rootScope.IOS==true){
+				var alertPopup = $ionicPopup.alert({
+					title: 'Sorry',
+					template: 'Please upload one receipt'
+				});
+
+				alertPopup.then(function(res) {
+				});
+			}else{
+				$cordovaDialogs.alert('Please upload one receipt')
+				.then(function() {
+				});
+			}
+
 		}
 		else {	
 			$ionicLoading.show({
@@ -1095,6 +1110,21 @@ angular.module('starter.controllers', [])
 				.then(function() {
 				});
 			}
+		}else if(document.getElementsByName('imgValue').length==0){
+			if($rootScope.IOS==true){
+				var alertPopup = $ionicPopup.alert({
+					title: 'Sorry',
+					template: 'Please upload one receipt'
+				});
+
+				alertPopup.then(function(res) {
+				});
+			}else{
+				$cordovaDialogs.alert('Please upload one receipt')
+				.then(function() {
+				});
+			}
+
 		}else{
 			$ionicLoading.show({
 			template: '<ion-spinner icon="ios"></ion-spinner><br>Loading...'
@@ -3854,6 +3884,21 @@ angular.module('starter.controllers', [])
 				.then(function() {
 				});
 			}
+		}else if(document.getElementsByName('imgValue').length==0){
+			if($rootScope.IOS==true){
+				var alertPopup = $ionicPopup.alert({
+					title: 'Sorry',
+					template: 'Please upload one receipt'
+				});
+
+				alertPopup.then(function(res) {
+				});
+			}else{
+				$cordovaDialogs.alert('Please upload one receipt')
+				.then(function() {
+				});
+			}
+
 		}else{
 			$http.post("http://app.sterlinghsa.com/api/v1/accounts/newclaimrequest",{'acct_num':  $scope.fsaaccno,
 			'acct_id':$scope.fsaaccId,
@@ -4050,6 +4095,21 @@ angular.module('starter.controllers', [])
 				.then(function() {
 				});
 			}
+		}else if(document.getElementsByName('imgValue').length==0){
+			if($rootScope.IOS==true){
+				var alertPopup = $ionicPopup.alert({
+					title: 'Sorry',
+					template: 'Please upload one receipt'
+				});
+
+				alertPopup.then(function(res) {
+				});
+			}else{
+				$cordovaDialogs.alert('Please upload one receipt')
+				.then(function() {
+				});
+			}
+
 		}else{
 			$http.post("http://app.sterlinghsa.com/api/v1/accounts/newclaimrequest",{'acct_num': $scope.hraacc,
 			'acct_id':$scope.fsaaccId,
