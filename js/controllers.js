@@ -786,7 +786,7 @@ angular.module('starter.controllers', [])
 				.then(function() {
 				});
 			}
-		}else if(document.getElementsByName('imgValue').length==0){
+		}else if($scope.imgSrc==undefined){
 			if($rootScope.IOS==true){
 				var alertPopup = $ionicPopup.alert({
 					title: 'Sorry',
@@ -1110,7 +1110,7 @@ angular.module('starter.controllers', [])
 				.then(function() {
 				});
 			}
-		}else if(document.getElementsByName('imgValue').length==0){
+		}else if($scope.imgSrc==undefined){
 			if($rootScope.IOS==true){
 				var alertPopup = $ionicPopup.alert({
 					title: 'Sorry',
