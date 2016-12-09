@@ -606,7 +606,7 @@ angular.module('starter.controllers', [])
 					var options = {
 					maximumImagesCount: 5,
 					quality: 50,
-					destinationType: Camera.DestinationType.DATA_URI,
+					destinationType: Camera.DestinationType.DATA_URL,
 					sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
 					targetWidth: 100,
 					targetHeight: 100,
@@ -616,7 +616,7 @@ angular.module('starter.controllers', [])
 				};
 				
 				$cordovaCamera.getPicture(options).then(function(imageData) {
-					$scope.imgSrc= imageData;
+					$scope.imgSrc= "data:image/png;base64,"+imageData;
 				
 				}, function(err) {
 				});
@@ -624,7 +624,7 @@ angular.module('starter.controllers', [])
 				} else {
 					var options = {
 					quality: 50,
-					destinationType: Camera.DestinationType.DATA_URI,
+					destinationType: Camera.DestinationType.DATA_URL,
 					sourceType: Camera.PictureSourceType.CAMERA,
 					targetWidth: 100,
 					targetHeight: 100,
@@ -633,7 +633,7 @@ angular.module('starter.controllers', [])
 					correctOrientation:true
 				};
 				$cordovaCamera.getPicture(options).then(function(imageData) {
-					$scope.imgSrc= imageData;
+					$scope.imgSrc= "data:image/png;base64,"+imageData;
 				}, function(err) {
 				});
 				}
@@ -644,7 +644,7 @@ angular.module('starter.controllers', [])
 			if(options==1){
 				var options = {
 					quality: 50,
-					destinationType: Camera.DestinationType.DATA_URI,
+					destinationType: Camera.DestinationType.DATA_URL,
 					sourceType: Camera.PictureSourceType.CAMERA,
 					targetWidth: 100,
 					targetHeight: 100,
@@ -653,14 +653,14 @@ angular.module('starter.controllers', [])
 					correctOrientation:true
 				};
 				$cordovaCamera.getPicture(options).then(function(imageData) {
-					$scope.imgSrc= imageData;
+					$scope.imgSrc= "data:image/png;base64,"+imageData;
 				}, function(err) {
 				});
 			}else if(options==2){
 				var options = {
 					maximumImagesCount: 5,
 					quality: 50,
-					destinationType: Camera.DestinationType.DATA_URI,
+					destinationType: Camera.DestinationType.DATA_URL,
 					sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
 					targetWidth: 100,
 					targetHeight: 100,
@@ -670,7 +670,7 @@ angular.module('starter.controllers', [])
 				};
 				
 				$cordovaCamera.getPicture(options).then(function(imageData) {
-					$scope.imgSrc= imageData;
+					$scope.imgSrc= "data:image/png;base64,"+imageData;
 				
 				}, function(err) {
 				});
@@ -912,7 +912,7 @@ angular.module('starter.controllers', [])
 					var options = {
 					maximumImagesCount: 5,
 					quality: 50,
-					destinationType: Camera.DestinationType.DATA_URI,
+					destinationType: Camera.DestinationType.DATA_URL,
 					sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
 					targetWidth: 100,
 					targetHeight: 100,
@@ -922,7 +922,7 @@ angular.module('starter.controllers', [])
 				};
 				
 				$cordovaCamera.getPicture(options).then(function(imageData) {
-					$scope.imgSrc= imageData;
+					$scope.imgSrc= "data:image/png;base64,"+imageData;
 				
 				}, function(err) {
 				});
@@ -931,7 +931,7 @@ angular.module('starter.controllers', [])
 				} else {
 					var options = {
 						quality: 50,
-						destinationType: Camera.DestinationType.DATA_URI,
+						destinationType: Camera.DestinationType.DATA_URL,
 						sourceType: Camera.PictureSourceType.CAMERA,
 						targetWidth: 100,
 						targetHeight: 100,
@@ -940,7 +940,7 @@ angular.module('starter.controllers', [])
 						correctOrientation:true
 					};
 					$cordovaCamera.getPicture(options).then(function(imageData) {
-						$scope.imgSrc= imageData;
+						$scope.imgSrc= "data:image/png;base64,"+imageData;
 					}, function(err) {
 					});
 				}
@@ -951,7 +951,7 @@ angular.module('starter.controllers', [])
 			if(options==1){
 				var options = {
 					quality: 50,
-					destinationType: Camera.DestinationType.DATA_URI,
+					destinationType: Camera.DestinationType.DATA_URL,
 					sourceType: Camera.PictureSourceType.CAMERA,
 					targetWidth: 100,
 					targetHeight: 100,
@@ -960,13 +960,13 @@ angular.module('starter.controllers', [])
 					correctOrientation:true
 				};
 				$cordovaCamera.getPicture(options).then(function(imageData) {
-					$scope.imgSrc= imageData;
+					$scope.imgSrc= "data:image/png;base64,"+imageData;
 				}, function(err) {
 				});
 			}else if(options==2){
 				var options = {
 					quality: 50,
-					destinationType: Camera.DestinationType.DATA_URI,
+					destinationType: Camera.DestinationType.DATA_URL,
 					sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
 					targetWidth: 100,
 					targetHeight: 100,
@@ -975,7 +975,7 @@ angular.module('starter.controllers', [])
 					correctOrientation:true
 				};
 				$cordovaCamera.getPicture(options).then(function(imageData) {
-					$scope.imgSrc= imageData;
+					$scope.imgSrc= "data:image/png;base64,"+imageData;
 				}, function(err) {
 				});
 			}
@@ -1080,8 +1080,9 @@ angular.module('starter.controllers', [])
 	}).error(function(err){
 	});
 	
-	$http.get('http://app.sterlinghsa.com/api/v1/accounts/payeeslist',{params:{'acc_num':'ICA300298'},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} })
+	$http.get('http://app.sterlinghsa.com/api/v1/accounts/payeeslist',{params:{'acc_num':$scope.hsaaccno},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} })
 	.success(function(data){
+		
 		$scope.payee=data.payee ;
 	}).error(function(err){
 	});
@@ -2118,7 +2119,7 @@ angular.module('starter.controllers', [])
 				if(res) {
 					var options = {
 						quality: 50,
-						destinationType: Camera.DestinationType.DATA_URI,
+						destinationType: Camera.DestinationType.DATA_URL,
 						sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
 						targetWidth: 100,
 						targetHeight: 100,
@@ -2134,7 +2135,7 @@ angular.module('starter.controllers', [])
 				} else {
 					var options = {
 						quality: 50,
-						destinationType: Camera.DestinationType.DATA_URI,
+						destinationType: Camera.DestinationType.DATA_URL,
 						sourceType: Camera.PictureSourceType.CAMERA,
 						targetWidth: 100,
 						targetHeight: 100,
@@ -2154,7 +2155,7 @@ angular.module('starter.controllers', [])
 				if(options==1){
 					var options = {
 						quality: 50,
-						destinationType: Camera.DestinationType.DATA_URI,
+						destinationType: Camera.DestinationType.DATA_URL,
 						sourceType: Camera.PictureSourceType.CAMERA,
 						targetWidth: 100,
 						targetHeight: 100,
@@ -2169,7 +2170,7 @@ angular.module('starter.controllers', [])
 				}else if(options==2){
 					var options = {
 						quality: 50,
-						destinationType: Camera.DestinationType.DATA_URI,
+						destinationType: Camera.DestinationType.DATA_URL,
 						sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
 						targetWidth: 100,
 						targetHeight: 100,
@@ -2615,7 +2616,7 @@ angular.module('starter.controllers', [])
 				if(res) {
 					var options = {
 						quality: 50,
-						destinationType: Camera.DestinationType.DATA_URI,
+						destinationType: Camera.DestinationType.DATA_URL,
 						sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
 						targetWidth: 100,
 						targetHeight: 100,
@@ -2630,7 +2631,7 @@ angular.module('starter.controllers', [])
 				} else {
 					var options = {
 						quality: 50,
-						destinationType: Camera.DestinationType.DATA_URI,
+						destinationType: Camera.DestinationType.DATA_URL,
 						sourceType: Camera.PictureSourceType.CAMERA,
 						targetWidth: 100,
 						targetHeight: 100,
@@ -2650,7 +2651,7 @@ angular.module('starter.controllers', [])
 				if(options==1){
 					var options = {
 						quality: 50,
-						destinationType: Camera.DestinationType.DATA_URI,
+						destinationType: Camera.DestinationType.DATA_URL,
 						sourceType: Camera.PictureSourceType.CAMERA,
 						targetWidth: 100,
 						targetHeight: 100,
@@ -2665,7 +2666,7 @@ angular.module('starter.controllers', [])
 				}else if(options==2){
 					var options = {
 						quality: 50,
-						destinationType: Camera.DestinationType.DATA_URI,
+						destinationType: Camera.DestinationType.DATA_URL,
 						sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
 						targetWidth: 100,
 						targetHeight: 100,
@@ -2910,7 +2911,7 @@ angular.module('starter.controllers', [])
 			if(options==1){
 				var options = {
 					quality: 50,
-					destinationType: Camera.DestinationType.DATA_URI,
+					destinationType: Camera.DestinationType.DATA_URL,
 					sourceType: Camera.PictureSourceType.CAMERA,
 					targetWidth: 100,
 					targetHeight: 100,
@@ -2919,13 +2920,13 @@ angular.module('starter.controllers', [])
 					correctOrientation:true
 				};
 				$cordovaCamera.getPicture(options).then(function(imageData) {
-					$scope.imgSrc= imageData;
+					$scope.imgSrc= "data:image/png;base64,"+imageData;
 				}, function(err) {
 				});
 			}else if(options==2){
 				var options = {
 					quality: 50,
-					destinationType: Camera.DestinationType.DATA_URI,
+					destinationType: Camera.DestinationType.DATA_URL,
 					sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
 					targetWidth: 100,
 					targetHeight: 100,
@@ -2934,7 +2935,7 @@ angular.module('starter.controllers', [])
 					correctOrientation:true
 				};
 				$cordovaCamera.getPicture(options).then(function(imageData) {
-					$scope.imgSrc= imageData;
+					$scope.imgSrc= "data:image/png;base64,"+imageData;
 				}, function(err) {
 				});
 			}
@@ -3040,7 +3041,7 @@ angular.module('starter.controllers', [])
 	$scope.username = localStorage.getItem('username');
 	$scope.access_token = localStorage.getItem('access_token');
 	
-	$http.get('http://app.sterlinghsa.com/api/v1/accounts/portfolio',{headers: {'Content-Type':'application/json; charset=utf-8','Authorization':localStorage.getItem('access_token')} })
+	$http.get('http://app.sterlinghsa.com/api/v1/accounts/portfolio',{headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} })
 	.success(function(data){
 		$rootScope.acctype=data.account_types;
 		if($scope.acctype.HSA!=null)
@@ -3693,7 +3694,7 @@ angular.module('starter.controllers', [])
 				if(res) {
 					var options = {
 						quality: 50,
-						destinationType: Camera.DestinationType.DATA_URI,
+						destinationType: Camera.DestinationType.DATA_URL,
 						sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
 						targetWidth: 100,
 						targetHeight: 100,
@@ -3708,7 +3709,7 @@ angular.module('starter.controllers', [])
 				} else {
 					var options = {
 						quality: 50,
-						destinationType: Camera.DestinationType.DATA_URI,
+						destinationType: Camera.DestinationType.DATA_URL,
 						sourceType: Camera.PictureSourceType.CAMERA,
 						targetWidth: 100,
 						targetHeight: 100,
@@ -3728,7 +3729,7 @@ angular.module('starter.controllers', [])
 				if(options==1){
 					var options = {
 						quality: 50,
-						destinationType: Camera.DestinationType.DATA_URI,
+						destinationType: Camera.DestinationType.DATA_URL,
 						sourceType: Camera.PictureSourceType.CAMERA,
 						targetWidth: 100,
 						targetHeight: 100,
@@ -3743,7 +3744,7 @@ angular.module('starter.controllers', [])
 				}else if(options==2){
 					var options = {
 						quality: 50,
-						destinationType: Camera.DestinationType.DATA_URI,
+						destinationType: Camera.DestinationType.DATA_URL,
 						sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
 						targetWidth: 100,
 						targetHeight: 100,
@@ -4007,7 +4008,7 @@ angular.module('starter.controllers', [])
 				if(res) {
 					var options = {
 						quality: 50,
-						destinationType: Camera.DestinationType.DATA_URI,
+						destinationType: Camera.DestinationType.DATA_URL,
 						sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
 						targetWidth: 100,
 						targetHeight: 100,
@@ -4022,7 +4023,7 @@ angular.module('starter.controllers', [])
 				} else {
 					var options = {
 						quality: 50,
-						destinationType: Camera.DestinationType.DATA_URI,
+						destinationType: Camera.DestinationType.DATA_URL,
 						sourceType: Camera.PictureSourceType.CAMERA,
 						targetWidth: 100,
 						targetHeight: 100,
@@ -4042,7 +4043,7 @@ angular.module('starter.controllers', [])
 				if(options==1){
 					var options = {
 						quality: 50,
-						destinationType: Camera.DestinationType.DATA_URI,
+						destinationType: Camera.DestinationType.DATA_URL,
 						sourceType: Camera.PictureSourceType.CAMERA,
 						targetWidth: 100,
 						targetHeight: 100,
@@ -4057,7 +4058,7 @@ angular.module('starter.controllers', [])
 				}else if(options==2){
 					var options = {
 						quality: 50,
-						destinationType: Camera.DestinationType.DATA_URI,
+						destinationType: Camera.DestinationType.DATA_URL,
 						sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
 						targetWidth: 100,
 						targetHeight: 100,
