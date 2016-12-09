@@ -1204,7 +1204,7 @@ angular.module('starter.controllers', [])
 	}
 	
 })
-.controller('TaxyearCtrl', function($scope,$ionicPlatform,$cordovaNetwork,$cordovaDatePicker,$http,$location,$ionicModal,$cordovaDialogs,$ionicLoading,$cordovaNetwork,	$rootScope,$sce,$cordovaFileOpener2,$cordovaFileTransfer,$ionicPopup) {
+.controller('TaxyearCtrl', function($scope,$ionicPlatform,$cordovaNetwork,$cordovaDatePicker,$http,$location,$ionicModal,$cordovaDialogs,$ionicLoading,$cordovaNetwork,	$rootScope,$sce,$cordovaFileOpener2,$cordovaFileTransfer,$ionicPopup,$cordovaFile) {
 	$rootScope.hidecontent=true;
 	localStorage.setItem("backCount","4");
 	$scope.username = localStorage.getItem('username');
@@ -1266,6 +1266,64 @@ angular.module('starter.controllers', [])
 		}
 	});
     }
+	
+	$scope.form1099=function(){
+		$http({
+			url : 'http://app.sterlinghsa.com/api/v1/accounts/taxstatementpdf',
+			params:{acct_num:$rootScope.hsaaccno,type:'1099',tax_year:$scope.tax_statement_list[0].TAX_YEAR},
+			method : 'GET',
+			responseType : 'arraybuffer',
+			headers: {
+				'Content-type' : 'application/pdf',
+				'Authorization':$scope.access_token
+			},
+			cache: true,
+		}).success(function(data) {
+			var blob = new Blob([data], { type: 'application/pdf' });
+			var fileURL = URL.createObjectURL(blob);
+			var fileName = "1099.pdf";
+			var contentFile = blob;
+			$cordovaFile.createDir(cordova.file.externalRootDirectory, "Sterling Administration", true)
+			.then(function (success) {
+				$cordovaFile.writeFile(success.nativeURL, fileName,contentFile, true)
+				.then(function (success) {
+					$cordovaFileOpener2.open(success.target.localURL,'application/pdf')
+					.then(function(){},function(err){})
+					}, function (error){	
+					});
+			},function (error){
+			});
+		}).error(function(data){});
+	}
+	
+	$scope.form5498=function(){
+		$http({
+			url : 'http://app.sterlinghsa.com/api/v1/accounts/taxstatementpdf',
+			params:{acct_num:$rootScope.hsaaccno,type:'5498',tax_year:$scope.tax_statement_list[0].TAX_YEAR},
+			method : 'GET',
+			responseType : 'arraybuffer',
+			headers: {
+				'Content-type' : 'application/pdf',
+				'Authorization':$scope.access_token
+			},
+			cache: true,
+		}).success(function(data) {
+			var blob = new Blob([data], { type: 'application/pdf' });
+			var fileURL = URL.createObjectURL(blob);
+			var fileName = "5498.pdf";
+			var contentFile = blob;
+			$cordovaFile.createDir(cordova.file.externalRootDirectory, "Sterling Administration", true)
+			.then(function (success) {
+				$cordovaFile.writeFile(success.nativeURL, fileName,contentFile, true)
+				.then(function (success) {
+					$cordovaFileOpener2.open(success.target.localURL,'application/pdf')
+					.then(function(){},function(err){})
+					}, function (error){	
+					});
+			},function (error){
+			});
+		}).error(function(data){});
+	}
 
 	$scope.goback=function()
 	{
@@ -2465,7 +2523,25 @@ angular.module('starter.controllers', [])
 
 	$http.get(" http://app.sterlinghsa.com/api/v1/accounts/plan-type",{params:{'acct_id':$scope.fsaaccId},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
 	.success(function(data){
-		$scope.plan_types=data.plan_types;
+		if(data.plan_types==null){
+			if($rootScope.IOS==true){
+				var alertPopup = $ionicPopup.alert({
+					title: 'Sorry',
+					template: 'There is no plan-type for this user'
+				});
+
+				alertPopup.then(function(res) {
+					$location.path('/app/fsa');
+				});
+			}else{
+				$cordovaDialogs.alert('There is no plan-type for this user','Sorry','OK')
+				.then(function() {
+					$location.path('/app/fsa');
+				});
+			}
+		}else{
+			$scope.plan_types=data.plan_types;
+		}
 	}).error(function(err){
 	});
  
@@ -2493,6 +2569,16 @@ angular.module('starter.controllers', [])
 			$rootScope.taxcontent=false;
 			$location.path("/newclaim");
 		}else if(claim.MEANING === 'HRACFC'){
+			$rootScope.patientname=true;
+			$rootScope.dependentName=false;
+			$rootScope.taxcontent=false;
+			$location.path("/newclaim");
+		}else if(claim.MEANING === 'Healthcare FSA'){
+			$rootScope.patientname=true;
+			$rootScope.dependentName=false;
+			$rootScope.taxcontent=false;
+			$location.path("/newclaim");
+		}else if(claim.MEANING === 'HRAOHIOCHRIST'){
 			$rootScope.patientname=true;
 			$rootScope.dependentName=false;
 			$rootScope.taxcontent=false;
@@ -2531,7 +2617,25 @@ angular.module('starter.controllers', [])
 
 	$http.get(" http://app.sterlinghsa.com/api/v1/accounts/plan-type",{params:{'acct_id':$scope.fsaaccId},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
 	.success(function(data){
-		$rootScope.plan_types=data.plan_types;
+		if(data.plan_types==null){
+			if($rootScope.IOS==true){
+				var alertPopup = $ionicPopup.alert({
+					title: 'Sorry',
+					template: 'There is no plan-type for this user'
+				});
+
+				alertPopup.then(function(res) {
+					$location.path('/app/fsa');
+				});
+			}else{
+				$cordovaDialogs.alert('There is no plan-type for this user','Sorry','OK')
+				.then(function() {
+					$location.path('/app/fsa');
+				});
+			}
+		}else{
+			$rootScope.plan_types=data.plan_types;
+		}
 	}).error(function(err){
 	});
   
@@ -2564,6 +2668,16 @@ angular.module('starter.controllers', [])
 			$rootScope.dependentName=false;
 			$rootScope.taxcontent=false;
 			$location.path("/fsadependent");
+		}else if(claim.MEANING === 'Healthcare FSA'){
+			$rootScope.patientname=true;
+			$rootScope.dependentName=false;
+			$rootScope.taxcontent=false;
+			$location.path("/newclaim");
+		}else if(claim.MEANING === 'HRAOHIOCHRIST'){
+			$rootScope.patientname=true;
+			$rootScope.dependentName=false;
+			$rootScope.taxcontent=false;
+			$location.path("/newclaim");
 		}else if(claim.MEANING === 'Parking FSA'){
 			$rootScope.patientname=false;
 			$rootScope.dependentName=false;
@@ -3535,7 +3649,7 @@ angular.module('starter.controllers', [])
 		$location.path("app/hra")
 	}
 })
-.controller('HrapaymeCtrl', function($scope,$location,$rootScope, $stateParams, $http) {
+.controller('HrapaymeCtrl', function($scope,$location,$rootScope,$ionicPopup,$cordovaDialogs,$stateParams, $http) {
 	$scope.username = localStorage.getItem('username');
 	$scope.access_token = localStorage.getItem('access_token');
 	$scope.hraid= $rootScope.hraaccId;
@@ -3547,7 +3661,25 @@ angular.module('starter.controllers', [])
 	
 	$http.get(" http://app.sterlinghsa.com/api/v1/accounts/plan-type",{params:{'acct_id':$scope.hraid},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
 	.success(function(data){
-		$scope.plan_types=data.plan_types;
+		if(data.plan_types==null){
+			if($rootScope.IOS==true){
+				var alertPopup = $ionicPopup.alert({
+					title: 'Sorry',
+					template: 'There is no plan-type for this user'
+				});
+
+				alertPopup.then(function(res) {
+					$location.path('/app/hra');
+				});
+			}else{
+				$cordovaDialogs.alert('There is no plan-type for this user','Sorry','OK')
+				.then(function() {
+					$location.path('/app/hra');
+				});
+			}
+		}else{
+			$scope.plan_types=data.plan_types;
+		}
 	}).error(function(err){
 	});
 	$scope.getClaimData=function(claim){
@@ -3560,6 +3692,14 @@ angular.module('starter.controllers', [])
 			$location.path("/paymeacoinde");
 		}else if(claim.MEANING === 'HRAFirmenich'){
 			$location.path("/paymeacoinde");
+		}else if(claim.MEANING === 'HRAApportable'){
+			$location.path("/paymeacoinde");
+		}else if(claim.MEANING === 'HRAOHIOCHRIST'){
+			$location.path("/paymeacoinde");
+		}else if(claim.MEANING === 'HRAJNOLAN'){
+			$location.path("/paymeacoinde");
+		}else if(claim.MEANING === 'HRACAREAL'){
+			$location.path("/paymeacoinde");
 		}
 	}
 	
@@ -3568,7 +3708,7 @@ angular.module('starter.controllers', [])
 		$location.path("/hranewclaim");
 	}
 })
-.controller('HrapayproviderCtrl', function($scope,$location,$rootScope, $stateParams, $http) {
+.controller('HrapayproviderCtrl', function($scope,$location,$rootScope,$ionicPopup,$cordovaDialogs,$stateParams, $http) {
 	$scope.username = localStorage.getItem('username');
 	$scope.access_token = localStorage.getItem('access_token');
 	$scope.hraid= $rootScope.hraaccId;
@@ -3581,7 +3721,25 @@ angular.module('starter.controllers', [])
 	
 	$http.get(" http://app.sterlinghsa.com/api/v1/accounts/plan-type",{params:{'acct_id':$scope.hraid},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
 	.success(function(data){
-		$scope.plan_types=data.plan_types;
+		if(data.plan_types==null){
+			if($rootScope.IOS==true){
+				var alertPopup = $ionicPopup.alert({
+					title: 'Sorry',
+					template: 'There is no plan-type for this user'
+				});
+
+				alertPopup.then(function(res) {
+					$location.path('/app/hra');
+				});
+			}else{
+				$cordovaDialogs.alert('There is no plan-type for this user','Sorry','OK')
+				.then(function() {
+					$location.path('/app/hra');
+				});
+			}
+		}else{
+			$scope.plan_types=data.plan_types;
+		}
 	}).error(function(err){
 	});
   
@@ -3595,6 +3753,14 @@ angular.module('starter.controllers', [])
 		if(claim.MEANING === 'HR4INDE'){
 			$location.path("/payprovideracoinde");
 		}else if(claim.MEANING === 'HRAFirmenich'){
+			$location.path("/paymeacoinde");
+		}else if(claim.MEANING === 'HRAApportable'){
+			$location.path("/paymeacoinde");
+		}else if(claim.MEANING === 'HRAOHIOCHRIST'){
+			$location.path("/paymeacoinde");
+		}else if(claim.MEANING === 'HRAJNOLAN'){
+			$location.path("/paymeacoinde");
+		}else if(claim.MEANING === 'HRACAREAL'){
 			$location.path("/paymeacoinde");
 		}
 	}
