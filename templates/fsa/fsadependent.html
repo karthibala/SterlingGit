@@ -123,7 +123,7 @@
 							<div ng-repeat="image in imgSrc">
 								<div class="row" >
 									<div class="col text-center">
-										<img ng-src="{{image}}" id="receipt"  ng-click="deleteimg($index)"/>
+										<img ng-src="data:image/png;base64,{{image}}" id="receipt"  ng-click="deleteimg($index)"/>
 										<input type="hidden" name="imgValue" ng-value="imgSrc" ng-model="newclaimvalues.imgValue">
 									</div>
 								</div>
@@ -131,7 +131,7 @@
 
 							<div class="row">
 								<div class="col text-center">
-									<button class="button button-calm button-small formButton1" ng-disabled="myForm.$invalid" type="submit" ng-click="newclaimFsa(); myForm.$setPristine()">SUBMIT</button>
+									<button class="button button-calm button-small formButton1" ng-disabled="myForm.$invalid " type="submit" ng-click="newclaimFsa(); myForm.$setPristine()">SUBMIT</button>
 								</div> 
 							</div>    
 					</div>
