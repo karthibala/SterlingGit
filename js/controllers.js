@@ -606,7 +606,7 @@ angular.module('starter.controllers', [])
 					var options = {
 					maximumImagesCount: 5,
 					quality: 50,
-					destinationType: Camera.DestinationType.FILE_URI,
+					destinationType: Camera.DestinationType.DATA_URI,
 					sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
 					targetWidth: 100,
 					targetHeight: 100,
@@ -624,7 +624,7 @@ angular.module('starter.controllers', [])
 				} else {
 					var options = {
 					quality: 50,
-					destinationType: Camera.DestinationType.FILE_URI,
+					destinationType: Camera.DestinationType.DATA_URI,
 					sourceType: Camera.PictureSourceType.CAMERA,
 					targetWidth: 100,
 					targetHeight: 100,
@@ -644,7 +644,7 @@ angular.module('starter.controllers', [])
 			if(options==1){
 				var options = {
 					quality: 50,
-					destinationType: Camera.DestinationType.FILE_URI,
+					destinationType: Camera.DestinationType.DATA_URI,
 					sourceType: Camera.PictureSourceType.CAMERA,
 					targetWidth: 100,
 					targetHeight: 100,
@@ -660,7 +660,7 @@ angular.module('starter.controllers', [])
 				var options = {
 					maximumImagesCount: 5,
 					quality: 50,
-					destinationType: Camera.DestinationType.FILE_URI,
+					destinationType: Camera.DestinationType.DATA_URI,
 					sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
 					targetWidth: 100,
 					targetHeight: 100,
@@ -912,7 +912,7 @@ angular.module('starter.controllers', [])
 					var options = {
 					maximumImagesCount: 5,
 					quality: 50,
-					destinationType: Camera.DestinationType.FILE_URI,
+					destinationType: Camera.DestinationType.DATA_URI,
 					sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
 					targetWidth: 100,
 					targetHeight: 100,
@@ -931,7 +931,7 @@ angular.module('starter.controllers', [])
 				} else {
 					var options = {
 						quality: 50,
-						destinationType: Camera.DestinationType.FILE_URI,
+						destinationType: Camera.DestinationType.DATA_URI,
 						sourceType: Camera.PictureSourceType.CAMERA,
 						targetWidth: 100,
 						targetHeight: 100,
@@ -951,7 +951,7 @@ angular.module('starter.controllers', [])
 			if(options==1){
 				var options = {
 					quality: 50,
-					destinationType: Camera.DestinationType.FILE_URI,
+					destinationType: Camera.DestinationType.DATA_URI,
 					sourceType: Camera.PictureSourceType.CAMERA,
 					targetWidth: 100,
 					targetHeight: 100,
@@ -966,7 +966,7 @@ angular.module('starter.controllers', [])
 			}else if(options==2){
 				var options = {
 					quality: 50,
-					destinationType: Camera.DestinationType.FILE_URI,
+					destinationType: Camera.DestinationType.DATA_URI,
 					sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
 					targetWidth: 100,
 					targetHeight: 100,
@@ -2118,7 +2118,7 @@ angular.module('starter.controllers', [])
 				if(res) {
 					var options = {
 						quality: 50,
-						destinationType: Camera.DestinationType.FILE_URI,
+						destinationType: Camera.DestinationType.DATA_URI,
 						sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
 						targetWidth: 100,
 						targetHeight: 100,
@@ -2134,7 +2134,7 @@ angular.module('starter.controllers', [])
 				} else {
 					var options = {
 						quality: 50,
-						destinationType: Camera.DestinationType.FILE_URI,
+						destinationType: Camera.DestinationType.DATA_URI,
 						sourceType: Camera.PictureSourceType.CAMERA,
 						targetWidth: 100,
 						targetHeight: 100,
@@ -2154,7 +2154,7 @@ angular.module('starter.controllers', [])
 				if(options==1){
 					var options = {
 						quality: 50,
-						destinationType: Camera.DestinationType.FILE_URI,
+						destinationType: Camera.DestinationType.DATA_URI,
 						sourceType: Camera.PictureSourceType.CAMERA,
 						targetWidth: 100,
 						targetHeight: 100,
@@ -2169,7 +2169,7 @@ angular.module('starter.controllers', [])
 				}else if(options==2){
 					var options = {
 						quality: 50,
-						destinationType: Camera.DestinationType.FILE_URI,
+						destinationType: Camera.DestinationType.DATA_URI,
 						sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
 						targetWidth: 100,
 						targetHeight: 100,
@@ -2615,7 +2615,7 @@ angular.module('starter.controllers', [])
 				if(res) {
 					var options = {
 						quality: 50,
-						destinationType: Camera.DestinationType.FILE_URI,
+						destinationType: Camera.DestinationType.DATA_URI,
 						sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
 						targetWidth: 100,
 						targetHeight: 100,
@@ -2630,7 +2630,7 @@ angular.module('starter.controllers', [])
 				} else {
 					var options = {
 						quality: 50,
-						destinationType: Camera.DestinationType.FILE_URI,
+						destinationType: Camera.DestinationType.DATA_URI,
 						sourceType: Camera.PictureSourceType.CAMERA,
 						targetWidth: 100,
 						targetHeight: 100,
@@ -2650,7 +2650,7 @@ angular.module('starter.controllers', [])
 				if(options==1){
 					var options = {
 						quality: 50,
-						destinationType: Camera.DestinationType.FILE_URI,
+						destinationType: Camera.DestinationType.DATA_URI,
 						sourceType: Camera.PictureSourceType.CAMERA,
 						targetWidth: 100,
 						targetHeight: 100,
@@ -2665,7 +2665,7 @@ angular.module('starter.controllers', [])
 				}else if(options==2){
 					var options = {
 						quality: 50,
-						destinationType: Camera.DestinationType.FILE_URI,
+						destinationType: Camera.DestinationType.DATA_URI,
 						sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
 						targetWidth: 100,
 						targetHeight: 100,
@@ -2910,7 +2910,7 @@ angular.module('starter.controllers', [])
 			if(options==1){
 				var options = {
 					quality: 50,
-					destinationType: Camera.DestinationType.FILE_URI,
+					destinationType: Camera.DestinationType.DATA_URI,
 					sourceType: Camera.PictureSourceType.CAMERA,
 					targetWidth: 100,
 					targetHeight: 100,
@@ -2925,7 +2925,7 @@ angular.module('starter.controllers', [])
 			}else if(options==2){
 				var options = {
 					quality: 50,
-					destinationType: Camera.DestinationType.FILE_URI,
+					destinationType: Camera.DestinationType.DATA_URI,
 					sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
 					targetWidth: 100,
 					targetHeight: 100,
@@ -3693,7 +3693,7 @@ angular.module('starter.controllers', [])
 				if(res) {
 					var options = {
 						quality: 50,
-						destinationType: Camera.DestinationType.FILE_URI,
+						destinationType: Camera.DestinationType.DATA_URI,
 						sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
 						targetWidth: 100,
 						targetHeight: 100,
@@ -3708,7 +3708,7 @@ angular.module('starter.controllers', [])
 				} else {
 					var options = {
 						quality: 50,
-						destinationType: Camera.DestinationType.FILE_URI,
+						destinationType: Camera.DestinationType.DATA_URI,
 						sourceType: Camera.PictureSourceType.CAMERA,
 						targetWidth: 100,
 						targetHeight: 100,
@@ -3728,7 +3728,7 @@ angular.module('starter.controllers', [])
 				if(options==1){
 					var options = {
 						quality: 50,
-						destinationType: Camera.DestinationType.FILE_URI,
+						destinationType: Camera.DestinationType.DATA_URI,
 						sourceType: Camera.PictureSourceType.CAMERA,
 						targetWidth: 100,
 						targetHeight: 100,
@@ -3743,7 +3743,7 @@ angular.module('starter.controllers', [])
 				}else if(options==2){
 					var options = {
 						quality: 50,
-						destinationType: Camera.DestinationType.FILE_URI,
+						destinationType: Camera.DestinationType.DATA_URI,
 						sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
 						targetWidth: 100,
 						targetHeight: 100,
@@ -4007,7 +4007,7 @@ angular.module('starter.controllers', [])
 				if(res) {
 					var options = {
 						quality: 50,
-						destinationType: Camera.DestinationType.FILE_URI,
+						destinationType: Camera.DestinationType.DATA_URI,
 						sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
 						targetWidth: 100,
 						targetHeight: 100,
@@ -4022,7 +4022,7 @@ angular.module('starter.controllers', [])
 				} else {
 					var options = {
 						quality: 50,
-						destinationType: Camera.DestinationType.FILE_URI,
+						destinationType: Camera.DestinationType.DATA_URI,
 						sourceType: Camera.PictureSourceType.CAMERA,
 						targetWidth: 100,
 						targetHeight: 100,
@@ -4042,7 +4042,7 @@ angular.module('starter.controllers', [])
 				if(options==1){
 					var options = {
 						quality: 50,
-						destinationType: Camera.DestinationType.FILE_URI,
+						destinationType: Camera.DestinationType.DATA_URI,
 						sourceType: Camera.PictureSourceType.CAMERA,
 						targetWidth: 100,
 						targetHeight: 100,
@@ -4057,7 +4057,7 @@ angular.module('starter.controllers', [])
 				}else if(options==2){
 					var options = {
 						quality: 50,
-						destinationType: Camera.DestinationType.FILE_URI,
+						destinationType: Camera.DestinationType.DATA_URI,
 						sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
 						targetWidth: 100,
 						targetHeight: 100,
