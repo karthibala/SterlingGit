@@ -2289,7 +2289,7 @@ angular.module('starter.controllers', [])
    
 	$scope.startTransDate="";
 	$scope.endTransDate="";
-	$scope.getTestTransDate=function(){
+	$scope.getTestTransDate1=function(){
 		var options = {
 			date: new Date(),
 			mode: 'date', // or 'time'
@@ -2315,7 +2315,7 @@ angular.module('starter.controllers', [])
 		})
 	};
 	
-	$scope.getStartDate=function(){
+	$scope.getTestTransDate=function(){
 		var today = new Date();
 		var _minDate = new Date();
 		_minDate.setMonth(today.getMonth() -1000);
@@ -2339,7 +2339,7 @@ angular.module('starter.controllers', [])
 				mon = Month.indexOf(dataas[1]);
 			}
 			var selectedDate=mon+'/'+dataas[2]+'/'+dataas[3];
-			$scope.activity.startDate=selectedDate;
+			$scope.newclaimvalues.startTransDate=selectedDate;
 
 		});
 	};
