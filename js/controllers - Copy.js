@@ -616,7 +616,7 @@ angular.module('starter.controllers', [])
 				};
 				
 				$cordovaCamera.getPicture(options).then(function(imageData) {
-					$scope.imgSrc= imageData;
+					$scope.imgSrc= "data:image/png;base64,"+imageData;
 				
 				}, function(err) {
 				});
@@ -633,7 +633,7 @@ angular.module('starter.controllers', [])
 					correctOrientation:true
 				};
 				$cordovaCamera.getPicture(options).then(function(imageData) {
-					$scope.imgSrc= imageData;
+					$scope.imgSrc= "data:image/png;base64,"+imageData;
 				}, function(err) {
 				});
 				}
@@ -653,7 +653,7 @@ angular.module('starter.controllers', [])
 					correctOrientation:true
 				};
 				$cordovaCamera.getPicture(options).then(function(imageData) {
-					$scope.imgSrc= imageData;
+					$scope.imgSrc= "data:image/png;base64,"+imageData;
 				}, function(err) {
 				});
 			}else if(options==2){
@@ -670,7 +670,7 @@ angular.module('starter.controllers', [])
 				};
 				
 				$cordovaCamera.getPicture(options).then(function(imageData) {
-					$scope.imgSrc= imageData;
+					$scope.imgSrc= "data:image/png;base64,"+imageData;
 				
 				}, function(err) {
 				});
@@ -1204,7 +1204,7 @@ angular.module('starter.controllers', [])
 	}
 	
 })
-.controller('TaxyearCtrl', function($scope,$ionicPlatform,$cordovaNetwork,$cordovaDatePicker,$http,$location,$ionicModal,$cordovaDialogs,$ionicLoading,$cordovaNetwork,	$rootScope,$cordovaFileOpener2,$cordovaFileTransfer,$ionicPopup,$cordovaFile) {
+.controller('TaxyearCtrl', function($scope,$ionicPlatform,$cordovaNetwork,$cordovaDatePicker,$http,$location,$ionicModal,$cordovaDialogs,$ionicLoading,$cordovaNetwork,	$rootScope,$sce,$cordovaFileOpener2,$cordovaFileTransfer,$ionicPopup,$cordovaFile) {
 	$rootScope.hidecontent=true;
 	localStorage.setItem("backCount","4");
 	$scope.username = localStorage.getItem('username');
@@ -1268,101 +1268,74 @@ angular.module('starter.controllers', [])
     }
 	
 	$scope.form1099=function(){
-		if($rootScope.IOS==true){
-			$http({
-				url : 'http://app.sterlinghsa.com/api/v1/accounts/taxstatementpdf',
-				params:{acct_num:$rootScope.hsaaccno,type:'1099',tax_year:$scope.tax_statement_list[0].TAX_YEAR},
-				method : 'GET',
-				responseType : 'arraybuffer',
-				headers: {
-					'Content-type' : 'application/pdf',
-					'Authorization':$scope.access_token
-				},
-				cache: true,
-			}).success(function(data) {
-				var blob = new Blob([data], { type: 'application/pdf' });
-				var fileURL = URL.createObjectURL(blob);
-				var fileName = "1099.pdf";
-				var contentFile = blob;
-				//alert(cordova.file.dataDirectory);
-				alert(cordova.file.documentsDirectory);
-				$cordovaFile.createDir(cordova.file.documentsDirectory, "Sterling", true)
+		alert("Click")
+		$http({
+			url : 'http://app.sterlinghsa.com/api/v1/accounts/taxstatementpdf',
+			params:{acct_num:$rootScope.hsaaccno,type:'1099',tax_year:$scope.tax_statement_list[0].TAX_YEAR},
+			method : 'GET',
+			responseType : 'arraybuffer',
+			headers: {
+				'Content-type' : 'application/pdf',
+				'Authorization':$scope.access_token
+			},
+			cache: true,
+		}).success(function(data) {
+			var blob = new Blob([data], { type: 'application/pdf' });
+			var fileURL = URL.createObjectURL(blob);
+			var fileName = "1099.pdf";
+			var contentFile = blob;
+			$cordovaFile.createDir(cordova.file.documentsDirectory, "Sterling Administration", true)
+			.then(function (success) {
+				//alert("success");
+				alert(JSON.stringify(success));
+				//alert(success.nativeURL)
+				$cordovaFile.writeFile(success.nativeURL, fileName,contentFile, true)
 				.then(function (success) {
-					alert("createDir-"+JSON.stringify(success));
-					$cordovaFile.writeFile(success.nativeURL, fileName,contentFile, true)
-					.then(function (success) {
-						alert("writeFile"+JSON.stringify(success));
-						$cordovaFileOpener2.open(success.target.localURL,'application/pdf')
-						.then(function(){alert("open")},function(err){
-							alert("Error");
-							alert(JSON.stringify(err));
-						})
-						}, function (error){	
-						});
-				},function (error){
-				});
-			}).error(function(data){});
-		}else{
-			$http({
-				url : 'http://app.sterlinghsa.com/api/v1/accounts/taxstatementpdf',
-				params:{acct_num:$rootScope.hsaaccno,type:'1099',tax_year:$scope.tax_statement_list[0].TAX_YEAR},
-				method : 'GET',
-				responseType : 'arraybuffer',
-				headers: {
-					'Content-type' : 'application/pdf',
-					'Authorization':$scope.access_token
-				},
-				cache: true,
-			}).success(function(data) {
-				var blob = new Blob([data], { type: 'application/pdf' });
-				var fileURL = URL.createObjectURL(blob);
-				var fileName = "1099.pdf";
-				var contentFile = blob;
-				$cordovaFile.createDir(cordova.file.externalRootDirectory, "Sterling Administration", true)
-				.then(function (success) {
-					$cordovaFile.writeFile(success.nativeURL, fileName,contentFile, true)
-					.then(function (success) {
-						$cordovaFileOpener2.open(success.target.localURL,'application/pdf')
-						.then(function(){},function(err){})
-						}, function (error){	
-						});
-				},function (error){
-				});
-			}).error(function(data){});
-		}
+					//alert(JSON.stringify(success));
+					alert(success.target.localURL)
+					//window.open(success.target.localURL, '_system');
+					$cordovaFileOpener2.open(success.target.localURL,'application/pdf')
+					.then(function(){
+						alert("open")
+					},function(err){
+						alert("File open error-"+JSON.stringfy(err))					
+					})
+					}, function (error){
+						alert("writeFile error-"+JSON.stringfy(error))					
+					});
+			},function (error){
+				alert("error-"+JSON.stringfy(error))
+			});
+		}).error(function(data){});
 	}
 	
 	$scope.form5498=function(){
-		if($rootScope.IOS==true){
-			alert($rootScope.IOS);
-		}else{
-			$http({
-				url : 'http://app.sterlinghsa.com/api/v1/accounts/taxstatementpdf',
-				params:{acct_num:$rootScope.hsaaccno,type:'5498',tax_year:$scope.tax_statement_list[0].TAX_YEAR},
-				method : 'GET',
-				responseType : 'arraybuffer',
-				headers: {
-					'Content-type' : 'application/pdf',
-					'Authorization':$scope.access_token
-				},
-				cache: true,
-			}).success(function(data) {
-				var blob = new Blob([data], { type: 'application/pdf' });
-				var fileURL = URL.createObjectURL(blob);
-				var fileName = "5498.pdf";
-				var contentFile = blob;
-				$cordovaFile.createDir(cordova.file.externalRootDirectory, "Sterling Administration", true)
+		$http({
+			url : 'http://app.sterlinghsa.com/api/v1/accounts/taxstatementpdf',
+			params:{acct_num:$rootScope.hsaaccno,type:'5498',tax_year:$scope.tax_statement_list[0].TAX_YEAR},
+			method : 'GET',
+			responseType : 'arraybuffer',
+			headers: {
+				'Content-type' : 'application/pdf',
+				'Authorization':$scope.access_token
+			},
+			cache: true,
+		}).success(function(data) {
+			var blob = new Blob([data], { type: 'application/pdf' });
+			var fileURL = URL.createObjectURL(blob);
+			var fileName = "5498.pdf";
+			var contentFile = blob;
+			$cordovaFile.createDir(cordova.file.externalRootDirectory, "Sterling Administration", true)
+			.then(function (success) {
+				$cordovaFile.writeFile(success.nativeURL, fileName,contentFile, true)
 				.then(function (success) {
-					$cordovaFile.writeFile(success.nativeURL, fileName,contentFile, true)
-					.then(function (success) {
-						$cordovaFileOpener2.open(success.target.localURL,'application/pdf')
-						.then(function(){},function(err){})
-						}, function (error){	
-						});
-				},function (error){
-				});
-			}).error(function(data){});
-		}
+					$cordovaFileOpener2.open(success.target.localURL,'application/pdf')
+					.then(function(){},function(err){})
+					}, function (error){	
+					});
+			},function (error){
+			});
+		}).error(function(data){});
 	}
 
 	$scope.goback=function()
@@ -2227,7 +2200,6 @@ angular.module('starter.controllers', [])
 					};
 					$cordovaCamera.getPicture(options).then(function(imageData) {
 						 $scope.imgSrc.push(imageData);
-						 $scope.randomFile=Math.floor((Math.random() * 10000000000) + 1)+".jpg";
 					}, function(err) {
 					});
 					
@@ -2244,7 +2216,6 @@ angular.module('starter.controllers', [])
 					};
 					$cordovaCamera.getPicture(options).then(function(imageData) {
 						$scope.imgSrc.push(imageData);
-						$scope.randomFile=Math.floor((Math.random() * 10000000000) + 1)+".jpg";
 					}, function(err) {
 					});
 				}
@@ -2265,7 +2236,6 @@ angular.module('starter.controllers', [])
 					};
 					$cordovaCamera.getPicture(options).then(function(imageData) {
 						$scope.imgSrc.push(imageData);
-						$scope.randomFile=Math.floor((Math.random() * 10000000000) + 1)+".jpg";
 					}, function(err) {
 					});
 				}else if(options==2){
@@ -2281,7 +2251,6 @@ angular.module('starter.controllers', [])
 					};
 					$cordovaCamera.getPicture(options).then(function(imageData) {
 						 $scope.imgSrc.push(imageData);
-						 $scope.randomFile=Math.floor((Math.random() * 10000000000) + 1)+".jpg";
 					}, function(err) {
 					});
 				}
@@ -2328,45 +2297,43 @@ angular.module('starter.controllers', [])
 		}
 	});
    
-	
-	$scope.getstartTransDate=function(){
-		var today = new Date();
-		var _minDate = new Date();
-		_minDate.setMonth(today.getMonth() -1000);
-		var mindate = ionic.Platform.isIOS() ? new Date(_minDate.getFullYear(), _minDate.getMonth(), _minDate.getDay()) :
-		(new Date(_minDate.getFullYear(), _minDate.getMonth(), _minDate.getDay())).valueOf();
-		var maxDate = ionic.Platform.isIOS() ? new Date() : (new Date()).valueOf();
+	$scope.startTransDate="";
+	$scope.endTransDate="";
+	$scope.getTransDate=function(){
+		var options = {
+			date: new Date(),
+			mode: 'date', // or 'time'
+			minDate: new Date(),
 
-		$cordovaDatePicker.show({date: today,minDate: mindate,maxDate: maxDate}).then
-		(function(date)
-		{
-			var date1=date.toString();
-			var dataas=date1.split(" ");
-			var Month = ["App","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
-			var mon=""; 
-			if(Month.indexOf(dataas[1]).toString().length==1)
-			{
-				mon="0"+Month.indexOf(dataas[1]);
-			}
-			else
-			{
-				mon = Month.indexOf(dataas[1]);
-			}
-			var selectedDate=mon+'/'+dataas[2]+'/'+dataas[3];
-			$scope.newclaimvalues.startTransDate=selectedDate;
-		});
+		}
+		$ionicPlatform.ready(function(){
+			$cordovaDatePicker.show(options).then(function(date){
+				var date1=date.toString();
+				var dataas=date1.split(" ");
+				var Month = ["App","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+				var mon=""; 
+				if(Month.indexOf(dataas[1]).toString().length==1)
+				{
+					mon="0"+Month.indexOf(dataas[1]);
+				}
+				else
+				{
+					mon = Month.indexOf(dataas[1]);
+				}
+				var selectedDate=mon+'/'+dataas[2]+'/'+dataas[3];
+				$scope.newclaimvalues.startTransDate=selectedDate;
+			});
+		})
 	};
 	$scope.EndgetTransDate=function(){
-		var today = new Date();
-		var _minDate = new Date();
-		_minDate.setMonth(today.getMonth() -1000);
-		var mindate = ionic.Platform.isIOS() ? new Date(_minDate.getFullYear(), _minDate.getMonth(), _minDate.getDay()) :
-		(new Date(_minDate.getFullYear(), _minDate.getMonth(), _minDate.getDay())).valueOf();
-		var maxDate = ionic.Platform.isIOS() ? new Date() : (new Date()).valueOf();
+		var options = {
+			date: new Date(),
+			mode: 'date', // or 'time'
+			minDate: new Date(),
 
-		$cordovaDatePicker.show({date: today,minDate: mindate,maxDate: maxDate}).then
-		(function(date)
-		{
+		}
+		$ionicPlatform.ready(function(){
+			$cordovaDatePicker.show(options).then(function(date){
 			var date1=date.toString();
 			var dataas=date1.split(" ");
 			var Month = ["App","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
@@ -2381,8 +2348,9 @@ angular.module('starter.controllers', [])
 			}
 			var selectedDate=mon+'/'+dataas[2]+'/'+dataas[3];
 			$scope.newclaimvalues.endTransDate=selectedDate;
-		});
-		
+			});
+		})
+
 	};
 	$scope.newclaimsubmit=function(){
 		if($scope.newclaimvalues.amount == 0){
@@ -2450,26 +2418,23 @@ angular.module('starter.controllers', [])
 			$ionicLoading.show({
 			template: '<ion-spinner icon="ios"></ion-spinner><br>Loading...'
 			});
-			
-			$http.post("http://app.sterlinghsa.com/api/v1/accounts/newclaimrequest_base64",{'acct_num':  $scope.fsaaccno,
+
+			$http.post("http://app.sterlinghsa.com/api/v1/accounts/newclaimrequest",{'acct_num':  $scope.fsaaccno,
 			'acct_id':$scope.fsaaccId,
 			'bank_acct_id':$scope.newclaimvalues.Bankaccount.BANK_ACC_ID,
 			'amount':$scope.newclaimvalues.amount,
 			'service_start_date':$scope.newclaimvalues.startTransDate,
 			'service_end_date':$scope.newclaimvalues.endTransDate,
 			'patient_name':$scope.newclaimvalues.patient,
-			'plan_type':$rootScope.planCode,
+			'plan_type':$scope.plan_types,
 			'claim_method':'SUBSCRIBER_ONLINE_ACH',
 			'vendor_id':'',
 			'vendor_acc_num':'',
 			'insurance_category':'',
 			'description':$scope.newclaimvalues.description,
-			'note':'Mobile',
+			'note':'Dependent Care Claim from Mobile Website',
 			'memo':'',
-			"receipt":$scope.imgSrc,
-			"file_name":$scope.randomFile,
-			"file_mime_type":'image/jpeg'
-			},{headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
+			"receipt":document.getElementsByName('imgValue')[0].value},{headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
 			.success(function(data){
 
 			if(data.status == "SUCCESS"){
@@ -2605,43 +2570,36 @@ angular.module('starter.controllers', [])
 			$rootScope.patientname=true;
 			$rootScope.dependentName=true;
 			$rootScope.taxcontent=true;
-			$rootScope.planCode=claim.LOOKUP_CODE;
 			$location.path("/newclaim");
 		}else if(claim.MEANING === 'Transit FSA'){
 			$rootScope.patientname=false;
 			$rootScope.dependentName=false;
 			$rootScope.taxcontent=false;
-			$rootScope.planCode=claim.LOOKUP_CODE;
 			$location.path("/newclaim");
 		}else if(claim.MEANING === 'Limited Purpose Healthcare FSA'){
 			$rootScope.patientname=true;
 			$rootScope.dependentName=false;
 			$rootScope.taxcontent=false;
-			$rootScope.planCode=claim.LOOKUP_CODE;
 			$location.path("/newclaim");
 		}else if(claim.MEANING === 'HRACFC'){
 			$rootScope.patientname=true;
 			$rootScope.dependentName=false;
 			$rootScope.taxcontent=false;
-			$rootScope.planCode=claim.LOOKUP_CODE;
 			$location.path("/newclaim");
 		}else if(claim.MEANING === 'Healthcare FSA'){
 			$rootScope.patientname=true;
 			$rootScope.dependentName=false;
 			$rootScope.taxcontent=false;
-			$rootScope.planCode=claim.LOOKUP_CODE;
 			$location.path("/newclaim");
 		}else if(claim.MEANING === 'HRAOHIOCHRIST'){
 			$rootScope.patientname=true;
 			$rootScope.dependentName=false;
 			$rootScope.taxcontent=false;
-			$rootScope.planCode=claim.LOOKUP_CODE;
 			$location.path("/newclaim");
 		}else if(claim.MEANING === 'Parking FSA'){
 			$rootScope.patientname=false;
 			$rootScope.dependentName=false;
 			$rootScope.taxcontent=false;
-			$rootScope.planCode=claim.LOOKUP_CODE;
 			$location.path("/newclaim");
 		}
 		$scope.plan_type={};
@@ -2705,45 +2663,38 @@ angular.module('starter.controllers', [])
 			$rootScope.patientname=true;
 			$rootScope.dependentName=true;
 			$rootScope.taxcontent=true;
-			$rootScope.planCode=claim.LOOKUP_CODE;
 			$location.path("/fsadependent");
 
 		}else if(claim.MEANING === 'Transit FSA'){
 			$rootScope.patientname=false;
 			$rootScope.dependentName=false;
 			$rootScope.taxcontent=false;
-			$rootScope.planCode=claim.LOOKUP_CODE;
 			$location.path("/fsadependent");
 
 		}else if(claim.MEANING === 'Limited Purpose Healthcare FSA'){
 			$rootScope.patientname=true;
 			$rootScope.dependentName=false;
 			$rootScope.taxcontent=false;
-			$rootScope.planCode=claim.LOOKUP_CODE;
 			$location.path("/fsadependent");
 		}else if(claim.MEANING === 'HRACFC'){
 			$rootScope.patientname=true;
 			$rootScope.dependentName=false;
 			$rootScope.taxcontent=false;
-			$rootScope.planCode=claim.LOOKUP_CODE;
 			$location.path("/fsadependent");
 		}else if(claim.MEANING === 'Healthcare FSA'){
 			$rootScope.patientname=true;
 			$rootScope.dependentName=false;
 			$rootScope.taxcontent=false;
-			$rootScope.planCode=claim.LOOKUP_CODE;
 			$location.path("/newclaim");
 		}else if(claim.MEANING === 'HRAOHIOCHRIST'){
 			$rootScope.patientname=true;
 			$rootScope.dependentName=false;
 			$rootScope.taxcontent=false;
-			$rootScope.planCode=claim.LOOKUP_CODE;
 			$location.path("/newclaim");
 		}else if(claim.MEANING === 'Parking FSA'){
 			$rootScope.patientname=false;
 			$rootScope.dependentName=false;
 			$rootScope.taxcontent=false;
-			$rootScope.planCode=claim.LOOKUP_CODE;
 			$location.path("/fsadependent");
 		}
 	}
@@ -2802,7 +2753,6 @@ angular.module('starter.controllers', [])
 					};
 					$cordovaCamera.getPicture(options).then(function(imageData) {
 						 $scope.imgSrc.push(imageData);
-						 $scope.randomFile=Math.floor((Math.random() * 10000000000) + 1)+".jpg";
 					}, function(err) {
 					});	
 				} else {
@@ -2818,7 +2768,6 @@ angular.module('starter.controllers', [])
 					};
 					$cordovaCamera.getPicture(options).then(function(imageData) {
 							 $scope.imgSrc.push(imageData);
-							 $scope.randomFile=Math.floor((Math.random() * 10000000000) + 1)+".jpg";
 					}, function(err) {
 					});
 				}
@@ -2839,7 +2788,6 @@ angular.module('starter.controllers', [])
 					};
 					$cordovaCamera.getPicture(options).then(function(imageData) {
 							 $scope.imgSrc.push(imageData);
-							 $scope.randomFile=Math.floor((Math.random() * 10000000000) + 1)+".jpg";
 					}, function(err) {
 					});
 				}else if(options==2){
@@ -2855,7 +2803,6 @@ angular.module('starter.controllers', [])
 					};
 					$cordovaCamera.getPicture(options).then(function(imageData) {
 						 $scope.imgSrc.push(imageData);
-						 $scope.randomFile=Math.floor((Math.random() * 10000000000) + 1)+".jpg";
 					}, function(err) {
 					});
 				}
@@ -2924,24 +2871,22 @@ angular.module('starter.controllers', [])
 			template: '<ion-spinner icon="ios"></ion-spinner><br>Loading...'
 			});
 
-			$http.post("http://app.sterlinghsa.com/api/v1/accounts/newclaimrequest_base64",{'acct_num':  $scope.fsaaccno,
+			$http.post("http://app.sterlinghsa.com/api/v1/accounts/newclaimrequest",{'acct_num':  $scope.fsaaccno,
 			'acct_id':$scope.fsaaccId,
 			'bank_acct_id':'',
 			'amount':$scope.newclaimvalues.amount,
 			'service_start_date':$scope.newclaimvalues.startTransDate,
 			'service_end_date':$scope.newclaimvalues.endTransDate,
 			'patient_name':$scope.newclaimvalues.patient,
-			'plan_type':$rootScope.planCode,
+			'plan_type':$scope.plan_types,
 			'claim_method':'SUBSCRIBER_ONLINE_ACH',
 			'vendor_id':$scope.newclaimvalues.selectpayee.VENDOR_ID,
 			'vendor_acc_num':'',
 			'insurance_category':'',
 			'description':$scope.newclaimvalues.description,
-			'note':'Mobile',
+			'note':'Dependent Care Claim from Mobile Website',
 			'memo':'',
-			"receipt":$scope.imgSrc,
-			"file_name":$scope.randomFile,
-			"file_mime_type":'image/jpeg'},{headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
+			"receipt":document.getElementsByName('imgValue')[0].value},{headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
 			.success(function(data){
 			if(data.status == "SUCCESS"){
 				$ionicLoading.hide();
@@ -3103,7 +3048,6 @@ angular.module('starter.controllers', [])
 				};
 				$cordovaCamera.getPicture(options).then(function(imageData) {
 					$scope.imgSrc= "data:image/png;base64,"+imageData;
-					$scope.randomFile=Math.floor((Math.random() * 10000000000) + 1)+".jpg";
 				}, function(err) {
 				});
 			}else if(options==2){
@@ -3119,7 +3063,6 @@ angular.module('starter.controllers', [])
 				};
 				$cordovaCamera.getPicture(options).then(function(imageData) {
 					$scope.imgSrc= "data:image/png;base64,"+imageData;
-					$scope.randomFile=Math.floor((Math.random() * 10000000000) + 1)+".jpg";
 				}, function(err) {
 				});
 			}
@@ -3128,24 +3071,22 @@ angular.module('starter.controllers', [])
 	}
    
 	$scope.newclaimsubmit=function(){
-		$http.post("http://app.sterlinghsa.com/api/v1/accounts/newclaimrequest_base64",{'acct_num':  $scope.fsaaccno,
+		$http.post("http://app.sterlinghsa.com/api/v1/accounts/newclaimrequest",{'acct_num':  $scope.fsaaccno,
 		'acct_id':$scope.fsaaccId,
 		'bank_acct_id':$scope.newclaimvalues.Bankaccount.BANK_ACC_ID,
 		'amount':$scope.newclaimvalues.amount,
 		'service_start_date':$scope.newclaimvalues.startTransDate,
 		'service_end_date':$scope.newclaimvalues.endTransDate,
 		'patient_name':$scope.newclaimvalues.patient,
-		'plan_type':$rootScope.planCode,
+		'plan_type':$scope.plan_types,
 		'claim_method':'SUBSCRIBER_ONLINE_ACH',
 		'vendor_id':'',
 		'vendor_acc_num':'',
 		'insurance_category':'',
 		'description':$scope.newclaimvalues.description,
-		'note':'Mobile',
+		'note':'Dependent Care Claim from Mobile Website',
 		'memo':'',
-		"receipt":$scope.imgSrc,
-		"file_name":$scope.randomFile,
-		"file_mime_type":'image/jpeg'},{headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
+		"receipt":document.getElementsByName('imgValue')[0].value},{headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
 		.success(function(data){
 
 			if(data.status == "SUCCESS"){
@@ -3762,22 +3703,16 @@ angular.module('starter.controllers', [])
 		}
 		if(claim.MEANING === 'HR4INDE'){
 			$location.path("/paymeacoinde");
-			$rootScope.planCode=claim.LOOKUP_CODE;
 		}else if(claim.MEANING === 'HRAFirmenich'){
 			$location.path("/paymeacoinde");
-			$rootScope.planCode=claim.LOOKUP_CODE;
 		}else if(claim.MEANING === 'HRAApportable'){
 			$location.path("/paymeacoinde");
-			$rootScope.planCode=claim.LOOKUP_CODE;
 		}else if(claim.MEANING === 'HRAOHIOCHRIST'){
 			$location.path("/paymeacoinde");
-			$rootScope.planCode=claim.LOOKUP_CODE;
 		}else if(claim.MEANING === 'HRAJNOLAN'){
 			$location.path("/paymeacoinde");
-			$rootScope.planCode=claim.LOOKUP_CODE;
 		}else if(claim.MEANING === 'HRACAREAL'){
 			$location.path("/paymeacoinde");
-			$rootScope.planCode=claim.LOOKUP_CODE;
 		}
 	}
 	
@@ -3830,22 +3765,16 @@ angular.module('starter.controllers', [])
 		}
 		if(claim.MEANING === 'HR4INDE'){
 			$location.path("/payprovideracoinde");
-			$rootScope.planCode=claim.LOOKUP_CODE;
 		}else if(claim.MEANING === 'HRAFirmenich'){
 			$location.path("/paymeacoinde");
-			$rootScope.planCode=claim.LOOKUP_CODE;
 		}else if(claim.MEANING === 'HRAApportable'){
 			$location.path("/paymeacoinde");
-			$rootScope.planCode=claim.LOOKUP_CODE;
 		}else if(claim.MEANING === 'HRAOHIOCHRIST'){
 			$location.path("/paymeacoinde");
-			$rootScope.planCode=claim.LOOKUP_CODE;
 		}else if(claim.MEANING === 'HRAJNOLAN'){
 			$location.path("/paymeacoinde");
-			$rootScope.planCode=claim.LOOKUP_CODE;
 		}else if(claim.MEANING === 'HRACAREAL'){
 			$location.path("/paymeacoinde");
-			$rootScope.planCode=claim.LOOKUP_CODE;
 		}
 	}
 	$scope.goback=function()
@@ -3954,7 +3883,6 @@ angular.module('starter.controllers', [])
 					};
 					$cordovaCamera.getPicture(options).then(function(imageData) {
 						 $scope.imgSrc.push(imageData);
-						 $scope.randomFile=Math.floor((Math.random() * 10000000000) + 1)+".jpg";
 					}, function(err) {
 					});
 				} else {
@@ -3970,7 +3898,6 @@ angular.module('starter.controllers', [])
 					};
 					$cordovaCamera.getPicture(options).then(function(imageData) {
 						 $scope.imgSrc.push(imageData);
-						 $scope.randomFile=Math.floor((Math.random() * 10000000000) + 1)+".jpg";
 					}, function(err) {
 					});
 				}
@@ -3991,7 +3918,6 @@ angular.module('starter.controllers', [])
 					};
 					$cordovaCamera.getPicture(options).then(function(imageData) {
 						 $scope.imgSrc.push(imageData);
-						 $scope.randomFile=Math.floor((Math.random() * 10000000000) + 1)+".jpg";
 					}, function(err) {
 					});
 				}else if(options==2){
@@ -4007,7 +3933,6 @@ angular.module('starter.controllers', [])
 					};
 					$cordovaCamera.getPicture(options).then(function(imageData) {
 						 $scope.imgSrc.push(imageData);
-						 $scope.randomFile=Math.floor((Math.random() * 10000000000) + 1)+".jpg";
 					}, function(err) {
 					});
 				}
@@ -4155,24 +4080,22 @@ angular.module('starter.controllers', [])
 			}
 
 		}else{
-			$http.post("http://app.sterlinghsa.com/api/v1/accounts/newclaimrequest_base64",{'acct_num':  $scope.fsaaccno,
+			$http.post("http://app.sterlinghsa.com/api/v1/accounts/newclaimrequest",{'acct_num':  $scope.fsaaccno,
 			'acct_id':$scope.fsaaccId,
 			'bank_acct_id':$scope.acoinde.Bankaccount.BANK_ACC_ID,
 			'amount':$scope.acoinde.amount,
 			'service_start_date':$scope.acoinde.startTransDate,
 			'service_end_date':$scope.acoinde.endTransDate,
 			'patient_name':'',
-			'plan_type':$rootScope.planCode,
+			'plan_type':$scope.plan_types,
 			'claim_method':'SUBSCRIBER_ONLINE_ACH',
 			'vendor_id':'',
 			'vendor_acc_num':'',
 			'insurance_category':'',
 			'description':$scope.acoinde.description,
-			'note':'Mobile',
+			'note':'Dependent Care Claim from Mobile Website',
 			'memo':'',
-			"receipt":$scope.imgSrc,
-			"file_name":$scope.randomFile,
-			"file_mime_type":'image/jpeg'},{headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
+			"receipt":document.getElementsByName('imgValue')[0].value},{headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
 			.success(function(data){
 				if(data.status == "SUCCESS"){
 					$ionicLoading.hide();
@@ -4274,7 +4197,6 @@ angular.module('starter.controllers', [])
 					};
 					$cordovaCamera.getPicture(options).then(function(imageData) {
 							 $scope.imgSrc.push(imageData);
-							 $scope.randomFile=Math.floor((Math.random() * 10000000000) + 1)+".jpg";
 					}, function(err) {
 					});
 				} else {
@@ -4290,7 +4212,6 @@ angular.module('starter.controllers', [])
 					};
 					$cordovaCamera.getPicture(options).then(function(imageData) {
 						 $scope.imgSrc.push(imageData);
-						 $scope.randomFile=Math.floor((Math.random() * 10000000000) + 1)+".jpg";
 					}, function(err) {
 					});
 				}
@@ -4311,7 +4232,6 @@ angular.module('starter.controllers', [])
 					};
 					$cordovaCamera.getPicture(options).then(function(imageData) {
 						 $scope.imgSrc.push(imageData);
-						 $scope.randomFile=Math.floor((Math.random() * 10000000000) + 1)+".jpg";
 					}, function(err) {
 					});
 				}else if(options==2){
@@ -4327,7 +4247,6 @@ angular.module('starter.controllers', [])
 					};
 					$cordovaCamera.getPicture(options).then(function(imageData) {
 							 $scope.imgSrc.push(imageData);
-							 $scope.randomFile=Math.floor((Math.random() * 10000000000) + 1)+".jpg";
 					}, function(err) {
 					});
 				}
@@ -4372,24 +4291,22 @@ angular.module('starter.controllers', [])
 			}
 
 		}else{
-			$http.post("http://app.sterlinghsa.com/api/v1/accounts/newclaimrequest_base64",{'acct_num': $scope.hraacc,
+			$http.post("http://app.sterlinghsa.com/api/v1/accounts/newclaimrequest",{'acct_num': $scope.hraacc,
 			'acct_id':$scope.fsaaccId,
 			'bank_acct_id':'',
 			'amount':$scope.provideracoinde.amount,
 			'service_start_date':$scope.provideracoinde.startTransDate,
 			'service_end_date':$scope.provideracoinde.endTransDate,
 			'patient_name':$scope.provideracoinde.patient,
-			'plan_type':$rootScope.planCode,
+			'plan_type':$scope.plan_types,
 			'claim_method':'SUBSCRIBER_ONLINE_ACH',
 			'vendor_id':$scope.provideracoinde.selectpayee.VENDOR_ID,
 			'vendor_acc_num':'',
 			'insurance_category':'',
 			'description':$scope.provideracoinde.description,
-			'note':'Mobile App',
+			'note':'Dependent Care Claim from Mobile App',
 			'memo':'',
-			"receipt":$scope.imgSrc,
-			"file_name":$scope.randomFile,
-			"file_mime_type":'image/jpeg'},{headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
+			"receipt":document.getElementsByName('imgValue')[0].value},{headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
 			.success(function(data){
 				if(data.status == "SUCCESS"){
 					$ionicLoading.hide();
