@@ -2289,7 +2289,7 @@ angular.module('starter.controllers', [])
    
 	$scope.startTransDate="";
 	$scope.endTransDate="";
-	$scope.getTransDate=function(){
+	$scope.getTestTransDate=function(){
 		var options = {
 			date: new Date(),
 			mode: 'date', // or 'time'
