@@ -2293,7 +2293,6 @@ angular.module('starter.controllers', [])
 		var options = {
 			date: new Date(),
 			mode: 'date', // or 'time'
-			minDate: new Date(),
 
 		}
 		$ionicPlatform.ready(function(){
