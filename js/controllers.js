@@ -200,6 +200,8 @@ angular.module('starter.controllers', [])
 			date: new Date(),
 			mode: 'date', // or 'time'
 			minDate: new Date(),
+			allowOldDates: true,
+			allowFutureDates: true,
 
 		}
 		$ionicPlatform.ready(function(){
@@ -685,6 +687,7 @@ angular.module('starter.controllers', [])
 			date: new Date(),
 			mode: 'date', // or 'time'
 			minDate: new Date(),
+			 
 
 		}
 	$ionicPlatform.ready(function(){
