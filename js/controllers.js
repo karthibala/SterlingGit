@@ -1287,15 +1287,22 @@ angular.module('starter.controllers', [])
 				//alert(cordova.file.dataDirectory);
 				$cordovaFile.createDir(cordova.file.documentsDirectory, "Sterling", true)
 				.then(function (success) {
-					alert(JSON.stringify(success));
+					//alert(JSON.stringify(success));
 					$cordovaFile.writeFile(success.nativeURL, fileName,contentFile, true)
 					.then(function (success) {
-						alert("writeFile"+JSON.stringify(success));
-						$cordovaFileOpener2.open(success.target.localURL,'application/pdf')
+						//alert("writeFile"+JSON.stringify(success));
+						/*$cordovaFileOpener2.open(success.target.localURL,'application/pdf')
 						.then(function(){alert("open")},function(err){
-							alert("Error");
-							alert(JSON.stringify(err));
-						})
+							//alert("Error");
+							//alert(JSON.stringify(err));
+						})*/
+						
+						var alertPopup = $ionicPopup.alert({
+							title: 'Success',
+							template: 'Form 1099-SA download successsfully'
+						});
+						alertPopup.then(function(res) {});
+						
 						}, function (error){	
 						});
 				},function (error){
@@ -1333,7 +1340,45 @@ angular.module('starter.controllers', [])
 	
 	$scope.form5498=function(){
 		if($rootScope.IOS==true){
-			
+			$http({
+				url : 'http://app.sterlinghsa.com/api/v1/accounts/taxstatementpdf',
+				params:{acct_num:$rootScope.hsaaccno,type:'5498',tax_year:$scope.tax_statement_list[0].TAX_YEAR},
+				method : 'GET',
+				responseType : 'arraybuffer',
+				headers: {
+					'Content-type' : 'application/pdf',
+					'Authorization':$scope.access_token
+				},
+				cache: true,
+			}).success(function(data) {
+				var blob = new Blob([data], { type: 'application/pdf' });
+				var fileURL = URL.createObjectURL(blob);
+				var fileName = "5498.pdf";
+				var contentFile = blob;
+				//alert(cordova.file.dataDirectory);
+				$cordovaFile.createDir(cordova.file.documentsDirectory, "Sterling", true)
+				.then(function (success) {
+					//alert(JSON.stringify(success));
+					$cordovaFile.writeFile(success.nativeURL, fileName,contentFile, true)
+					.then(function (success) {
+						//alert("writeFile"+JSON.stringify(success));
+						/*$cordovaFileOpener2.open(success.target.localURL,'application/pdf')
+						.then(function(){alert("open")},function(err){
+							//alert("Error");
+							//alert(JSON.stringify(err));
+						})*/
+						
+						var alertPopup = $ionicPopup.alert({
+							title: 'Success',
+							template: 'Form 5498-SA download successsfully'
+						});
+						alertPopup.then(function(res) {});
+						
+						}, function (error){	
+						});
+				},function (error){
+				});
+			}).error(function(data){});
 		}else{
 			$http({
 				url : 'http://app.sterlinghsa.com/api/v1/accounts/taxstatementpdf',
