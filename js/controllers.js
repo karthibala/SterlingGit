@@ -2190,6 +2190,7 @@ angular.module('starter.controllers', [])
 	$scope.newclaim_balance=$rootScope.newclaim_balance;
 	$scope.newclaimvalues={taxid:'',amount:'',dependent:'',patient:'',Bankaccount:'',startTransDate:'',endTransDate:''};
 	$scope.imgSrc=[];
+	$scope.randomFile=[];
 	$scope.floatlabel=false;
 	$scope.date = $filter('date')(new Date(),'MM/dd/yyyy');
 	$ionicScrollDelegate.scrollBottom(true);
@@ -2226,7 +2227,7 @@ angular.module('starter.controllers', [])
 					};
 					$cordovaCamera.getPicture(options).then(function(imageData) {
 						 $scope.imgSrc.push(imageData);
-						 $scope.randomFile=Math.floor((Math.random() * 10000000000) + 1)+".jpg";
+						 $scope.randomFile.push(Math.floor((Math.random() * 10000000000) + 1)+".jpg");
 					}, function(err) {
 					});
 					
@@ -2243,7 +2244,7 @@ angular.module('starter.controllers', [])
 					};
 					$cordovaCamera.getPicture(options).then(function(imageData) {
 						$scope.imgSrc.push(imageData);
-						$scope.randomFile=Math.floor((Math.random() * 10000000000) + 1)+".jpg";
+						$scope.randomFile.push(Math.floor((Math.random() * 10000000000) + 1)+".jpg");
 					}, function(err) {
 					});
 				}
@@ -2264,7 +2265,7 @@ angular.module('starter.controllers', [])
 					};
 					$cordovaCamera.getPicture(options).then(function(imageData) {
 						$scope.imgSrc.push(imageData);
-						$scope.randomFile=Math.floor((Math.random() * 10000000000) + 1)+".jpg";
+						$scope.randomFile.push(Math.floor((Math.random() * 10000000000) + 1)+".jpg");
 					}, function(err) {
 					});
 				}else if(options==2){
@@ -2280,7 +2281,7 @@ angular.module('starter.controllers', [])
 					};
 					$cordovaCamera.getPicture(options).then(function(imageData) {
 						 $scope.imgSrc.push(imageData);
-						 $scope.randomFile=Math.floor((Math.random() * 10000000000) + 1)+".jpg";
+						 $scope.randomFile.push(Math.floor((Math.random() * 10000000000) + 1)+".jpg");
 					}, function(err) {
 					});
 				}
@@ -2765,6 +2766,7 @@ angular.module('starter.controllers', [])
 	$scope.newclaim_balance=$rootScope.newclaim_balance;
     $scope.newclaimvalues={taxid:'',amount:'',dependent:'',patient:'',Bankaccount:'',startTransDate:'',endTransDate:''};
 	$scope.imgSrc=[];
+	$scope.randomFile=[];
 	$scope.floatlabel=false;
 	$scope.date = $filter('date')(new Date(),'MM/dd/yyyy');
 	 $ionicScrollDelegate.scrollBottom(true);
@@ -2800,7 +2802,7 @@ angular.module('starter.controllers', [])
 					};
 					$cordovaCamera.getPicture(options).then(function(imageData) {
 						 $scope.imgSrc.push(imageData);
-						 $scope.randomFile=Math.floor((Math.random() * 10000000000) + 1)+".jpg";
+						 $scope.randomFile.push(Math.floor((Math.random() * 10000000000) + 1)+".jpg");
 					}, function(err) {
 					});	
 				} else {
@@ -2816,7 +2818,7 @@ angular.module('starter.controllers', [])
 					};
 					$cordovaCamera.getPicture(options).then(function(imageData) {
 							 $scope.imgSrc.push(imageData);
-							 $scope.randomFile=Math.floor((Math.random() * 10000000000) + 1)+".jpg";
+							 $scope.randomFile.push(Math.floor((Math.random() * 10000000000) + 1)+".jpg");
 					}, function(err) {
 					});
 				}
@@ -2837,7 +2839,7 @@ angular.module('starter.controllers', [])
 					};
 					$cordovaCamera.getPicture(options).then(function(imageData) {
 							 $scope.imgSrc.push(imageData);
-							 $scope.randomFile=Math.floor((Math.random() * 10000000000) + 1)+".jpg";
+							 $scope.randomFile.push(Math.floor((Math.random() * 10000000000) + 1)+".jpg");
 					}, function(err) {
 					});
 				}else if(options==2){
@@ -2853,7 +2855,7 @@ angular.module('starter.controllers', [])
 					};
 					$cordovaCamera.getPicture(options).then(function(imageData) {
 						 $scope.imgSrc.push(imageData);
-						 $scope.randomFile=Math.floor((Math.random() * 10000000000) + 1)+".jpg";
+						 $scope.randomFile.push(Math.floor((Math.random() * 10000000000) + 1)+".jpg");
 					}, function(err) {
 					});
 				}
@@ -3101,7 +3103,7 @@ angular.module('starter.controllers', [])
 				};
 				$cordovaCamera.getPicture(options).then(function(imageData) {
 					$scope.imgSrc= "data:image/png;base64,"+imageData;
-					$scope.randomFile=Math.floor((Math.random() * 10000000000) + 1)+".jpg";
+					$scope.randomFile.push(Math.floor((Math.random() * 10000000000) + 1)+".jpg");
 				}, function(err) {
 				});
 			}else if(options==2){
@@ -3117,7 +3119,7 @@ angular.module('starter.controllers', [])
 				};
 				$cordovaCamera.getPicture(options).then(function(imageData) {
 					$scope.imgSrc= "data:image/png;base64,"+imageData;
-					$scope.randomFile=Math.floor((Math.random() * 10000000000) + 1)+".jpg";
+					$scope.randomFile.push(Math.floor((Math.random() * 10000000000) + 1)+".jpg");
 				}, function(err) {
 				});
 			}
@@ -3923,6 +3925,7 @@ angular.module('starter.controllers', [])
 	$scope.hsaaccno=$rootScope.hsaaccno;
 	$scope.acoinde = {selectAccount:'',amount:'',description:'',startTransDate:'',endTransDate:''};
 	$scope.imgSrc=[];
+	$scope.randomFile=[];
 	$scope.floatlabel=false;
 	
 	$scope.SelectFloat = function ()
@@ -3952,7 +3955,7 @@ angular.module('starter.controllers', [])
 					};
 					$cordovaCamera.getPicture(options).then(function(imageData) {
 						 $scope.imgSrc.push(imageData);
-						 $scope.randomFile=Math.floor((Math.random() * 10000000000) + 1)+".jpg";
+						 $scope.randomFile.push(Math.floor((Math.random() * 10000000000) + 1)+".jpg");
 					}, function(err) {
 					});
 				} else {
@@ -3968,7 +3971,7 @@ angular.module('starter.controllers', [])
 					};
 					$cordovaCamera.getPicture(options).then(function(imageData) {
 						 $scope.imgSrc.push(imageData);
-						 $scope.randomFile=Math.floor((Math.random() * 10000000000) + 1)+".jpg";
+						 $scope.randomFile.push(Math.floor((Math.random() * 10000000000) + 1)+".jpg");
 					}, function(err) {
 					});
 				}
@@ -3989,7 +3992,7 @@ angular.module('starter.controllers', [])
 					};
 					$cordovaCamera.getPicture(options).then(function(imageData) {
 						 $scope.imgSrc.push(imageData);
-						 $scope.randomFile=Math.floor((Math.random() * 10000000000) + 1)+".jpg";
+						 $scope.randomFile.push(Math.floor((Math.random() * 10000000000) + 1)+".jpg");
 					}, function(err) {
 					});
 				}else if(options==2){
@@ -4005,7 +4008,7 @@ angular.module('starter.controllers', [])
 					};
 					$cordovaCamera.getPicture(options).then(function(imageData) {
 						 $scope.imgSrc.push(imageData);
-						 $scope.randomFile=Math.floor((Math.random() * 10000000000) + 1)+".jpg";
+						 $scope.randomFile.push(Math.floor((Math.random() * 10000000000) + 1)+".jpg");
 					}, function(err) {
 					});
 				}
@@ -4243,6 +4246,7 @@ angular.module('starter.controllers', [])
 	$scope.hraacc= $rootScope.hraaccno;
 	$scope.provideracoinde={selectpayee:'',amount:'',description:'',startTransDate:'',endTransDate:''};
 	$scope.imgSrc=[];
+	$scope.randomFile=[];
 	$scope.floatlabel=false;
 	
 	$scope.SelectFloat = function ()
@@ -4272,7 +4276,7 @@ angular.module('starter.controllers', [])
 					};
 					$cordovaCamera.getPicture(options).then(function(imageData) {
 							 $scope.imgSrc.push(imageData);
-							 $scope.randomFile=Math.floor((Math.random() * 10000000000) + 1)+".jpg";
+							 $scope.randomFile.push(Math.floor((Math.random() * 10000000000) + 1)+".jpg");
 					}, function(err) {
 					});
 				} else {
@@ -4288,7 +4292,7 @@ angular.module('starter.controllers', [])
 					};
 					$cordovaCamera.getPicture(options).then(function(imageData) {
 						 $scope.imgSrc.push(imageData);
-						 $scope.randomFile=Math.floor((Math.random() * 10000000000) + 1)+".jpg";
+						 $scope.randomFile.push(Math.floor((Math.random() * 10000000000) + 1)+".jpg");
 					}, function(err) {
 					});
 				}
@@ -4309,7 +4313,7 @@ angular.module('starter.controllers', [])
 					};
 					$cordovaCamera.getPicture(options).then(function(imageData) {
 						 $scope.imgSrc.push(imageData);
-						 $scope.randomFile=Math.floor((Math.random() * 10000000000) + 1)+".jpg";
+						 $scope.randomFile.push(Math.floor((Math.random() * 10000000000) + 1)+".jpg");
 					}, function(err) {
 					});
 				}else if(options==2){
@@ -4325,7 +4329,7 @@ angular.module('starter.controllers', [])
 					};
 					$cordovaCamera.getPicture(options).then(function(imageData) {
 							 $scope.imgSrc.push(imageData);
-							 $scope.randomFile=Math.floor((Math.random() * 10000000000) + 1)+".jpg";
+							 $scope.randomFile.push(Math.floor((Math.random() * 10000000000) + 1)+".jpg");
 					}, function(err) {
 					});
 				}
