@@ -120,12 +120,10 @@
 								</div> 
 							</div> 
 
-							<div ng-repeat="image in imgSrc">
-								<div class="row" >
-									<div class="col text-center">
-										<img ng-src="data:image/png;base64,{{image}}" id="receipt"  ng-click="deleteimg($index)"/>
-										<input type="hidden" name="imgValue" ng-value="imgSrc" ng-model="newclaimvalues.imgValue">
-									</div>
+							<div class="row" >
+								<div class="col text-center">
+									<img ng-src="data:image/png;base64,{{imgSrc}}" id="receipt"/>
+									<input type="hidden" name="imgValue" ng-value="{{imgSrc}}" ng-model="newclaimvalues.imgValue">
 								</div>
 							</div>
 

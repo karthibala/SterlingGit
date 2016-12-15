@@ -1,5 +1,5 @@
-<?xml version="1.5" encoding="UTF-8" standalone="yes"?>
-<widget id="com.sterling.admin" version="1.0.5" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<?xml version="1.6" encoding="UTF-8" standalone="yes"?>
+<widget id="com.sterling.admin" version="1.0.6" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
   <name>Sterling Administration</name>
   <description>
         Sterling Administration  App for HSA,FSA,HRA and COBRA
@@ -10,7 +10,7 @@
 	
 	<plugin name="cordova-plugin-network-information" source="npm" />
 	<plugin name="cordova-plugin-inappbrowser" source="npm"/>
-	<plugin name="cordova-plugin-camera" source="npm"/>
+	<!-- <plugin name="cordova-plugin-camera" source="npm"/> -->
 	<plugin name="cordova-plugin-datepicker" source="npm"/>
 	<plugin name="cordova-plugin-dialogs" source="npm"/>
 	<plugin name="cordova-plugin-file" source="npm"/>
@@ -18,6 +18,10 @@
 	<plugin name="cordova-plugin-file-opener2" source="npm"/>
 	<plugin name="cordova-plugin-splashscreen" source="npm"/>
 	<plugin name="cordova-plugin-whitelist" source="npm"/>
+	<plugin name="cordova-plugin-camera" spec="~2.3.1">
+        <variable name="CAMERA_USAGE_DESCRIPTION" value="capture the claim receipt" />
+        <variable name="PHOTOLIBRARY_USAGE_DESCRIPTION" value="choose the claim receipt" />
+    </plugin>
 	
   <content src="login.html"/>
   <access origin="*"/>
@@ -53,6 +57,12 @@
 	<icon src="SterlingIcon.png"/>
   </platform>
   <platform name="ios">
+	<!-- <config-file target="*-Info.plist" parent="NSPhotoLibraryUsageDescription">
+        <string>upload receipt</string>
+    </config-file>
+    <config-file target="*-Info.plist" parent="NSCameraUsageDescription">
+        <string>upload receipt</string>
+    </config-file> -->
 	<icon height="57" src="Icons/ios/icon.png" width="57" />
     <icon height="40" src="Icons/ios/icon-40.png" width="40" />
     <icon height="80" src="Icons/ios/icon-40@2x.png" width="80" />

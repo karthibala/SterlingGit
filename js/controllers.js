@@ -2911,10 +2911,6 @@ angular.module('starter.controllers', [])
 		}	
 	}
 	
-	$scope.deleteimg=function($index){
-		$scope.imgSrc.splice($index,1)
-	}
-   
 	$scope.newclaimFsa=function(){
 		if($scope.newclaimvalues.amount == 0){
 			$cordovaDialogs.alert('Please enter the amount greater than 0','Sorry','OK')
@@ -3830,8 +3826,8 @@ angular.module('starter.controllers', [])
 	$scope.hraacc= $rootScope.hraaccno;
 	$scope.hsaaccno=$rootScope.hsaaccno;
 	$scope.acoinde = {selectAccount:'',amount:'',description:'',startTransDate:'',endTransDate:''};
-	$scope.imgSrc=[];
-	$scope.randomFile=[];
+	//$scope.imgSrc=[];
+	//$scope.randomFile=[];
 	$scope.floatlabel=false;
 	
 	$scope.SelectFloat = function ()
@@ -3860,8 +3856,8 @@ angular.module('starter.controllers', [])
 						correctOrientation:true
 					};
 					$cordovaCamera.getPicture(options).then(function(imageData) {
-						 $scope.imgSrc.push(imageData);
-						 $scope.randomFile.push(Math.floor((Math.random() * 10000000000) + 1)+".jpg");
+						$scope.imgSrc=imageData;
+						$scope.randomFile=Math.floor((Math.random() * 10000000000) + 1)+".jpg";
 					}, function(err) {
 					});
 				} else {
@@ -3876,8 +3872,8 @@ angular.module('starter.controllers', [])
 						correctOrientation:true
 					};
 					$cordovaCamera.getPicture(options).then(function(imageData) {
-						 $scope.imgSrc.push(imageData);
-						 $scope.randomFile.push(Math.floor((Math.random() * 10000000000) + 1)+".jpg");
+						$scope.imgSrc=imageData;
+						$scope.randomFile=Math.floor((Math.random() * 10000000000) + 1)+".jpg";
 					}, function(err) {
 					});
 				}
@@ -3897,8 +3893,8 @@ angular.module('starter.controllers', [])
 						correctOrientation:true
 					};
 					$cordovaCamera.getPicture(options).then(function(imageData) {
-						 $scope.imgSrc.push(imageData);
-						 $scope.randomFile.push(Math.floor((Math.random() * 10000000000) + 1)+".jpg");
+						$scope.imgSrc=imageData;
+						$scope.randomFile=Math.floor((Math.random() * 10000000000) + 1)+".jpg";
 					}, function(err) {
 					});
 				}else if(options==2){
@@ -3913,8 +3909,8 @@ angular.module('starter.controllers', [])
 						correctOrientation:true
 					};
 					$cordovaCamera.getPicture(options).then(function(imageData) {
-						 $scope.imgSrc.push(imageData);
-						 $scope.randomFile.push(Math.floor((Math.random() * 10000000000) + 1)+".jpg");
+						$scope.imgSrc=imageData;
+						$scope.randomFile=Math.floor((Math.random() * 10000000000) + 1)+".jpg";
 					}, function(err) {
 					});
 				}
@@ -4150,8 +4146,8 @@ angular.module('starter.controllers', [])
 	$scope.newclaim_balance=$rootScope.newclaim_balance;
 	$scope.hraacc= $rootScope.hraaccno;
 	$scope.provideracoinde={selectpayee:'',amount:'',description:'',startTransDate:'',endTransDate:''};
-	$scope.imgSrc=[];
-	$scope.randomFile=[];
+	//$scope.imgSrc=[];
+	//$scope.randomFile=[];
 	$scope.floatlabel=false;
 	
 	$scope.SelectFloat = function ()
@@ -4180,8 +4176,8 @@ angular.module('starter.controllers', [])
 						correctOrientation:true
 					};
 					$cordovaCamera.getPicture(options).then(function(imageData) {
-							 $scope.imgSrc.push(imageData);
-							 $scope.randomFile.push(Math.floor((Math.random() * 10000000000) + 1)+".jpg");
+						$scope.imgSrc=imageData;
+						$scope.randomFile=Math.floor((Math.random() * 10000000000) + 1)+".jpg";
 					}, function(err) {
 					});
 				} else {
@@ -4196,8 +4192,8 @@ angular.module('starter.controllers', [])
 						correctOrientation:true
 					};
 					$cordovaCamera.getPicture(options).then(function(imageData) {
-						 $scope.imgSrc.push(imageData);
-						 $scope.randomFile.push(Math.floor((Math.random() * 10000000000) + 1)+".jpg");
+						$scope.imgSrc=imageData;
+						$scope.randomFile=Math.floor((Math.random() * 10000000000) + 1)+".jpg";
 					}, function(err) {
 					});
 				}
@@ -4217,8 +4213,8 @@ angular.module('starter.controllers', [])
 						correctOrientation:true
 					};
 					$cordovaCamera.getPicture(options).then(function(imageData) {
-						 $scope.imgSrc.push(imageData);
-						 $scope.randomFile.push(Math.floor((Math.random() * 10000000000) + 1)+".jpg");
+						$scope.imgSrc=imageData;
+						$scope.randomFile=Math.floor((Math.random() * 10000000000) + 1)+".jpg";
 					}, function(err) {
 					});
 				}else if(options==2){
@@ -4233,8 +4229,8 @@ angular.module('starter.controllers', [])
 						correctOrientation:true
 					};
 					$cordovaCamera.getPicture(options).then(function(imageData) {
-							 $scope.imgSrc.push(imageData);
-							 $scope.randomFile.push(Math.floor((Math.random() * 10000000000) + 1)+".jpg");
+						$scope.imgSrc=imageData;
+						$scope.randomFile=Math.floor((Math.random() * 10000000000) + 1)+".jpg";
 					}, function(err) {
 					});
 				}

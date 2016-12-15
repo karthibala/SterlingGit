@@ -85,13 +85,11 @@
 									<button class="button button-calm button-small  formButton1" type="submit " ng-click="upload();" ><i side="left"  class="icon-left ion-android-upload" ></i><span class="icon-upload">Upload</span></button>
 								</div> 
 							</div> 
-
-							<div ng-repeat="image in imgSrc">
-								<div class="row" >
-									<div class="col text-center">
-										<img ng-src="data:image/png;base64,{{image}}" id="receipt"  ng-click="deleteimg($index)"/>
-										<input type="hidden" name="imgValue" ng-value="imgSrc" ng-model="paymeValues.imgValue">
-									</div>
+							
+							<div class="row" >
+								<div class="col text-center">
+									<img ng-src="data:image/png;base64,{{imgSrc}}" id="receipt"/>
+									<input type="hidden" name="imgValue" ng-value="{{imgSrc}}" ng-model="paymeValues.imgValue">
 								</div>
 							</div>
 
