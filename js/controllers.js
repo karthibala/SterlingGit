@@ -173,7 +173,7 @@ angular.module('starter.controllers', [])
 		}
    });
 })
-.controller('makecontributeCtrl', function($scope,$cordovaNetwork,$rootScope,$ionicPlatform,$cordovaDatePicker,$http,$location,$ionicModal,$cordovaDialogs,$ionicLoading,$cordovaNetwork,$ionicPopup) {
+.controller('makecontributeCtrl', function($scope,$cordovaNetwork,$rootScope,$ionicPlatform,$cordovaDatePicker,$http,$location,$ionicModal,$cordovaDialogs,$ionicLoading,$cordovaNetwork,$ionicPopup,$filter) {
 	$rootScope.hidecontent=true;
 	$scope.TransDate="";
 	$scope.username = localStorage.getItem('username');
@@ -185,6 +185,7 @@ angular.module('starter.controllers', [])
 	$scope.hsaaccId=$rootScope.hsaaccId;
 	$scope.floatlabel=false;
 	$scope.floatlabel1=false;
+	$scope.date = $filter('date')(new Date(),'MM/dd/yyyy');
 
 	$scope.SelectFloat = function ()
 	{ 
@@ -336,6 +337,20 @@ angular.module('starter.controllers', [])
 				});
 
 			}	
+		}else if($scope.date >= $scope.makecontribute.TransDate){
+			if($rootScope.IOS==true){
+				var alertPopup = $ionicPopup.alert({
+					title: 'Sorry',
+					template: 'Please select future date'
+				});
+
+				alertPopup.then(function(res) {
+				});
+			}else{
+				$cordovaDialogs.alert('Please select future date','Sorry','OK')
+				.then(function() {
+				});
+			}
 		}else{
 			$ionicLoading.show({
 			template: '<ion-spinner icon="ios"></ion-spinner><br>Loading...'
@@ -572,7 +587,7 @@ angular.module('starter.controllers', [])
 		
 	}
 })
-.controller('PaymeCtrl', function($scope,$rootScope,$cordovaNetwork,$ionicPlatform,$cordovaImagePicker,$cordovaDatePicker,$http,$location,$ionicModal,$cordovaDialogs,$ionicLoading,$cordovaCamera,$ionicPopup) {
+.controller('PaymeCtrl', function($scope,$rootScope,$cordovaNetwork,$ionicPlatform,$cordovaImagePicker,$cordovaDatePicker,$http,$location,$ionicModal,$cordovaDialogs,$ionicLoading,$cordovaCamera,$ionicPopup,$filter) {
 	$rootScope.hidecontent=true;
 	localStorage.setItem("backCount","4");
 	$scope.paymeValues={selectAccount:'',amount:'',TransDate:'',category:'',imgValue:''};
@@ -582,6 +597,7 @@ angular.module('starter.controllers', [])
 	$scope.msghide=true;
 	$scope.floatlabel=false;
 	$scope.floatlabel1=false;
+	$scope.date = $filter('date')(new Date(),'MM/dd/yyyy');
 	
 	$scope.SelectFloat = function ()
 	{ 
@@ -786,6 +802,20 @@ angular.module('starter.controllers', [])
 				.then(function() {
 				});
 			}
+		}else if($scope.date >= $scope.paymeValues.TransDate){
+			if($rootScope.IOS==true){
+				var alertPopup = $ionicPopup.alert({
+					title: 'Sorry',
+					template: 'Please select future date'
+				});
+
+				alertPopup.then(function(res) {
+				});
+			}else{
+				$cordovaDialogs.alert('Please select future date','Sorry','OK')
+				.then(function() {
+				});
+			}
 		}else if($scope.imgSrc==undefined){
 			if($rootScope.IOS==true){
 				var alertPopup = $ionicPopup.alert({
@@ -885,7 +915,7 @@ angular.module('starter.controllers', [])
 	
 	
 })
-.controller('PayproviderCtrl', function($scope,$rootScope,$cordovaNetwork,$ionicPlatform,$cordovaDatePicker,$http,$location,$ionicModal,$cordovaDialogs,$ionicLoading,$cordovaNetwork,$cordovaCamera,$ionicPopup) {
+.controller('PayproviderCtrl', function($scope,$rootScope,$cordovaNetwork,$ionicPlatform,$cordovaDatePicker,$http,$location,$ionicModal,$cordovaDialogs,$ionicLoading,$cordovaNetwork,$cordovaCamera,$ionicPopup,$filter) {
 	$rootScope.hidecontent=true;
 	localStorage.setItem("backCount","4");
 	$scope.hsaaccId=$rootScope.hsaaccId;
@@ -893,6 +923,7 @@ angular.module('starter.controllers', [])
 	$scope.hsaaccno=$rootScope.hsaaccno;
 	$scope.payprovierValues={selectPayee:'',patient_name:'',amount:'',TransDate:'',description:''};
 	$scope.floatlabel=false;
+	$scope.date = $filter('date')(new Date(),'MM/dd/yyyy');
 	
 	$scope.SelectFloat = function ()
 	{ 
@@ -1108,6 +1139,20 @@ angular.module('starter.controllers', [])
 				});
 			}else{
 				$cordovaDialogs.alert('Please enter the amount greater than 0','Sorry','OK')
+				.then(function() {
+				});
+			}
+		}else if($scope.date >= $scope.payprovierValues.TransDate){
+			if($rootScope.IOS==true){
+				var alertPopup = $ionicPopup.alert({
+					title: 'Sorry',
+					template: 'Please select future date'
+				});
+
+				alertPopup.then(function(res) {
+				});
+			}else{
+				$cordovaDialogs.alert('Please select future date','Sorry','OK')
 				.then(function() {
 				});
 			}
