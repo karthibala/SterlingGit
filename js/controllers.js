@@ -3170,6 +3170,421 @@ angular.module('starter.controllers', [])
 	}
 })
 
+.controller('fsacardclaimCtrl', function($scope,$ionicPlatform,$cordovaNetwork,$cordovaDatePicker,$http,$location,$ionicModal,$cordovaDialogs,$ionicLoading,$cordovaNetwork,$rootScope) {
+	$rootScope.hidecontent=true;
+	localStorage.setItem("backCount","3");
+	$scope.username = localStorage.getItem('username');
+	$scope.access_token = localStorage.getItem('access_token');
+
+	$scope.goback=function()
+	{
+		$rootScope.hidecontent=false;
+		$location.path("app/fsa")
+	}
+	
+})
+
+.controller('fsacarddetailCtrl', function($scope,$rootScope,$cordovaNetwork,$ionicPlatform,$cordovaDatePicker,$http,$location,$ionicModal,$cordovaDialogs,$ionicLoading,$cordovaNetwork,$ionicPopup) {
+	$rootScope.hidecontent=true;
+	localStorage.setItem("backCount","5");
+	$scope.username = localStorage.getItem('username');
+	$scope.access_token = localStorage.getItem('access_token');
+	$scope.fsaaccno=$rootScope.fsaaccno;
+	if($cordovaNetwork.isOffline())
+	{
+		$ionicLoading.hide();
+		if($rootScope.IOS==true){
+			var alertPopup = $ionicPopup.alert({
+				title: 'Sorry',
+				template: 'Session expired, Please Login Again'
+			});
+
+			alertPopup.then(function(res) {
+				localStorage.clear();
+				window.location='login.html#/login';
+			});
+		}else{
+			$cordovaDialogs.confirm('Session expired, Please Login Again', 'Sorry', 'ok')
+			.then(function(buttonIndex) {
+				if(buttonIndex=="1")
+				{
+					localStorage.clear();
+					window.location='login.html#/login';
+				}
+			});
+			return false;
+		}
+	}else{ 
+		$http.get(" http://app.sterlinghsa.com/api/v1/accounts/debitcardpurchase",{params:{'acct_num':$scope.fsaaccno,'trans_type':'d','plan_type':'fsa'},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
+		.success(function(data){
+			$ionicLoading.hide();
+			if(data.debit_card_list==null){
+				if($rootScope.IOS==true){
+				var alertPopup = $ionicPopup.alert({
+					title: 'Sorry',
+					template: 'No debit card purchase Detail'
+				});
+
+				alertPopup.then(function(res) {
+					$location.path('app/fsa');
+				});
+			}else{
+				$cordovaDialogs.confirm('No debit card purchase Detail', 'Sorry', 'ok')
+				.then(function(buttonIndex) {
+					if(buttonIndex=="1")
+					{
+						$location.path('app/fsa');
+					}
+				}); 
+			}
+				
+			}
+			else{
+				$scope.debit_card_list=data.debit_card_list[0];
+				$rootScope.debit_card_transNo = $scope.debit_card_list.TRANSACTION_NUMBER; 
+				$rootScope.debit_card_amount = $scope.debit_card_list.AMOUNT;
+			}
+
+		}).error(function(err){
+			$ionicLoading.hide();
+			if($rootScope.IOS==true){
+				var alertPopup = $ionicPopup.alert({
+					title: 'Sorry',
+					template: 'Session expired, Please Login Again'
+				});
+
+				alertPopup.then(function(res) {
+					localStorage.clear();
+					window.location='login.html#/login';
+				});
+			}else{
+				$cordovaDialogs.confirm('Session expired, Please Login Again', 'Sorry', 'ok')
+				.then(function(buttonIndex) {
+					if(buttonIndex=="1")
+					{
+						localStorage.clear();
+						window.location='login.html#/login';
+					}
+				});
+				return false;
+			}
+		});
+	}
+	
+	$scope.goback=function()
+	{
+		$location.path("app/fsa")
+	}
+	
+})
+
+.controller('fsaclaimdetailCtrl', function($scope,$rootScope,$cordovaNetwork,$ionicPlatform,$cordovaDatePicker,$http,$location,$ionicModal,$cordovaDialogs,$ionicLoading,$cordovaNetwork,$ionicPopup) {
+	$rootScope.hidecontent=true;
+	localStorage.setItem("backCount","5");
+	$scope.username = localStorage.getItem('username');
+	$scope.access_token = localStorage.getItem('access_token');
+	$scope.trans_num=$rootScope.debit_card_transNo
+	if($cordovaNetwork.isOffline())
+	{
+		$ionicLoading.hide();
+		if($rootScope.IOS==true){
+			var alertPopup = $ionicPopup.alert({
+				title: 'Sorry',
+				template: 'Session expired, Please Login Again'
+			});
+
+			alertPopup.then(function(res) {
+				localStorage.clear();
+				window.location='login.html#/login';
+			});
+		}else{
+			$cordovaDialogs.confirm('Session expired, Please Login Again', 'Sorry', 'ok')
+			.then(function(buttonIndex) {
+				if(buttonIndex=="1")
+				{
+					localStorage.clear();
+					window.location='login.html#/login';
+				}
+			});
+			return false;
+		}
+	}else{
+		$http.get(" http://app.sterlinghsa.com/api/v1/accounts/claimdetail",{params:{'trans_num':$scope.trans_num,'trans_type':'c','plan_type':'fsa'},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
+		.success(function(data){
+			$ionicLoading.hide();
+			if(data.payment_information==null){
+				if($rootScope.IOS==true){
+				var alertPopup = $ionicPopup.alert({
+					title: 'Sorry',
+					template: 'No Claim Detail'
+				});
+
+				alertPopup.then(function(res) {
+					$location.path('/fsacardclaim');
+				});
+			}else{
+				$cordovaDialogs.confirm('No Claim Detail', 'Sorry', 'ok')
+				.then(function(buttonIndex) {
+					if(buttonIndex=="1")
+					{
+						$location.path('/fsacardclaim');
+					}
+				}); 
+			}
+				
+			}
+			else{
+				$scope.payment_information=data.payment_information[0];
+				$scope.docs_list=data.docs_list;
+				//alert("payment_information-"+JSON.stringify($scope.payment_information))
+				//alert("docs_list-"+JSON.stringify($scope.docs_list))
+			}
+
+		}).error(function(err){
+			$ionicLoading.hide();
+			if($rootScope.IOS==true){
+				var alertPopup = $ionicPopup.alert({
+					title: 'Sorry',
+					template: 'Session expired, Please Login Again'
+				});
+
+				alertPopup.then(function(res) {
+					localStorage.clear();
+					window.location='login.html#/login';
+				});
+			}else{
+				$cordovaDialogs.confirm('Session expired, Please Login Again', 'Sorry', 'ok')
+				.then(function(buttonIndex) {
+					if(buttonIndex=="1")
+					{
+						localStorage.clear();
+						window.location='login.html#/login';
+					}
+				});
+				return false;
+			}
+		});
+	}
+	
+	$scope.goback=function()
+	{
+		$location.path("app/fsa")
+	}
+	
+})
+
+.controller('fsanewcardclaimCtrl', function($scope,$ionicPlatform,$cordovaNetwork,$cordovaDatePicker,$http,$location,$ionicModal,$cordovaDialogs,$ionicLoading,$cordovaNetwork,$ionicScrollDelegate,$rootScope,$cordovaCamera,$ionicPopup,$filter) {
+	$rootScope.hidecontent=true;
+	$scope.username = localStorage.getItem('username');
+	$scope.access_token = localStorage.getItem('access_token');
+	$scope.trans_num=$rootScope.debit_card_transNo;
+	$scope.debit_card_amount = $rootScope.debit_card_amount;
+	//$scope.imgSrc=[];
+	//$scope.randomFile=[];
+	$scope.floatlabel=false;
+	
+	$ionicScrollDelegate.scrollBottom(true);
+	
+	$scope.SelectFloat = function ()
+	{ 
+		$scope.floatlabel=true; 
+	}
+
+	$scope.goback=function()
+	{
+		$scope.plan_types={};
+		$location.path("/fsacardclaim");
+	}
+	$scope.upload = function(){
+		if($rootScope.IOS==true){
+			var confirmPopup = $ionicPopup.confirm({
+				title: 'Upload Receipt',
+				template: 'Choose your option',
+				okText: 'Gallery',
+				cancelText: 'Camera',
+			});
+			confirmPopup.then(function(res) {
+				if(res) {
+					var options = {
+						quality: 50,
+						destinationType: Camera.DestinationType.DATA_URL,
+						sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+						targetWidth: 100,
+						targetHeight: 100,
+						popoverOptions: CameraPopoverOptions,
+						saveToPhotoAlbum: false,
+						correctOrientation:true
+					};
+					$cordovaCamera.getPicture(options).then(function(imageData) {
+						 $scope.imgSrc=imageData;
+						 $scope.randomFile=Math.floor((Math.random() * 10000000000) + 1)+".jpg";
+					}, function(err) {
+					});
+					
+				} else {
+					var options = {
+						quality: 50,
+						destinationType: Camera.DestinationType.DATA_URL,
+						sourceType: Camera.PictureSourceType.CAMERA,
+						targetWidth: 100,
+						targetHeight: 100,
+						popoverOptions: CameraPopoverOptions,
+						saveToPhotoAlbum: false,
+						correctOrientation:true
+					};
+					$cordovaCamera.getPicture(options).then(function(imageData) {
+						$scope.imgSrc=imageData;
+						$scope.randomFile=Math.floor((Math.random() * 10000000000) + 1)+".jpg";
+					}, function(err) {
+					});
+				}
+			});
+		}else{
+			$cordovaDialogs.confirm('Choose your option', 'Upload Receipt', ['Camera','Gallery'])
+			.then(function(options) {
+				if(options==1){
+					var options = {
+						quality: 50,
+						destinationType: Camera.DestinationType.DATA_URL,
+						sourceType: Camera.PictureSourceType.CAMERA,
+						targetWidth: 100,
+						targetHeight: 100,
+						popoverOptions: CameraPopoverOptions,
+						saveToPhotoAlbum: false,
+						correctOrientation:true
+					};
+					$cordovaCamera.getPicture(options).then(function(imageData) {
+						$scope.imgSrc=imageData;
+						$scope.randomFile=Math.floor((Math.random() * 10000000000) + 1)+".jpg";
+					}, function(err) {
+					});
+				}else if(options==2){
+					var options = {
+						quality: 50,
+						destinationType: Camera.DestinationType.DATA_URL,
+						sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+						targetWidth: 100,
+						targetHeight: 100,
+						popoverOptions: CameraPopoverOptions,
+						saveToPhotoAlbum: false,
+						correctOrientation:true
+					};
+					$cordovaCamera.getPicture(options).then(function(imageData) {
+						$scope.imgSrc=imageData;
+						$scope.randomFile=Math.floor((Math.random() * 10000000000) + 1)+".jpg";
+					}, function(err) {
+					});
+				}
+			});
+			return false;
+		}
+	}
+	   
+	$scope.newclaimsubmit=function(){
+		if(document.getElementsByName('imgValue').length==0){
+			if($rootScope.IOS==true){
+				var alertPopup = $ionicPopup.alert({
+					title: 'Sorry',
+					template: 'Please upload one receipt'
+				});
+
+				alertPopup.then(function(res) {
+				});
+			}else{
+				$cordovaDialogs.alert('Please upload one receipt')
+				.then(function() {
+				});
+			}
+
+		}else if($scope.trans_num==undefined){
+			if($rootScope.IOS==true){
+				var alertPopup = $ionicPopup.alert({
+					title: 'Sorry',
+					template: "You Can't upload any receipt"
+				});
+
+				alertPopup.then(function(res) {
+				});
+			}else{
+				$cordovaDialogs.alert("You Can't upload any receipt")
+				.then(function() {
+				});
+			}
+		}
+		else{
+			$ionicLoading.show({
+			template: '<ion-spinner icon="ios"></ion-spinner><br>Loading...'
+			});
+			
+			$http.post("http://app.sterlinghsa.com/api/v1/accounts/uploadclaimdocument",{'claim_id':  $scope.trans_num,
+			"receipt":$scope.imgSrc,
+			"file_name":$scope.randomFile,
+			"file_mime_type":'image/jpeg'
+			},{headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
+			.success(function(data){
+
+			if(data.status == "SUCCESS"){
+				$ionicLoading.hide();
+				$scope.claim_id = data.claim_id;
+				$location.path("/fsacardclaim");
+				if($rootScope.IOS==true){
+					var alertPopup = $ionicPopup.alert({
+						title: 'Success',
+						template: 'Claim Submitted Successfully'
+					});
+
+					alertPopup.then(function(res) {
+						$scope.imgSrc= '';
+						var myEl = angular.element( document.querySelector( '#receipt' ) );
+						myEl.removeAttr('src');
+						$scope.floatlabel=false;
+					});
+				}else{
+					$cordovaDialogs.alert('Claim Submitted Successfully', 'Success', 'OK')
+					.then(function() {
+						$scope.imgSrc= '';
+						var myEl = angular.element( document.querySelector( '#receipt' ) );
+						myEl.removeAttr('src');
+						$scope.floatlabel=false;
+					});
+					return false;
+				}	
+			}else if(data.status == "FAILED"){
+				$ionicLoading.hide();
+				$location.path("/fsacardclaim");
+				if($rootScope.IOS==true){
+					var alertPopup = $ionicPopup.alert({
+						title: 'Sorry',
+						template: data.error_message
+					});
+
+					alertPopup.then(function(res) {
+						$scope.imgSrc= '';
+						var myEl = angular.element( document.querySelector( '#receipt' ) );
+						myEl.removeAttr('src');
+						$scope.floatlabel=false;	
+					});
+				}else{
+					$cordovaDialogs.alert(data.error_message, 'Sorry', 'OK')
+					.then(function($setUntouched,$setPristine) {
+						$scope.imgSrc= '';
+						var myEl = angular.element( document.querySelector( '#receipt' ) );
+						myEl.removeAttr('src');
+						$scope.floatlabel=false;		    
+					});
+					return false;
+				}	
+				
+			}
+
+			}).error(function(err){
+			});
+		}
+
+	}
+})
+
+//Other controllers
 .controller('AppCtrl', function($scope,$ionicPopup, $timeout ,$ionicModal,$location,$cordovaDialogs, $rootScope,$http) {
 	$scope.username = localStorage.getItem('username');
 	$scope.access_token = localStorage.getItem('access_token');
@@ -4487,6 +4902,419 @@ angular.module('starter.controllers', [])
 		$location.path("/hrapayprovider");
 	}
 
+})
+
+.controller('hracardclaimCtrl', function($scope,$ionicPlatform,$cordovaNetwork,$cordovaDatePicker,$http,$location,$ionicModal,$cordovaDialogs,$ionicLoading,$cordovaNetwork,$rootScope) {
+	$rootScope.hidecontent=true;
+	localStorage.setItem("backCount","3");
+	$scope.username = localStorage.getItem('username');
+	$scope.access_token = localStorage.getItem('access_token');
+
+	$scope.goback=function()
+	{
+		$rootScope.hidecontent=false;
+		$location.path("app/hra")
+	}
+	
+})
+
+.controller('hracarddetailCtrl', function($scope,$rootScope,$cordovaNetwork,$ionicPlatform,$cordovaDatePicker,$http,$location,$ionicModal,$cordovaDialogs,$ionicLoading,$cordovaNetwork,$ionicPopup) {
+	$rootScope.hidecontent=true;
+	localStorage.setItem("backCount","5");
+	$scope.username = localStorage.getItem('username');
+	$scope.access_token = localStorage.getItem('access_token');
+	$scope.hraaccno=$rootScope.hraaccno;
+	if($cordovaNetwork.isOffline())
+	{
+		$ionicLoading.hide();
+		if($rootScope.IOS==true){
+			var alertPopup = $ionicPopup.alert({
+				title: 'Sorry',
+				template: 'Session expired, Please Login Again'
+			});
+
+			alertPopup.then(function(res) {
+				localStorage.clear();
+				window.location='login.html#/login';
+			});
+		}else{
+			$cordovaDialogs.confirm('Session expired, Please Login Again', 'Sorry', 'ok')
+			.then(function(buttonIndex) {
+				if(buttonIndex=="1")
+				{
+					localStorage.clear();
+					window.location='login.html#/login';
+				}
+			});
+			return false;
+		}
+	}else{ 
+		$http.get(" http://app.sterlinghsa.com/api/v1/accounts/debitcardpurchase",{params:{'acct_num':$scope.hraaccno},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
+		.success(function(data){
+			$ionicLoading.hide();
+			if(data.debit_card_list==null){
+				if($rootScope.IOS==true){
+				var alertPopup = $ionicPopup.alert({
+					title: 'Sorry',
+					template: 'No debit card purchase Detail'
+				});
+
+				alertPopup.then(function(res) {
+					$location.path('app/hra');
+				});
+			}else{
+				$cordovaDialogs.confirm('No debit card purchase Detail', 'Sorry', 'ok')
+				.then(function(buttonIndex) {
+					if(buttonIndex=="1")
+					{
+						$location.path('app/hra');
+					}
+				}); 
+			}
+				
+			}
+			else{
+				$scope.hra_debit_card_list=data.debit_card_list[0];
+				$rootScope.hra_debit_card_transNo = $scope.hra_debit_card_list.TRANSACTION_NUMBER; 
+				$rootScope.hra_debit_card_amount = $scope.hra_debit_card_list.AMOUNT;
+			}
+
+		}).error(function(err){
+			$ionicLoading.hide();
+			if($rootScope.IOS==true){
+				var alertPopup = $ionicPopup.alert({
+					title: 'Sorry',
+					template: 'Session expired, Please Login Again'
+				});
+
+				alertPopup.then(function(res) {
+					localStorage.clear();
+					window.location='login.html#/login';
+				});
+			}else{
+				$cordovaDialogs.confirm('Session expired, Please Login Again', 'Sorry', 'ok')
+				.then(function(buttonIndex) {
+					if(buttonIndex=="1")
+					{
+						localStorage.clear();
+						window.location='login.html#/login';
+					}
+				});
+				return false;
+			}
+		});
+	}
+	
+	$scope.goback=function()
+	{
+		$location.path("app/hra")
+	}
+	
+})
+
+.controller('hraclaimdetailCtrl', function($scope,$rootScope,$cordovaNetwork,$ionicPlatform,$cordovaDatePicker,$http,$location,$ionicModal,$cordovaDialogs,$ionicLoading,$cordovaNetwork,$ionicPopup) {
+	$rootScope.hidecontent=true;
+	localStorage.setItem("backCount","5");
+	$scope.username = localStorage.getItem('username');
+	$scope.access_token = localStorage.getItem('access_token');
+	$scope.hra_trans_num=$rootScope.hra_debit_card_transNo
+	if($cordovaNetwork.isOffline())
+	{
+		$ionicLoading.hide();
+		if($rootScope.IOS==true){
+			var alertPopup = $ionicPopup.alert({
+				title: 'Sorry',
+				template: 'Session expired, Please Login Again'
+			});
+
+			alertPopup.then(function(res) {
+				localStorage.clear();
+				window.location='login.html#/login';
+			});
+		}else{
+			$cordovaDialogs.confirm('Session expired, Please Login Again', 'Sorry', 'ok')
+			.then(function(buttonIndex) {
+				if(buttonIndex=="1")
+				{
+					localStorage.clear();
+					window.location='login.html#/login';
+				}
+			});
+			return false;
+		}
+	}else{
+		$http.get(" http://app.sterlinghsa.com/api/v1/accounts/claimdetail",{params:{'trans_num':$scope.hra_trans_num},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
+		.success(function(data){
+			$ionicLoading.hide();
+			if(data.payment_information==null){
+				if($rootScope.IOS==true){
+				var alertPopup = $ionicPopup.alert({
+					title: 'Sorry',
+					template: 'No Claim Detail'
+				});
+
+				alertPopup.then(function(res) {
+					$location.path('/hracardclaim');
+				});
+			}else{
+				$cordovaDialogs.confirm('No Claim Detail', 'Sorry', 'ok')
+				.then(function(buttonIndex) {
+					if(buttonIndex=="1")
+					{
+						$location.path('/hracardclaim');
+					}
+				}); 
+			}
+				
+			}
+			else{
+				$scope.hra_payment_information=data.payment_information[0];
+				$scope.hra_docs_list=data.docs_list;
+			}
+
+		}).error(function(err){
+			$ionicLoading.hide();
+			if($rootScope.IOS==true){
+				var alertPopup = $ionicPopup.alert({
+					title: 'Sorry',
+					template: 'Session expired, Please Login Again'
+				});
+
+				alertPopup.then(function(res) {
+					localStorage.clear();
+					window.location='login.html#/login';
+				});
+			}else{
+				$cordovaDialogs.confirm('Session expired, Please Login Again', 'Sorry', 'ok')
+				.then(function(buttonIndex) {
+					if(buttonIndex=="1")
+					{
+						localStorage.clear();
+						window.location='login.html#/login';
+					}
+				});
+				return false;
+			}
+		});
+	}
+	
+	$scope.goback=function()
+	{
+		$location.path("app/hra")
+	}
+	
+})
+
+.controller('hranewcardclaimCtrl', function($scope,$ionicPlatform,$cordovaNetwork,$cordovaDatePicker,$http,$location,$ionicModal,$cordovaDialogs,$ionicLoading,$cordovaNetwork,$ionicScrollDelegate,$rootScope,$cordovaCamera,$ionicPopup,$filter) {
+	$rootScope.hidecontent=true;
+	$scope.username = localStorage.getItem('username');
+	$scope.access_token = localStorage.getItem('access_token');
+	$scope.hra_trans_num=$rootScope.hra_debit_card_transNo;
+	//alert($scope.hra_trans_num)
+	$scope.hra_debit_card_amount = $rootScope.hra_debit_card_amount;
+	//$scope.imgSrc=[];
+	//$scope.randomFile=[];
+	$scope.floatlabel=false;
+	
+	$ionicScrollDelegate.scrollBottom(true);
+	
+	$scope.SelectFloat = function ()
+	{ 
+		$scope.floatlabel=true; 
+	}
+
+	$scope.goback=function()
+	{
+		$scope.plan_types={};
+		$location.path("/fsacardclaim");
+	}
+	$scope.upload = function(){
+		if($rootScope.IOS==true){
+			var confirmPopup = $ionicPopup.confirm({
+				title: 'Upload Receipt',
+				template: 'Choose your option',
+				okText: 'Gallery',
+				cancelText: 'Camera',
+			});
+			confirmPopup.then(function(res) {
+				if(res) {
+					var options = {
+						quality: 50,
+						destinationType: Camera.DestinationType.DATA_URL,
+						sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+						targetWidth: 100,
+						targetHeight: 100,
+						popoverOptions: CameraPopoverOptions,
+						saveToPhotoAlbum: false,
+						correctOrientation:true
+					};
+					$cordovaCamera.getPicture(options).then(function(imageData) {
+						 $scope.imgSrc=imageData;
+						 $scope.randomFile=Math.floor((Math.random() * 10000000000) + 1)+".jpg";
+					}, function(err) {
+					});
+					
+				} else {
+					var options = {
+						quality: 50,
+						destinationType: Camera.DestinationType.DATA_URL,
+						sourceType: Camera.PictureSourceType.CAMERA,
+						targetWidth: 100,
+						targetHeight: 100,
+						popoverOptions: CameraPopoverOptions,
+						saveToPhotoAlbum: false,
+						correctOrientation:true
+					};
+					$cordovaCamera.getPicture(options).then(function(imageData) {
+						$scope.imgSrc=imageData;
+						$scope.randomFile=Math.floor((Math.random() * 10000000000) + 1)+".jpg";
+					}, function(err) {
+					});
+				}
+			});
+		}else{
+			$cordovaDialogs.confirm('Choose your option', 'Upload Receipt', ['Camera','Gallery'])
+			.then(function(options) {
+				if(options==1){
+					var options = {
+						quality: 50,
+						destinationType: Camera.DestinationType.DATA_URL,
+						sourceType: Camera.PictureSourceType.CAMERA,
+						targetWidth: 100,
+						targetHeight: 100,
+						popoverOptions: CameraPopoverOptions,
+						saveToPhotoAlbum: false,
+						correctOrientation:true
+					};
+					$cordovaCamera.getPicture(options).then(function(imageData) {
+						$scope.imgSrc=imageData;
+						$scope.randomFile=Math.floor((Math.random() * 10000000000) + 1)+".jpg";
+					}, function(err) {
+					});
+				}else if(options==2){
+					var options = {
+						quality: 50,
+						destinationType: Camera.DestinationType.DATA_URL,
+						sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+						targetWidth: 100,
+						targetHeight: 100,
+						popoverOptions: CameraPopoverOptions,
+						saveToPhotoAlbum: false,
+						correctOrientation:true
+					};
+					$cordovaCamera.getPicture(options).then(function(imageData) {
+						$scope.imgSrc=imageData;
+						$scope.randomFile=Math.floor((Math.random() * 10000000000) + 1)+".jpg";
+					}, function(err) {
+					});
+				}
+			});
+			return false;
+		}
+	}
+	   
+	$scope.newclaimsubmit=function(){
+		if(document.getElementsByName('imgValue').length==0){
+			if($rootScope.IOS==true){
+				var alertPopup = $ionicPopup.alert({
+					title: 'Sorry',
+					template: 'Please upload one receipt'
+				});
+
+				alertPopup.then(function(res) {
+				});
+			}else{
+				$cordovaDialogs.alert('Please upload one receipt')
+				.then(function() {
+				});
+			}
+
+		}else if($scope.trans_num==undefined){
+			if($rootScope.IOS==true){
+				var alertPopup = $ionicPopup.alert({
+					title: 'Sorry',
+					template: "You Can't upload any receipt"
+				});
+
+				alertPopup.then(function(res) {
+				});
+			}else{
+				$cordovaDialogs.alert("You Can't upload any receipt")
+				.then(function() {
+				});
+			}
+		}
+		else{
+			$ionicLoading.show({
+			template: '<ion-spinner icon="ios"></ion-spinner><br>Loading...'
+			});
+			
+			$http.post("http://app.sterlinghsa.com/api/v1/accounts/uploadclaimdocument",{'claim_id':  $scope.hra_trans_num,
+			"receipt":$scope.imgSrc,
+			"file_name":$scope.randomFile,
+			"file_mime_type":'image/jpeg'
+			},{headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
+			.success(function(data){
+
+			if(data.status == "SUCCESS"){
+				$ionicLoading.hide();
+				$scope.claim_id = data.claim_id;
+				$location.path("/hracardclaim");
+				if($rootScope.IOS==true){
+					var alertPopup = $ionicPopup.alert({
+						title: 'Success',
+						template: 'Claim Submitted Successfully'
+					});
+
+					alertPopup.then(function(res) {
+						$scope.imgSrc= '';
+						var myEl = angular.element( document.querySelector( '#receipt' ) );
+						myEl.removeAttr('src');
+						$scope.floatlabel=false;
+					});
+				}else{
+					$cordovaDialogs.alert('Claim Submitted Successfully', 'Success', 'OK')
+					.then(function() {
+						$scope.imgSrc= '';
+						var myEl = angular.element( document.querySelector( '#receipt' ) );
+						myEl.removeAttr('src');
+						$scope.floatlabel=false;
+					});
+					return false;
+				}	
+			}else if(data.status == "FAILED"){
+				$ionicLoading.hide();
+				$location.path("/hracardclaim");
+				if($rootScope.IOS==true){
+					var alertPopup = $ionicPopup.alert({
+						title: 'Sorry',
+						template: data.error_message
+					});
+
+					alertPopup.then(function(res) {
+						$scope.imgSrc= '';
+						var myEl = angular.element( document.querySelector( '#receipt' ) );
+						myEl.removeAttr('src');
+						$scope.floatlabel=false;	
+					});
+				}else{
+					$cordovaDialogs.alert(data.error_message, 'Sorry', 'OK')
+					.then(function($setUntouched,$setPristine) {
+						$scope.imgSrc= '';
+						var myEl = angular.element( document.querySelector( '#receipt' ) );
+						myEl.removeAttr('src');
+						$scope.floatlabel=false;		    
+					});
+					return false;
+				}	
+				
+			}
+
+			}).error(function(err){
+			});
+		}
+
+	}
 })
 
 // Cobra controller

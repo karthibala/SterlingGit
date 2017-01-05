@@ -206,6 +206,30 @@ angular.module('starter', ['ionic', 'starter.controllers','ngCordova'])
 		templateUrl: 'templates/fsa/fsadependent.html',
 		controller: 'fsadependentCtrl'
 	})	
+	.state('fsacardclaim', {
+		cache:false,
+		url: '/fsacardclaim',
+		templateUrl: 'templates/fsa/fsacardclaim.html',
+		controller: 'fsacardclaimCtrl'
+	})
+	.state('fsacarddetail', {
+		cache:false,
+		url: '/fsacarddetail',
+		templateUrl: 'templates/fsa/fsacarddetail.html',
+		controller: 'fsacarddetailCtrl'
+	})
+	.state('fsaclaimdetail', {
+		cache:false,
+		url: '/fsaclaimdetail',
+		templateUrl: 'templates/fsa/fsaclaimdetail.html',
+		controller: 'fsaclaimdetailCtrl'
+	})
+	.state('fsanewcardclaim', {
+		cache:false,
+		url: '/fsanewcardclaim',
+		templateUrl: 'templates/fsa/fsanewcardclaim.html',
+		controller: 'fsanewcardclaimCtrl'
+	})
 	
 	// HRA 
 	.state('app.hra', {
@@ -267,7 +291,30 @@ angular.module('starter', ['ionic', 'starter.controllers','ngCordova'])
 		templateUrl: 'templates/hra/payprovideracoinde.html',
 		controller: 'PayprovideracoindeCtrl'
 	})
-	
+	.state('hracardclaim', {
+		cache:false,
+		url: '/hracardclaim',
+		templateUrl: 'templates/hra/hracardclaim.html',
+		controller: 'hracardclaimCtrl'
+	})
+	.state('hracarddetail', {
+		cache:false,
+		url: '/hracarddetail',
+		templateUrl: 'templates/hra/hracarddetail.html',
+		controller: 'hracarddetailCtrl'
+	})
+	.state('hraclaimdetail', {
+		cache:false,
+		url: '/hraclaimdetail',
+		templateUrl: 'templates/hra/hraclaimdetail.html',
+		controller: 'hraclaimdetailCtrl'
+	})
+	.state('hranewcardclaim', {
+		cache:false,
+		url: '/hranewcardclaim',
+		templateUrl: 'templates/hra/hranewcardclaim.html',
+		controller: 'hranewcardclaimCtrl'
+	})
 	// cobra
 	.state('app.cobra', {
 		url: "/cobra",

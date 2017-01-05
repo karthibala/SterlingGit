@@ -1,0 +1,65 @@
+<ion-header-bar id="headerborder" class="headerborder">
+	<div class="home-head2 " ng-click="goback();">
+		<i ng-click="goback();" class="ion ion-arrow-left-c back-icon"></i>
+	</div>
+	<div class="home-head2 ">
+		<p class="headertitle">Claim Detail</p>
+	</div>
+</ion-header-bar>
+<ion-view>
+	<ion-content class="bgnew">
+		<div class="card">
+			<div class="item ItemLinehr">
+				<span class="ItemHeadLine">Payment Information</span>
+			</div>
+			<div class="item item-avatar itemleft">
+				<img src="img/item/Allowable-contributions.png" class="item-Image">
+				<div class="ItemlineHead cardContent">Claim Status</div>
+				<div class="ItemlineValueText cardContent">{{hra_payment_information.CLAIM_STATUS}}</div>
+			</div>
+			<div class="item item-avatar itemleft">
+				<img src="img/item/account_balance.png" class="item-Image">
+				<div class="ItemlineHead cardContent">Claim Paid</div>
+				<div class="ItemlineValueText cardContent">{{hra_payment_information.CLAIM_PAID | currency}}</div>
+			</div>
+			<div class="item item-avatar itemleft">
+				<img src="img/item/dateicon.png" class="item-Image">
+				<div class="ItemlineHead cardContent">Paid Date</div>
+				<div class="ItemlineValueText cardContent">{{hra_payment_information.PAID_DATE}}</div>
+			</div>
+			<div class="item item-avatar itemleft">
+				<img src="img/item/plan.png" class="item-Image">
+				<div class="ItemlineHead cardContent">Claim Pending</div>
+				<div class="ItemlineValueText cardContent">{{hra_payment_information.CLAIM_PENDING}}</div>
+			</div>
+			<div class="item item-avatar itemleft">
+				<img src="img/item/account_balance.png" class="item-Image">
+				<div class="ItemlineHead cardContent">Unsubstantiated Amount</div>
+				<div class="ItemlineValueText cardContent">{{hra_payment_information.UNSUBSTANTIATED_AMOUNT | currency}}</div>
+			</div>
+			<div class="item itemleft item-avatar">
+				<img src="img/item/Account-number.png" class="item-Image">
+				<div class="ItemlineHead cardContent">Reimbursement Method</div>
+				<div class="ItemlineValueText cardContent">{{hra_payment_information.REIMBURSEMENT_METHOD}}</div>
+			</div>
+		</div>
+		<div class="div1" ng-repeat="data in hra_docs_list">
+			<div class="card">
+				<div class="item ItemLinehr">
+					<span class="ItemHeadLine ">{{data.CREATION_DATE}}</span>
+				</div>
+				<div class="item item-avatar itemleft ItemLinehr">
+					<img src="img/item/Total-contribution.png" class="item-Image">
+					<div class="ItemlineHead cardContent">Document Name</div>
+					<div class="ItemlineValueText cardContent">{{data.DOCUMENT_NAME}}</div>
+				</div>
+				<div class="item item-avatar itemleft">
+					<img src="img/item/account_balance.png" class="item-Image">
+					<div class="ItemlineHead cardContent">Attachment Id</div>
+					<div class="ItemlineValueText cardContent">{{data.ATTACHMENT_ID}}</div>
+				</div>
+			</div>
+		</div>
+		<div style="height: 10px;"></div>
+	</ion-content>
+</ion-view>
