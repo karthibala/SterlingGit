@@ -670,6 +670,7 @@ angular.module('starter.controllers', [])
 				};
 				$cordovaCamera.getPicture(options).then(function(imageData) {
 					$scope.imgSrc= imageData;
+					$scope.randomFile=Math.floor((Math.random() * 10000000000) + 1)+".jpg";
 				}, function(err) {
 				});
 			}else if(options==2){
@@ -687,7 +688,7 @@ angular.module('starter.controllers', [])
 				
 				$cordovaCamera.getPicture(options).then(function(imageData) {
 					$scope.imgSrc= imageData;
-				
+					$scope.randomFile=Math.floor((Math.random() * 10000000000) + 1)+".jpg";
 				}, function(err) {
 				});
 			}
@@ -831,13 +832,12 @@ angular.module('starter.controllers', [])
 				});
 			}
 
-		}
-		else {	
+		}else {	
 			$ionicLoading.show({
 			template: '<ion-spinner icon="ios"></ion-spinner><br>Loading...'
 			});
 
-			$http.post("http://app.sterlinghsa.com/api/v1/accounts/payme",{'hsa_acct_id': $scope.hsaaccId,'bank_acct_id':$scope.paymeValues.selectAccount.BANK_ACC_ID,'amount':$scope.paymeValues.amount,'category':$scope.paymeValues.category.LOOKUP_CODE,'trans_date':$scope.paymeValues.TransDate,"receipt":document.getElementsByName('imgValue')[0].value},{headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
+			$http.post("http://app.sterlinghsa.com/api/v1/accounts/payme",{'hsa_acct_id': $scope.hsaaccId,'bank_acct_id':$scope.paymeValues.selectAccount.BANK_ACC_ID,'amount':$scope.paymeValues.amount,'category':$scope.paymeValues.category.LOOKUP_CODE,'trans_date':$scope.paymeValues.TransDate,"receipt":$scope.imgSrc,"file_name":$scope.randomFile,"file_mime_type":'image/jpeg'},{headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
 			.success(function(data){
 				if(data.status == "SUCCESS"){
 					$ionicLoading.hide();
@@ -954,7 +954,7 @@ angular.module('starter.controllers', [])
 				
 				$cordovaCamera.getPicture(options).then(function(imageData) {
 					$scope.imgSrc= imageData;
-				
+					$scope.randomFile=Math.floor((Math.random() * 10000000000) + 1)+".jpg";
 				}, function(err) {
 				});
 					
@@ -972,6 +972,7 @@ angular.module('starter.controllers', [])
 					};
 					$cordovaCamera.getPicture(options).then(function(imageData) {
 						$scope.imgSrc= imageData;
+						$scope.randomFile=Math.floor((Math.random() * 10000000000) + 1)+".jpg";
 					}, function(err) {
 					});
 				}
@@ -992,6 +993,7 @@ angular.module('starter.controllers', [])
 				};
 				$cordovaCamera.getPicture(options).then(function(imageData) {
 					$scope.imgSrc= imageData;
+					$scope.randomFile=Math.floor((Math.random() * 10000000000) + 1)+".jpg";
 				}, function(err) {
 				});
 			}else if(options==2){
@@ -1007,6 +1009,7 @@ angular.module('starter.controllers', [])
 				};
 				$cordovaCamera.getPicture(options).then(function(imageData) {
 					$scope.imgSrc= imageData;
+					$scope.randomFile=Math.floor((Math.random() * 10000000000) + 1)+".jpg";
 				}, function(err) {
 				});
 			}
@@ -1176,7 +1179,7 @@ angular.module('starter.controllers', [])
 			template: '<ion-spinner icon="ios"></ion-spinner><br>Loading...'
 			});
 
-			$http.post("http://app.sterlinghsa.com/api/v1/accounts/payprovider",{'hsa_acct_id':$scope.hsaaccId,'vendor_id':$scope.payprovierValues.selectPayee.VENDOR_ID,'amount':$scope.payprovierValues.amount,'patient_name':$scope.payprovierValues.patient_name,'trans_date':$scope.payprovierValues.TransDate,"receipt":document.getElementsByName('imgValue')[0].value},{headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
+			$http.post("http://app.sterlinghsa.com/api/v1/accounts/payprovider",{'hsa_acct_id':$scope.hsaaccId,'vendor_id':$scope.payprovierValues.selectPayee.VENDOR_ID,'amount':$scope.payprovierValues.amount,'patient_name':$scope.payprovierValues.patient_name,'trans_date':$scope.payprovierValues.TransDate,"receipt":$scope.imgSrc,"file_name":$scope.randomFile,"file_mime_type":'image/jpeg'},{headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
 			.success(function(data){
 
 				if(data.status == "SUCCESS")
@@ -1573,6 +1576,7 @@ angular.module('starter.controllers', [])
 		$scope.account_types=data.account_types.FSA;
 		$rootScope.fsaaccno=data.account_types.FSA.ACCT_NUM;
 		$rootScope.fsaaccId=data.account_types.FSA.ACCT_ID;
+		$scope.debit();
 	}).error(function(err){
 		$ionicLoading.hide();
 		if($rootScope.IOS==true){
@@ -1598,6 +1602,18 @@ angular.module('starter.controllers', [])
 				return false;
 		}
 	});
+	$scope.debit=function(){
+		$http.get(" http://app.sterlinghsa.com/api/v1/accounts/debitcardpurchase",{params:{'acct_num':$scope.fsaaccno,'trans_type':'d','plan_type':'fsa'},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
+		.success(function(data){
+			$ionicLoading.hide();
+				$scope.debit_card_list=data.debit_card_list[0];
+				$rootScope.debit_card_transNo = $scope.debit_card_list.TRANSACTION_NUMBER;
+				$rootScope.debit_card_amount = $scope.debit_card_list.AMOUNT;
+		}).error(function(err){
+			$ionicLoading.hide();
+		});
+	}
+	
 	$scope.goBack = function () {
 		var selected = $ionicTabsDelegate.selectedIndex();
 		if (selected != -1 && selected != 0) {
@@ -2316,8 +2332,8 @@ angular.module('starter.controllers', [])
 						correctOrientation:true
 					};
 					$cordovaCamera.getPicture(options).then(function(imageData) {
-						$scope.imgSrc=imageData;
-						$scope.randomFile=Math.floor((Math.random() * 10000000000) + 1)+".jpg";
+						 $scope.imgSrc=imageData;
+						 $scope.randomFile=Math.floor((Math.random() * 10000000000) + 1)+".jpg";
 					}, function(err) {
 					});
 					
@@ -2379,10 +2395,7 @@ angular.module('starter.controllers', [])
 			return false;
 		}
 	}
-	$scope.deleteimg=function($index){
-		$scope.imgSrc.splice($index,1)
-	}
-   
+	
 	$http.get('http://app.sterlinghsa.com/api/v1/accounts/payeeslist',{params:{'acc_num': $scope.fsaaccno},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} })
 	.success(function(data){
 		$scope.payee=data.payee ;
@@ -2418,45 +2431,43 @@ angular.module('starter.controllers', [])
 		}
 	});
    
+	$scope.startTransDate="";
+	$scope.endTransDate="";
 	$scope.getTransDate=function(){
-		var today = new Date();
-		var _minDate = new Date();
-		_minDate.setMonth(today.getMonth() -1000);
-		var mindate = ionic.Platform.isIOS() ? new Date(_minDate.getFullYear(), _minDate.getMonth(), _minDate.getDay()) :
-		(new Date(_minDate.getFullYear(), _minDate.getMonth(), _minDate.getDay())).valueOf();
-		var maxDate = ionic.Platform.isIOS() ? new Date() : (new Date()).valueOf();
+		var options = {
+			date: new Date(),
+			mode: 'date', // or 'time'
+			minDate: new Date(),
 
-		$cordovaDatePicker.show({date: today,minDate: mindate,maxDate: maxDate}).then
-		(function(date)
-		{
-			var date1=date.toString();
-			var dataas=date1.split(" ");
-			var Month = ["App","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
-			var mon=""; 
-			if(Month.indexOf(dataas[1]).toString().length==1)
-			{
-				mon="0"+Month.indexOf(dataas[1]);
-			}
-			else
-			{
-				mon = Month.indexOf(dataas[1]);
-			}
-			var selectedDate=mon+'/'+dataas[2]+'/'+dataas[3];
-			$scope.newclaimvalues.startTransDate=selectedDate;
-
-		});
+		}
+		$ionicPlatform.ready(function(){
+			$cordovaDatePicker.show(options).then(function(date){
+				var date1=date.toString();
+				var dataas=date1.split(" ");
+				var Month = ["App","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+				var mon=""; 
+				if(Month.indexOf(dataas[1]).toString().length==1)
+				{
+					mon="0"+Month.indexOf(dataas[1]);
+				}
+				else
+				{
+					mon = Month.indexOf(dataas[1]);
+				}
+				var selectedDate=mon+'/'+dataas[2]+'/'+dataas[3];
+				$scope.newclaimvalues.startTransDate=selectedDate;
+			});
+		})
 	};
 	$scope.EndgetTransDate=function(){
-		var today = new Date();
-		var _minDate = new Date();
-		_minDate.setMonth(today.getMonth() -1000);
-		var mindate = ionic.Platform.isIOS() ? new Date(_minDate.getFullYear(), _minDate.getMonth(), _minDate.getDay()) :
-		(new Date(_minDate.getFullYear(), _minDate.getMonth(), _minDate.getDay())).valueOf();
-		var maxDate = ionic.Platform.isIOS() ? new Date() : (new Date()).valueOf();
+		var options = {
+			date: new Date(),
+			mode: 'date', // or 'time'
+			minDate: new Date(),
 
-		$cordovaDatePicker.show({date: today,minDate: mindate,maxDate: maxDate}).then
-		(function(date)
-		{
+		}
+		$ionicPlatform.ready(function(){
+			$cordovaDatePicker.show(options).then(function(date){
 			var date1=date.toString();
 			var dataas=date1.split(" ");
 			var Month = ["App","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
@@ -2471,10 +2482,10 @@ angular.module('starter.controllers', [])
 			}
 			var selectedDate=mon+'/'+dataas[2]+'/'+dataas[3];
 			$scope.newclaimvalues.endTransDate=selectedDate;
+			});
+		})
 
-		});
 	};
-	
 	$scope.newclaimsubmit=function(){
 		if($scope.newclaimvalues.amount == 0){
 			if($rootScope.IOS==true){
@@ -3101,63 +3112,62 @@ angular.module('starter.controllers', [])
    
    
   
+	$scope.startTransDate="";
+	$scope.endTransDate="";
+
 	$scope.getTransDate=function(){
-		var today = new Date();
-		var _minDate = new Date();
-		_minDate.setMonth(today.getMonth() -1000);
-		var mindate = ionic.Platform.isIOS() ? new Date(_minDate.getFullYear(), _minDate.getMonth(), _minDate.getDay()) :
-		(new Date(_minDate.getFullYear(), _minDate.getMonth(), _minDate.getDay())).valueOf();
-		var maxDate = ionic.Platform.isIOS() ? new Date() : (new Date()).valueOf();
+		var options = {
+			date: new Date(),
+			mode: 'date', // or 'time'
+			minDate: new Date(),
 
-		$cordovaDatePicker.show({date: today,minDate: mindate,maxDate: maxDate}).then
-		(function(date)
-		{
-			var date1=date.toString();
-			var dataas=date1.split(" ");
-			var Month = ["App","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
-			var mon=""; 
-			if(Month.indexOf(dataas[1]).toString().length==1)
-			{
-				mon="0"+Month.indexOf(dataas[1]);
-			}
-			else
-			{
-				mon = Month.indexOf(dataas[1]);
-			}
-			var selectedDate=mon+'/'+dataas[2]+'/'+dataas[3];
-			$scope.newclaimvalues.startTransDate=selectedDate;
+		}
+		$ionicPlatform.ready(function(){
+			$cordovaDatePicker.show(options).then(function(date){
+				var date1=date.toString();
+				var dataas=date1.split(" ");
+				var Month = ["App","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+				var mon=""; 
+				if(Month.indexOf(dataas[1]).toString().length==1)
+				{
+					mon="0"+Month.indexOf(dataas[1]);
+				}
+				else
+				{
+					mon = Month.indexOf(dataas[1]);
+				}
+				var selectedDate=mon+'/'+dataas[2]+'/'+dataas[3];
+				$scope.newclaimvalues.startTransDate=selectedDate;
 
-		});
+			});
+		})
 	};
 	$scope.EndgetTransDate=function(){
-		var today = new Date();
-		var _minDate = new Date();
-		_minDate.setMonth(today.getMonth() -1000);
-		var mindate = ionic.Platform.isIOS() ? new Date(_minDate.getFullYear(), _minDate.getMonth(), _minDate.getDay()) :
-		(new Date(_minDate.getFullYear(), _minDate.getMonth(), _minDate.getDay())).valueOf();
-		var maxDate = ionic.Platform.isIOS() ? new Date() : (new Date()).valueOf();
+		var options = {
+			date: new Date(),
+			mode: 'date', // or 'time'
+			minDate: new Date(),
 
-		$cordovaDatePicker.show({date: today,minDate: mindate,maxDate: maxDate}).then
-		(function(date)
-		{
-			var date1=date.toString();
-			var dataas=date1.split(" ");
-			var Month = ["App","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
-			var mon=""; 
-			if(Month.indexOf(dataas[1]).toString().length==1)
-			{
-				mon="0"+Month.indexOf(dataas[1]);
-			}
-			else
-			{
-				mon = Month.indexOf(dataas[1]);
-			}
-			var selectedDate=mon+'/'+dataas[2]+'/'+dataas[3];
-			$scope.newclaimvalues.endTransDate=selectedDate;
-
-		});
+		}
+		$ionicPlatform.ready(function(){
+			$cordovaDatePicker.show(options).then(function(date){
+				var date1=date.toString();
+				var dataas=date1.split(" ");
+				var Month = ["App","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+				var mon=""; 
+				if(Month.indexOf(dataas[1]).toString().length==1)
+				{
+					mon="0"+Month.indexOf(dataas[1]);
+				}
+				else
+				{
+					mon = Month.indexOf(dataas[1]);
+				}
+				var selectedDate=mon+'/'+dataas[2]+'/'+dataas[3];
+				$scope.newclaimvalues.endTransDate=selectedDate;
+			});
+		})
 	};
-
 })
 
 .controller('HealthCtrl', function($scope,$ionicPlatform,$cordovaNetwork,$cordovaDatePicker,$http,$location,$ionicModal,$cordovaDialogs,$ionicLoading,$cordovaNetwork,$rootScope) {
@@ -3584,7 +3594,7 @@ angular.module('starter.controllers', [])
 	}
 })
 
-//Other controllers
+// Other Controllers
 .controller('AppCtrl', function($scope,$ionicPopup, $timeout ,$ionicModal,$location,$cordovaDialogs, $rootScope,$http) {
 	$scope.username = localStorage.getItem('username');
 	$scope.access_token = localStorage.getItem('access_token');
@@ -4378,11 +4388,7 @@ angular.module('starter.controllers', [])
 			return false;
 		}
 	}
-	
-	$scope.deleteimg=function($index){
-		$scope.imgSrc.splice($index,1)
-	}
-	
+		
 	$http.get("http://app.sterlinghsa.com/api/v1/accounts/bankdetails",{params:{'type':'hra', 'acc_num':$scope.hraacc},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
 	.success(function(data){
 		if(data.status=="FAILED"){
@@ -4429,61 +4435,62 @@ angular.module('starter.controllers', [])
 		}
 	});
  
+	$scope.startTransDate="";
+	$scope.endTransDate="";
 	$scope.getTransDate=function(){
-		var today = new Date();
-		var _minDate = new Date();
-		_minDate.setMonth(today.getMonth() -1000);
-		var mindate = ionic.Platform.isIOS() ? new Date(_minDate.getFullYear(), _minDate.getMonth(), _minDate.getDay()) :
-		(new Date(_minDate.getFullYear(), _minDate.getMonth(), _minDate.getDay())).valueOf();
-		var maxDate = ionic.Platform.isIOS() ? new Date() : (new Date()).valueOf();
+		var options = {
+			date: new Date(),
+			mode: 'date', // or 'time'
+			minDate: new Date(),
 
-		$cordovaDatePicker.show({date: today,minDate: mindate,maxDate: maxDate}).then
-		(function(date)
-		{
-			var date1=date.toString();
-			var dataas=date1.split(" ");
-			var Month = ["App","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
-			var mon=""; 
-			if(Month.indexOf(dataas[1]).toString().length==1)
-			{
-				mon="0"+Month.indexOf(dataas[1]);
-			}
-			else
-			{
-				mon = Month.indexOf(dataas[1]);
-			}
-			var selectedDate=mon+'/'+dataas[2]+'/'+dataas[3];
-			$scope.acoinde.startTransDate=selectedDate;
+		}
+		$ionicPlatform.ready(function(){
+			$cordovaDatePicker.show(options).then(function(date){
+				var date1=date.toString();
+				var dataas=date1.split(" ");
+				var Month = ["App","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+				var mon=""; 
+				if(Month.indexOf(dataas[1]).toString().length==1)
+				{
+					mon="0"+Month.indexOf(dataas[1]);
+				}
+				else
+				{
+					mon = Month.indexOf(dataas[1]);
+				}
+				var selectedDate=mon+'/'+dataas[2]+'/'+dataas[3];
+				$scope.acoinde.startTransDate=selectedDate;
 
-		});
+			});
+		})
+
 	};
 	$scope.EndgetTransDate=function(){
-		var today = new Date();
-		var _minDate = new Date();
-		_minDate.setMonth(today.getMonth() -1000);
-		var mindate = ionic.Platform.isIOS() ? new Date(_minDate.getFullYear(), _minDate.getMonth(), _minDate.getDay()) :
-		(new Date(_minDate.getFullYear(), _minDate.getMonth(), _minDate.getDay())).valueOf();
-		var maxDate = ionic.Platform.isIOS() ? new Date() : (new Date()).valueOf();
+		var options = {
+			date: new Date(),
+			mode: 'date', // or 'time'
+			minDate: new Date(),
 
-		$cordovaDatePicker.show({date: today,minDate: mindate,maxDate: maxDate}).then
-		(function(date)
-		{
-			var date1=date.toString();
-			var dataas=date1.split(" ");
-			var Month = ["App","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
-			var mon=""; 
-			if(Month.indexOf(dataas[1]).toString().length==1)
-			{
-				mon="0"+Month.indexOf(dataas[1]);
-			}
-			else
-			{
-				mon = Month.indexOf(dataas[1]);
-			}
-			var selectedDate=mon+'/'+dataas[2]+'/'+dataas[3];
-			$scope.acoinde.endTransDate=selectedDate;
+		}
+		$ionicPlatform.ready(function(){
+			$cordovaDatePicker.show(options).then(function(date){
+				var date1=date.toString();
+				var dataas=date1.split(" ");
+				var Month = ["App","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+				var mon=""; 
+				if(Month.indexOf(dataas[1]).toString().length==1)
+				{
+					mon="0"+Month.indexOf(dataas[1]);
+				}
+				else
+				{
+					mon = Month.indexOf(dataas[1]);
+				}
+				var selectedDate=mon+'/'+dataas[2]+'/'+dataas[3];
+				$scope.acoinde.endTransDate=selectedDate;
+			});
+		})
 
-		});
 	};
  
 	$scope.submitValues=function(){
@@ -4700,10 +4707,6 @@ angular.module('starter.controllers', [])
 		
 	}
 	
-	$scope.deleteimg=function($index){
-	$scope.imgSrc.splice($index,1)
-	}
-
 	$scope.submitValues=function(){
 		if($scope.provideracoinde.amount == 0){
 			if($rootScope.IOS==true){
@@ -4840,17 +4843,17 @@ angular.module('starter.controllers', [])
 		}
 	});
  
+	$scope.startTransDate="";
+	$scope.endTransDate="";
 	$scope.getTransDate=function(){
-		var today = new Date();
-		var _minDate = new Date();
-		_minDate.setMonth(today.getMonth() -1000);
-		var mindate = ionic.Platform.isIOS() ? new Date(_minDate.getFullYear(), _minDate.getMonth(), _minDate.getDay()) :
-		(new Date(_minDate.getFullYear(), _minDate.getMonth(), _minDate.getDay())).valueOf();
-		var maxDate = ionic.Platform.isIOS() ? new Date() : (new Date()).valueOf();
+		var options = {
+			date: new Date(),
+			mode: 'date', // or 'time'
+			minDate: new Date(),
 
-		$cordovaDatePicker.show({date: today,minDate: mindate,maxDate: maxDate}).then
-		(function(date)
-		{
+		}
+	$ionicPlatform.ready(function(){
+		$cordovaDatePicker.show(options).then(function(date){
 			var date1=date.toString();
 			var dataas=date1.split(" ");
 			var Month = ["App","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
@@ -4863,39 +4866,41 @@ angular.module('starter.controllers', [])
 			{
 				mon = Month.indexOf(dataas[1]);
 			}
+
 			var selectedDate=mon+'/'+dataas[2]+'/'+dataas[3];
 			$scope.provideracoinde.startTransDate=selectedDate;
+
 		});
+	})
+
 	};
 	$scope.EndgetTransDate=function(){
-		var today = new Date();
-		var _minDate = new Date();
-		_minDate.setMonth(today.getMonth() -1000);
-		var mindate = ionic.Platform.isIOS() ? new Date(_minDate.getFullYear(), _minDate.getMonth(), _minDate.getDay()) :
-		(new Date(_minDate.getFullYear(), _minDate.getMonth(), _minDate.getDay())).valueOf();
-		var maxDate = ionic.Platform.isIOS() ? new Date() : (new Date()).valueOf();
+		var options = {
+			date: new Date(),
+			mode: 'date', // or 'time'
+			minDate: new Date(),
 
-		$cordovaDatePicker.show({date: today,minDate: mindate,maxDate: maxDate}).then
-		(function(date)
-		{
-			var date1=date.toString();
-			var dataas=date1.split(" ");
-			var Month = ["App","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
-			var mon=""; 
-			if(Month.indexOf(dataas[1]).toString().length==1)
-			{
-				mon="0"+Month.indexOf(dataas[1]);
-			}
-			else
-			{
-				mon = Month.indexOf(dataas[1]);
-			}
-			var selectedDate=mon+'/'+dataas[2]+'/'+dataas[3];
-			$scope.provideracoinde.endTransDate=selectedDate;
+		}
+		$ionicPlatform.ready(function(){
+			$cordovaDatePicker.show(options).then(function(date){
+				var date1=date.toString();
+				var dataas=date1.split(" ");
+				var Month = ["App","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+				var mon=""; 
+				if(Month.indexOf(dataas[1]).toString().length==1)
+				{
+					mon="0"+Month.indexOf(dataas[1]);
+				}
+				else
+				{
+					mon = Month.indexOf(dataas[1]);
+				}
+				var selectedDate=mon+'/'+dataas[2]+'/'+dataas[3];
+				$scope.provideracoinde.endTransDate=selectedDate;
+			});
+		})
 
-		});
 	};
-	
 
 	$scope.goback=function()
 	{
@@ -4903,6 +4908,7 @@ angular.module('starter.controllers', [])
 	}
 
 })
+
 
 .controller('hracardclaimCtrl', function($scope,$ionicPlatform,$cordovaNetwork,$cordovaDatePicker,$http,$location,$ionicModal,$cordovaDialogs,$ionicLoading,$cordovaNetwork,$rootScope) {
 	$rootScope.hidecontent=true;
