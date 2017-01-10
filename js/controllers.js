@@ -3378,9 +3378,9 @@ angular.module('starter.controllers', [])
 	}
 	
 	$scope.getDocument=function(doc){
-		alert(doc.ATTACHMENT_ID)
+		//alert(doc.ATTACHMENT_ID)
 		if($rootScope.IOS==true){
-			alert("Http")
+			//alert("Http")
 			$http({
 				url : 'http://app.sterlinghsa.com/api/v1/accounts/downloadclaimdocument',
 				params:{id:doc.ATTACHMENT_ID},
@@ -3389,7 +3389,7 @@ angular.module('starter.controllers', [])
 				headers: {'Authorization':$scope.access_token},
 				cache: true,
 			}).success(function(data) {
-				alert(data);
+				//alert(data);
 				var arrayBufferView = new Uint8Array(data);
 				var blob = new Blob([arrayBufferView], { type: 'image/jpeg' });
 				var fileURL = URL.createObjectURL(blob);
@@ -3398,12 +3398,12 @@ angular.module('starter.controllers', [])
 				//alert(cordova.file.dataDirectory);
 				$cordovaFile.createDir(cordova.file.documentsDirectory, "Sterling Administration/Claim Docs", true)
 				.then(function (success) {
-					alert(JSON.stringify(success));
+					//alert(JSON.stringify(success));
 					$cordovaFile.writeFile(success.nativeURL, fileName,contentFile, true)
 					.then(function (success) {
 						var alertPopup = $ionicPopup.alert({
 							title: 'Success',
-							template: 'Document'+doc.DOCUMENT_NAME+'downloaded successsfully'
+							template: 'Document downloaded successsfully'
 						});
 						alertPopup.then(function(res) {});
 						}, function (error){	
