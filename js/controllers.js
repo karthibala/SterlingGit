@@ -3380,6 +3380,7 @@ angular.module('starter.controllers', [])
 	$scope.getDocument=function(doc){
 		alert(doc.ATTACHMENT_ID)
 		if($rootScope.IOS==true){
+			alert("Http")
 			$http({
 				url : 'http://app.sterlinghsa.com/api/v1/accounts/downloadclaimdocument',
 				params:{id:doc.ATTACHMENT_ID},
@@ -3388,6 +3389,7 @@ angular.module('starter.controllers', [])
 				headers: {'Authorization':$scope.access_token},
 				cache: true,
 			}).success(function(data) {
+				alert(data);
 				var arrayBufferView = new Uint8Array(data);
 				var blob = new Blob([arrayBufferView], { type: 'image/jpeg' });
 				var fileURL = URL.createObjectURL(blob);
