@@ -3396,7 +3396,7 @@ angular.module('starter.controllers', [])
 				var fileName = doc.DOCUMENT_NAME;
 				var contentFile = blob;
 				//alert(cordova.file.dataDirectory);
-				$cordovaFile.createDir(cordova.file.documentsDirectory, "Sterling Administration/Claim Docs", true)
+				$cordovaFile.createDir(cordova.file.documentsDirectory, "Sterling/ClaimDocs", true)
 				.then(function (success) {
 					//alert(JSON.stringify(success));
 					$cordovaFile.writeFile(success.nativeURL, fileName,contentFile, true)
