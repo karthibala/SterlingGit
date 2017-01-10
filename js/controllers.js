@@ -3378,6 +3378,7 @@ angular.module('starter.controllers', [])
 	}
 	
 	$scope.getDocument=function(doc){
+		alert(doc.ATTACHMENT_ID)
 		if($rootScope.IOS==true){
 			$http({
 				url : 'http://app.sterlinghsa.com/api/v1/accounts/downloadclaimdocument',
@@ -3395,7 +3396,7 @@ angular.module('starter.controllers', [])
 				//alert(cordova.file.dataDirectory);
 				$cordovaFile.createDir(cordova.file.documentsDirectory, "Sterling Administration/Claim Docs", true)
 				.then(function (success) {
-					//alert(JSON.stringify(success));
+					alert(JSON.stringify(success));
 					$cordovaFile.writeFile(success.nativeURL, fileName,contentFile, true)
 					.then(function (success) {
 						var alertPopup = $ionicPopup.alert({
