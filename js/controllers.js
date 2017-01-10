@@ -633,7 +633,7 @@ angular.module('starter.controllers', [])
 				
 				$cordovaCamera.getPicture(options).then(function(imageData) {
 					$scope.imgSrc= imageData;
-				
+					$scope.randomFile=Math.floor((Math.random() * 10000000000) + 1)+".jpg";
 				}, function(err) {
 				});
 					
@@ -650,6 +650,7 @@ angular.module('starter.controllers', [])
 				};
 				$cordovaCamera.getPicture(options).then(function(imageData) {
 					$scope.imgSrc= imageData;
+					$scope.randomFile=Math.floor((Math.random() * 10000000000) + 1)+".jpg";
 				}, function(err) {
 				});
 				}
