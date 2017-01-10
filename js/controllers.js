@@ -3390,8 +3390,7 @@ angular.module('starter.controllers', [])
 	$scope.access_token = localStorage.getItem('access_token');
 	$scope.trans_num=$rootScope.debit_card_transNo;
 	$scope.debit_card_amount = $rootScope.debit_card_amount;
-	//$scope.imgSrc=[];
-	//$scope.randomFile=[];
+	$scope.imgSrc;
 	$scope.floatlabel=false;
 	
 	$ionicScrollDelegate.scrollBottom(true);
@@ -3492,7 +3491,7 @@ angular.module('starter.controllers', [])
 	}
 	   
 	$scope.newclaimsubmit=function(){
-		if(document.getElementsByName('imgValue').length==0){
+		if($scope.imgSrc==undefined){
 			if($rootScope.IOS==true){
 				var alertPopup = $ionicPopup.alert({
 					title: 'Sorry',
@@ -5115,8 +5114,7 @@ angular.module('starter.controllers', [])
 	$scope.hra_trans_num=$rootScope.hra_debit_card_transNo;
 	//alert($scope.hra_trans_num)
 	$scope.hra_debit_card_amount = $rootScope.hra_debit_card_amount;
-	//$scope.imgSrc=[];
-	//$scope.randomFile=[];
+	$scope.imgSrc;
 	$scope.floatlabel=false;
 	
 	$ionicScrollDelegate.scrollBottom(true);
@@ -5217,7 +5215,7 @@ angular.module('starter.controllers', [])
 	}
 	   
 	$scope.newclaimsubmit=function(){
-		if(document.getElementsByName('imgValue').length==0){
+		if($scope.imgSrc==undefined){
 			if($rootScope.IOS==true){
 				var alertPopup = $ionicPopup.alert({
 					title: 'Sorry',
