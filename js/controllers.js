@@ -3398,20 +3398,38 @@ angular.module('starter.controllers', [])
 				//alert(cordova.file.dataDirectory);
 				$cordovaFile.createDir(cordova.file.documentsDirectory, "Sterling", true)
 				.then(function (success) {
-					//alert(JSON.stringify(success));
-					$cordovaFile.writeFile(success.nativeURL, fileName,contentFile, true)
+					//alert(JSON.stringify(success));					
+					$cordovaFile.createDir(success.nativeURL, "Docs", true)
 					.then(function (success) {
-						var alertPopup = $ionicPopup.alert({
-							title: 'Success',
-							template: 'Document downloaded successsfully'
-						});
-						alertPopup.then(function(res) {});
-						}, function (error){
-							alert("writeFile Error");
-							alert(error);
-						});
+						//alert(JSON.stringify(success));
+						$cordovaFile.writeFile(success.nativeURL, fileName,contentFile, true)
+						.then(function (success) {
+							var alertPopup = $ionicPopup.alert({
+								title: 'Success',
+								template: 'Document '+fileName+' downloaded successsfully'
+							});
+							alertPopup.then(function(res) {});
+							}, function (error){
+								alert("writeFile Error");
+								alert(error);
+							});
+					},function (error){
+						alert("createDir2 Error");
+						alert(error);
+					});
+					// $cordovaFile.writeFile(success.nativeURL, fileName,contentFile, true)
+					// .then(function (success) {
+						// var alertPopup = $ionicPopup.alert({
+							// title: 'Success',
+							// template: 'Document downloaded successsfully'
+						// });
+						// alertPopup.then(function(res) {});
+						// }, function (error){
+							// alert("writeFile Error");
+							// alert(error);
+						// });
 				},function (error){
-					alert("createDir Error");
+					alert("createDir1 Error");
 					alert(error);
 				});
 			}).error(function(data){
