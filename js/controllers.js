@@ -3402,6 +3402,29 @@ angular.module('starter.controllers', [])
 					$cordovaFile.createDir(success.nativeURL, "Docs", true)
 					.then(function (success) {
 						//alert(JSON.stringify(success));
+						
+						
+						 $cordovaFile.checkDir(success.nativeURL, "Docs")
+						  .then(function (success) {
+							// success
+							alert("checkDir success");
+							alert(success)
+						  }, function (error) {
+							// error
+							alert("checkDir error")
+							alert(error)
+						  });
+						
+						$cordovaFile.checkFile(success.nativeURL, fileName)
+						  .then(function (success) {
+							// success
+							alert("checkFile success");
+							alert(success)
+						  }, function (error) {
+							// error
+							alert("checkFile error")
+							alert(error)
+						  });
 						$cordovaFile.writeFile(success.nativeURL, fileName,contentFile, true)
 						.then(function (success) {
 							var alertPopup = $ionicPopup.alert({
@@ -3417,17 +3440,6 @@ angular.module('starter.controllers', [])
 						alert("createDir2 Error");
 						alert(error);
 					});
-					// $cordovaFile.writeFile(success.nativeURL, fileName,contentFile, true)
-					// .then(function (success) {
-						// var alertPopup = $ionicPopup.alert({
-							// title: 'Success',
-							// template: 'Document downloaded successsfully'
-						// });
-						// alertPopup.then(function(res) {});
-						// }, function (error){
-							// alert("writeFile Error");
-							// alert(error);
-						// });
 				},function (error){
 					alert("createDir1 Error");
 					alert(error);
