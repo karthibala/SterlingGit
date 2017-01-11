@@ -3406,11 +3406,18 @@ angular.module('starter.controllers', [])
 							template: 'Document downloaded successsfully'
 						});
 						alertPopup.then(function(res) {});
-						}, function (error){	
+						}, function (error){
+							alert("writeFile Error");
+							alert(error);
 						});
 				},function (error){
+					alert("createDir Error");
+					alert(error);
 				});
-			}).error(function(data){});
+			}).error(function(data){
+				alert("http Error");
+					alert(data);
+			});
 		}else{
 			$http({
 				url : 'http://app.sterlinghsa.com/api/v1/accounts/downloadclaimdocument',
