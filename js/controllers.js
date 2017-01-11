@@ -3398,55 +3398,32 @@ angular.module('starter.controllers', [])
 				//alert(cordova.file.dataDirectory);
 				$cordovaFile.createDir(cordova.file.documentsDirectory, "Sterling", true)
 				.then(function (success) {
-					//alert("createDir1-"+JSON.stringify(success));
+					//alert(JSON.stringify(success));					
 					$cordovaFile.createDir(success.nativeURL, "Docs", true)
 					.then(function (success) {
-						//alert("createDir2-"+JSON.stringify(success));
-						
-						
-						 $cordovaFile.checkDir(cordova.file.documentsDirectory, "Sterling/Docs")
-						  .then(function (success) {
-							// success
-							alert("checkDir success");
-							alert(JSON.stringify(success))
-						  }, function (error) {
-							// error
-							alert("checkDir error")
-							alert(JSON.stringify(error))
-						  });
-						
+						//alert(JSON.stringify(success));
 						$cordovaFile.writeFile(success.nativeURL, fileName,contentFile, true)
 						.then(function (success) {
-							$cordovaFile.checkFile(success.nativeURL, fileName)
-						  .then(function (success) {
-							// success
-							alert("checkFile success");
-							alert(JSON.stringify(success))
-						  }, function (error) {
-							// error
-							alert("checkFile error")
-							alert(JSON.stringify(error))
-						  });
 							var alertPopup = $ionicPopup.alert({
 								title: 'Success',
 								template: 'Document '+fileName+' downloaded successsfully'
 							});
 							alertPopup.then(function(res) {});
 							}, function (error){
-								alert("writeFile Error");
-								alert(error);
+								//alert("writeFile Error");
+								//alert(error);
 							});
 					},function (error){
-						alert("createDir2 Error");
-						alert(error);
+						//alert("createDir2 Error");
+						//alert(error);
 					});
 				},function (error){
-					alert("createDir1 Error");
-					alert(error);
+					//alert("createDir1 Error");
+					//alert(error);
 				});
 			}).error(function(data){
-				alert("http Error");
-					alert(data);
+				//alert("http Error");
+				//alert(data);
 			});
 		}else{
 			$http({
@@ -5200,7 +5177,9 @@ angular.module('starter.controllers', [])
 	}
 	
 	$scope.getDocument=function(doc){
+		//alert(doc.ATTACHMENT_ID)
 		if($rootScope.IOS==true){
+			//alert("Http")
 			$http({
 				url : 'http://app.sterlinghsa.com/api/v1/accounts/downloadclaimdocument',
 				params:{id:doc.ATTACHMENT_ID},
@@ -5209,27 +5188,42 @@ angular.module('starter.controllers', [])
 				headers: {'Authorization':$scope.access_token},
 				cache: true,
 			}).success(function(data) {
+				//alert(data);
 				var arrayBufferView = new Uint8Array(data);
 				var blob = new Blob([arrayBufferView], { type: 'image/jpeg' });
 				var fileURL = URL.createObjectURL(blob);
 				var fileName = doc.DOCUMENT_NAME;
 				var contentFile = blob;
 				//alert(cordova.file.dataDirectory);
-				$cordovaFile.createDir(cordova.file.documentsDirectory, "Sterling Administration/Claim Docs", true)
+				$cordovaFile.createDir(cordova.file.documentsDirectory, "Sterling", true)
 				.then(function (success) {
-					//alert(JSON.stringify(success));
-					$cordovaFile.writeFile(success.nativeURL, fileName,contentFile, true)
+					//alert(JSON.stringify(success));					
+					$cordovaFile.createDir(success.nativeURL, "Docs", true)
 					.then(function (success) {
-						var alertPopup = $ionicPopup.alert({
-							title: 'Success',
-							template: 'Document'+doc.DOCUMENT_NAME+'downloaded successsfully'
-						});
-						alertPopup.then(function(res) {});
-						}, function (error){	
-						});
+						//alert(JSON.stringify(success));
+						$cordovaFile.writeFile(success.nativeURL, fileName,contentFile, true)
+						.then(function (success) {
+							var alertPopup = $ionicPopup.alert({
+								title: 'Success',
+								template: 'Document '+fileName+' downloaded successsfully'
+							});
+							alertPopup.then(function(res) {});
+							}, function (error){
+								//alert("writeFile Error");
+								//alert(error);
+							});
+					},function (error){
+						//alert("createDir2 Error");
+						//alert(error);
+					});
 				},function (error){
+					//alert("createDir1 Error");
+					//alert(error);
 				});
-			}).error(function(data){});
+			}).error(function(data){
+				//alert("http Error");
+				//alert(data);
+			});
 		}else{
 			$http({
 				url : 'http://app.sterlinghsa.com/api/v1/accounts/downloadclaimdocument',
