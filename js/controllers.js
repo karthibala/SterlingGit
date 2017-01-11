@@ -3398,35 +3398,36 @@ angular.module('starter.controllers', [])
 				//alert(cordova.file.dataDirectory);
 				$cordovaFile.createDir(cordova.file.documentsDirectory, "Sterling", true)
 				.then(function (success) {
-					//alert(JSON.stringify(success));					
+					alert("createDir1-"+JSON.stringify(success));
 					$cordovaFile.createDir(success.nativeURL, "Docs", true)
 					.then(function (success) {
-						//alert(JSON.stringify(success));
+						alert("createDir2-"+JSON.stringify(success));
 						
 						
-						 $cordovaFile.checkDir(success.nativeURL, "Docs")
+						 $cordovaFile.checkDir(cordova.file.documentsDirectory, "Sterling/Docs")
 						  .then(function (success) {
 							// success
 							alert("checkDir success");
-							alert(success)
+							alert(JSON.stringify(success))
 						  }, function (error) {
 							// error
 							alert("checkDir error")
-							alert(error)
+							alert(JSON.stringify(error))
 						  });
 						
 						$cordovaFile.checkFile(success.nativeURL, fileName)
 						  .then(function (success) {
 							// success
 							alert("checkFile success");
-							alert(success)
+							alert(JSON.stringify(success))
 						  }, function (error) {
 							// error
 							alert("checkFile error")
-							alert(error)
+							alert(JSON.stringify(error))
 						  });
 						$cordovaFile.writeFile(success.nativeURL, fileName,contentFile, true)
 						.then(function (success) {
+							alert(JSON.stringify(success))
 							var alertPopup = $ionicPopup.alert({
 								title: 'Success',
 								template: 'Document '+fileName+' downloaded successsfully'
