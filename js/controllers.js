@@ -2296,6 +2296,7 @@ angular.module('starter.controllers', [])
 	$scope.newclaim_plantype=$rootScope.newclaim_plantype;
 	$scope.newclaim_balance=$rootScope.newclaim_balance;
 	$scope.newclaimvalues={taxid:'',amount:'',dependent:'',patient:'',Bankaccount:'',startTransDate:'',endTransDate:''};
+	$scope.imgSrc;
 	//$scope.imgSrc=[];
 	//$scope.randomFile=[];
 	$scope.floatlabel=false;
@@ -2505,7 +2506,7 @@ angular.module('starter.controllers', [])
 				});
 			}
 		}
-		else if($scope.newclaimvalues.startTransDate > $scope.newclaimvalues.endTransDate){
+		else if(new Date($scope.newclaimvalues.startTransDate) > new Date($scope.newclaimvalues.endTransDate)){
 			if($rootScope.IOS==true){
 				var alertPopup = $ionicPopup.alert({
 					title: 'Sorry',
@@ -2520,7 +2521,7 @@ angular.module('starter.controllers', [])
 				});
 			}
 		}
-		else if($scope.newclaimvalues.endTransDate >$scope.date){
+		else if(new Date($scope.newclaimvalues.endTransDate) < $scope.date){
 			if($rootScope.IOS==true){
 				var alertPopup = $ionicPopup.alert({
 					title: 'Sorry',
@@ -2535,7 +2536,7 @@ angular.module('starter.controllers', [])
 				});
 			}
 
-		}else if(document.getElementsByName('imgValue').length==0){
+		}else if($scope.imgSrc==undefined){
 			if($rootScope.IOS==true){
 				var alertPopup = $ionicPopup.alert({
 					title: 'Sorry',
@@ -2871,6 +2872,7 @@ angular.module('starter.controllers', [])
 	$scope.newclaim_plantype=$rootScope.newclaim_plantype;
 	$scope.newclaim_balance=$rootScope.newclaim_balance;
     $scope.newclaimvalues={taxid:'',amount:'',dependent:'',patient:'',Bankaccount:'',startTransDate:'',endTransDate:''};
+	$scope.imgSrc;
 	//$scope.imgSrc=[];
 	//$scope.randomFile=[];
 	$scope.floatlabel=false;
@@ -2976,7 +2978,7 @@ angular.module('starter.controllers', [])
 			.then(function() {
 			});
 		}
-		else if($scope.newclaimvalues.startTransDate > $scope.newclaimvalues.endTransDate){
+		else if(new Date($scope.newclaimvalues.startTransDate) > new Date($scope.newclaimvalues.endTransDate)){
 			if($rootScope.IOS==true){
 				var alertPopup = $ionicPopup.alert({
 					title: 'Sorry',
@@ -2991,7 +2993,7 @@ angular.module('starter.controllers', [])
 				});
 			}
 		}
-		else if($scope.newclaimvalues.endTransDate >$scope.date){
+		else if(new Date($scope.newclaimvalues.endTransDate) >$scope.date){
 			if($rootScope.IOS==true){
 				var alertPopup = $ionicPopup.alert({
 					title: 'Sorry',
@@ -3006,7 +3008,7 @@ angular.module('starter.controllers', [])
 				});
 			}
 
-		}else if(document.getElementsByName('imgValue').length==0){
+		}else if($scope.imgSrc==undefined){
 			if($rootScope.IOS==true){
 				var alertPopup = $ionicPopup.alert({
 					title: 'Sorry',
@@ -4372,6 +4374,7 @@ angular.module('starter.controllers', [])
 	$scope.hraacc= $rootScope.hraaccno;
 	$scope.hsaaccno=$rootScope.hsaaccno;
 	$scope.acoinde = {selectAccount:'',amount:'',description:'',startTransDate:'',endTransDate:''};
+	$scope.imgSrc;
 	//$scope.imgSrc=[];
 	//$scope.randomFile=[];
 	$scope.floatlabel=false;
@@ -4583,7 +4586,36 @@ angular.module('starter.controllers', [])
 				.then(function() {
 				});
 			}
-		}else if(document.getElementsByName('imgValue').length==0){
+		}else if(new Date($scope.acoinde.startTransDate) > new Date($scope.acoinde.endTransDate)){
+			if($rootScope.IOS==true){
+				var alertPopup = $ionicPopup.alert({
+					title: 'Sorry',
+					template: 'End Date should not be less than start Date'
+				});
+
+				alertPopup.then(function(res) {
+				});
+			}else{
+				$cordovaDialogs.alert('End Date should not be less than start Date')
+				.then(function() {
+				});
+			}
+		}else if(new Date($scope.acoinde.endTransDate) < $scope.date){
+			if($rootScope.IOS==true){
+				var alertPopup = $ionicPopup.alert({
+					title: 'Sorry',
+					template: 'Cannot select future date in End date'
+				});
+
+				alertPopup.then(function(res) {
+				});
+			}else{
+				$cordovaDialogs.alert('Cannot select future date in End date')
+				.then(function() {
+				});
+			}
+
+		}else if($scope.imgSrc==undefined){
 			if($rootScope.IOS==true){
 				var alertPopup = $ionicPopup.alert({
 					title: 'Sorry',
@@ -4688,6 +4720,7 @@ angular.module('starter.controllers', [])
 	$scope.newclaim_balance=$rootScope.newclaim_balance;
 	$scope.hraacc= $rootScope.hraaccno;
 	$scope.provideracoinde={selectpayee:'',amount:'',description:'',startTransDate:'',endTransDate:''};
+	$scope.imgSrc;
 	//$scope.imgSrc=[];
 	//$scope.randomFile=[];
 	$scope.floatlabel=false;
@@ -4797,7 +4830,36 @@ angular.module('starter.controllers', [])
 				.then(function() {
 				});
 			}
-		}else if(document.getElementsByName('imgValue').length==0){
+		}else if(new Date($scope.provideracoinde.startTransDate) > new Date($scope.provideracoinde.endTransDate)){
+			if($rootScope.IOS==true){
+				var alertPopup = $ionicPopup.alert({
+					title: 'Sorry',
+					template: 'End Date should not be less than start Date'
+				});
+
+				alertPopup.then(function(res) {
+				});
+			}else{
+				$cordovaDialogs.alert('End Date should not be less than start Date')
+				.then(function() {
+				});
+			}
+		}else if(new Date($scope.provideracoinde.endTransDate) < $scope.date){
+			if($rootScope.IOS==true){
+				var alertPopup = $ionicPopup.alert({
+					title: 'Sorry',
+					template: 'Cannot select future date in End date'
+				});
+
+				alertPopup.then(function(res) {
+				});
+			}else{
+				$cordovaDialogs.alert('Cannot select future date in End date')
+				.then(function() {
+				});
+			}
+
+		}else if($scope.imgSrc==undefined){
 			if($rootScope.IOS==true){
 				var alertPopup = $ionicPopup.alert({
 					title: 'Sorry',
