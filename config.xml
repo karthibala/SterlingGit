@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<widget id="com.sterling.admin" version="1.0.8" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.sterling.admin" version="1.0.7" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
   <name>Sterling Administration</name>
   <description>
         Sterling Administration  App for HSA,FSA,HRA and COBRA
@@ -74,11 +74,22 @@
     <icon height="29" src="Icons/ios/icon-small.png" width="29" />
     <icon height="58" src="Icons/ios/icon-small@2x.png" width="58" />
     <icon height="87" src="Icons/ios/icon-small@3x.png" width="87" />
-	<splash src="splash/drawable-port-ldpi-screen.png" />
-	<splash src="splash/drawable-port-mdpi-screen.png" />
-	<splash src="splash/drawable-port-hdpi-screen.png" />
-	<splash src="splash/drawable-port-xhdpi-screen.png" />
-	<splash src="splash/drawable-port-xxhdpi-screen.png" />
-	<splash src="splash/drawable-port-xxxhdpi-screen.png" />
+	<!-- iPhone and iPod touch -->
+	<splash src="Icons/splash/Default.png" platform="ios" width="320" height="480" />
+	<splash src="Icons/splash/Default@2x.png" platform="ios" width="640" height="960" />
+
+	<!-- iPhone 5 / iPod Touch (5th Generation) -->
+	<splash src="Icons/splash/Default-568h@2x.png" platform="ios" width="640" height="1136" />
+
+	<!-- iPhone 6 -->
+	<splash src="Icons/splash/Default-667h@2x.png" platform="ios" width="750" height="1334" />
+	<splash src="Icons/splash/Default-Portrait-736h@3x.png" platform="ios" width="1242" height="2208" />
+
+
+	<!-- iPad -->
+	<splash src="Icons/splash/Default-Portrait.png" platform="ios" width="768" height="1024" />
+
+	<!-- Retina iPad -->
+	<splash src="Icons/splash/Default-Portrait@2x.png" platform="ios" width="1536" height="2048" />
   </platform>
 </widget>
