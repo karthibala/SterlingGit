@@ -3680,6 +3680,7 @@ angular.module('starter.controllers', [])
 	$http.get('http://app.sterlinghsa.com/api/v1/accounts/portfolio',{headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} })
 	.success(function(data){
 		$rootScope.acctype=data.account_types;
+		$scope.acctype=data.account_types;
 		if($scope.acctype.HSA!=null)
 		{
 			$scope.hidehsa=true; 
@@ -3704,6 +3705,16 @@ angular.module('starter.controllers', [])
 			$scope.showHramenu=true;	
 			$location.path('/app/hra');
 			$scope.homePath="#/app/hra";
+		}
+		
+		if($scope.acctype.HSA!=null || $scope.acctype.HSA!=undefined){
+			$location.path('/app/hsa');
+		}else if($scope.acctype.FSA!=null || $scope.acctype.FSA!=undefined){
+			$location.path('/app/fsa');
+		}else if($scope.acctype.HRA!=null || $scope.acctype.HRA!=undefined){
+			$location.path('/app/hra');
+		}else if($scope.acctype.COBRA!=null || $scope.acctype.COBRA!=undefined){
+			$location.path('/app/cobra');
 		}
 
 	}).error(function(err){
