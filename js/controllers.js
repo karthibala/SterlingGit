@@ -3685,36 +3685,40 @@ angular.module('starter.controllers', [])
 		{
 			$scope.hidehsa=true; 
 			$scope.showHsamenu=true;
-			$location.path('/app/hsa');
-			$scope.homePath="#/app/hsa";
+			// $location.path('/app/hsa');
+			// $scope.homePath="#/app/hsa";
 		}
 		if($scope.acctype.FSA!=null){
 			$scope.hidefsa=true;
 			$scope.showFsamenu=true;
-			$location.path('/app/fsa');
-			$scope.homePath="#/app/fsa";
+			// $location.path('/app/fsa');
+			// $scope.homePath="#/app/fsa";
 		}
 		if($scope.acctype.COBRA!=null){
 			$scope.hidecobra=true;
 			$scope.showCobramenu=true;							 
-			$location.path('/app/cobra');
-			$scope.homePath="#/app/cobra";
+			// $location.path('/app/cobra');
+			// $scope.homePath="#/app/cobra";
 		}
 		if($scope.acctype.HRA!=null){
 			$scope.hidehra=true;
 			$scope.showHramenu=true;	
-			$location.path('/app/hra');
-			$scope.homePath="#/app/hra";
+			// $location.path('/app/hra');
+			// $scope.homePath="#/app/hra";
 		}
 		
 		if($scope.acctype.HSA!=null || $scope.acctype.HSA!=undefined){
 			$location.path('/app/hsa');
+			$scope.homePath="#/app/hsa";
 		}else if($scope.acctype.FSA!=null || $scope.acctype.FSA!=undefined){
 			$location.path('/app/fsa');
+			$scope.homePath="#/app/fsa";
 		}else if($scope.acctype.HRA!=null || $scope.acctype.HRA!=undefined){
 			$location.path('/app/hra');
+			$scope.homePath="#/app/hra";
 		}else if($scope.acctype.COBRA!=null || $scope.acctype.COBRA!=undefined){
 			$location.path('/app/cobra');
+			$scope.homePath="#/app/cobra";
 		}
 
 	}).error(function(err){

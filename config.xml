@@ -23,7 +23,7 @@
         <variable name="PHOTOLIBRARY_USAGE_DESCRIPTION" value="choose the claim receipt" />
     </plugin>
 	
-  <content src="login.html"/>
+  <content src="index.html"/>
   <access origin="*"/>
   <allow-navigation href="cdvfile:*" />
 	<allow-intent href="tel:*" />
