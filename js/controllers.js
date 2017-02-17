@@ -530,6 +530,7 @@ angular.module('starter.controllers', [])
 			// }).error(function(err){
 			
 			// });
+			
 			if($rootScope.IOS==true){
 				$http({
 					url : ' http://app.sterlinghsa.com/api/v1/accounts/activitystatementpdf',
@@ -544,7 +545,7 @@ angular.module('starter.controllers', [])
 					$ionicLoading.hide();
 					var blob = new Blob([data], { type: 'application/pdf' });
 					var fileURL = URL.createObjectURL(blob);
-					var fileName = "Statement.pdf";
+					var fileName = $filter('date')(new Date(),'HHmmss')+".pdf";
 					var contentFile = blob;
 					//alert(cordova.file.dataDirectory);
 					$cordovaFile.createDir(cordova.file.documentsDirectory, "Sterling", true)
@@ -584,7 +585,7 @@ angular.module('starter.controllers', [])
 					$ionicLoading.hide();
 					var blob = new Blob([data], { type: 'application/pdf' });
 					var fileURL = URL.createObjectURL(blob);
-					var fileName = "Statement.pdf";
+					var fileName = $filter('date')(new Date(),'HHmmss')+".pdf";
 					var contentFile = blob;
 					$cordovaFile.createDir(cordova.file.externalRootDirectory, "Sterling Administration", true)
 					.then(function (success) {
