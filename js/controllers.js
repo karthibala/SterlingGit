@@ -142,12 +142,13 @@ angular.module('starter.controllers', [])
      $rootScope.cobrassn=data.account_types.COBRA.SSN;
     }
     
-     $http.get(' http://app.sterlinghsa.com/api/v1/accounts/accountinfo',{params:{'type':'hsa','acc_num': data.account_types.HSA.ACCT_NUM},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} })
-     .success(function(data){
-      $scope.contributions=data.total_contributions.CURRENT_YR_CONTRB;
-     }).error(function(err){
-      
-     });
+		$http.get(' http://app.sterlinghsa.com/api/v1/accounts/accountinfo',{params:{'type':'hsa','acc_num': data.account_types.HSA.ACCT_NUM},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} })
+		.success(function(data){
+		$scope.contributions=data.total_contributions.CURRENT_YR_CONTRB;
+		}).error(function(err){
+
+		});
+		$scope.debit();
       }).error(function(err){
 		$ionicLoading.hide();
 		if($rootScope.IOS==true){
@@ -172,6 +173,19 @@ angular.module('starter.controllers', [])
 			return false;
 		}
    });
+   
+   $scope.debit=function(){
+		$http.get(" http://app.sterlinghsa.com/api/v1/accounts/debitcardpurchase",{params:{'acct_num':$scope.hsaaccno},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
+		.success(function(data){
+			$ionicLoading.hide();
+				$scope.hsa_debit_card_list=data.debit_card_list[0];
+				$rootScope.hsa_debit_card_transNo = $scope.debit_card_list.TRANSACTION_NUMBER;
+				$rootScope.hsa_debit_card_amount = $scope.debit_card_list.AMOUNT;
+		}).error(function(err){
+			$ionicLoading.hide();
+		});
+	}
+   
 })
 .controller('makecontributeCtrl', function($scope,$cordovaNetwork,$rootScope,$ionicPlatform,$cordovaDatePicker,$http,$location,$ionicModal,$cordovaDialogs,$ionicLoading,$cordovaNetwork,$ionicPopup,$filter) {
 	$rootScope.hidecontent=true;
@@ -1679,7 +1693,7 @@ angular.module('starter.controllers', [])
 			return false;
 		}
 	}else{ 
-		$http.get(" http://app.sterlinghsa.com/api/v1/accounts/debitcardpurchase",{params:{'acct_num':$scope.hsaaccno,'trans_type':'d','plan_type':'hsa'},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
+		$http.get(" http://app.sterlinghsa.com/api/v1/accounts/debitcardpurchase",{params:{'acct_num':$scope.hsaaccno},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
 		.success(function(data){
 			$ionicLoading.hide();
 			if(data.debit_card_list==null){
@@ -1705,8 +1719,8 @@ angular.module('starter.controllers', [])
 			}
 			else{
 				$scope.debit_card_list=data.debit_card_list[0];
-				$rootScope.debit_card_transNo = $scope.debit_card_list.TRANSACTION_NUMBER; 
-				$rootScope.debit_card_amount = $scope.debit_card_list.AMOUNT;
+				$rootScope.hsa_debit_card_transNo = $scope.debit_card_list.TRANSACTION_NUMBER; 
+				$rootScope.hsa_debit_card_amount = $scope.debit_card_list.AMOUNT;
 			}
 
 		}).error(function(err){
@@ -1747,7 +1761,7 @@ angular.module('starter.controllers', [])
 	localStorage.setItem("backCount","5");
 	$scope.username = localStorage.getItem('username');
 	$scope.access_token = localStorage.getItem('access_token');
-	$scope.trans_num=$rootScope.debit_card_transNo;
+	$scope.trans_num=$rootScope.hsa_debit_card_transNo;
 	if($cordovaNetwork.isOffline())
 	{
 		$ionicLoading.hide();
@@ -1773,7 +1787,7 @@ angular.module('starter.controllers', [])
 			return false;
 		}
 	}else{
-		$http.get(" http://app.sterlinghsa.com/api/v1/accounts/claimdetail",{params:{'trans_num':$scope.trans_num,'trans_type':'c','plan_type':'hsa'},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
+		$http.get(" http://app.sterlinghsa.com/api/v1/accounts/claimdetail",{params:{'trans_num':$scope.trans_num},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
 		.success(function(data){
 			$ionicLoading.hide();
 			if(data.payment_information==null){
@@ -1917,8 +1931,8 @@ angular.module('starter.controllers', [])
 	$rootScope.hidecontent=true;
 	$scope.username = localStorage.getItem('username');
 	$scope.access_token = localStorage.getItem('access_token');
-	$scope.trans_num=$rootScope.debit_card_transNo;
-	$scope.debit_card_amount = $rootScope.debit_card_amount;
+	$scope.trans_num=$rootScope.hsa_debit_card_transNo;
+	$scope.debit_card_amount = $rootScope.hsa_debit_card_amount;
 	$scope.imgSrc;
 	$scope.floatlabel=false;
 	
@@ -2162,12 +2176,12 @@ angular.module('starter.controllers', [])
 		}
 	});
 	$scope.debit=function(){
-		$http.get(" http://app.sterlinghsa.com/api/v1/accounts/debitcardpurchase",{params:{'acct_num':$scope.fsaaccno,'trans_type':'d','plan_type':'fsa'},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
+		$http.get(" http://app.sterlinghsa.com/api/v1/accounts/debitcardpurchase",{params:{'acct_num':$scope.fsaaccno},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
 		.success(function(data){
 			$ionicLoading.hide();
 				$scope.debit_card_list=data.debit_card_list[0];
-				$rootScope.debit_card_transNo = $scope.debit_card_list.TRANSACTION_NUMBER;
-				$rootScope.debit_card_amount = $scope.debit_card_list.AMOUNT;
+				$rootScope.fsa_debit_card_transNo = $scope.debit_card_list.TRANSACTION_NUMBER;
+				$rootScope.fsa_debit_card_amount = $scope.debit_card_list.AMOUNT;
 		}).error(function(err){
 			$ionicLoading.hide();
 		});
@@ -3786,7 +3800,7 @@ angular.module('starter.controllers', [])
 			return false;
 		}
 	}else{ 
-		$http.get(" http://app.sterlinghsa.com/api/v1/accounts/debitcardpurchase",{params:{'acct_num':$scope.fsaaccno,'trans_type':'d','plan_type':'fsa'},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
+		$http.get(" http://app.sterlinghsa.com/api/v1/accounts/debitcardpurchase",{params:{'acct_num':$scope.fsaaccno},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
 		.success(function(data){
 			$ionicLoading.hide();
 			if(data.debit_card_list==null){
@@ -3812,8 +3826,8 @@ angular.module('starter.controllers', [])
 			}
 			else{
 				$scope.debit_card_list=data.debit_card_list[0];
-				$rootScope.debit_card_transNo = $scope.debit_card_list.TRANSACTION_NUMBER; 
-				$rootScope.debit_card_amount = $scope.debit_card_list.AMOUNT;
+				$rootScope.fsa_debit_card_transNo = $scope.debit_card_list.TRANSACTION_NUMBER; 
+				$rootScope.fsa_debit_card_amount = $scope.debit_card_list.AMOUNT;
 			}
 
 		}).error(function(err){
@@ -3854,7 +3868,7 @@ angular.module('starter.controllers', [])
 	localStorage.setItem("backCount","5");
 	$scope.username = localStorage.getItem('username');
 	$scope.access_token = localStorage.getItem('access_token');
-	$scope.trans_num=$rootScope.debit_card_transNo
+	$scope.trans_num=$rootScope.fsa_debit_card_transNo
 	if($cordovaNetwork.isOffline())
 	{
 		$ionicLoading.hide();
@@ -3880,7 +3894,7 @@ angular.module('starter.controllers', [])
 			return false;
 		}
 	}else{
-		$http.get(" http://app.sterlinghsa.com/api/v1/accounts/claimdetail",{params:{'trans_num':$scope.trans_num,'trans_type':'c','plan_type':'fsa'},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
+		$http.get(" http://app.sterlinghsa.com/api/v1/accounts/claimdetail",{params:{'trans_num':$scope.trans_num},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
 		.success(function(data){
 			$ionicLoading.hide();
 			if(data.payment_information==null){
@@ -4024,8 +4038,8 @@ angular.module('starter.controllers', [])
 	$rootScope.hidecontent=true;
 	$scope.username = localStorage.getItem('username');
 	$scope.access_token = localStorage.getItem('access_token');
-	$scope.trans_num=$rootScope.debit_card_transNo;
-	$scope.debit_card_amount = $rootScope.debit_card_amount;
+	$scope.trans_num=$rootScope.fsa_debit_card_transNo;
+	$scope.debit_card_amount = $rootScope.fsa_debit_card_amount;
 	$scope.imgSrc;
 	$scope.floatlabel=false;
 	
@@ -4495,10 +4509,23 @@ angular.module('starter.controllers', [])
 	.success(function(data){
 		$rootScope.hraaccno=data.account_types.HRA.ACCT_NUM; 
 		$rootScope.hraaccId=data.account_types.HRA.ACCT_ID;
+		$scope.debit();
 	}).error(function(err){
 
 	});
 
+	$scope.debit=function(){
+		$http.get(" http://app.sterlinghsa.com/api/v1/accounts/debitcardpurchase",{params:{'acct_num':$scope.hraaccno},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
+		.success(function(data){
+			$ionicLoading.hide();
+				$scope.hra_debit_card_list=data.debit_card_list[0];
+				$rootScope.hra_debit_card_transNo = $scope.debit_card_list.TRANSACTION_NUMBER;
+				$rootScope.hra_debit_card_amount = $scope.debit_card_list.AMOUNT;
+		}).error(function(err){
+			$ionicLoading.hide();
+		});
+	}
+	
 	$scope.goBack=function(){
 		$location.path("app/fsa");
 	}
