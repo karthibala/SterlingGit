@@ -39,10 +39,13 @@
 							<div class="input-label ItemlineHead1">
 							select
 							</div>
-							<select class="bgnew" name="selectAccount" ng-model="makecontribute.selectAccount" ng-change="SelectFloat()" required>
-							<option value="" > Select Bank Account</option>
-							<option ng-repeat="data in bank_details">{{data.DISPLAY_NAME}}</option>
+							<!-- <select class="bgnew" name="selectAccount" ng-model="makecontribute.selectAccount" ng-change="SelectFloat()" required> -->
+							<!-- <option value="" > Select Bank Account</option> -->
+							<!-- <option ng-repeat="data in bank_details">{{data.DISPLAY_NAME}}</option> -->
 
+							<!-- </select> -->
+							<select class="bgnew" name="selectAccount" ng-model="makecontribute.selectAccount" ng-options="pay.DISPLAY_NAME for pay in bank_details" ng-change="SelectFloat()" required>
+								<option selected disabled value=""> Select Bank Account</option>
 							</select>
 						</label>
 						
@@ -97,9 +100,12 @@
 							<span class="input-label">
 							Description
 							</span>
-							<select class="bgnew" name="selectdescription" ng-model="makecontribute.selectdescription" ng-change="SelectFloat1()" required>
-								<option value="" > Select Description</option>
-								<option ng-repeat="data in description">{{data.FEE_NAME}}</option>
+							<!-- <select class="bgnew" name="selectdescription" ng-model="makecontribute.selectdescription" ng-change="SelectFloat1()" required> -->
+								<!-- <option value="" > Select Description</option> -->
+								<!-- <option ng-repeat="data in description">{{data.FEE_NAME}}</option> -->
+							<!-- </select> -->
+							<select class="bgnew" name="selectdescription" ng-model="makecontribute.selectdescription" ng-options="pay.FEE_NAME for pay in description" ng-change="SelectFloat1()" required>
+								<option selected disabled value=""> Select Description</option>
 							</select>
 						</label>
 						
