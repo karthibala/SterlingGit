@@ -102,6 +102,31 @@ angular.module('starter', ['ionic', 'starter.controllers','ngCordova'])
 		controller: 'ScheduledcontributeCtrl'
 	})
 	
+	.state('hsacardclaim', {
+		cache:false,
+		url: '/hsacardclaim',
+		templateUrl: 'templates/hsa/hsacardclaim.html',
+		controller: 'hsacardclaimCtrl'
+	})
+	.state('hsacarddetail', {
+		cache:false,
+		url: '/hsacarddetail',
+		templateUrl: 'templates/hsa/hsacarddetail.html',
+		controller: 'hsacarddetailCtrl'
+	})
+	.state('hsaclaimdetail', {
+		cache:false,
+		url: '/hsaclaimdetail',
+		templateUrl: 'templates/hsa/hsaclaimdetail.html',
+		controller: 'hsaclaimdetailCtrl'
+	})
+	.state('hsanewcardclaim', {
+		cache:false,
+		url: '/hsanewcardclaim',
+		templateUrl: 'templates/hsa/hsanewcardclaim.html',
+		controller: 'hsanewcardclaimCtrl'
+	})
+	
 	//FSA
 	.state('app.fsa', {
 		url: "/fsa",

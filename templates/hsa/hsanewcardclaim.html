@@ -1,0 +1,65 @@
+<ion-header-bar class="headerborder" >
+	<div class="home-head2 " ng-click="goback();">
+		<i ng-click="goback();" class="ion ion-arrow-left-c back-icon"></i>
+    </div>
+    <div class="home-head2 ">
+		<p class="headertitle">New Claim</p>
+	</div>
+</ion-header-bar>
+<ion-view>
+	<ion-content class="bgnew">
+				<form name="myForm">
+					<div class="row responsive-sm">
+						<div class="col col-75 center">
+							<div class="card">
+								<div class="item item-avatar">
+								<img src="img/item/account_balance.png">
+								<div class="ItemlineHead cardContent">Amount</div>
+								<div class="ItemlineValueText cardContent">{{debit_card_amount| currency}}</div>
+								</div>
+							</div>
+
+							<div class="list">
+								
+								<!-- <label class="item item-input formselect" > -->
+									<!-- <span class="input-label ItemlineHead1">Claim Id</span> -->
+									<!-- <input type="text"  class="input-box1 input-boxfocus1 formselect" id="forminput" name="trans_num" ng-model="newclaimvalues.trans_num" value="{{trans_num}}" disabled> -->
+								<!-- </label> -->
+								
+							</div>
+
+							<div class="row">
+								<div class="col text-center">
+									<button class="button button-calm button-small  formButton1" type="submit" ng-click="upload();" ><i side="left"  class="icon-left ion-android-upload" ></i><span class="icon-upload">Upload</span></button>
+								</div> 
+							</div> 
+
+							<!-- <div ng-repeat="image in imgSrc">
+								<div class="row" >
+									<div class="col text-center">
+										<img ng-src="data:image/png;base64,{{image}}" id="receipt"  ng-click="deleteimg($index)"/>
+										<input type="hidden" name="imgValue" ng-value="imgSrc" ng-model="newclaimvalues.imgValue">
+									</div>
+								</div>
+							</div> -->
+							
+								<div class="row" >
+									<div class="col text-center">
+										<img ng-src="data:image/png;base64,{{imgSrc}}" id="receipt"/>
+										<input type="hidden" name="imgValue" ng-value="{{imgSrc}}" ng-model="newclaimvalues.imgValue">
+									</div>
+								</div>
+							
+
+							<div class="row">
+								<div class="col text-center">
+									<button class="button button-calm button-small formButton1" type="submit" ng-click="newclaimsubmit();">SUBMIT</button>
+								</div> 
+							</div>    
+						</div>
+					</div>
+						<!--the below code used for Scrolling -->
+					<div style="height:100px;"></div>
+				</form>
+		</ion-content>
+</ion-view>
