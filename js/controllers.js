@@ -480,7 +480,7 @@ angular.module('starter.controllers', [])
 	}
 			
 })
-.controller('ActivitystmntCtrl', function($scope,$ionicPlatform,$cordovaNetwork,$cordovaDatePicker,$http,$location,$ionicModal,$cordovaDialogs,$ionicLoading,$cordovaNetwork,$rootScope,$filter,$cordovaFile,$cordovaFileOpener2) {
+.controller('ActivitystmntCtrl', function($scope,$ionicPlatform,$cordovaNetwork,$cordovaDatePicker,$http,$location,$ionicModal,$cordovaDialogs,$ionicLoading,$cordovaNetwork,$rootScope,$filter,$cordovaFile,$cordovaFileOpener2,$ionicPopup) {
 	$rootScope.hidecontent=true;
 	localStorage.setItem("backCount","4");
 	$scope.username = localStorage.getItem('username');
@@ -562,7 +562,7 @@ angular.module('starter.controllers', [])
 							
 							var alertPopup = $ionicPopup.alert({
 								title: 'Success',
-								template: 'Statement download successsfully'
+								template: 'Activity Statement download successsfully'
 							});
 							alertPopup.then(function(res) {});
 							
