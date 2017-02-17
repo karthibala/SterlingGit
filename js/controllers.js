@@ -485,7 +485,7 @@ angular.module('starter.controllers', [])
 	localStorage.setItem("backCount","4");
 	$scope.username = localStorage.getItem('username');
 	$scope.access_token = localStorage.getItem('access_token');
-	$rootScope.activity={startDate:'',EndtDate:''};
+	$scope.activity={startDate:'',EndtDate:''};
 	$scope.username = localStorage.getItem('username');
 	$scope.access_token = localStorage.getItem('access_token');
 	$scope.date = $filter('date')(new Date(),'MM/dd/yyyy');
@@ -565,7 +565,7 @@ angular.module('starter.controllers', [])
 								template: 'Activity Statement download successsfully'
 							});
 							alertPopup.then(function(res) {});
-							
+							$scope.activity={};
 							}, function (error){	
 							});
 					},function (error){
@@ -592,7 +592,9 @@ angular.module('starter.controllers', [])
 						$cordovaFile.writeFile(success.nativeURL, fileName,contentFile, true)
 						.then(function (success) {
 							$cordovaFileOpener2.open(success.target.localURL,'application/pdf')
-							.then(function(){},function(err){})
+							.then(function(){
+								$scope.activity={};
+							},function(err){})
 							}, function (error){	
 							});
 					},function (error){
