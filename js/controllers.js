@@ -200,7 +200,8 @@ angular.module('starter.controllers', [])
 	$scope.floatlabel=false;
 	$scope.floatlabel1=false;
 	$scope.date = $filter('date')(new Date(),'MM/dd/yyyy');
-
+	$scope.currentYear = $filter('date')(new Date(),'yyyy');
+	
 	$scope.SelectFloat = function ()
 	{ 
 		$scope.floatlabel=true; 
@@ -266,6 +267,23 @@ angular.module('starter.controllers', [])
 		$http.get("http://app.sterlinghsa.com/api/v1/accounts/bankdetails",{params:{'type':'hsa', 'acc_num':$scope.hsaaccno},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
 		.success(function(data){
 			$ionicLoading.hide();
+			if(data.status=="FAILED"){
+				if($rootScope.IOS==true){
+					var alertPopup = $ionicPopup.alert({
+						title: 'Sorry',
+						template: 'You do not have a bank account on record'
+					});
+
+					alertPopup.then(function(res) {
+						window.history.back();
+					});
+				}else{
+					$cordovaDialogs.alert('You do not have a bank account on record','Sorry','OK')
+					.then(function() {
+						window.history.back();
+					});
+				}
+			}
 			$scope.bank_details=data.bank_details;
 		}).error(function(err){
 			$ionicLoading.hide();
@@ -834,6 +852,23 @@ angular.module('starter.controllers', [])
 	}else{
 		$http.get("http://app.sterlinghsa.com/api/v1/accounts/bankdetails",{params:{'type':'hsa', 'acc_num':$scope.hsaaccno},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
 		.success(function(data){
+			if(data.status=="FAILED"){
+				if($rootScope.IOS==true){
+					var alertPopup = $ionicPopup.alert({
+						title: 'Sorry',
+						template: 'You do not have a bank account on record'
+					});
+
+					alertPopup.then(function(res) {
+						window.history.back();
+					});
+				}else{
+					$cordovaDialogs.alert('You do not have a bank account on record','Sorry','OK')
+					.then(function() {
+						window.history.back();
+					});
+				}
+			}
 			$scope.bank_details=data.bank_details;
 		}).error(function(err){
 			$ionicLoading.hide();
@@ -1160,62 +1195,50 @@ angular.module('starter.controllers', [])
 				return false;
 			}
 	}else{
-	$http.get("http://app.sterlinghsa.com/api/v1/accounts/bankdetails",{params:{'type':'hsa', 'acc_num':$scope.hsaaccno},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
-	.success(function(data){
-		$scope.bank_details=data.bank_details;
-	}).error(function(err){
-		$ionicLoading.hide();
-		if($rootScope.IOS==true){
-				var alertPopup = $ionicPopup.alert({
-					title: 'Sorry',
-					template: 'Session expired, Please Login Again'
-				});
+		$http.get('  http://app.sterlinghsa.com/api/v1/accounts/categories',{headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} })
+		.success(function(data){
+			$scope.categories=data.categories;
+		}).error(function(err){
+		});
+	 
+		$http.get(' http://app.sterlinghsa.com/api/v1/accounts/description',{headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} })
+		.success(function(data){
+			$scope.descriptions=data.description ;
+		}).error(function(err){
+		});
+		
+		$http.get('http://app.sterlinghsa.com/api/v1/accounts/payeeslist',{params:{'acc_num':$scope.hsaaccno},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} })
+		.success(function(data){
+			//alert(data.payee.length)
+			if(data.payee==null){
+				if($rootScope.IOS==true){
+					var alertPopup = $ionicPopup.alert({
+						title: 'Sorry',
+						template: 'You do not have any payee on record'
+					});
 
-				alertPopup.then(function(res) {
-					localStorage.clear();
-					window.location='login.html#/login';
-				});
-		}else{
-				$cordovaDialogs.confirm('Session expired, Please Login Again', 'Sorry', 'ok')
-				.then(function(buttonIndex) {
-					if(buttonIndex=="1")
-					{
-						localStorage.clear();
-						window.location='login.html#/login';
-					}
-				});
-				return false;
+					alertPopup.then(function(res) {
+						window.history.back();
+					});
+				}else{
+					$cordovaDialogs.alert('You do not have any payee on record','Sorry','OK')
+					.then(function() {
+						window.history.back();
+					});
+				}
 			}
-	});
+			$scope.payee=data.payee ;
+		}).error(function(err){
+		});
+		
+		$http.get(" http://app.sterlinghsa.com/api/v1/accounts/balances",{params:{'type':'hsa'},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
+		.success(function(data){
+			$scope.availablebalance=data.balances.BALANCE;
+		}).error(function(err){
+
+		});
 	}
 	
-	$http.get('  http://app.sterlinghsa.com/api/v1/accounts/categories',{headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} })
-	.success(function(data){
-		$scope.categories=data.categories;
-	}).error(function(err){
-	});
- 
-	$http.get(' http://app.sterlinghsa.com/api/v1/accounts/description',{headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} })
-	.success(function(data){
-		$scope.descriptions=data.description ;
-	}).error(function(err){
-	});
-	
-	$http.get('http://app.sterlinghsa.com/api/v1/accounts/payeeslist',{params:{'acc_num':$scope.hsaaccno},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} })
-	.success(function(data){
-		
-		$scope.payee=data.payee ;
-	}).error(function(err){
-	});
-	
-	$http.get(" http://app.sterlinghsa.com/api/v1/accounts/balances",{params:{'type':'hsa'},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
-	.success(function(data){
-		$scope.availablebalance=data.balances.BALANCE;
-	}).error(function(err){
-
-	});
-	
-	 
 	$scope.submitValue=function()
 	{
 		if($scope.payprovierValues.amount == 0){
@@ -2977,7 +3000,26 @@ angular.module('starter.controllers', [])
 	
 	$http.get('http://app.sterlinghsa.com/api/v1/accounts/payeeslist',{params:{'acc_num': $scope.fsaaccno},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} })
 	.success(function(data){
-		$scope.payee=data.payee ;
+		$scope.payee=data.payee;
+		if($rootScope.claimMode='payprovider'){
+			if(data.payee==null){
+				if($rootScope.IOS==true){
+					var alertPopup = $ionicPopup.alert({
+						title: 'Sorry',
+						template: 'You do not have any payee on record'
+					});
+
+					alertPopup.then(function(res) {
+						window.history.back();
+					});
+				}else{
+					$cordovaDialogs.alert('You do not have any payee on record','Sorry','OK')
+					.then(function() {
+						window.history.back();
+					});
+				}
+			}
+		}
 	}).error(function(err){
 
 	});
@@ -2985,6 +3027,27 @@ angular.module('starter.controllers', [])
 	$http.get("http://app.sterlinghsa.com/api/v1/accounts/bankdetails",{params:{'type':'fsa', 'acc_num':$scope.fsaaccno},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
 	.success(function(data){
 		$scope.bank_details=data.bank_details;
+		//alert("claimMode")
+		//alert($rootScope.claimMode)
+		if($rootScope.claimMode='payme'){
+			if(data.status=="FAILED"){
+				if($rootScope.IOS==true){
+					var alertPopup = $ionicPopup.alert({
+						title: 'Sorry',
+						template: 'You do not have a bank account on record'
+					});
+
+					alertPopup.then(function(res) {
+						window.history.back();
+					});
+				}else{
+					$cordovaDialogs.alert('You do not have a bank account on record','Sorry','OK')
+					.then(function() {
+						window.history.back();
+					});
+				}
+			}
+		}
 	}).error(function(err){
 		$ionicLoading.hide();
 		if($rootScope.IOS==true){
@@ -3247,6 +3310,8 @@ angular.module('starter.controllers', [])
 	$scope.access_token = localStorage.getItem('access_token');
 	$scope.fsaaccId=$rootScope.fsaaccId;
 	$scope.fsaccno=$rootScope.fsaaccno;
+	$rootScope.claimMode='';
+	$rootScope.claimMode='payme';
 	$http.get("http://app.sterlinghsa.com/api/v1/accounts/availablebalances",{params:{ 'acct_num':$scope.fsaccno},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
 	.success(function(data){
 		$scope.available_balances = data.available_balances;
@@ -3348,6 +3413,8 @@ angular.module('starter.controllers', [])
 	$scope.access_token = localStorage.getItem('access_token');
 	$scope.fsaaccId=$rootScope.fsaaccId;
 	$scope.fsaccno=$rootScope.fsaaccno;
+	$rootScope.claimMode='';
+	$rootScope.claimMode='payprovider';
 	$http.get("http://app.sterlinghsa.com/api/v1/accounts/availablebalances",{params:{ 'acct_num':$scope.fsaccno},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
 	.success(function(data){
 		$scope.available_balances = data.available_balances;
@@ -3689,6 +3756,25 @@ angular.module('starter.controllers', [])
 	$http.get('http://app.sterlinghsa.com/api/v1/accounts/payeeslist',{params:{'acc_num': $scope.fsaaccno},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} })
 	.success(function(data){
 		$scope.payee=data.payee ;
+		if($rootScope.claimMode='payprovider'){
+			if(data.payee==null){
+				if($rootScope.IOS==true){
+					var alertPopup = $ionicPopup.alert({
+						title: 'Sorry',
+						template: 'You do not have any payee on record'
+					});
+
+					alertPopup.then(function(res) {
+						window.history.back();
+					});
+				}else{
+					$cordovaDialogs.alert('You do not have any payee on record','Sorry','OK')
+					.then(function() {
+						window.history.back();
+					});
+				}
+			}
+		}
 	}).error(function(err){
 	});
 	
@@ -4417,9 +4503,7 @@ angular.module('starter.controllers', [])
 				localStorage.clear();
 				window.location='login.html#/login';
 				}
-				else{
-				ionic.Platform.exitApp();
-				}
+				else{}
 			});
 		}
 	}
@@ -4781,6 +4865,8 @@ angular.module('starter.controllers', [])
 	$scope.access_token = localStorage.getItem('access_token');
 	$scope.hraid= $rootScope.hraaccId;
 	$scope.hraacc= $rootScope.hraaccno;
+	$rootScope.claimMode='';
+	$rootScope.claimMode='payme';
 	$http.get("http://app.sterlinghsa.com/api/v1/accounts/availablebalances",{params:{ 'acct_num':$scope.hraacc},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
 	.success(function(data){
 		$scope.available_balances = data.available_balances;
@@ -4846,7 +4932,8 @@ angular.module('starter.controllers', [])
 	$scope.access_token = localStorage.getItem('access_token');
 	$scope.hraid= $rootScope.hraaccId;
 	$scope.hraacc= $rootScope.hraaccno;
-	
+	$rootScope.claimMode='';
+	$rootScope.claimMode='payprovider';
 	$http.get("http://app.sterlinghsa.com/api/v1/accounts/availablebalances",{params:{ 'acct_num':$scope.hraacc},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
 	.success(function(data){
 		$scope.available_balances = data.available_balances;
@@ -5075,23 +5162,24 @@ angular.module('starter.controllers', [])
 		
 	$http.get("http://app.sterlinghsa.com/api/v1/accounts/bankdetails",{params:{'type':'hra', 'acc_num':$scope.hraacc},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
 	.success(function(data){
-		if(data.status=="FAILED"){
-			$scope.msg=data.error_message;
-			if($rootScope.IOS==true){
-				var alertPopup = $ionicPopup.alert({
-					title: 'Sorry',
-					template: $scope.msg
-				});
+		if($rootScope.claimMode='payme'){
+			if(data.status=="FAILED"){
+				if($rootScope.IOS==true){
+					var alertPopup = $ionicPopup.alert({
+						title: 'Sorry',
+						template: 'You do not have a bank account on record'
+					});
 
-				alertPopup.then(function(res){
-				});
-			}else{
-				$cordovaDialogs.alert($scope.msg, 'Sorry', 'ok')
-				.then(function() {
-				});
-				return false;
+					alertPopup.then(function(res) {
+						window.history.back();
+					});
+				}else{
+					$cordovaDialogs.alert('You do not have a bank account on record','Sorry','OK')
+					.then(function() {
+						window.history.back();
+					});
+				}
 			}
-			
 		}
 		$scope.bank_details=data.bank_details;
 	}).error(function(err){
@@ -5561,6 +5649,25 @@ angular.module('starter.controllers', [])
 	$http.get('http://app.sterlinghsa.com/api/v1/accounts/payeeslist',{params:{'acc_num': $scope.hraacc},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} })
 	.success(function(data){
 		$scope.payee=data.payee ;
+		if($rootScope.claimMode='payprovider'){
+			if(data.payee==null){
+				if($rootScope.IOS==true){
+					var alertPopup = $ionicPopup.alert({
+						title: 'Sorry',
+						template: 'You do not have any payee on record'
+					});
+
+					alertPopup.then(function(res) {
+						window.history.back();
+					});
+				}else{
+					$cordovaDialogs.alert('You do not have any payee on record','Sorry','OK')
+					.then(function() {
+						window.history.back();
+					});
+				}
+			}
+		}
 	}).error(function(err){
 		if($rootScope.IOS==true){
 				var alertPopup = $ionicPopup.alert({

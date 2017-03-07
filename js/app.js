@@ -44,6 +44,7 @@ angular.module('starter', ['ionic', 'starter.controllers','ngCordova'])
 	})
 	.state('accounts', {
 		url: '/accounts',
+		cache: false,
 		templateUrl: 'templates/account.html',
 		controller: 'AccountCtrl'
 	})

@@ -12,19 +12,19 @@
 		<div class="card">
 			<div class="item item-avatar itemleft  item-text-wrap ItemLinehr ">
 				<img src="img/item/Total-contribution.png" class="item-Image1">
-				<div class="ItemlineHead cardContent">Total Contributions for 2017</div>
+				<div class="ItemlineHead cardContent">Total Contributions for {{currentYear}}</div>
 
 				<div class="ItemlineValueText cardContent">{{total_contribution.CURRENT_YR_CONTRB| currency}}</div>
 			</div>
 			<div class="item item-avatar itemleft item-text-wrap">
 				<img src="img/item/Allowable-contributions.png" class="item-Image1">
-				<div class="ItemlineHead cardContent">Allowable Contributions Remaining for 2017</div>
+				<div class="ItemlineHead cardContent">Allowable Contributions Remaining for {{currentYear}}</div>
 				<div class="ItemlineValueText cardContent">{{total_contribution.CONTRB_LIMIT  | currency}}</div>
 			</div>
 
 			<div class="item item-avatar itemleft item-text-wrap">
 				<img src="img/item/Total-disburesment.png" class="item-Image1">
-				<div class="ItemlineHead cardContent">Total Disbursement for 2017</div>
+				<div class="ItemlineHead cardContent">Total Disbursement for {{currentYear}}</div>
 				<div class="ItemlineValueText cardContent">{{total_contribution.TOTAL_DISB_AMOUNT | currency}}</div>
 			</div>
 		</div>
