@@ -10,6 +10,13 @@ angular.module('starter', ['ionic', 'starter.controllers','ngCordova'])
 			StatusBar.styleDefault();
 		}
 	});
+	$ionicPlatform.registerBackButtonAction(function () {
+	if (condition) {
+		//navigator.app.exitApp();
+	} else {
+		
+	}
+	}, 100);
 })
 
 .config(function($stateProvider, $urlRouterProvider) {

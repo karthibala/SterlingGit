@@ -271,14 +271,14 @@ angular.module('starter.controllers', [])
 				if($rootScope.IOS==true){
 					var alertPopup = $ionicPopup.alert({
 						title: 'Sorry',
-						template: 'You do not have a bank account on record'
+						template: 'You do not have a bank account on record.You must add a bank account by logging into sterlinghsa.com to schedule disbursements'
 					});
 
 					alertPopup.then(function(res) {
 						window.history.back();
 					});
 				}else{
-					$cordovaDialogs.alert('You do not have a bank account on record','Sorry','OK')
+					$cordovaDialogs.alert('You do not have a bank account on record.You must add a bank account by logging into sterlinghsa.com to schedule disbursements','Sorry','OK')
 					.then(function() {
 						window.history.back();
 					});
@@ -856,14 +856,14 @@ angular.module('starter.controllers', [])
 				if($rootScope.IOS==true){
 					var alertPopup = $ionicPopup.alert({
 						title: 'Sorry',
-						template: 'You do not have a bank account on record'
+						template: 'You do not have a bank account on record.You must add a bank account by logging into sterlinghsa.com to schedule disbursements'
 					});
 
 					alertPopup.then(function(res) {
 						window.history.back();
 					});
 				}else{
-					$cordovaDialogs.alert('You do not have a bank account on record','Sorry','OK')
+					$cordovaDialogs.alert('You do not have a bank account on record.You must add a bank account by logging into sterlinghsa.com to schedule disbursements','Sorry','OK')
 					.then(function() {
 						window.history.back();
 					});
@@ -1214,14 +1214,14 @@ angular.module('starter.controllers', [])
 				if($rootScope.IOS==true){
 					var alertPopup = $ionicPopup.alert({
 						title: 'Sorry',
-						template: 'You do not have any payee on record'
+						template: 'You do not have any payee on record.You must add a payee account by logging into www.sterlinghsa.com to schedule new claim request for payee'
 					});
 
 					alertPopup.then(function(res) {
 						window.history.back();
 					});
 				}else{
-					$cordovaDialogs.alert('You do not have any payee on record','Sorry','OK')
+					$cordovaDialogs.alert('You do not have any payee on record.You must add a payee account by logging into www.sterlinghsa.com to schedule new claim request for payee','Sorry','OK')
 					.then(function() {
 						window.history.back();
 					});
@@ -1362,11 +1362,12 @@ angular.module('starter.controllers', [])
 	}
 	
 })
-.controller('TaxyearCtrl', function($scope,$ionicPlatform,$cordovaNetwork,$cordovaDatePicker,$http,$location,$ionicModal,$cordovaDialogs,$ionicLoading,$cordovaNetwork,	$rootScope,$sce,$cordovaFileOpener2,$cordovaFileTransfer,$ionicPopup,$cordovaFile) {
+.controller('TaxyearCtrl', function($scope,$ionicPlatform,$cordovaNetwork,$cordovaDatePicker,$http,$location,$ionicModal,$cordovaDialogs,$ionicLoading,$cordovaNetwork,	$rootScope,$sce,$cordovaFileOpener2,$cordovaFileTransfer,$ionicPopup,$cordovaFile,$filter) {
 	$rootScope.hidecontent=true;
 	localStorage.setItem("backCount","4");
 	$scope.username = localStorage.getItem('username');
 	$scope.access_token = localStorage.getItem('access_token');
+	$scope.currentYear = $filter('date')(new Date(),'yyyy');
 	if($cordovaNetwork.isOffline())
     {
      $ionicLoading.hide();
@@ -3006,14 +3007,14 @@ angular.module('starter.controllers', [])
 				if($rootScope.IOS==true){
 					var alertPopup = $ionicPopup.alert({
 						title: 'Sorry',
-						template: 'You do not have any payee on record'
+						template: 'You do not have any payee on record.You must add a payee account by logging into www.sterlinghsa.com to schedule new claim request for payee'
 					});
 
 					alertPopup.then(function(res) {
 						window.history.back();
 					});
 				}else{
-					$cordovaDialogs.alert('You do not have any payee on record','Sorry','OK')
+					$cordovaDialogs.alert('You do not have any payee on record.You must add a payee account by logging into www.sterlinghsa.com to schedule new claim request for payee','Sorry','OK')
 					.then(function() {
 						window.history.back();
 					});
@@ -3034,14 +3035,14 @@ angular.module('starter.controllers', [])
 				if($rootScope.IOS==true){
 					var alertPopup = $ionicPopup.alert({
 						title: 'Sorry',
-						template: 'You do not have a bank account on record'
+						template: 'You do not have a bank account on record.You must add a bank account by logging into sterlinghsa.com to schedule disbursements'
 					});
 
 					alertPopup.then(function(res) {
 						window.history.back();
 					});
 				}else{
-					$cordovaDialogs.alert('You do not have a bank account on record','Sorry','OK')
+					$cordovaDialogs.alert('You do not have a bank account on record.You must add a bank account by logging into sterlinghsa.com to schedule disbursements','Sorry','OK')
 					.then(function() {
 						window.history.back();
 					});
@@ -3761,14 +3762,14 @@ angular.module('starter.controllers', [])
 				if($rootScope.IOS==true){
 					var alertPopup = $ionicPopup.alert({
 						title: 'Sorry',
-						template: 'You do not have any payee on record'
+						template: 'You do not have any payee on record.You must add a payee account by logging into www.sterlinghsa.com to schedule new claim request for payee'
 					});
 
 					alertPopup.then(function(res) {
 						window.history.back();
 					});
 				}else{
-					$cordovaDialogs.alert('You do not have any payee on record','Sorry','OK')
+					$cordovaDialogs.alert('You do not have any payee on record.You must add a payee account by logging into www.sterlinghsa.com to schedule new claim request for payee','Sorry','OK')
 					.then(function() {
 						window.history.back();
 					});
@@ -4535,16 +4536,34 @@ angular.module('starter.controllers', [])
 
 })
 .controller('HeaderCtrl', function($scope,$ionicPopup, $timeout ,$ionicModal,$location, $ionicHistory, $cordovaDialogs) {
-	$scope.Logout=function()
+	$scope.logOut=function()
 	{
-		$cordovaDialogs.confirm('Do you want to Logout', 'Are you sure', ['Yes','No'])
-		.then(function(buttonIndex) {
-			if(buttonIndex=="1")
-			{
+		if($rootScope.IOS==true){
+				var confirmPopup = $ionicPopup.confirm({
+				title: 'Do you want to Logout',
+				template: 'Are you sure',
+				okText: 'No',
+				cancelText: 'Yes',
+			});
+			confirmPopup.then(function(res) {
+				if(res) {
+					console.log('You are not sure');
+				} else {
+					localStorage.clear();
+					window.location='login.html#/login';
+				}
+			});
+		}else{
+			$cordovaDialogs.confirm('Do you want to Logout', 'Are you sure', ['Yes','No'])
+			.then(function(buttonIndex) {
+				if(buttonIndex=="1")
+				{
 				localStorage.clear();
-				$location.path("login.html#/login");
-			}	  
-		});
+				window.location='login.html#/login';
+				}
+				else{}
+			});
+		}
 	}
 	$scope.goBack = function()
 	{
@@ -5167,14 +5186,14 @@ angular.module('starter.controllers', [])
 				if($rootScope.IOS==true){
 					var alertPopup = $ionicPopup.alert({
 						title: 'Sorry',
-						template: 'You do not have a bank account on record'
+						template: 'You do not have a bank account on record.You must add a bank account by logging into sterlinghsa.com to schedule disbursements'
 					});
 
 					alertPopup.then(function(res) {
 						window.history.back();
 					});
 				}else{
-					$cordovaDialogs.alert('You do not have a bank account on record','Sorry','OK')
+					$cordovaDialogs.alert('You do not have a bank account on record.You must add a bank account by logging into sterlinghsa.com to schedule disbursements','Sorry','OK')
 					.then(function() {
 						window.history.back();
 					});
@@ -5654,14 +5673,14 @@ angular.module('starter.controllers', [])
 				if($rootScope.IOS==true){
 					var alertPopup = $ionicPopup.alert({
 						title: 'Sorry',
-						template: 'You do not have any payee on record'
+						template: 'You do not have any payee on record.You must add a payee account by logging into www.sterlinghsa.com to schedule new claim request for payee'
 					});
 
 					alertPopup.then(function(res) {
 						window.history.back();
 					});
 				}else{
-					$cordovaDialogs.alert('You do not have any payee on record','Sorry','OK')
+					$cordovaDialogs.alert('You do not have any payee on record.You must add a payee account by logging into www.sterlinghsa.com to schedule new claim request for payee','Sorry','OK')
 					.then(function() {
 						window.history.back();
 					});
