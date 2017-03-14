@@ -3443,12 +3443,12 @@ angular.module('starter.controllers', [])
 				});
 
 				alertPopup.then(function(res) {
-					//$location.path('/app/fsa');
+					$location.path('/app/fsa');
 				});
 			}else{
 				$cordovaDialogs.alert('There is no plan-type for this user','Sorry','OK')
 				.then(function() {
-					//$location.path('/app/fsa');
+					$location.path('/app/fsa');
 				});
 			}
 		}else{
@@ -3790,12 +3790,12 @@ angular.module('starter.controllers', [])
 					});
 
 					alertPopup.then(function(res) {
-						window.history.back();
+						//window.history.back();
 					});
 				}else{
 					$cordovaDialogs.alert('You do not have any payee on record.You must add a payee account by logging into www.sterlinghsa.com to schedule new claim request for payee','Sorry','OK')
 					.then(function() {
-						window.history.back();
+						//window.history.back();
 					});
 				}
 			}
