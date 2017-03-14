@@ -3392,6 +3392,18 @@ angular.module('starter.controllers', [])
 			$rootScope.taxcontent=false;
 			$rootScope.planCode=claim.LOOKUP_CODE;
 			$location.path("/newclaim");
+		}else if(claim.MEANING === 'MEDICALHRA'){
+			$rootScope.patientname=true;
+			$rootScope.dependentName=false;
+			$rootScope.taxcontent=false;
+			$rootScope.planCode=claim.LOOKUP_CODE;
+			$location.path("/newclaim");
+		}else if(claim.MEANING === 'HRA'){
+			$rootScope.patientname=true;
+			$rootScope.dependentName=false;
+			$rootScope.taxcontent=false;
+			$rootScope.planCode=claim.LOOKUP_CODE;
+			$location.path("/newclaim");
 		}
 		$scope.plan_type={};
 
@@ -3431,12 +3443,12 @@ angular.module('starter.controllers', [])
 				});
 
 				alertPopup.then(function(res) {
-					$location.path('/app/fsa');
+					//$location.path('/app/fsa');
 				});
 			}else{
 				$cordovaDialogs.alert('There is no plan-type for this user','Sorry','OK')
 				.then(function() {
-					$location.path('/app/fsa');
+					//$location.path('/app/fsa');
 				});
 			}
 		}else{
@@ -3483,15 +3495,27 @@ angular.module('starter.controllers', [])
 			$rootScope.dependentName=false;
 			$rootScope.taxcontent=false;
 			$rootScope.planCode=claim.LOOKUP_CODE;
-			$location.path("/newclaim");
+			$location.path("/fsadependent");
 		}else if(claim.MEANING === 'HRAOHIOCHRIST'){
 			$rootScope.patientname=true;
 			$rootScope.dependentName=false;
 			$rootScope.taxcontent=false;
 			$rootScope.planCode=claim.LOOKUP_CODE;
-			$location.path("/newclaim");
+			$location.path("/fsadependent");
 		}else if(claim.MEANING === 'Parking FSA'){
 			$rootScope.patientname=false;
+			$rootScope.dependentName=false;
+			$rootScope.taxcontent=false;
+			$rootScope.planCode=claim.LOOKUP_CODE;
+			$location.path("/fsadependent");
+		}else if(claim.MEANING === 'MEDICALHRA'){
+			$rootScope.patientname=true;
+			$rootScope.dependentName=false;
+			$rootScope.taxcontent=false;
+			$rootScope.planCode=claim.LOOKUP_CODE;
+			$location.path("/fsadependent");
+		}else if(claim.MEANING === 'HRA'){
+			$rootScope.patientname=true;
 			$rootScope.dependentName=false;
 			$rootScope.taxcontent=false;
 			$rootScope.planCode=claim.LOOKUP_CODE;
@@ -4646,6 +4670,7 @@ angular.module('starter.controllers', [])
 	$scope.username = localStorage.getItem('username');
 	$scope.access_token = localStorage.getItem('access_token');
 	$scope.hraacc= $rootScope.hraaccno;
+	$scope.hraaccId= $rootScope.hraaccId;
 	if($cordovaNetwork.isOffline())
 	{
 		$ionicLoading.hide();
@@ -4884,6 +4909,7 @@ angular.module('starter.controllers', [])
 	$scope.access_token = localStorage.getItem('access_token');
 	$scope.hraid= $rootScope.hraaccId;
 	$scope.hraacc= $rootScope.hraaccno;
+	$scope.hraaccId= $rootScope.hraaccId;
 	$rootScope.claimMode='';
 	$rootScope.claimMode='payme';
 	$http.get("http://app.sterlinghsa.com/api/v1/accounts/availablebalances",{params:{ 'acct_num':$scope.hraacc},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
@@ -4920,6 +4946,7 @@ angular.module('starter.controllers', [])
 				$rootScope.newclaim_balance =$scope.available_balances[i].BALANCE;
 			}
 		}
+		/*
 		if(claim.MEANING === 'HR4INDE'){
 			$location.path("/paymeacoinde");
 			$rootScope.planCode=claim.LOOKUP_CODE;
@@ -4938,7 +4965,9 @@ angular.module('starter.controllers', [])
 		}else if(claim.MEANING === 'HRACAREAL'){
 			$location.path("/paymeacoinde");
 			$rootScope.planCode=claim.LOOKUP_CODE;
-		}
+		}*/
+		$location.path("/paymeacoinde");
+		$rootScope.planCode=claim.LOOKUP_CODE;
 	}
 	
 	$scope.goback=function()
@@ -4951,6 +4980,7 @@ angular.module('starter.controllers', [])
 	$scope.access_token = localStorage.getItem('access_token');
 	$scope.hraid= $rootScope.hraaccId;
 	$scope.hraacc= $rootScope.hraaccno;
+	$scope.hraaccId= $rootScope.hraaccId;
 	$rootScope.claimMode='';
 	$rootScope.claimMode='payprovider';
 	$http.get("http://app.sterlinghsa.com/api/v1/accounts/availablebalances",{params:{ 'acct_num':$scope.hraacc},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
@@ -4989,25 +5019,27 @@ angular.module('starter.controllers', [])
 				$rootScope.newclaim_balance =$scope.available_balances[i].BALANCE;
 			}
 		}
-		if(claim.MEANING === 'HR4INDE'){
+		/*if(claim.MEANING === 'HR4INDE'){
 			$location.path("/payprovideracoinde");
 			$rootScope.planCode=claim.LOOKUP_CODE;
 		}else if(claim.MEANING === 'HRAFirmenich'){
-			$location.path("/paymeacoinde");
+			$location.path("/payprovideracoinde");
 			$rootScope.planCode=claim.LOOKUP_CODE;
 		}else if(claim.MEANING === 'HRAApportable'){
-			$location.path("/paymeacoinde");
+			$location.path("/payprovideracoinde");
 			$rootScope.planCode=claim.LOOKUP_CODE;
 		}else if(claim.MEANING === 'HRAOHIOCHRIST'){
-			$location.path("/paymeacoinde");
+			$location.path("/payprovideracoinde");
 			$rootScope.planCode=claim.LOOKUP_CODE;
 		}else if(claim.MEANING === 'HRAJNOLAN'){
-			$location.path("/paymeacoinde");
+			$location.path("/payprovideracoinde");
 			$rootScope.planCode=claim.LOOKUP_CODE;
 		}else if(claim.MEANING === 'HRACAREAL'){
-			$location.path("/paymeacoinde");
+			$location.path("/payprovideracoinde");
 			$rootScope.planCode=claim.LOOKUP_CODE;
-		}
+		}*/
+		$location.path("/payprovideracoinde");
+		$rootScope.planCode=claim.LOOKUP_CODE;
 	}
 	$scope.goback=function()
 	{
@@ -5019,7 +5051,7 @@ angular.module('starter.controllers', [])
 	$scope.username = localStorage.getItem('username');
 	$scope.access_token = localStorage.getItem('access_token');
 	$scope.hraacc= $rootScope.hraaccno;
-	
+	$scope.hraaccId= $rootScope.hraaccId;
 	if($cordovaNetwork.isOffline())
 	{
 		$ionicLoading.hide();
@@ -5084,6 +5116,7 @@ angular.module('starter.controllers', [])
 	$scope.newclaim_balance=$rootScope.newclaim_balance;
 	$scope.hraacc= $rootScope.hraaccno;
 	$scope.hsaaccno=$rootScope.hsaaccno;
+	$scope.hraaccId= $rootScope.hraaccId;
 	$scope.acoinde = {selectAccount:'',amount:'',description:'',startTransDate:'',endTransDate:''};
 	$scope.imgSrc;
 	//$scope.imgSrc=[];
@@ -5343,8 +5376,8 @@ angular.module('starter.controllers', [])
 			}
 
 		}else{
-			$http.post("http://app.sterlinghsa.com/api/v1/accounts/newclaimrequest_base64",{'acct_num':  $scope.fsaaccno,
-			'acct_id':$scope.fsaaccId,
+			$http.post("http://app.sterlinghsa.com/api/v1/accounts/newclaimrequest_base64",{'acct_num':  $scope.hraaccno,
+			'acct_id':$scope.hraaccId,
 			'bank_acct_id':$scope.acoinde.Bankaccount.BANK_ACC_ID,
 			'amount':$scope.acoinde.amount,
 			'service_start_date':$scope.acoinde.startTransDate,
@@ -5430,7 +5463,8 @@ angular.module('starter.controllers', [])
 	$scope.username = localStorage.getItem('username');
 	$scope.access_token = localStorage.getItem('access_token');
 	$scope.newclaim_balance=$rootScope.newclaim_balance;
-	$scope.hraacc= $rootScope.hraaccno;
+	$scope.hraaccno= $rootScope.hraaccno;
+	$scope.hraaccId= $rootScope.hraaccId;
 	$scope.provideracoinde={selectpayee:'',amount:'',description:'',startTransDate:'',endTransDate:''};
 	$scope.imgSrc;
 	//$scope.imgSrc=[];
@@ -5587,8 +5621,8 @@ angular.module('starter.controllers', [])
 			}
 
 		}else{
-			$http.post("http://app.sterlinghsa.com/api/v1/accounts/newclaimrequest_base64",{'acct_num': $scope.hraacc,
-			'acct_id':$scope.fsaaccId,
+			$http.post("http://app.sterlinghsa.com/api/v1/accounts/newclaimrequest_base64",{'acct_num': $scope.hraaccno,
+			'acct_id':$scope.hraaccId,
 			'bank_acct_id':'',
 			'amount':$scope.provideracoinde.amount,
 			'service_start_date':$scope.provideracoinde.startTransDate,
