@@ -79,7 +79,16 @@
 								</span>
 							</div>
 							</div>
-							
+							<label class="item item-input item-floating-label formselect" ng-class="{ 'has-errors' :myForm.patient.$dirty && myForm.patient.$invalid ,'no-errors' :myForm.patient.$valid   }">
+								<span class="input-label ItemlineHead1">Enter Patient's Name</span>
+								<input type="text"  class="input-box input-boxfocus formselect" id="forminput" name="patient"  ng-pattern="/^[a-zA-Z\w -]*$/"  ng-model="acoinde.patient" placeholder="Enter Patient's Name"  required>
+							</label> 
+							<div class="row">
+							<span style="color:red" ng-show="myForm.patient.$dirty && myForm.patient.$invalid">
+								<span ng-show="myForm.patient.$error.required"> Patient's Name is required.</span>
+								<p style="color:red" ng-show="myForm.patient.$error.pattern"> Please Enter Text.</p>
+							</span>
+							</div>
 							<div class="row">
 								<div class="col  text-center">
 									<button class="button button-calm button-small  formButton1" type="submit " ng-click="upload();" ><i side="left"  class="icon-left ion-android-upload" ></i><span class="icon-upload">Upload</span></button>

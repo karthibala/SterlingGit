@@ -3350,55 +3350,73 @@ angular.module('starter.controllers', [])
 				$rootScope.newclaim_plantype=$scope.available_balances[i].PLAN_DESC;
 			}
 		}
-		if(claim.MEANING === 'Dependent Care FSA'){
-			$rootScope.patientname=true;
+		if(claim.LOOKUP_CODE === 'DCA'){
+			$rootScope.patientname=false;
 			$rootScope.dependentName=true;
 			$rootScope.taxcontent=true;
 			$rootScope.planCode=claim.LOOKUP_CODE;
 			$location.path("/newclaim");
-		}else if(claim.MEANING === 'Transit FSA'){
+		}else if(claim.LOOKUP_CODE === 'TRN'){
 			$rootScope.patientname=false;
 			$rootScope.dependentName=false;
 			$rootScope.taxcontent=false;
 			$rootScope.planCode=claim.LOOKUP_CODE;
 			$location.path("/newclaim");
-		}else if(claim.MEANING === 'Limited Purpose Healthcare FSA'){
+		}else if(claim.LOOKUP_CODE === 'LPF'){
 			$rootScope.patientname=true;
 			$rootScope.dependentName=false;
 			$rootScope.taxcontent=false;
 			$rootScope.planCode=claim.LOOKUP_CODE;
 			$location.path("/newclaim");
-		}else if(claim.MEANING === 'HRACFC'){
+		}else if(claim.LOOKUP_CODE === 'HRA'){
 			$rootScope.patientname=true;
 			$rootScope.dependentName=false;
 			$rootScope.taxcontent=false;
 			$rootScope.planCode=claim.LOOKUP_CODE;
 			$location.path("/newclaim");
-		}else if(claim.MEANING === 'Healthcare FSA'){
+		}else if(claim.LOOKUP_CODE === 'FSA'){
 			$rootScope.patientname=true;
 			$rootScope.dependentName=false;
 			$rootScope.taxcontent=false;
 			$rootScope.planCode=claim.LOOKUP_CODE;
 			$location.path("/newclaim");
-		}else if(claim.MEANING === 'HRAOHIOCHRIST'){
+		}else if(claim.LOOKUP_CODE === 'HRP'){
 			$rootScope.patientname=true;
 			$rootScope.dependentName=false;
 			$rootScope.taxcontent=false;
 			$rootScope.planCode=claim.LOOKUP_CODE;
 			$location.path("/newclaim");
-		}else if(claim.MEANING === 'Parking FSA'){
+		}else if(claim.LOOKUP_CODE === 'PKG'){
 			$rootScope.patientname=false;
 			$rootScope.dependentName=false;
 			$rootScope.taxcontent=false;
 			$rootScope.planCode=claim.LOOKUP_CODE;
 			$location.path("/newclaim");
-		}else if(claim.MEANING === 'MEDICALHRA'){
+		}else if(claim.LOOKUP_CODE === 'UA1'){
+			$rootScope.patientname=false;
+			$rootScope.dependentName=false;
+			$rootScope.taxcontent=false;
+			$rootScope.planCode=claim.LOOKUP_CODE;
+			$location.path("/newclaim");
+		}else if(claim.LOOKUP_CODE === 'ACO'){
 			$rootScope.patientname=true;
 			$rootScope.dependentName=false;
 			$rootScope.taxcontent=false;
 			$rootScope.planCode=claim.LOOKUP_CODE;
 			$location.path("/newclaim");
-		}else if(claim.MEANING === 'HRA'){
+		}else if(claim.LOOKUP_CODE === 'HR4'){
+			$rootScope.patientname=true;
+			$rootScope.dependentName=false;
+			$rootScope.taxcontent=false;
+			$rootScope.planCode=claim.LOOKUP_CODE;
+			$location.path("/newclaim");
+		}else if(claim.LOOKUP_CODE === 'HR5'){
+			$rootScope.patientname=true;
+			$rootScope.dependentName=false;
+			$rootScope.taxcontent=false;
+			$rootScope.planCode=claim.LOOKUP_CODE;
+			$location.path("/newclaim");
+		}else if(claim.LOOKUP_CODE === 'HSA'){
 			$rootScope.patientname=true;
 			$rootScope.dependentName=false;
 			$rootScope.taxcontent=false;
@@ -3464,57 +3482,74 @@ angular.module('starter.controllers', [])
 				$rootScope.newclaim_plantype=$scope.available_balances[i].PLAN_DESC;
 			}
 		}
-		if(claim.MEANING === 'Dependent Care FSA'){
-			$rootScope.patientname=true;
+		
+		if(claim.LOOKUP_CODE === 'DCA'){
+			$rootScope.patientname=false;
 			$rootScope.dependentName=true;
 			$rootScope.taxcontent=true;
 			$rootScope.planCode=claim.LOOKUP_CODE;
 			$location.path("/fsadependent");
-
-		}else if(claim.MEANING === 'Transit FSA'){
+		}else if(claim.LOOKUP_CODE === 'TRN'){
 			$rootScope.patientname=false;
 			$rootScope.dependentName=false;
 			$rootScope.taxcontent=false;
 			$rootScope.planCode=claim.LOOKUP_CODE;
 			$location.path("/fsadependent");
-
-		}else if(claim.MEANING === 'Limited Purpose Healthcare FSA'){
+		}else if(claim.LOOKUP_CODE === 'LPF'){
 			$rootScope.patientname=true;
 			$rootScope.dependentName=false;
 			$rootScope.taxcontent=false;
 			$rootScope.planCode=claim.LOOKUP_CODE;
 			$location.path("/fsadependent");
-		}else if(claim.MEANING === 'HRACFC'){
+		}else if(claim.LOOKUP_CODE === 'HRA'){
 			$rootScope.patientname=true;
 			$rootScope.dependentName=false;
 			$rootScope.taxcontent=false;
 			$rootScope.planCode=claim.LOOKUP_CODE;
 			$location.path("/fsadependent");
-		}else if(claim.MEANING === 'Healthcare FSA'){
+		}else if(claim.LOOKUP_CODE === 'FSA'){
 			$rootScope.patientname=true;
 			$rootScope.dependentName=false;
 			$rootScope.taxcontent=false;
 			$rootScope.planCode=claim.LOOKUP_CODE;
 			$location.path("/fsadependent");
-		}else if(claim.MEANING === 'HRAOHIOCHRIST'){
+		}else if(claim.LOOKUP_CODE === 'HRP'){
 			$rootScope.patientname=true;
 			$rootScope.dependentName=false;
 			$rootScope.taxcontent=false;
 			$rootScope.planCode=claim.LOOKUP_CODE;
 			$location.path("/fsadependent");
-		}else if(claim.MEANING === 'Parking FSA'){
+		}else if(claim.LOOKUP_CODE === 'PKG'){
 			$rootScope.patientname=false;
 			$rootScope.dependentName=false;
 			$rootScope.taxcontent=false;
 			$rootScope.planCode=claim.LOOKUP_CODE;
 			$location.path("/fsadependent");
-		}else if(claim.MEANING === 'MEDICALHRA'){
+		}else if(claim.LOOKUP_CODE === 'UA1'){
+			$rootScope.patientname=false;
+			$rootScope.dependentName=false;
+			$rootScope.taxcontent=false;
+			$rootScope.planCode=claim.LOOKUP_CODE;
+			$location.path("/fsadependent");
+		}else if(claim.LOOKUP_CODE === 'ACO'){
 			$rootScope.patientname=true;
 			$rootScope.dependentName=false;
 			$rootScope.taxcontent=false;
 			$rootScope.planCode=claim.LOOKUP_CODE;
 			$location.path("/fsadependent");
-		}else if(claim.MEANING === 'HRA'){
+		}else if(claim.LOOKUP_CODE === 'HR4'){
+			$rootScope.patientname=true;
+			$rootScope.dependentName=false;
+			$rootScope.taxcontent=false;
+			$rootScope.planCode=claim.LOOKUP_CODE;
+			$location.path("/fsadependent");
+		}else if(claim.LOOKUP_CODE === 'HR5'){
+			$rootScope.patientname=true;
+			$rootScope.dependentName=false;
+			$rootScope.taxcontent=false;
+			$rootScope.planCode=claim.LOOKUP_CODE;
+			$location.path("/fsadependent");
+		}else if(claim.LOOKUP_CODE === 'HSA'){
 			$rootScope.patientname=true;
 			$rootScope.dependentName=false;
 			$rootScope.taxcontent=false;
@@ -5117,7 +5152,7 @@ angular.module('starter.controllers', [])
 	$scope.hraacc= $rootScope.hraaccno;
 	$scope.hsaaccno=$rootScope.hsaaccno;
 	$scope.hraaccId= $rootScope.hraaccId;
-	$scope.acoinde = {selectAccount:'',amount:'',description:'',startTransDate:'',endTransDate:''};
+	$scope.acoinde = {selectAccount:'',amount:'',description:'',startTransDate:'',endTransDate:'',patient:''};
 	$scope.imgSrc;
 	//$scope.imgSrc=[];
 	//$scope.randomFile=[];
@@ -5382,7 +5417,7 @@ angular.module('starter.controllers', [])
 			'amount':$scope.acoinde.amount,
 			'service_start_date':$scope.acoinde.startTransDate,
 			'service_end_date':$scope.acoinde.endTransDate,
-			'patient_name':'',
+			'patient_name':$scope.acoinde.patient,
 			'plan_type':$rootScope.planCode,
 			'claim_method':'SUBSCRIBER_ONLINE_ACH',
 			'vendor_id':'',
@@ -5465,7 +5500,7 @@ angular.module('starter.controllers', [])
 	$scope.newclaim_balance=$rootScope.newclaim_balance;
 	$scope.hraaccno= $rootScope.hraaccno;
 	$scope.hraaccId= $rootScope.hraaccId;
-	$scope.provideracoinde={selectpayee:'',amount:'',description:'',startTransDate:'',endTransDate:''};
+	$scope.provideracoinde={selectpayee:'',amount:'',description:'',startTransDate:'',endTransDate:'',patient:''};
 	$scope.imgSrc;
 	//$scope.imgSrc=[];
 	//$scope.randomFile=[];
