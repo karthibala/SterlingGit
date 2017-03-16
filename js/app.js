@@ -277,6 +277,18 @@ angular.module('starter', ['ionic', 'starter.controllers','ngCordova'])
 		templateUrl: 'templates/fsa/fsaclaimdetail.html',
 		controller: 'fsaclaimdetailCtrl'
 	})
+	.state('fsaclaimview', {
+		cache:false,
+		url: '/fsaclaimview',
+		templateUrl: 'templates/fsa/fsaclaimview.html',
+		controller: 'fsaclaimviewCtrl'
+	})
+	.state('fsanewcardclaimview', {
+		cache:false,
+		url: '/fsanewcardclaimview',
+		templateUrl: 'templates/fsa/fsanewcardclaimview.html',
+		controller: 'fsanewcardclaimviewCtrl'
+	})
 	.state('fsanewcardclaim', {
 		cache:false,
 		url: '/fsanewcardclaim',
@@ -371,6 +383,18 @@ angular.module('starter', ['ionic', 'starter.controllers','ngCordova'])
 		url: '/hraclaimdetail',
 		templateUrl: 'templates/hra/hraclaimdetail.html',
 		controller: 'hraclaimdetailCtrl'
+	})
+	.state('hraclaimview', {
+		cache:false,
+		url: '/hraclaimview',
+		templateUrl: 'templates/hra/hraclaimview.html',
+		controller: 'hraclaimviewCtrl'
+	})
+	.state('hranewcardclaimview', {
+		cache:false,
+		url: '/hranewcardclaimview',
+		templateUrl: 'templates/hra/hranewcardclaimview.html',
+		controller: 'hranewcardclaimviewCtrl'
 	})
 	.state('hranewcardclaim', {
 		cache:false,
