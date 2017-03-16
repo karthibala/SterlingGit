@@ -4279,7 +4279,7 @@ angular.module('starter.controllers', [])
 	
 	$scope.goback=function()
 	{
-		$location.path("app/fsa")
+		$location.path("/fsaclaimview")
 	}
 	
 })
@@ -4402,7 +4402,7 @@ angular.module('starter.controllers', [])
 	$scope.goback=function()
 	{
 		$scope.plan_types={};
-		$location.path("/fsacardclaim");
+		$location.path("/fsanewcardclaimview");
 	}
 	$scope.upload = function(){
 		if($rootScope.IOS==true){
@@ -6510,7 +6510,8 @@ angular.module('starter.controllers', [])
 	
 	$scope.goback=function()
 	{
-		$location.path("app/hra")
+		//$location.path("app/hra")
+		$location.path("/hraclaimview")
 	}
 	
 })
@@ -6535,7 +6536,7 @@ angular.module('starter.controllers', [])
 	$scope.goback=function()
 	{
 		$scope.plan_types={};
-		$location.path("/fsacardclaim");
+		$location.path("/hranewcardclaimview");
 	}
 	$scope.upload = function(){
 		if($rootScope.IOS==true){
