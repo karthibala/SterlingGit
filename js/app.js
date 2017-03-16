@@ -56,6 +56,7 @@ angular.module('starter', ['ionic', 'starter.controllers','ngCordova'])
 		controller: 'AccountCtrl'
 	})
 	.state('health', {
+		cache: false,
 		url: '/health',
 		templateUrl: 'templates/health.html',
 		controller: 'HealthCtrl'
@@ -85,26 +86,31 @@ angular.module('starter', ['ionic', 'starter.controllers','ngCordova'])
 		controller: 'PayproviderCtrl'
 	})
 	.state('taxyear', {
+		cache: false,
 		url: '/taxyear',
 		templateUrl: 'templates/taxyear.html',
 		controller: 'TaxyearCtrl'
 	})
 	.state('hsastatement', {
+		cache: false,
 		url: '/hsastatement',
 		templateUrl: 'templates/hsastatement.html',
 		controller: 'HsastatementCtrl'
 	})
 	.state('activityContribution', {
+		cache: false,
 		url: '/activityContribution',
 		templateUrl: 'templates/activityContribution.html',
 		controller: 'activityContributionyCtrl'
 	})
 	.state('disbursement', {
+		cache: false,
 		url: '/disbursement',
 		templateUrl: 'templates/disbursement.html',
 		controller: 'DisbursementCtrl'
 	})
 	.state('scheduledcontribute', {
+		cache: false,
 		url: '/scheduledcontribute',
 		templateUrl: 'templates/scheduledcontribute.html',
 		controller: 'ScheduledcontributeCtrl'
@@ -146,56 +152,67 @@ angular.module('starter', ['ionic', 'starter.controllers','ngCordova'])
 		}
 	})
 	.state('contribution', {
+		cache: false,
 		url: '/contribution',
 		templateUrl: 'templates/contribution.html',
 		controller: 'ContributionCtrl'
 	})
 	.state('make', {
+		cache: false,
 		url: '/make',
 		templateUrl: 'templates/make.html',
 		controller: 'MakeCtrl'  
 	})	
 	.state('activity', {
+		cache: false,
 		url: '/activity',
 		templateUrl: 'templates/activity.html',
 		controller: 'ActivityCtrl'
 	})
 	.state('recent', {
+		cache: false,
 		url: '/recent',
 		templateUrl: 'templates/recent.html',
 		controller: 'RecentCtrl'
 	})
 	.state('recentdisburse', {
+		cache: false,
 		url: '/recentdisburse',
 		templateUrl: 'templates/recentdisburse.html',
 		controller: 'RecentdisburseCtrl'
 	})
 	.state('scheduleddisbursement', {
+		cache: false,
 		url: '/scheduleddisbursement',
 		templateUrl: 'templates/scheduleddisbursement.html',
 		controller: 'ScheduledDisbursementCtrl'
 	})
 	.state('lastdisbursement', {
+		cache: false,
 		url: '/lastdisbursement',
 		templateUrl: 'templates/lastdisbursement.html',
 		controller: 'lastdisbursementCtrl'
 	})
 	.state('lastcontribution', {
+		cache: false,
 		url: '/lastcontribution',
 		templateUrl: 'templates/lastcontribution.html',
 		controller: 'lastcontributionCtrl'
 	})
 	.state('fsacontribution', {
+		cache: false,
 		url: '/fsacontribution',
 		templateUrl: 'templates/fsacontribution.html',
 		controller: 'fsacontributionCtrl'
 	})
 	.state('information', {
+		cache: false,
 		url: '/information',
 		templateUrl: 'templates/information.html',
 		controller: 'InformationCtrl'
 	})
 	.state('availablebalance', {
+		cache: false,
 		url: '/availablebalance',
 		templateUrl: 'templates/availablebalance.html',
 		controller: 'AvailablebalanceCtrl'
@@ -207,11 +224,13 @@ angular.module('starter', ['ionic', 'starter.controllers','ngCordova'])
 		controller: 'newclaimCtrl'
 	})
 	.state('recentdis', {
+		cache: false,
 		url: '/recentdis',
 		templateUrl: 'templates/recentdisburse.html',
 		controller: 'RecentdisCtrl'
 	})
 	.state('recentcontribute', {
+		cache: false,
 		url: '/recentcontribute',
 		templateUrl: 'templates/recentcontribute.html',
 		controller: 'RecentcontributeCtrl'
@@ -223,6 +242,7 @@ angular.module('starter', ['ionic', 'starter.controllers','ngCordova'])
 		controller: 'NewCtrl'
 	})
 	.state('fsapayme', {
+		cache: false,
 		url: '/fsapayme',
 		templateUrl: 'templates/fsa/fsapayme.html',
 		controller: 'FsapaymeCtrl'
@@ -275,51 +295,61 @@ angular.module('starter', ['ionic', 'starter.controllers','ngCordova'])
 		}
 	})
 	.state('hraacct', {
+		cache: false,
 		url: '/hraacct',
 		templateUrl: 'templates/hra/hraacct.html',
 		controller: 'HraacctCtrl'
 	})
 	.state('hracontribution', {
+		cache: false,
 		url: '/hracontribution',
 		templateUrl: 'templates/hra/hracontribution.html',
 		controller: 'HracontributionCtrl'
 	})
 	.state('hradisburse', {
+		cache: false,
 		url: '/hradisburse',
 		templateUrl: 'templates/hra/hradisburse.html',
 		controller: 'HradisburseCtrl'
 	})
 	.state('hranewclaim', {
+		cache: false,
 		url: '/hranewclaim',
 		templateUrl: 'templates/hra/hranewclaim.html',
 		controller: 'HranewclaimCtrl'
 	})
 	.state('hrarecent', {
+		cache: false,
 		url: '/hrarecent',
 		templateUrl: 'templates/hra/hrarecent.html',
 		controller: 'HrarecentCtrl'
 	})
 	.state('hrapayme', {
+		cache: false,
 		url: '/hrapayme',
 		templateUrl: 'templates/hra/hrapayme.html',
 		controller: 'HrapaymeCtrl'
 	})
 	.state('hrapayprovider', {
+		cache: false,
 		url: '/hrapayprovider',
 		templateUrl: 'templates/hra/hrapayprovider.html',
 		controller: 'HrapayproviderCtrl'
 	})
 	.state('hrabal', {
+		cache: false,
 		url: '/hrabal',
 		templateUrl: 'templates/hra/hrabal.html',
 		controller: 'HrabalCtrl'
 	})
 	.state('paymeacoinde', {
+		cache: false,
 		url: '/paymeacoinde',
 		templateUrl: 'templates/hra/paymeacoinde.html',
 		controller: 'PaymeacoindeCtrl'
 	})
 	.state('payprovideracoinde', {
+		cache: false,
 		url: '/payprovideracoinde',
 		templateUrl: 'templates/hra/payprovideracoinde.html',
 		controller: 'PayprovideracoindeCtrl'
@@ -359,6 +389,7 @@ angular.module('starter', ['ionic', 'starter.controllers','ngCordova'])
 		}
 	})
 	.state('cobraaccount', {
+		cache: false,
 		url: "/cobraaccount",
 		templateUrl: "templates/cobra/cobraaccount.html",
 		controller: 'CobraaccountCtrl'
