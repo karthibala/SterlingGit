@@ -6133,7 +6133,7 @@ angular.module('starter.controllers', [])
 				
 			}
 			else{
-				$scope.hra_debit_card_list=data.debit_card_list;
+				$scope.debit_card_list=data.debit_card_list;
 			}
 
 		}).error(function(err){
@@ -6372,7 +6372,7 @@ angular.module('starter.controllers', [])
 	localStorage.setItem("backCount","5");
 	$scope.username = localStorage.getItem('username');
 	$scope.access_token = localStorage.getItem('access_token');
-	$scope.hra_trans_num=$rootScope.hra_debit_card_transNo
+	$scope.hra_trans_num=$rootScope.claimData.CLAIM_ID
 	if($cordovaNetwork.isOffline())
 	{
 		$ionicLoading.hide();
@@ -6541,9 +6541,9 @@ angular.module('starter.controllers', [])
 	$rootScope.hidecontent=true;
 	$scope.username = localStorage.getItem('username');
 	$scope.access_token = localStorage.getItem('access_token');
-	$scope.hra_trans_num=$rootScope.hra_debit_card_transNo;
+	$scope.hra_trans_num=$rootScope.claimData.CLAIM_ID
 	//alert($scope.hra_trans_num)
-	$scope.hra_debit_card_amount = $rootScope.hra_debit_card_amount;
+	$scope.hra_debit_card_amount = $rootScope.claimData.CLAIM_AMOUNT;
 	$scope.imgSrc;
 	$scope.floatlabel=false;
 	
