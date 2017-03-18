@@ -1619,31 +1619,30 @@ angular.module('starter.controllers', [])
 	$scope.hsaaccId=$rootScope.hsaaccId;
 	
 	$http.get(" http://app.sterlinghsa.com/api/v1/accounts/schedule",{params:{'acct_id':$scope.hsaaccId,'trans_type':'c'},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
-	.success(function(data){ 
-	$ionicLoading.hide();
-	if(data.schedule_list!=null){
-		$scope.schedule_list=data.schedule_list;
+	.success(function(data){
+		$ionicLoading.hide();
+		if(data.schedule_list==null || data.schedule_list==""){
+			if($rootScope.IOS==true){
+					var alertPopup = $ionicPopup.alert({
+						title: 'Sorry',
+						template: 'There are no Scheduled contribution'
+					});
 
-	}else{
-		if($rootScope.IOS==true){
-				var alertPopup = $ionicPopup.alert({
-					title: 'Sorry',
-					template: 'No Scheduledcontribution'
+					alertPopup.then(function(res) {
+						$location.path("/activityContribution");
+					});
+			}else{
+				$cordovaDialogs.confirm('There are no Scheduled contribution', 'Sorry', 'ok')
+				.then(function(buttonIndex) {
+					if(buttonIndex=="1")
+					{
+						$location.path("/activityContribution");
+					}
 				});
-
-				alertPopup.then(function(res) {
-					$location.path("/activityContribution");
-				});
+			}
 		}else{
-				$cordovaDialogs.confirm('No Scheduledcontribution', 'Sorry', 'ok')
-			.then(function(buttonIndex) {
-				if(buttonIndex=="1")
-				{
-					$location.path("/activityContribution");
-				}
-			});
+			$scope.schedule_list=data.schedule_list;
 		}
-	}
 	}).error(function(err){
 		$ionicLoading.hide();
 		if($rootScope.IOS==true){
@@ -2351,18 +2350,18 @@ angular.module('starter.controllers', [])
 		$http.get(" http://app.sterlinghsa.com/api/v1/accounts/recent-activity",{params:{'acct_id':$scope.hsaaccId,'trans_type':'c','plan_type':'hsa'},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
 		.success(function(data){
 			$ionicLoading.hide();
-			if(data.transcation_list==null){
+			if(data.transcation_list==null || data.transcation_list==""){
 				if($rootScope.IOS==true){
 					var alertPopup = $ionicPopup.alert({
 						title: 'Sorry',
-						template: 'No RecentContribution'
+						template: 'There are no Recent Contribution'
 					});
 
 					alertPopup.then(function(res) {
 						$location.path('/activityContribution');
 					});
 				}else{
-					$cordovaDialogs.confirm('No RecentContribution', 'Sorry', 'ok')
+					$cordovaDialogs.confirm('There are no Recent Contribution', 'Sorry', 'ok')
 						.then(function(buttonIndex) {
 							if(buttonIndex=="1")
 							{
@@ -2442,18 +2441,18 @@ angular.module('starter.controllers', [])
 	$http.get(" http://app.sterlinghsa.com/api/v1/accounts/recent-activity",{params:{'acct_id':$scope.hsaaccId,'trans_type':'d','plan_type':'hsa'},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
 	.success(function(data){
 		$ionicLoading.hide();
-		if(data.transcation_list==null){
+		if(data.transcation_list==null || data.transcation_list==""){
 			if($rootScope.IOS==true){
 				var alertPopup = $ionicPopup.alert({
 					title: 'Sorry',
-					template: 'No RecentDisbursement'
+					template: 'There are no Recent Disbursement'
 				});
 
 				alertPopup.then(function(res) {
 					$location.path('/disbursement');
 				});
 			}else{
-				$cordovaDialogs.confirm('No RecentDisbursement', 'Sorry', 'ok')
+				$cordovaDialogs.confirm('There are no Recent Disbursement', 'Sorry', 'ok')
 				.then(function(buttonIndex) {
 					if(buttonIndex=="1")
 					{
@@ -2508,18 +2507,18 @@ angular.module('starter.controllers', [])
 	$http.get(" http://app.sterlinghsa.com/api/v1/accounts/schedule",{params:{'acct_id':$scope.hsaaccId,'trans_type':'d'},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
 	.success(function(data){ 
 		$ionicLoading.hide();
-		if(data.schedule_list==null){
+		if(data.schedule_list==null || data.schedule_list==""){
 			if($rootScope.IOS==true){
 				var alertPopup = $ionicPopup.alert({
 					title: 'Sorry',
-					template: 'No ScheduledDisbursement'
+					template: 'There are no Scheduled Disbursement'
 				});
 
 				alertPopup.then(function(res) {
 					$location.path('/disbursement');
 				});
 			}else{
-				$cordovaDialogs.confirm('No ScheduledDisbursement', 'Sorry', 'ok')
+				$cordovaDialogs.confirm('There are no Scheduled Disbursement', 'Sorry', 'ok')
 			.then(function(buttonIndex) {
 				if(buttonIndex=="1")
 				{
@@ -2598,18 +2597,18 @@ angular.module('starter.controllers', [])
 		$http.get(" http://app.sterlinghsa.com/api/v1/accounts/recent-activity",{params:{'acct_id':$scope.fsaaccId,'trans_type':'d','plan_type':'fsa'},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
 		.success(function(data){
 			$ionicLoading.hide();
-			if(data.transcation_list==null){
+			if(data.transcation_list==null || data.transcation_list==""){
 				if($rootScope.IOS==true){
 				var alertPopup = $ionicPopup.alert({
 					title: 'Sorry',
-					template: 'No RecentDisbursement'
+					template: 'There are no Recent Disbursement'
 				});
 
 				alertPopup.then(function(res) {
 					$location.path('/fsacontribution');
 				});
 			}else{
-				$cordovaDialogs.confirm('No RecentDisbursement', 'Sorry', 'ok')
+				$cordovaDialogs.confirm('There are no Recent Disbursement', 'Sorry', 'ok')
 				.then(function(buttonIndex) {
 					if(buttonIndex=="1")
 					{
@@ -2689,18 +2688,18 @@ angular.module('starter.controllers', [])
 		$http.get(" http://app.sterlinghsa.com/api/v1/accounts/recent-activity",{params:{'acct_id':$scope.fsaaccId,'trans_type':'c','plan_type':'fsa'},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
 		.success(function(data){
 			$ionicLoading.hide();
-			if(data.transcation_list==null){
+			if(data.transcation_list==null || data.transcation_list==""){
 				if($rootScope.IOS==true){
 				var alertPopup = $ionicPopup.alert({
 					title: 'Sorry',
-					template: 'No RecentContribution'
+					template: 'There are no Recent Contribution'
 				});
 
 				alertPopup.then(function(res) {
 					$location.path('/fsacontribution');
 				});
 			}else{
-				$cordovaDialogs.confirm('No RecentContribution', 'Sorry', 'ok')
+				$cordovaDialogs.confirm('There are no Recent Contribution', 'Sorry', 'ok')
 				.then(function(buttonIndex) {
 					if(buttonIndex=="1")
 					{
@@ -4999,14 +4998,25 @@ angular.module('starter.controllers', [])
 		$http.get(" http://app.sterlinghsa.com/api/v1/accounts/recent-activity",{params:{'acct_id': $scope.hraid,'trans_type':'c','plan_type':'hra'},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
 		.success(function(data){
 			$ionicLoading.hide();
-			if(data.transcation_list==null){
-				$cordovaDialogs.confirm('No RecentContribution', 'Sorry', 'ok')
-				.then(function(buttonIndex) {
-					if(buttonIndex=="1")
-					{
-						$location.path('/fsacontribution');
-					}
-				}); 
+			if(data.transcation_list==null || data.transcation_list==""){
+				if($rootScope.IOS==true){
+					var alertPopup = $ionicPopup.alert({
+						title: 'Sorry',
+						template: 'There are no Recent Contribution'
+					});
+
+					alertPopup.then(function(res) {
+						$location.path('/hracontribution');
+					});
+				}else{
+					$cordovaDialogs.confirm('There are no Recent Contribution', 'Sorry', 'ok')
+						.then(function(buttonIndex) {
+							if(buttonIndex=="1")
+							{
+								$location.path('/hracontribution');
+							}
+						}); 
+				}
 			}
 			else{
 			$scope.transcation_list=data.transcation_list;
@@ -5079,15 +5089,26 @@ angular.module('starter.controllers', [])
 		$http.get(" http://app.sterlinghsa.com/api/v1/accounts/recent-activity",{params:{'acct_id':$scope.hraid,'trans_type':'d','plan_type':'hra'},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
 		.success(function(data){
 			$ionicLoading.hide();
-			if(data.transcation_list==null)
+			if(data.transcation_list==null || data.transcation_list=="")
 			{
-				$cordovaDialogs.confirm('No RecentDisbursement', 'Sorry', 'ok')
-				.then(function(buttonIndex) {
-					if(buttonIndex=="1")
-					{
-						$location.path('/fsacontribution');
-					}
-				}); 
+				if($rootScope.IOS==true){
+					var alertPopup = $ionicPopup.alert({
+						title: 'Sorry',
+						template: 'There are no Recent Disbursement'
+					});
+
+					alertPopup.then(function(res) {
+						$location.path('/hracontribution');
+					});
+				}else{
+					$cordovaDialogs.confirm('There are no Recent Disbursement', 'Sorry', 'ok')
+						.then(function(buttonIndex) {
+							if(buttonIndex=="1")
+							{
+								$location.path('/hracontribution');
+							}
+						}); 
+				}
 			}
 			else
 			{
