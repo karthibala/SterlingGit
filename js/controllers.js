@@ -1617,8 +1617,9 @@ angular.module('starter.controllers', [])
 	$scope.username = localStorage.getItem('username');
 	$scope.access_token = localStorage.getItem('access_token');
 	$scope.hsaaccId=$rootScope.hsaaccId;
+	$scope.hsaaccno=$rootScope.hsaaccno;
 	
-	$http.get(" http://app.sterlinghsa.com/api/v1/accounts/schedule",{params:{'acct_id':$scope.hsaaccId,'trans_type':'c'},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
+	$http.get(" http://app.sterlinghsa.com/api/v1/accounts/schedule",{params:{'acc_num':$scope.hsaaccno,'trans_type':'c'},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
 	.success(function(data){
 		$ionicLoading.hide();
 		if(data.schedule_list==null || data.schedule_list==""){
