@@ -4063,7 +4063,7 @@ angular.module('starter.controllers', [])
 			template: '<ion-spinner icon="ios"></ion-spinner><br>Loading...'
 			});
 			
-			$http.post("http://app.sterlinghsa.com/api/v1/accounts/uploadclaimdocument",{'claim_id':  $scope.claimData.CLAIM_ID,
+			$http.post("http://app.sterlinghsa.com/api/v1/accounts/uploadclaimdocument",{'claim_id':  $scope.trans_num,
 			"receipt":$scope.imgSrc,
 			"file_name":$scope.randomFile,
 			"file_mime_type":'image/jpeg'
@@ -4141,6 +4141,7 @@ angular.module('starter.controllers', [])
 		$rootScope.acctype=data.account_types;
 		$scope.acctype=data.account_types;
 		if($rootScope.acctype==null || $rootScope.acctype==""){
+			//$location.path("app/noplan")
 			//alert("No active plans");
 			if($rootScope.IOS==true){
 				var alertPopup = $ionicPopup.alert({
@@ -4149,16 +4150,16 @@ angular.module('starter.controllers', [])
 				});
 
 				alertPopup.then(function(res) {
-					localStorage.clear();
-					window.location='login.html#/login';
+					//localStorage.clear();
+					//window.location='login.html#/login';
 				});
 			}else{
 				$cordovaDialogs.confirm('There are no active plans', 'Sorry', 'ok')
 				.then(function(buttonIndex) {
 					if(buttonIndex=="1")
 					{
-						localStorage.clear();
-						window.location='login.html#/login';
+						//localStorage.clear();
+						//window.location='login.html#/login';
 					}
 				});
 				return false;
@@ -6238,7 +6239,7 @@ angular.module('starter.controllers', [])
 				});
 			}
 
-		}else if($scope.trans_num==undefined){
+		}else if($scope.hra_trans_num==undefined){
 			if($rootScope.IOS==true){
 				var alertPopup = $ionicPopup.alert({
 					title: 'Sorry',

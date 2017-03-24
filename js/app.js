@@ -39,6 +39,11 @@ angular.module('starter', ['ionic', 'starter.controllers','ngCordova'])
 		controller: 'contactCtrl'
 	})
 	
+	.state('app.noplan', {
+		url: "/noplan",
+		template: "<h1>No active plan</h1>"
+	})
+	
 	// HSA
 	.state('app.hsa', {
 		url: "/hsa",
