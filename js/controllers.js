@@ -4146,7 +4146,7 @@ angular.module('starter.controllers', [])
 			if($rootScope.IOS==true){
 				var alertPopup = $ionicPopup.alert({
 					title: 'Sorry',
-					template: 'There are no active plans'
+					template: 'The benefit plans are not active at the moment, for details contact customer care'
 				});
 
 				alertPopup.then(function(res) {
@@ -4154,7 +4154,7 @@ angular.module('starter.controllers', [])
 					//window.location='login.html#/login';
 				});
 			}else{
-				$cordovaDialogs.confirm('There are no active plans', 'Sorry', 'ok')
+				$cordovaDialogs.confirm('The benefit plans are not active at the moment, for details contact customer care', 'Sorry', 'ok')
 				.then(function(buttonIndex) {
 					if(buttonIndex=="1")
 					{
