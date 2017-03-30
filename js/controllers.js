@@ -3496,14 +3496,14 @@ angular.module('starter.controllers', [])
 				if($rootScope.IOS==true){
 				var alertPopup = $ionicPopup.alert({
 					title: 'Sorry',
-					template: 'No debit card purchase Detail'
+					template: 'The desired information for your debit card purchase is unavailable at this moment.'
 				});
 
 				alertPopup.then(function(res) {
 					$location.path('app/fsa');
 				});
 			}else{
-				$cordovaDialogs.confirm('No debit card purchase Detail', 'Sorry', 'ok')
+				$cordovaDialogs.confirm('The desired information for your debit card purchase is unavailable at this moment.', 'Sorry', 'ok')
 				.then(function(buttonIndex) {
 					if(buttonIndex=="1")
 					{
@@ -3588,14 +3588,14 @@ angular.module('starter.controllers', [])
 				if($rootScope.IOS==true){
 				var alertPopup = $ionicPopup.alert({
 					title: 'Sorry',
-					template: 'No debit card purchase Detail'
+					template: 'The desired information for your debit card purchase is unavailable at this moment.'
 				});
 
 				alertPopup.then(function(res) {
 					$location.path('app/fsa');
 				});
 			}else{
-				$cordovaDialogs.confirm('No debit card purchase Detail', 'Sorry', 'ok')
+				$cordovaDialogs.confirm('The desired information for your debit card purchase is unavailable at this moment.', 'Sorry', 'ok')
 				.then(function(buttonIndex) {
 					if(buttonIndex=="1")
 					{
@@ -3860,14 +3860,14 @@ angular.module('starter.controllers', [])
 				if($rootScope.IOS==true){
 				var alertPopup = $ionicPopup.alert({
 					title: 'Sorry',
-					template: 'No debit card purchase Detail'
+					template: 'The desired information for your debit card purchase is unavailable at this moment.'
 				});
 
 				alertPopup.then(function(res) {
 					$location.path('app/fsa');
 				});
 			}else{
-				$cordovaDialogs.confirm('No debit card purchase Detail', 'Sorry', 'ok')
+				$cordovaDialogs.confirm('The desired information for your debit card purchase is unavailable at this moment.', 'Sorry', 'ok')
 				.then(function(buttonIndex) {
 					if(buttonIndex=="1")
 					{
@@ -5694,14 +5694,14 @@ angular.module('starter.controllers', [])
 				if($rootScope.IOS==true){
 				var alertPopup = $ionicPopup.alert({
 					title: 'Sorry',
-					template: 'No debit card purchase Detail'
+					template: 'The desired information for your debit card purchase is unavailable at this moment.'
 				});
 
 				alertPopup.then(function(res) {
 					$location.path('app/hra');
 				});
 			}else{
-				$cordovaDialogs.confirm('No debit card purchase Detail', 'Sorry', 'ok')
+				$cordovaDialogs.confirm('The desired information for your debit card purchase is unavailable at this moment.', 'Sorry', 'ok')
 				.then(function(buttonIndex) {
 					if(buttonIndex=="1")
 					{
@@ -5786,14 +5786,14 @@ angular.module('starter.controllers', [])
 				if($rootScope.IOS==true){
 				var alertPopup = $ionicPopup.alert({
 					title: 'Sorry',
-					template: 'No debit card purchase Detail'
+					template: 'The desired information for your debit card purchase is unavailable at this moment.'
 				});
 
 				alertPopup.then(function(res) {
 					$location.path('app/hra');
 				});
 			}else{
-				$cordovaDialogs.confirm('No debit card purchase Detail', 'Sorry', 'ok')
+				$cordovaDialogs.confirm('The desired information for your debit card purchase is unavailable at this moment.', 'Sorry', 'ok')
 				.then(function(buttonIndex) {
 					if(buttonIndex=="1")
 					{
@@ -5885,14 +5885,14 @@ angular.module('starter.controllers', [])
 				if($rootScope.IOS==true){
 				var alertPopup = $ionicPopup.alert({
 					title: 'Sorry',
-					template: 'No debit card purchase Detail'
+					template: 'The desired information for your debit card purchase is unavailable at this moment.'
 				});
 
 				alertPopup.then(function(res) {
 					$location.path('app/hra');
 				});
 			}else{
-				$cordovaDialogs.confirm('No debit card purchase Detail', 'Sorry', 'ok')
+				$cordovaDialogs.confirm('The desired information for your debit card purchase is unavailable at this moment.', 'Sorry', 'ok')
 				.then(function(buttonIndex) {
 					if(buttonIndex=="1")
 					{
