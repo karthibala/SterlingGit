@@ -528,26 +528,50 @@ angular.module('starter.controllers', [])
 	$scope.downloadStatement=function(){	
 
 		if($scope.activity.EndtDate=="" || $scope.activity.startDate ==""){
-			$cordovaDialogs.confirm('Please select date', 'Sorry', 'ok')
-			.then(function(buttonIndex)
-			{
-				if(buttonIndex=="1")
-				{
-					localStorage.clear();
-					$location.path('activitystmnt');
-				}
-			});
+			
+			if($rootScope.IOS==true){
+				var alertPopup = $ionicPopup.alert({
+					title: 'Sorry',
+					template: 'Please select date'
+				});
 
-		}else if($scope.activity.startDate > $scope.activity.EndtDate){
-			$cordovaDialogs.confirm('From date should be less then To date', 'Sorry', 'ok')
-			.then(function(buttonIndex)
-			{
-			if(buttonIndex=="1")
-			{
-				localStorage.clear();
-				$location.path('activitystmnt');
+				alertPopup.then(function(res) {
+					$location.path('activitystmnt');
+				});
+			}else{
+				$cordovaDialogs.confirm('Please select date', 'Sorry', 'ok')
+				.then(function(buttonIndex)
+				{
+					if(buttonIndex=="1")
+					{
+						$location.path('activitystmnt');
+					}
+				});
+				return false;
 			}
-			});
+			
+		}else if(new Date($scope.activity.startDate) > new Date($scope.activity.EndtDate)){
+			
+			if($rootScope.IOS==true){
+				var alertPopup = $ionicPopup.alert({
+					title: 'Sorry',
+					template: 'From date should be less then To date'
+				});
+
+				alertPopup.then(function(res) {
+					$location.path('activitystmnt');
+				});
+			}else{
+				$cordovaDialogs.confirm('From date should be less then To date', 'Sorry', 'ok')
+				.then(function(buttonIndex)
+				{
+					if(buttonIndex=="1")
+					{
+						$location.path('activitystmnt');
+					}
+				});
+				return false;
+			}
 
 		}
 		else{
