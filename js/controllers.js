@@ -612,7 +612,7 @@ angular.module('starter.controllers', [])
 					
 					// window.open(fileURL, '_blank', 'location=no');
 					//window.open(fileURL,"_system","location=yes,enableViewportScale=yes,hidden=no");
-					window.open(fileURL,"_system");
+					window.open('https://www.npmjs.com/package/cordova-plugin-ortoo-safariviewcontroller',"_system");
 					
 					// window.open(fileURL,"_blank");
 					
