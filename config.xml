@@ -97,7 +97,7 @@
 	<splash src="Icons/splash/Default-Portrait@2x.png" platform="ios" width="1536" height="2048" />
 
 	<preference name="iosExtraFilesystems" value="documents" />
-  	<!-- <preference name="iosPersistentFileLocation" value="Library" /> -->
+  	<preference name="iosPersistentFileLocation" value="Library" /> 
 
   </platform>
 </widget>
