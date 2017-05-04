@@ -515,7 +515,7 @@ angular.module('starter.controllers', [])
 	}
 			
 })
-.controller('ActivitystmntCtrl', function($scope,$ionicPlatform,$cordovaNetwork,$cordovaDatePicker,$http,$location,$ionicModal,$cordovaDialogs,$ionicLoading,$cordovaNetwork,$rootScope,$filter,$cordovaFile,$cordovaFileOpener2,$ionicPopup,SafariViewController,$ionicListDelegate) {
+.controller('ActivitystmntCtrl', function($scope,$ionicPlatform,$cordovaNetwork,$cordovaDatePicker,$http,$location,$ionicModal,$cordovaDialogs,$ionicLoading,$cordovaNetwork,$rootScope,$filter,$cordovaFile,$cordovaFileOpener2,$ionicPopup) {
 	$rootScope.hidecontent=true;
 	localStorage.setItem("backCount","4");
 	$scope.username = localStorage.getItem('username');
@@ -611,45 +611,8 @@ angular.module('starter.controllers', [])
 					//alert(cordova.file.dataDirectory);
 					
 					// window.open(fileURL, '_blank', 'location=no');
-					
-					window.open(fileURL,"_system","location=yes,enableViewportScale=yes,hidden=no");
-					open(fileURL,true);
-					  function openUrl(url, readerMode) {
-						  alert("get")
-    SafariViewController.isAvailable(function (available) {
-      if (available) {
-        SafariViewController.show({
-              url: url,
-              hidden: false, // default false
-              animated: true, // default true, note that 'hide' will reuse this preference (the 'Done' button will always animate though)
-              transition: 'curl', // unless animated is false you can choose from: curl, flip, fade, slide (default)
-              enterReaderModeIfAvailable: readerMode, // default false
-              barColor: "#0000ff", // default is white (iOS 10 only)
-              tintColor: "#ffffff" // default is ios blue
-            },
-            function(result) {
-              if (result.event === 'opened') {
-                console.log('opened');
-              } else if (result.event === 'loaded') {
-                console.log('loaded');
-//                SafariViewController.hide();
-              } else if (result.event === 'closed') {
-                console.log('closed');
-              }
-            },
-            function(msg) {
-              console.log("KO: " + JSON.stringify(msg));
-            })
-      } else {
-        // potentially powered by InAppBrowser because that (currently) clobbers window.open
-        window.open(url /*, '_blank', 'location=yes'*/);
-      }
-    })
-  }
-  function dismissSafari() {
-    SafariViewController.hide()
-  }
-					
+					//window.open(fileURL,"_system","location=yes,enableViewportScale=yes,hidden=no");
+					window.open(fileURL,"_system");
 					
 					// window.open(fileURL,"_blank");
 					
