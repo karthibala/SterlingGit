@@ -606,7 +606,7 @@ angular.module('starter.controllers', [])
 					var fileURL = URL.createObjectURL(blob);
 					var fileName = $filter('date')(new Date(),'HHmmss')+".pdf";
 					var contentFile = blob;
-					alert(cordova.file.documentsDirectory);
+					alert(cordova.file.sharedDirectory);
 					alert(cordova.file.applicationStorageDirectory);
 					//alert(cordova.file.dataDirectory);
 					
@@ -620,14 +620,14 @@ angular.module('starter.controllers', [])
 					.then(function (success) {
 						alert(JSON.stringify(success));
 						
-						// $cordovaFile.checkDir(success.nativeURL, "Sterling")
-						// .then(function (success) {
-							// // success
-							// alert("success"+JSON.stringify(success));
-						// }, function (error) {
-							// // error
-							// alert("error"+JSON.stringify(error));
-						// });
+						$cordovaFile.checkDir(success.nativeURL, "Sterling")
+						.then(function (success) {
+							// success
+							alert("success"+JSON.stringify(success));
+						}, function (error) {
+							// error
+							alert("error"+JSON.stringify(error));
+						});
 						
 						$cordovaFile.writeFile(success.nativeURL, fileName,contentFile, true)
 						.then(function (success) {
