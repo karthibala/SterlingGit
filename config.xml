@@ -42,10 +42,9 @@
   <preference name="android-minSdkVersion" value="16"/>
   <preference name="BackupWebStorage" value="none"/>
   <preference name="SplashScreen" value="screen"/>
-  <preference name="AndroidPersistentFileLocation" value="Compatibility" />
+  
   <!-- <preference name="iosExtraFilesystems" value="library,library-nosync,documents,documents-nosync,cache,bundle,root" /> -->
-  <preference name="iosExtraFilesystems" value="documents" />
-  <preference name="iosPersistentFileLocation" value="Library" />
+  
   <feature name="StatusBar">
     <param name="ios-package" value="CDVStatusBar" onload="true"/>
   </feature>
@@ -58,6 +57,7 @@
 	<splash src="splash/drawable-port-xhdpi-screen.png" density="port-xhdpi"/>
 	<splash src="splash/drawable-port-xxhdpi-screen.png" density="port-xxhdpi"/>
 	<splash src="splash/drawable-port-xxxhdpi-screen.png" density="port-xxxhdpi"/>
+	<preference name="AndroidPersistentFileLocation" value="Compatibility" />
   </platform>
   <platform name="ios">
 	<!-- <config-file target="*-Info.plist" parent="NSPhotoLibraryUsageDescription">
@@ -93,5 +93,9 @@
 
 	<!-- Retina iPad -->
 	<splash src="Icons/splash/Default-Portrait@2x.png" platform="ios" width="1536" height="2048" />
+
+	<preference name="iosExtraFilesystems" value="documents" />
+  	<!-- <preference name="iosPersistentFileLocation" value="Library" /> -->
+
   </platform>
 </widget>
