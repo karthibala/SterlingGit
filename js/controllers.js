@@ -606,8 +606,9 @@ angular.module('starter.controllers', [])
 					var fileURL = URL.createObjectURL(blob);
 					var fileName = $filter('date')(new Date(),'HHmmss')+".pdf";
 					var contentFile = blob;
-					alert(cordova.file.sharedDirectory);
-					alert(cordova.file.applicationStorageDirectory);
+					alert(JSON.stringify(cordova.file))
+					// alert(cordova.file.sharedDirectory);
+					// alert(cordova.file.applicationStorageDirectory);
 					//alert(cordova.file.dataDirectory);
 					
 					// window.open(fileURL, '_blank', 'location=no');
