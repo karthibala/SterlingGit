@@ -610,31 +610,32 @@ angular.module('starter.controllers', [])
 					// alert(cordova.file.applicationStorageDirectory);
 					//alert(cordova.file.dataDirectory);
 					
-					window.open(fileURL, '_system', 'location=yes');
+					// window.open(fileURL, '_blank', 'location=no');
+					window.open(fileURL,"_system","location=yes,enableViewportScale=yes,hidden=no");
 					// window.open(fileURL,"_blank");
 					
-					// $cordovaFile.createDir(cordova.file.documentsDirectory, "Sterling", true)
-					// .then(function (success) {
-						// //alert(JSON.stringify(success));
-						// $cordovaFile.writeFile(success.nativeURL, fileName,contentFile, true)
-						// .then(function (success) {
-							// alert("writeFile"+JSON.stringify(success));
-							// // $cordovaFileOpener2.open(success.target.localURL,'application/pdf')
-							// // .then(function(){alert("open")},function(err){
-								// // alert("Error");
-								// // alert(JSON.stringify(err));
-							// // })
-							// console.log("download complete: " + success.target.localURL);
-							// var alertPopup = $ionicPopup.alert({
-								// title: 'Success',
-								// template: 'Activity Statement download successsfully'
-							// });
-							// alertPopup.then(function(res) {});
-							// $scope.activity={};
-							// }, function (error){	
-							// });
-					// },function (error){
-					// });
+					$cordovaFile.createDir(cordova.file.documentsDirectory, "Sterling", true)
+					.then(function (success) {
+						//alert(JSON.stringify(success));
+						$cordovaFile.writeFile(success.nativeURL, fileName,contentFile, true)
+						.then(function (success) {
+							//alert("writeFile"+JSON.stringify(success));
+							$cordovaFileOpener2.open(success.target.localURL,'application/pdf')
+							.then(function(){alert("open")},function(err){
+								alert("Error");
+								alert(JSON.stringify(err));
+							})
+							console.log("download complete: " + success.target.localURL);
+							var alertPopup = $ionicPopup.alert({
+								title: 'Success',
+								template: 'Activity Statement download successsfully'
+							});
+							alertPopup.then(function(res) {});
+							$scope.activity={};
+							}, function (error){	
+							});
+					},function (error){
+					});
 				}).error(function(data){});
 			}else{
 				$http({
