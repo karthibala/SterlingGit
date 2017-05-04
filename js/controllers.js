@@ -620,23 +620,23 @@ angular.module('starter.controllers', [])
 					.then(function (success) {
 						alert(JSON.stringify(success));
 						
-						$cordovaFile.checkDir(success.nativeURL, "Sterling")
-						.then(function (success) {
-							// success
-							alert("success"+JSON.stringify(success));
-						}, function (error) {
-							// error
-							alert("error"+JSON.stringify(error));
-						});
+						// $cordovaFile.checkDir(success.nativeURL, "Sterling")
+						// .then(function (success) {
+							// // success
+							// alert("success"+JSON.stringify(success));
+						// }, function (error) {
+							// // error
+							// alert("error"+JSON.stringify(error));
+						// });
 						
 						$cordovaFile.writeFile(success.nativeURL, fileName,contentFile, true)
 						.then(function (success) {
 							alert("writeFile"+JSON.stringify(success));
-							// $cordovaFileOpener2.open(success.target.localURL,'application/pdf')
-							// .then(function(){alert("open")},function(err){
-								// alert("Error");
-								// alert(JSON.stringify(err));
-							// })
+							$cordovaFileOpener2.open(success.target.localURL,'application/pdf')
+							.then(function(){alert("open")},function(err){
+								alert("Error");
+								alert(JSON.stringify(err));
+							})
 							console.log("download complete: " + success.target.localURL);
 							var alertPopup = $ionicPopup.alert({
 								title: 'Success',
