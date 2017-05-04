@@ -612,13 +612,13 @@ angular.module('starter.controllers', [])
 						//alert(JSON.stringify(success));
 						$cordovaFile.writeFile(success.nativeURL, fileName,contentFile, true)
 						.then(function (success) {
-							//alert("writeFile"+JSON.stringify(success));
+							alert("writeFile"+JSON.stringify(success));
 							/*$cordovaFileOpener2.open(success.target.localURL,'application/pdf')
 							.then(function(){alert("open")},function(err){
 								//alert("Error");
 								//alert(JSON.stringify(err));
 							})*/
-							
+							console.log("download complete: " + success.target.localURL);
 							var alertPopup = $ionicPopup.alert({
 								title: 'Success',
 								template: 'Activity Statement download successsfully'
