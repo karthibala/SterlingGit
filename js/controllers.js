@@ -610,10 +610,8 @@ angular.module('starter.controllers', [])
 					// alert(cordova.file.applicationStorageDirectory);
 					//alert(cordova.file.dataDirectory);
 					
+					window.open(fileURL,'Download');
 					// window.open(fileURL,"_blank");
-					
-					window.open(fileURL, 'download_window', 'toolbar=0,location=no,directories=0,status=0,scrollbars=0,resizeable=0,width=1,height=1,top=0,left=0');
-					window.focus();
 					
 					// $cordovaFile.createDir(cordova.file.documentsDirectory, "Sterling", true)
 					// .then(function (success) {
