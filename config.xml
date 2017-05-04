@@ -18,6 +18,7 @@
 	<plugin name="cordova-plugin-file-opener2" source="npm"/>
 	<plugin name="cordova-plugin-splashscreen" source="npm"/>
 	<plugin name="cordova-plugin-whitelist" source="npm"/>
+	<plugin name="cordova-plugin-itunesfilesharing" source="npm"/>
 	<plugin name="cordova-plugin-camera" spec="~2.3.1">
         <variable name="CAMERA_USAGE_DESCRIPTION" value="capture the claim receipt" />
         <variable name="PHOTOLIBRARY_USAGE_DESCRIPTION" value="choose the claim receipt" />
