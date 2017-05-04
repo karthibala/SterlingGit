@@ -13,10 +13,7 @@
 	<!-- <plugin name="cordova-plugin-camera" source="npm"/> -->
 	<plugin name="cordova-plugin-datepicker" source="npm"/>
 	<plugin name="cordova-plugin-dialogs" source="npm"/>
-	<!-- <plugin name="cordova-plugin-file" source="npm"/> -->
-
-	<plugin spec="https://github.com/CustomPlugins/cordova-plugin-file-master.git" source="git"/>
-
+	<plugin name="cordova-plugin-file" source="npm"/>
 	<plugin name="cordova-plugin-file-transfer" source="npm"/>
 	<plugin name="cordova-plugin-file-opener2" source="npm"/>
 	<plugin name="cordova-plugin-splashscreen" source="npm"/>
@@ -30,14 +27,13 @@
   <content src="index.html"/>
   <access origin="*"/>
   <access origin="cdvfile://*" />
-  <!-- <allow-navigation href="cdvfile:*" /> -->
+  <allow-navigation href="cdvfile:*" />
 	<allow-intent href="tel:*" />
 	<allow-intent href="sms:*" />
 	<allow-intent href="mailto:*" />
 	<allow-intent href="geo:*" />
 	<allow-intent href="http://*/*" />
 	<allow-intent href="https://*/*" />
-	<allow-navigation href="*://*/*"/>
   <preference name="webviewbounce" value="false"/>
   <preference name="UIWebViewBounce" value="false"/>
   <preference name="DisallowOverscroll" value="true"/>
