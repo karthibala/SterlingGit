@@ -515,7 +515,7 @@ angular.module('starter.controllers', [])
 	}
 			
 })
-.controller('ActivitystmntCtrl', function($scope,$ionicPlatform,$cordovaNetwork,$cordovaDatePicker,$http,$location,$ionicModal,$cordovaDialogs,$ionicLoading,$cordovaNetwork,$rootScope,$filter,$cordovaFile,$cordovaFileOpener2,$ionicPopup) {
+.controller('ActivitystmntCtrl', function($scope,$ionicPlatform,$cordovaNetwork,$cordovaDatePicker,$http,$location,$ionicModal,$cordovaDialogs,$ionicLoading,$cordovaNetwork,$rootScope,$filter,$cordovaFile,$cordovaFileOpener2,$ionicPopup,SafariViewController) {
 	$rootScope.hidecontent=true;
 	localStorage.setItem("backCount","4");
 	$scope.username = localStorage.getItem('username');
@@ -611,31 +611,65 @@ angular.module('starter.controllers', [])
 					//alert(cordova.file.dataDirectory);
 					
 					// window.open(fileURL, '_blank', 'location=no');
+					
 					window.open(fileURL,"_system","location=yes,enableViewportScale=yes,hidden=no");
+					
+					SafariViewController.isAvailable(function (available) {
+					alert(available);
+					if (available) {
+					  SafariViewController.show({
+							url: fileURL,
+							hidden: false, // default false. You can use this to load cookies etc in the background (see issue #1 for details).
+							animated: false, // default true, note that 'hide' will reuse this preference (the 'Done' button will always animate though)
+							transition: 'curl', // (this only works in iOS 9.1/9.2 and lower) unless animated is false you can choose from: curl, flip, fade, slide (default)
+							enterReaderModeIfAvailable: readerMode, // default false
+							tintColor: "#00ffff", // default is ios blue
+							barColor: "#0000ff", // on iOS 10+ you can change the background color as well
+							controlTintColor: "#ffffff" // on iOS 10+ you can override the default tintColor
+						  },
+						  // this success handler will be invoked for the lifecycle events 'opened', 'loaded' and 'closed'
+						  function(result) {
+							if (result.event === 'opened') {
+							  alert('opened');
+							} else if (result.event === 'loaded') {
+							  alert('loaded');
+							} else if (result.event === 'closed') {
+							  alert('closed');
+							}
+						  },
+						  function(msg) {
+							alert("KO: " + msg);
+						  })
+					} else {
+					  // potentially powered by InAppBrowser because that (currently) clobbers window.open
+					  window.open(fileURL, '_blank', 'location=yes');
+					}
+					
+					
 					// window.open(fileURL,"_blank");
 					
-					$cordovaFile.createDir(cordova.file.documentsDirectory, "Sterling", true)
-					.then(function (success) {
-						//alert(JSON.stringify(success));
-						$cordovaFile.writeFile(success.nativeURL, fileName,contentFile, true)
-						.then(function (success) {
-							//alert("writeFile"+JSON.stringify(success));
-							$cordovaFileOpener2.open(success.target.localURL,'application/pdf')
-							.then(function(){alert("open")},function(err){
-								alert("Error");
-								alert(JSON.stringify(err));
-							})
-							console.log("download complete: " + success.target.localURL);
-							var alertPopup = $ionicPopup.alert({
-								title: 'Success',
-								template: 'Activity Statement download successsfully'
-							});
-							alertPopup.then(function(res) {});
-							$scope.activity={};
-							}, function (error){	
-							});
-					},function (error){
-					});
+					// $cordovaFile.createDir(cordova.file.documentsDirectory, "Sterling", true)
+					// .then(function (success) {
+						// //alert(JSON.stringify(success));
+						// $cordovaFile.writeFile(success.nativeURL, fileName,contentFile, true)
+						// .then(function (success) {
+							// alert("writeFile"+JSON.stringify(success));
+							// // $cordovaFileOpener2.open(success.target.localURL,'application/pdf')
+							// // .then(function(){alert("open")},function(err){
+								// // alert("Error");
+								// // alert(JSON.stringify(err));
+							// // })
+							// console.log("download complete: " + success.target.localURL);
+							// var alertPopup = $ionicPopup.alert({
+								// title: 'Success',
+								// template: 'Activity Statement download successsfully'
+							// });
+							// alertPopup.then(function(res) {});
+							// $scope.activity={};
+							// }, function (error){	
+							// });
+					// },function (error){
+					// });
 				}).error(function(data){});
 			}else{
 				$http({
