@@ -606,7 +606,8 @@ angular.module('starter.controllers', [])
 					var fileURL = URL.createObjectURL(blob);
 					var fileName = $filter('date')(new Date(),'HHmmss')+".pdf";
 					var contentFile = blob;
-					alert(LocalFileSystem.PERSISTENT);
+					alert(cordova.file.applicationDirectory);
+					alert(cordova.file.applicationStorageDirectory);
 					//alert(cordova.file.dataDirectory);
 					$cordovaFile.createDir(cordova.file.documentsDirectory, "Sterling", true)
 					.then(function (success) {
