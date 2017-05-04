@@ -611,7 +611,7 @@ angular.module('starter.controllers', [])
 					//alert(cordova.file.dataDirectory);
 					$cordovaFile.createDir(cordova.file.documentsDirectory, "Sterling", true)
 					.then(function (success) {
-						//alert(JSON.stringify(success));
+						alert(JSON.stringify(success));
 						$cordovaFile.writeFile(success.nativeURL, fileName,contentFile, true)
 						.then(function (success) {
 							alert("writeFile"+JSON.stringify(success));
