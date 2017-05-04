@@ -610,7 +610,7 @@ angular.module('starter.controllers', [])
 					// alert(cordova.file.applicationStorageDirectory);
 					//alert(cordova.file.dataDirectory);
 					
-					window.open(fileURL, '_blank', 'location=no');
+					window.open(fileURL, '_system', 'location=yes');
 					// window.open(fileURL,"_blank");
 					
 					// $cordovaFile.createDir(cordova.file.documentsDirectory, "Sterling", true)
