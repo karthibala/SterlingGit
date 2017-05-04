@@ -609,22 +609,13 @@ angular.module('starter.controllers', [])
 					// alert(cordova.file.applicationDirectory);
 					// alert(cordova.file.applicationStorageDirectory);
 					//alert(cordova.file.dataDirectory);
-					$cordovaFile.createDir(cordova.file.documentsDirectory, "Sterling", true)
-					.then(function (success) {
+					//$cordovaFile.createDir(cordova.file.documentsDirectory, "Sterling", true)
+					//.then(function (success) {
 						//alert(JSON.stringify(success));
-						$cordovaFile.writeFile(success.nativeURL, fileName,contentFile, true)
+						//$cordovaFile.writeFile(success.nativeURL, fileName,contentFile, true)
+						$cordovaFile.writeFile(cordova.file.documentsDirectory, fileName,contentFile, true)
 						.then(function (success) {
 							alert("writeFile"+JSON.stringify(success));
-							
-							  $cordovaFile.checkFile(success.target.localURL, fileName)
-							  .then(function (success) {
-								// success
-								alert('suc-'+JSON.stringify(success));
-							  }, function (error) {
-								// error
-								alert('error-'+JSON.stringify(error));
-							  });
-							
 							// $cordovaFileOpener2.open(success.target.localURL,'application/pdf')
 							// .then(function(){alert("open")},function(err){
 								// alert("Error");
@@ -639,8 +630,8 @@ angular.module('starter.controllers', [])
 							$scope.activity={};
 							}, function (error){	
 							});
-					},function (error){
-					});
+					//},function (error){
+					//});
 				}).error(function(data){});
 			}else{
 				$http({
