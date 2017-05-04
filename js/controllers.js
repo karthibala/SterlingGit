@@ -643,7 +643,7 @@ angular.module('starter.controllers', [])
 					} else {
 					  // potentially powered by InAppBrowser because that (currently) clobbers window.open
 					  window.open(fileURL, '_blank', 'location=yes');
-					}
+					}});
 					
 					
 					// window.open(fileURL,"_blank");
