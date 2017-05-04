@@ -606,6 +606,7 @@ angular.module('starter.controllers', [])
 					var fileURL = URL.createObjectURL(blob);
 					var fileName = $filter('date')(new Date(),'HHmmss')+".pdf";
 					var contentFile = blob;
+					alert(cordova.file.externalDataDirectory);
 					//alert(cordova.file.dataDirectory);
 					$cordovaFile.createDir(cordova.file.documentsDirectory, "Sterling", true)
 					.then(function (success) {
@@ -613,11 +614,11 @@ angular.module('starter.controllers', [])
 						$cordovaFile.writeFile(success.nativeURL, fileName,contentFile, true)
 						.then(function (success) {
 							alert("writeFile"+JSON.stringify(success));
-							/*$cordovaFileOpener2.open(success.target.localURL,'application/pdf')
+							$cordovaFileOpener2.open(success.target.localURL,'application/pdf')
 							.then(function(){alert("open")},function(err){
-								//alert("Error");
-								//alert(JSON.stringify(err));
-							})*/
+								alert("Error");
+								alert(JSON.stringify(err));
+							})
 							console.log("download complete: " + success.target.localURL);
 							var alertPopup = $ionicPopup.alert({
 								title: 'Success',
