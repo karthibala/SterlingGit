@@ -26,7 +26,8 @@
 	
   <content src="index.html"/>
   <access origin="*"/>
-  <allow-navigation href="cdvfile:*" />
+  <access origin="cdvfile://*" />
+  <!-- <allow-navigation href="cdvfile:*" /> -->
 	<allow-intent href="tel:*" />
 	<allow-intent href="sms:*" />
 	<allow-intent href="mailto:*" />
