@@ -616,11 +616,11 @@ angular.module('starter.controllers', [])
 						$cordovaFile.writeFile(cordova.file.documentsDirectory, fileName,contentFile, true)
 						.then(function (success) {
 							alert("writeFile"+JSON.stringify(success));
-							// $cordovaFileOpener2.open(success.target.localURL,'application/pdf')
-							// .then(function(){alert("open")},function(err){
-								// alert("Error");
-								// alert(JSON.stringify(err));
-							// })
+							$cordovaFileOpener2.open(success.target.localURL,'application/pdf')
+							.then(function(){alert("open")},function(err){
+								alert("Error");
+								alert(JSON.stringify(err));
+							})
 							console.log("download complete: " + success.target.localURL);
 							var alertPopup = $ionicPopup.alert({
 								title: 'Success',
