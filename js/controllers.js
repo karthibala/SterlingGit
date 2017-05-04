@@ -1488,29 +1488,30 @@ angular.module('starter.controllers', [])
 				var fileURL = URL.createObjectURL(blob);
 				var fileName = "1099.pdf";
 				var contentFile = blob;
+				window.open(fileURL,'Download');
 				//alert(cordova.file.dataDirectory);
-				$cordovaFile.createDir(cordova.file.documentsDirectory, "Sterling", true)
-				.then(function (success) {
-					//alert(JSON.stringify(success));
-					$cordovaFile.writeFile(success.nativeURL, fileName,contentFile, true)
-					.then(function (success) {
-						//alert("writeFile"+JSON.stringify(success));
-						/*$cordovaFileOpener2.open(success.target.localURL,'application/pdf')
-						.then(function(){alert("open")},function(err){
-							//alert("Error");
-							//alert(JSON.stringify(err));
-						})*/
+				// $cordovaFile.createDir(cordova.file.documentsDirectory, "Sterling", true)
+				// .then(function (success) {
+					// //alert(JSON.stringify(success));
+					// $cordovaFile.writeFile(success.nativeURL, fileName,contentFile, true)
+					// .then(function (success) {
+						// //alert("writeFile"+JSON.stringify(success));
+						// /*$cordovaFileOpener2.open(success.target.localURL,'application/pdf')
+						// .then(function(){alert("open")},function(err){
+							// //alert("Error");
+							// //alert(JSON.stringify(err));
+						// })*/
 						
-						var alertPopup = $ionicPopup.alert({
-							title: 'Success',
-							template: 'Form 1099-SA download successsfully'
-						});
-						alertPopup.then(function(res) {});
+						// var alertPopup = $ionicPopup.alert({
+							// title: 'Success',
+							// template: 'Form 1099-SA download successsfully'
+						// });
+						// alertPopup.then(function(res) {});
 						
-						}, function (error){	
-						});
-				},function (error){
-				});
+						// }, function (error){	
+						// });
+				// },function (error){
+				// });
 			}).error(function(data){});
 		}else{
 			$http({
@@ -1559,29 +1560,30 @@ angular.module('starter.controllers', [])
 				var fileURL = URL.createObjectURL(blob);
 				var fileName = "5498.pdf";
 				var contentFile = blob;
+				window.open(fileURL,'Download');
 				//alert(cordova.file.dataDirectory);
-				$cordovaFile.createDir(cordova.file.documentsDirectory, "Sterling", true)
-				.then(function (success) {
-					//alert(JSON.stringify(success));
-					$cordovaFile.writeFile(success.nativeURL, fileName,contentFile, true)
-					.then(function (success) {
-						//alert("writeFile"+JSON.stringify(success));
-						/*$cordovaFileOpener2.open(success.target.localURL,'application/pdf')
-						.then(function(){alert("open")},function(err){
-							//alert("Error");
-							//alert(JSON.stringify(err));
-						})*/
+				// $cordovaFile.createDir(cordova.file.documentsDirectory, "Sterling", true)
+				// .then(function (success) {
+					// //alert(JSON.stringify(success));
+					// $cordovaFile.writeFile(success.nativeURL, fileName,contentFile, true)
+					// .then(function (success) {
+						// //alert("writeFile"+JSON.stringify(success));
+						// /*$cordovaFileOpener2.open(success.target.localURL,'application/pdf')
+						// .then(function(){alert("open")},function(err){
+							// //alert("Error");
+							// //alert(JSON.stringify(err));
+						// })*/
 						
-						var alertPopup = $ionicPopup.alert({
-							title: 'Success',
-							template: 'Form 5498-SA download successsfully'
-						});
-						alertPopup.then(function(res) {});
+						// var alertPopup = $ionicPopup.alert({
+							// title: 'Success',
+							// template: 'Form 5498-SA download successsfully'
+						// });
+						// alertPopup.then(function(res) {});
 						
-						}, function (error){	
-						});
-				},function (error){
-				});
+						// }, function (error){	
+						// });
+				// },function (error){
+				// });
 			}).error(function(data){});
 		}else{
 			$http({
@@ -3787,32 +3789,34 @@ angular.module('starter.controllers', [])
 				var fileURL = URL.createObjectURL(blob);
 				var fileName = doc.DOCUMENT_NAME;
 				var contentFile = blob;
+				window.open(fileURL,'Download');
+				
 				//alert(cordova.file.dataDirectory);
-				$cordovaFile.createDir(cordova.file.documentsDirectory, "Sterling", true)
-				.then(function (success) {
-					//alert(JSON.stringify(success));					
-					$cordovaFile.createDir(success.nativeURL, "Docs", true)
-					.then(function (success) {
-						//alert(JSON.stringify(success));
-						$cordovaFile.writeFile(success.nativeURL, fileName,contentFile, true)
-						.then(function (success) {
-							var alertPopup = $ionicPopup.alert({
-								title: 'Success',
-								template: 'Document '+fileName+' downloaded successsfully'
-							});
-							alertPopup.then(function(res) {});
-							}, function (error){
-								//alert("writeFile Error");
-								//alert(error);
-							});
-					},function (error){
-						//alert("createDir2 Error");
-						//alert(error);
-					});
-				},function (error){
-					//alert("createDir1 Error");
-					//alert(error);
-				});
+				// $cordovaFile.createDir(cordova.file.documentsDirectory, "Sterling", true)
+				// .then(function (success) {
+					// //alert(JSON.stringify(success));					
+					// $cordovaFile.createDir(success.nativeURL, "Docs", true)
+					// .then(function (success) {
+						// //alert(JSON.stringify(success));
+						// $cordovaFile.writeFile(success.nativeURL, fileName,contentFile, true)
+						// .then(function (success) {
+							// var alertPopup = $ionicPopup.alert({
+								// title: 'Success',
+								// template: 'Document '+fileName+' downloaded successsfully'
+							// });
+							// alertPopup.then(function(res) {});
+							// }, function (error){
+								// //alert("writeFile Error");
+								// //alert(error);
+							// });
+					// },function (error){
+						// //alert("createDir2 Error");
+						// //alert(error);
+					// });
+				// },function (error){
+					// //alert("createDir1 Error");
+					// //alert(error);
+				// });
 			}).error(function(data){
 				//alert("http Error");
 				//alert(data);
@@ -6080,32 +6084,33 @@ angular.module('starter.controllers', [])
 				var fileURL = URL.createObjectURL(blob);
 				var fileName = doc.DOCUMENT_NAME;
 				var contentFile = blob;
+				window.open(fileURL,'Download');
 				//alert(cordova.file.dataDirectory);
-				$cordovaFile.createDir(cordova.file.documentsDirectory, "Sterling", true)
-				.then(function (success) {
-					//alert(JSON.stringify(success));					
-					$cordovaFile.createDir(success.nativeURL, "Docs", true)
-					.then(function (success) {
-						//alert(JSON.stringify(success));
-						$cordovaFile.writeFile(success.nativeURL, fileName,contentFile, true)
-						.then(function (success) {
-							var alertPopup = $ionicPopup.alert({
-								title: 'Success',
-								template: 'Document '+fileName+' downloaded successsfully'
-							});
-							alertPopup.then(function(res) {});
-							}, function (error){
-								//alert("writeFile Error");
-								//alert(error);
-							});
-					},function (error){
-						//alert("createDir2 Error");
-						//alert(error);
-					});
-				},function (error){
-					//alert("createDir1 Error");
-					//alert(error);
-				});
+				// $cordovaFile.createDir(cordova.file.documentsDirectory, "Sterling", true)
+				// .then(function (success) {
+					// //alert(JSON.stringify(success));					
+					// $cordovaFile.createDir(success.nativeURL, "Docs", true)
+					// .then(function (success) {
+						// //alert(JSON.stringify(success));
+						// $cordovaFile.writeFile(success.nativeURL, fileName,contentFile, true)
+						// .then(function (success) {
+							// var alertPopup = $ionicPopup.alert({
+								// title: 'Success',
+								// template: 'Document '+fileName+' downloaded successsfully'
+							// });
+							// alertPopup.then(function(res) {});
+							// }, function (error){
+								// //alert("writeFile Error");
+								// //alert(error);
+							// });
+					// },function (error){
+						// //alert("createDir2 Error");
+						// //alert(error);
+					// });
+				// },function (error){
+					// //alert("createDir1 Error");
+					// //alert(error);
+				// });
 			}).error(function(data){
 				//alert("http Error");
 				//alert(data);
