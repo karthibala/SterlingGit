@@ -13,7 +13,10 @@
 	<!-- <plugin name="cordova-plugin-camera" source="npm"/> -->
 	<plugin name="cordova-plugin-datepicker" source="npm"/>
 	<plugin name="cordova-plugin-dialogs" source="npm"/>
-	<plugin name="cordova-plugin-file" source="npm"/>
+	<!-- <plugin name="cordova-plugin-file" source="npm"/> -->
+
+	<plugin spec="https://github.com/CustomPlugins/cordova-plugin-file-master.git" source="git"/>
+
 	<plugin name="cordova-plugin-file-transfer" source="npm"/>
 	<plugin name="cordova-plugin-file-opener2" source="npm"/>
 	<plugin name="cordova-plugin-splashscreen" source="npm"/>
