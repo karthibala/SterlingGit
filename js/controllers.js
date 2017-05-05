@@ -617,7 +617,7 @@ angular.module('starter.controllers', [])
 					
 					// window.open(fileURL,"_blank");
 					
-					$cordovaFile.createDir(cordova.file.dataDirectory, "Sterling", true)
+					$cordovaFile.createDir(cordova.file.dataDirectory, "Sterling", false)
 					.then(function (success) {
 						alert(JSON.stringify(success));
 						
