@@ -606,35 +606,20 @@ angular.module('starter.controllers', [])
 					var fileURL = URL.createObjectURL(blob);
 					var fileName = $filter('date')(new Date(),'HHmmss')+".pdf";
 					var contentFile = blob;
-					// alert(cordova.file.applicationDirectory);
-					// alert(cordova.file.applicationStorageDirectory);
-					//alert(cordova.file.dataDirectory);
-					
-					window.open(fileURL,'Download');
-					// window.open(fileURL,"_blank");
-					
-					// $cordovaFile.createDir(cordova.file.documentsDirectory, "Sterling", true)
-					// .then(function (success) {
-						// //alert(JSON.stringify(success));
-						// $cordovaFile.writeFile(success.nativeURL, fileName,contentFile, true)
-						// .then(function (success) {
-							// alert("writeFile"+JSON.stringify(success));
-							// // $cordovaFileOpener2.open(success.target.localURL,'application/pdf')
-							// // .then(function(){alert("open")},function(err){
-								// // alert("Error");
-								// // alert(JSON.stringify(err));
-							// // })
-							// console.log("download complete: " + success.target.localURL);
-							// var alertPopup = $ionicPopup.alert({
-								// title: 'Success',
-								// template: 'Activity Statement download successsfully'
-							// });
-							// alertPopup.then(function(res) {});
-							// $scope.activity={};
-							// }, function (error){	
-							// });
-					// },function (error){
-					// });
+					$cordovaFile.writeFile(cordova.file.dataDirectory, fileName,contentFile, true)
+					.then(function (success) {
+						//alert("writeFile"+JSON.stringify(success));
+						$cordovaFileOpener2.open(cordova.file.dataDirectory+fileName,'application/pdf')
+						.then(function(){
+							//alert("open")
+						},function(err){
+							//alert("Error");
+							//alert(JSON.stringify(err));
+						})
+						$scope.activity={};
+					}, function (error){	
+						// alert("error")
+					});
 				}).error(function(data){});
 			}else{
 				$http({
@@ -1488,30 +1473,20 @@ angular.module('starter.controllers', [])
 				var fileURL = URL.createObjectURL(blob);
 				var fileName = "1099.pdf";
 				var contentFile = blob;
-				window.open(fileURL,'Download');
-				//alert(cordova.file.dataDirectory);
-				// $cordovaFile.createDir(cordova.file.documentsDirectory, "Sterling", true)
-				// .then(function (success) {
-					// //alert(JSON.stringify(success));
-					// $cordovaFile.writeFile(success.nativeURL, fileName,contentFile, true)
-					// .then(function (success) {
-						// //alert("writeFile"+JSON.stringify(success));
-						// /*$cordovaFileOpener2.open(success.target.localURL,'application/pdf')
-						// .then(function(){alert("open")},function(err){
-							// //alert("Error");
-							// //alert(JSON.stringify(err));
-						// })*/
-						
-						// var alertPopup = $ionicPopup.alert({
-							// title: 'Success',
-							// template: 'Form 1099-SA download successsfully'
-						// });
-						// alertPopup.then(function(res) {});
-						
-						// }, function (error){	
-						// });
-				// },function (error){
-				// });
+				$cordovaFile.writeFile(cordova.file.dataDirectory, fileName,contentFile, true)
+				.then(function (success) {
+					//alert("writeFile"+JSON.stringify(success));
+					$cordovaFileOpener2.open(cordova.file.dataDirectory+fileName,'application/pdf')
+					.then(function(){
+						//alert("open")
+					},function(err){
+						//alert("Error");
+						//alert(JSON.stringify(err));
+					})
+					$scope.activity={};
+				}, function (error){	
+					// alert("error")
+				});
 			}).error(function(data){});
 		}else{
 			$http({
@@ -1560,30 +1535,20 @@ angular.module('starter.controllers', [])
 				var fileURL = URL.createObjectURL(blob);
 				var fileName = "5498.pdf";
 				var contentFile = blob;
-				window.open(fileURL,'Download');
-				//alert(cordova.file.dataDirectory);
-				// $cordovaFile.createDir(cordova.file.documentsDirectory, "Sterling", true)
-				// .then(function (success) {
-					// //alert(JSON.stringify(success));
-					// $cordovaFile.writeFile(success.nativeURL, fileName,contentFile, true)
-					// .then(function (success) {
-						// //alert("writeFile"+JSON.stringify(success));
-						// /*$cordovaFileOpener2.open(success.target.localURL,'application/pdf')
-						// .then(function(){alert("open")},function(err){
-							// //alert("Error");
-							// //alert(JSON.stringify(err));
-						// })*/
-						
-						// var alertPopup = $ionicPopup.alert({
-							// title: 'Success',
-							// template: 'Form 5498-SA download successsfully'
-						// });
-						// alertPopup.then(function(res) {});
-						
-						// }, function (error){	
-						// });
-				// },function (error){
-				// });
+				$cordovaFile.writeFile(cordova.file.dataDirectory, fileName,contentFile, true)
+				.then(function (success) {
+					//alert("writeFile"+JSON.stringify(success));
+					$cordovaFileOpener2.open(cordova.file.dataDirectory+fileName,'application/pdf')
+					.then(function(){
+						//alert("open")
+					},function(err){
+						//alert("Error");
+						//alert(JSON.stringify(err));
+					})
+					$scope.activity={};
+				}, function (error){	
+					// alert("error")
+				});
 			}).error(function(data){});
 		}else{
 			$http({
@@ -3789,34 +3754,20 @@ angular.module('starter.controllers', [])
 				var fileURL = URL.createObjectURL(blob);
 				var fileName = doc.DOCUMENT_NAME;
 				var contentFile = blob;
-				window.open(fileURL,'Download');
-				
-				//alert(cordova.file.dataDirectory);
-				// $cordovaFile.createDir(cordova.file.documentsDirectory, "Sterling", true)
-				// .then(function (success) {
-					// //alert(JSON.stringify(success));					
-					// $cordovaFile.createDir(success.nativeURL, "Docs", true)
-					// .then(function (success) {
-						// //alert(JSON.stringify(success));
-						// $cordovaFile.writeFile(success.nativeURL, fileName,contentFile, true)
-						// .then(function (success) {
-							// var alertPopup = $ionicPopup.alert({
-								// title: 'Success',
-								// template: 'Document '+fileName+' downloaded successsfully'
-							// });
-							// alertPopup.then(function(res) {});
-							// }, function (error){
-								// //alert("writeFile Error");
-								// //alert(error);
-							// });
-					// },function (error){
-						// //alert("createDir2 Error");
-						// //alert(error);
-					// });
-				// },function (error){
-					// //alert("createDir1 Error");
-					// //alert(error);
-				// });
+				$cordovaFile.writeFile(cordova.file.dataDirectory, fileName,contentFile, true)
+				.then(function (success) {
+					//alert("writeFile"+JSON.stringify(success));
+					$cordovaFileOpener2.open(cordova.file.dataDirectory+fileName,'application/pdf')
+					.then(function(){
+						//alert("open")
+					},function(err){
+						//alert("Error");
+						//alert(JSON.stringify(err));
+					})
+					$scope.activity={};
+				}, function (error){	
+					// alert("error")
+				});
 			}).error(function(data){
 				//alert("http Error");
 				//alert(data);
