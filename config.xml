@@ -99,7 +99,11 @@
 	<!-- <preference name="iosExtraFilesystems" value="documents" />
   	<preference name="iosPersistentFileLocation" value="Library" />  -->
 
-  	<preference name="iosExtraFilesystems" value="library,library-nosync,documents,documents-nosync,cache,bundle,root"/>
+  	<!-- <preference name="iosExtraFilesystems" value="library,library-nosync,documents,documents-nosync,cache,bundle,root"/> -->
+
+  	<preference name="iosPersistentFileLocation" value="Library" />
+
+	<preference name="iosPersistentFileLocation" value="Compatibility" />
 
   </platform>
 </widget>
