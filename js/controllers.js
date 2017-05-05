@@ -634,14 +634,20 @@ angular.module('starter.controllers', [])
 						.then(function (success) {
 							alert("writeFile"+JSON.stringify(success));
 							
-							$cordovaFile.checkFile(success.nativeURL, fileName)
-						.then(function (success) {
-							// success
-							alert("success1"+JSON.stringify(success));
-						}, function (error) {
-							// error
-							alert("error1"+JSON.stringify(error));
-						});
+							$cordovaFile.listDir(cordova.file.dataDirectory).then( function(entries) {
+alert('listDir: '+ JSON.stringify(entries));
+}, function(err) {
+alert('listDir error: '+ JSON.stringify(err));
+});
+							
+							// $cordovaFile.checkFile(success.nativeURL, fileName)
+						// .then(function (success) {
+							// // success
+							// alert("success1"+JSON.stringify(success));
+						// }, function (error) {
+							// // error
+							// alert("error1"+JSON.stringify(error));
+						// });
 							
 							// $cordovaFileOpener2.open(success.target.localURL,'application/pdf')
 							// .then(function(){alert("open")},function(err){
@@ -681,7 +687,9 @@ angular.module('starter.controllers', [])
 					.then(function (success) {
 						$cordovaFile.writeFile(success.nativeURL, fileName,contentFile, true)
 						.then(function (success) {
-							$cordovaFileOpener2.open(success.target.localURL,'application/pdf')
+							//$cordovaFileOpener2.open(success.target.localURL,'application/pdf')
+							alert(success.nativeURL+fileName);
+							$cordovaFileOpener2.open(success.nativeURL+fileName,'application/pdf')
 							.then(function(){
 								$scope.activity={};
 							},function(err){})
