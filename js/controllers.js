@@ -229,7 +229,7 @@ angular.module('starter.controllers', [])
 	$scope.getTransDate=function(){
 		var today = new Date();
 		//var maxDate = ionic.Platform.isIOS() ? new Date() : (new Date()).valueOf()+1493998268893;
-		alert(today);
+		//alert(today);
 		if($rootScope.IOS==true){
 			// if(today.getDay()==6){
 				// var startDate = ionic.Platform.isAndroid() ? new Date() : (new Date(new Date().getTime() + 48 * 60 * 60 * 1000)).valueOf();
