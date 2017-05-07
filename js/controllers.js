@@ -247,7 +247,7 @@ angular.module('starter.controllers', [])
 		var options = {
 			date: new Date(),
 			mode: 'date', // or 'time'
-			minDate: new Date()+1
+			minDate: new Date() - 1
 		}
 		$ionicPlatform.ready(function(){
 			$cordovaDatePicker.show(options).then(function(date){
