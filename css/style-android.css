@@ -122,7 +122,8 @@
 }
 #forminput{
 	color:#444; 
-	padding-left:0px; 
+	padding-left:0px;
+	padding-bottom:5px;
 } 
 .formButton{
 	border-radius:4px;
@@ -655,8 +656,14 @@ input::-moz-placeholder {
  }
  .Select-Float{
 	margin-left:20px;
-	margin-bottom:-9px;
+	/* margin-bottom:-9px; */
+	margin-bottom:1px;
  }
+ 
+ .Select-BottomFloat{
+	margin-top:6px;
+ }
+ 
  /* .SelectColor{
 	 color:#C2C5C8! important;
  }
