@@ -253,6 +253,7 @@ angular.module('starter.controllers', [])
 		}
 		$ionicPlatform.ready(function(){
 			$cordovaDatePicker.show(options).then(function(date){
+				alert(date);
 				var date1=date.toString();
 				var dataas=date1.split(" ");
 				var Month = ["App","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
