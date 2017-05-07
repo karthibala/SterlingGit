@@ -227,11 +227,18 @@ angular.module('starter.controllers', [])
 	}
 	
 	$scope.getTransDate=function(){
+		var today = new Date();
+		//var maxDate = ionic.Platform.isIOS() ? new Date() : (new Date()).valueOf()+1493998268893;
+		if(today.getDay()==6){
+			var maxDate = ionic.Platform.isIOS() ? new Date() : (new Date(new Date().getTime() + 48 * 60 * 60 * 1000)).valueOf();
+		}else{
+			var maxDate = ionic.Platform.isIOS() ? new Date() : (new Date(new Date().getTime() + 24 * 60 * 60 * 1000)).valueOf();
+		}
+		
 		var options = {
 			date: new Date(),
 			mode: 'date', // or 'time'
-			minDate: new Date(),
-
+			minDate: maxDate
 		}
 		$ionicPlatform.ready(function(){
 			$cordovaDatePicker.show(options).then(function(date){
@@ -286,14 +293,14 @@ angular.module('starter.controllers', [])
 				if($rootScope.IOS==true){
 					var alertPopup = $ionicPopup.alert({
 						title: 'Sorry',
-						template: 'You do not have a bank account on record.You must add a bank account by logging into sterlinghsa.com to schedule disbursements'
+						template: 'You do not have a bank account on record.You must add a bank account by logging into www.sterlingadministration.com to schedule disbursements'
 					});
 
 					alertPopup.then(function(res) {
 						window.history.back();
 					});
 				}else{
-					$cordovaDialogs.alert('You do not have a bank account on record.You must add a bank account by logging into sterlinghsa.com to schedule disbursements','Sorry','OK')
+					$cordovaDialogs.alert('You do not have a bank account on record.You must add a bank account by logging into www.sterlingadministration.com to schedule disbursements','Sorry','OK')
 					.then(function() {
 						window.history.back();
 					});
@@ -398,7 +405,22 @@ angular.module('starter.controllers', [])
 				.then(function() {
 				});
 			}
-		}else{
+		}else if(new Date($scope.makecontribute.TransDate).getDay()==6 || new Date($scope.makecontribute.TransDate).getDay()==0 ){
+			if($rootScope.IOS==true){
+				var alertPopup = $ionicPopup.alert({
+					title: 'Sorry',
+					template: 'Please select Weekdays'
+				});
+
+				alertPopup.then(function(res) {
+				});
+			}else{
+				$cordovaDialogs.alert('Please select Weekdays','Sorry','OK')
+				.then(function() {
+				});
+			}
+		}
+		else{
 			$ionicLoading.show({
 			template: '<ion-spinner icon="ios"></ion-spinner><br>Loading...'
 			});
@@ -832,32 +854,36 @@ angular.module('starter.controllers', [])
 	
 	$scope.TransDate="";
 	$scope.getTransDate=function(){
+		var today = new Date();
+		if(today.getDay()==6){
+			var maxDate = ionic.Platform.isIOS() ? new Date() : (new Date(new Date().getTime() + 48 * 60 * 60 * 1000)).valueOf();
+		}else{
+			var maxDate = ionic.Platform.isIOS() ? new Date() : (new Date(new Date().getTime() + 24 * 60 * 60 * 1000)).valueOf();
+		}
+		
 		var options = {
 			date: new Date(),
 			mode: 'date', // or 'time'
-			minDate: new Date(),
-
+			minDate: maxDate
 		}
-	$ionicPlatform.ready(function(){
-		$cordovaDatePicker.show(options).then(function(date){
-
-			var date1=date.toString();
-			var dataas=date1.split(" ");
-			var Month = ["App","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
-			var mon=""; 
-			if(Month.indexOf(dataas[1]).toString().length==1)
-			{
-				mon="0"+Month.indexOf(dataas[1]);
-			}
-			else
-			{
-				mon = Month.indexOf(dataas[1]);
-			}
-			var selectedDate=mon+'/'+dataas[2]+'/'+dataas[3];
-			$scope.paymeValues.TransDate=selectedDate;
-		});
+		$ionicPlatform.ready(function(){
+			$cordovaDatePicker.show(options).then(function(date){
+				var date1=date.toString();
+				var dataas=date1.split(" ");
+				var Month = ["App","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+				var mon=""; 
+				if(Month.indexOf(dataas[1]).toString().length==1)
+				{
+					mon="0"+Month.indexOf(dataas[1]);
+				}
+				else
+				{
+					mon = Month.indexOf(dataas[1]);
+				}
+				var selectedDate=mon+'/'+dataas[2]+'/'+dataas[3];
+				$scope.paymeValues.TransDate=selectedDate;
+			});
 		})
-
 	};
 	 	
 	if($cordovaNetwork.isOffline())
@@ -886,14 +912,14 @@ angular.module('starter.controllers', [])
 				if($rootScope.IOS==true){
 					var alertPopup = $ionicPopup.alert({
 						title: 'Sorry',
-						template: 'You do not have a bank account on record.You must add a bank account by logging into sterlinghsa.com to schedule disbursements'
+						template: 'You do not have a bank account on record.You must add a bank account by logging into www.sterlingadministration.com to schedule disbursements'
 					});
 
 					alertPopup.then(function(res) {
 						window.history.back();
 					});
 				}else{
-					$cordovaDialogs.alert('You do not have a bank account on record.You must add a bank account by logging into sterlinghsa.com to schedule disbursements','Sorry','OK')
+					$cordovaDialogs.alert('You do not have a bank account on record.You must add a bank account by logging into www.sterlingadministration.com to schedule disbursements','Sorry','OK')
 					.then(function() {
 						window.history.back();
 					});
@@ -965,6 +991,20 @@ angular.module('starter.controllers', [])
 				});
 			}else{
 				$cordovaDialogs.alert('Please select future date','Sorry','OK')
+				.then(function() {
+				});
+			}
+		}else if(new Date($scope.paymeValues.TransDate).getDay()==6 || new Date($scope.paymeValues.TransDate).getDay()==0 ){
+			if($rootScope.IOS==true){
+				var alertPopup = $ionicPopup.alert({
+					title: 'Sorry',
+					template: 'Please select Weekdays'
+				});
+
+				alertPopup.then(function(res) {
+				});
+			}else{
+				$cordovaDialogs.alert('Please select Weekdays','Sorry','OK')
 				.then(function() {
 				});
 			}
@@ -1173,11 +1213,17 @@ angular.module('starter.controllers', [])
 	
 	
 	$scope.getTransDate=function(){
+		var today = new Date();
+		if(today.getDay()==6){
+			var maxDate = ionic.Platform.isIOS() ? new Date() : (new Date(new Date().getTime() + 48 * 60 * 60 * 1000)).valueOf();
+		}else{
+			var maxDate = ionic.Platform.isIOS() ? new Date() : (new Date(new Date().getTime() + 24 * 60 * 60 * 1000)).valueOf();
+		}
+		
 		var options = {
 			date: new Date(),
 			mode: 'date', // or 'time'
-			minDate: new Date(),
-
+			minDate: maxDate
 		}
 		$ionicPlatform.ready(function(){
 			$cordovaDatePicker.show(options).then(function(date){
@@ -1197,7 +1243,6 @@ angular.module('starter.controllers', [])
 				$scope.payprovierValues.TransDate=selectedDate;
 			});
 		})
-
 	};
 	
 	if($cordovaNetwork.isOffline())
@@ -1244,14 +1289,14 @@ angular.module('starter.controllers', [])
 				if($rootScope.IOS==true){
 					var alertPopup = $ionicPopup.alert({
 						title: 'Sorry',
-						template: 'You do not have any payee on record.You must add a payee account by logging into www.sterlinghsa.com to schedule new claim request for payee'
+						template: 'You do not have any pay provider on record.You must add a pay provider account by logging into www.sterlingadministration.com to schedule new claim request for pay provider'
 					});
 
 					alertPopup.then(function(res) {
 						window.history.back();
 					});
 				}else{
-					$cordovaDialogs.alert('You do not have any payee on record.You must add a payee account by logging into www.sterlinghsa.com to schedule new claim request for payee','Sorry','OK')
+					$cordovaDialogs.alert('You do not have any pay provider on record.You must add a pay provider account by logging into www.sterlingadministration.com to schedule new claim request for pay provider','Sorry','OK')
 					.then(function() {
 						window.history.back();
 					});
@@ -1296,6 +1341,20 @@ angular.module('starter.controllers', [])
 				});
 			}else{
 				$cordovaDialogs.alert('Please select future date','Sorry','OK')
+				.then(function() {
+				});
+			}
+		}else if(new Date($scope.payprovierValues.TransDate).getDay()==6 || new Date($scope.payprovierValues.TransDate).getDay()==0 ){
+			if($rootScope.IOS==true){
+				var alertPopup = $ionicPopup.alert({
+					title: 'Sorry',
+					template: 'Please select Weekdays'
+				});
+
+				alertPopup.then(function(res) {
+				});
+			}else{
+				$cordovaDialogs.alert('Please select Weekdays','Sorry','OK')
 				.then(function() {
 				});
 			}
@@ -2534,81 +2593,79 @@ angular.module('starter.controllers', [])
 		}
 	}
 	
-	$http.get('http://app.sterlinghsa.com/api/v1/accounts/payeeslist',{params:{'acc_num': $scope.fsaaccno},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} })
-	.success(function(data){
-		$scope.payee=data.payee;
-		if($rootScope.claimMode='payprovider'){
-			if(data.payee==null){
-				if($rootScope.IOS==true){
-					var alertPopup = $ionicPopup.alert({
-						title: 'Sorry',
-						template: 'You do not have any payee on record.You must add a payee account by logging into www.sterlinghsa.com to schedule new claim request for payee'
-					});
-
-					alertPopup.then(function(res) {
-						window.history.back();
-					});
-				}else{
-					$cordovaDialogs.alert('You do not have any payee on record.You must add a payee account by logging into www.sterlinghsa.com to schedule new claim request for payee','Sorry','OK')
-					.then(function() {
-						window.history.back();
-					});
-				}
-			}
-		}
-	}).error(function(err){
-
-	});
-   
-	$http.get("http://app.sterlinghsa.com/api/v1/accounts/bankdetails",{params:{'type':'fsa', 'acc_num':$scope.fsaaccno},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
-	.success(function(data){
-		$scope.bank_details=data.bank_details;
-		//alert("claimMode")
-		//alert($rootScope.claimMode)
-		if($rootScope.claimMode='payme'){
+	if($rootScope.claimMode='payme'){
+		$http.get("http://app.sterlinghsa.com/api/v1/accounts/bankdetails",{params:{'type':'fsa', 'acc_num':$scope.fsaaccno},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
+		.success(function(data){
+			$scope.bank_details=data.bank_details;
+			//alert("claimMode")
+			//alert($rootScope.claimMode)
 			if(data.status=="FAILED"){
 				if($rootScope.IOS==true){
 					var alertPopup = $ionicPopup.alert({
 						title: 'Sorry',
-						template: 'You do not have a bank account on record.You must add a bank account by logging into sterlinghsa.com to schedule disbursements'
+						template: 'You do not have a bank account on record.You must add a bank account by logging into www.sterlingadministration.com to schedule disbursements'
 					});
 
 					alertPopup.then(function(res) {
 						window.history.back();
 					});
 				}else{
-					$cordovaDialogs.alert('You do not have a bank account on record.You must add a bank account by logging into sterlinghsa.com to schedule disbursements','Sorry','OK')
+					$cordovaDialogs.alert('You do not have a bank account on record.You must add a bank account by logging into www.sterlingadministration.com to schedule disbursements','Sorry','OK')
 					.then(function() {
 						window.history.back();
 					});
 				}
 			}
-		}
-	}).error(function(err){
-		$ionicLoading.hide();
-		if($rootScope.IOS==true){
-			var alertPopup = $ionicPopup.alert({
-				title: 'Sorry',
-				template: 'Session expired, Please Login Again'
-			});
+		}).error(function(err){
+			$ionicLoading.hide();
+			if($rootScope.IOS==true){
+				var alertPopup = $ionicPopup.alert({
+					title: 'Sorry',
+					template: 'Session expired, Please Login Again'
+				});
 
-			alertPopup.then(function(res) {
-				localStorage.clear();
-				window.location='login.html#/login';
-			});
-		}else{
-			$cordovaDialogs.confirm('Session expired, Please Login Again', 'Sorry', 'ok')
-			.then(function(buttonIndex) {
-				if(buttonIndex=="1")
-				{
+				alertPopup.then(function(res) {
 					localStorage.clear();
 					window.location='login.html#/login';
+				});
+			}else{
+				$cordovaDialogs.confirm('Session expired, Please Login Again', 'Sorry', 'ok')
+				.then(function(buttonIndex) {
+					if(buttonIndex=="1")
+					{
+						localStorage.clear();
+						window.location='login.html#/login';
+					}
+				});
+				return false;
+			}
+		});   
+	}else if($rootScope.claimMode='payprovider'){
+		$http.get('http://app.sterlinghsa.com/api/v1/accounts/payeeslist',{params:{'acc_num': $scope.fsaaccno},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} })
+		.success(function(data){
+			$scope.payee=data.payee;
+			if(data.payee==null){
+				if($rootScope.IOS==true){
+					var alertPopup = $ionicPopup.alert({
+						title: 'Sorry',
+						template: 'You currently do not have Pay Provider information on record.  Please add a provider to your account through www.SterlingAdministration.com to select this option in future'
+					});
+
+					alertPopup.then(function(res) {
+						window.history.back();
+					});
+				}else{
+					$cordovaDialogs.alert('You currently do not have Pay Provider information on record.  Please add a provider to your account through www.SterlingAdministration.com to select this option in future','Sorry','OK')
+					.then(function() {
+						window.history.back();
+					});
 				}
-			});
-			return false;
-		}
-	});
-   
+			}
+		}).error(function(err){
+
+		});
+	}
+	
     $scope.getTransDate=function(){
 		var today = new Date();
 		var _minDate = new Date();
@@ -3356,14 +3413,14 @@ angular.module('starter.controllers', [])
 				if($rootScope.IOS==true){
 					var alertPopup = $ionicPopup.alert({
 						title: 'Sorry',
-						template: 'You do not have any payee on record.You must add a payee account by logging into www.sterlinghsa.com to schedule new claim request for payee'
+						template: 'You currently do not have Pay Provider information on record.  Please add a provider to your account through www.SterlingAdministration.com to select this option in future'
 					});
 
 					alertPopup.then(function(res) {
 						window.history.back();
 					});
 				}else{
-					$cordovaDialogs.alert('You do not have any payee on record.You must add a payee account by logging into www.sterlinghsa.com to schedule new claim request for payee','Sorry','OK')
+					$cordovaDialogs.alert('You currently do not have Pay Provider information on record.  Please add a provider to your account through www.SterlingAdministration.com to select this option in future','Sorry','OK')
 					.then(function() {
 						window.history.back();
 					});
@@ -5037,14 +5094,14 @@ angular.module('starter.controllers', [])
 				if($rootScope.IOS==true){
 					var alertPopup = $ionicPopup.alert({
 						title: 'Sorry',
-						template: 'You do not have a bank account on record.You must add a bank account by logging into sterlinghsa.com to schedule disbursements'
+						template: 'You do not have a bank account on record.You must add a bank account by logging into www.sterlingadministration.com to schedule disbursements'
 					});
 
 					alertPopup.then(function(res) {
 						window.history.back();
 					});
 				}else{
-					$cordovaDialogs.alert('You do not have a bank account on record.You must add a bank account by logging into sterlinghsa.com to schedule disbursements','Sorry','OK')
+					$cordovaDialogs.alert('You do not have a bank account on record.You must add a bank account by logging into www.sterlingadministration.com to schedule disbursements','Sorry','OK')
 					.then(function() {
 						window.history.back();
 					});
@@ -5525,14 +5582,14 @@ angular.module('starter.controllers', [])
 				if($rootScope.IOS==true){
 					var alertPopup = $ionicPopup.alert({
 						title: 'Sorry',
-						template: 'You do not have any payee on record.You must add a payee account by logging into www.sterlinghsa.com to schedule new claim request for payee'
+						template: 'You currently do not have Pay Provider information on record.  Please add a provider to your account through www.SterlingAdministration.com to select this option in future'
 					});
 
 					alertPopup.then(function(res) {
 						window.history.back();
 					});
 				}else{
-					$cordovaDialogs.alert('You do not have any payee on record.You must add a payee account by logging into www.sterlinghsa.com to schedule new claim request for payee','Sorry','OK')
+					$cordovaDialogs.alert('You currently do not have Pay Provider information on record.  Please add a provider to your account through www.SterlingAdministration.com to select this option in future','Sorry','OK')
 					.then(function() {
 						window.history.back();
 					});
