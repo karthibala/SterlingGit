@@ -264,6 +264,7 @@ angular.module('starter.controllers', [])
 					mon = Month.indexOf(dataas[1]);
 				}
 				var selectedDate=mon+'/'+dataas[2]+'/'+dataas[3];
+				alert(selectedDate)
 				$scope.makecontribute.TransDate=selectedDate;
 			});
 		})
