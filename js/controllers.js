@@ -874,8 +874,15 @@ angular.module('starter.controllers', [])
 		if($rootScope.IOS==true){
 			if(today.getDay()==6){
 				var maxDate = ionic.Platform.isAndroid() ? new Date() : (new Date(new Date().getTime() + 48 * 60 * 60 * 1000)).valueOf();
+				var startDate = new Date(new Date().getTime() + 48 * 60 * 60 * 1000);
 			}else{
 				var maxDate = ionic.Platform.isAndroid() ? new Date() : (new Date(new Date().getTime() + 24 * 60 * 60 * 1000)).valueOf();
+				var startDate = new Date(new Date().getTime() + 24 * 60 * 60 * 1000);
+			}
+			var options = {
+				date: new Date(startDate),
+				mode: 'date', // or 'time'
+				minDate: maxDate
 			}
 		}else{
 			if(today.getDay()==6){
@@ -883,13 +890,13 @@ angular.module('starter.controllers', [])
 			}else{
 				var maxDate = ionic.Platform.isIOS() ? new Date() : (new Date(new Date().getTime() + 24 * 60 * 60 * 1000)).valueOf();
 			}
+			var options = {
+				date: new Date(),
+				mode: 'date', // or 'time'
+				minDate: maxDate
+			}
 		}
 		
-		var options = {
-			date: new Date(),
-			mode: 'date', // or 'time'
-			minDate: maxDate
-		}
 		$ionicPlatform.ready(function(){
 			$cordovaDatePicker.show(options).then(function(date){
 				var date1=date.toString();
@@ -1241,8 +1248,15 @@ angular.module('starter.controllers', [])
 		if($rootScope.IOS==true){
 			if(today.getDay()==6){
 				var maxDate = ionic.Platform.isAndroid() ? new Date() : (new Date(new Date().getTime() + 48 * 60 * 60 * 1000)).valueOf();
+				var startDate = new Date(new Date().getTime() + 48 * 60 * 60 * 1000);
 			}else{
 				var maxDate = ionic.Platform.isAndroid() ? new Date() : (new Date(new Date().getTime() + 24 * 60 * 60 * 1000)).valueOf();
+				var startDate = new Date(new Date().getTime() + 24 * 60 * 60 * 1000);
+			}
+			var options = {
+				date: new Date(startDate),
+				mode: 'date', // or 'time'
+				minDate: maxDate
 			}
 		}else{
 			if(today.getDay()==6){
@@ -1250,13 +1264,13 @@ angular.module('starter.controllers', [])
 			}else{
 				var maxDate = ionic.Platform.isIOS() ? new Date() : (new Date(new Date().getTime() + 24 * 60 * 60 * 1000)).valueOf();
 			}
+			var options = {
+				date: new Date(),
+				mode: 'date', // or 'time'
+				minDate: maxDate
+			}
 		}
 		
-		var options = {
-			date: new Date(),
-			mode: 'date', // or 'time'
-			minDate: maxDate
-		}
 		$ionicPlatform.ready(function(){
 			$cordovaDatePicker.show(options).then(function(date){
 				var date1=date.toString();
