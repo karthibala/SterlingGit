@@ -62,7 +62,7 @@
 							<span class="input-label ItemlineHead1 ">
 								Enter Transaction Date
 							</span>
-							<input type="text"  ng-focus="getTransDate()" name="transaction" class="bgnew" ng-model="payprovierValues.TransDate"  id="forminput "  placeholder="Enter Transaction Date" ng-readonly="true" required>
+							<input type="text"  ng-click="getTransDate()" name="transaction" class="bgnew" ng-model="payprovierValues.TransDate"  id="forminput "  placeholder="Enter Transaction Date" ng-readonly="true" required>
 						</label>
 						<div class="row">
 							<span style="color:red" ng-show="myForm.transaction.$dirty && myForm.transaction.$invalid">

@@ -58,7 +58,7 @@
 
 						<label class="item item-input  item-floating-label formselect" ng-class="{ 'has-errors' :myForm.transaction.$dirty && myForm.transaction.$invalid  ,'no-errors' :myForm.transaction.$valid  }">
 							<span class="input-label ItemlineHead1">Enter Transaction</span>
-							<input type="text" ng-focus="getTransDate()"  name="transaction"  ng-model="paymeValues.TransDate" id="forminput"  placeholder="Enter Transaction Date" class="bgnew" ng-readonly="true" required>
+							<input type="text" ng-click="getTransDate()"  name="transaction"  ng-model="paymeValues.TransDate" id="forminput"  placeholder="Enter Transaction Date" class="bgnew" ng-readonly="true" required>
 						</label>
 						<div class="row" >
 							<span style="color:red" ng-show="myForm.transaction.$dirty && myForm.transaction.$invalid ">
