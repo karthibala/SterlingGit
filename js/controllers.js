@@ -231,7 +231,11 @@ angular.module('starter.controllers', [])
 		//var maxDate = ionic.Platform.isIOS() ? new Date() : (new Date()).valueOf()+1493998268893;
 		
 		if($rootScope.IOS==true){
-			var maxDate = ionic.Platform.isAndroid() ? new Date() : (new Date(new Date().getTime() + 24 * 60 * 60 * 1000)).valueOf();
+			if(today.getDay()==6){
+				var maxDate = ionic.Platform.isAndroid() ? new Date() : (new Date(new Date().getTime() + 48 * 60 * 60 * 1000)).valueOf();
+			}else{
+				var maxDate = ionic.Platform.isAndroid() ? new Date() : (new Date(new Date().getTime() + 24 * 60 * 60 * 1000)).valueOf();
+			}
 		}else{
 			if(today.getDay()==6){
 				var maxDate = ionic.Platform.isIOS() ? new Date() : (new Date(new Date().getTime() + 48 * 60 * 60 * 1000)).valueOf();
@@ -239,7 +243,6 @@ angular.module('starter.controllers', [])
 				var maxDate = ionic.Platform.isIOS() ? new Date() : (new Date(new Date().getTime() + 24 * 60 * 60 * 1000)).valueOf();
 			}
 		}
-		
 		
 		var options = {
 			date: new Date(),
@@ -861,10 +864,18 @@ angular.module('starter.controllers', [])
 	$scope.TransDate="";
 	$scope.getTransDate=function(){
 		var today = new Date();
-		if(today.getDay()==6){
-			var maxDate = ionic.Platform.isIOS() ? new Date() : (new Date(new Date().getTime() + 48 * 60 * 60 * 1000)).valueOf();
+		if($rootScope.IOS==true){
+			if(today.getDay()==6){
+				var maxDate = ionic.Platform.isAndroid() ? new Date() : (new Date(new Date().getTime() + 48 * 60 * 60 * 1000)).valueOf();
+			}else{
+				var maxDate = ionic.Platform.isAndroid() ? new Date() : (new Date(new Date().getTime() + 24 * 60 * 60 * 1000)).valueOf();
+			}
 		}else{
-			var maxDate = ionic.Platform.isIOS() ? new Date() : (new Date(new Date().getTime() + 24 * 60 * 60 * 1000)).valueOf();
+			if(today.getDay()==6){
+				var maxDate = ionic.Platform.isIOS() ? new Date() : (new Date(new Date().getTime() + 48 * 60 * 60 * 1000)).valueOf();
+			}else{
+				var maxDate = ionic.Platform.isIOS() ? new Date() : (new Date(new Date().getTime() + 24 * 60 * 60 * 1000)).valueOf();
+			}
 		}
 		
 		var options = {
@@ -1220,10 +1231,18 @@ angular.module('starter.controllers', [])
 	
 	$scope.getTransDate=function(){
 		var today = new Date();
-		if(today.getDay()==6){
-			var maxDate = ionic.Platform.isIOS() ? new Date() : (new Date(new Date().getTime() + 48 * 60 * 60 * 1000)).valueOf();
+		if($rootScope.IOS==true){
+			if(today.getDay()==6){
+				var maxDate = ionic.Platform.isAndroid() ? new Date() : (new Date(new Date().getTime() + 48 * 60 * 60 * 1000)).valueOf();
+			}else{
+				var maxDate = ionic.Platform.isAndroid() ? new Date() : (new Date(new Date().getTime() + 24 * 60 * 60 * 1000)).valueOf();
+			}
 		}else{
-			var maxDate = ionic.Platform.isIOS() ? new Date() : (new Date(new Date().getTime() + 24 * 60 * 60 * 1000)).valueOf();
+			if(today.getDay()==6){
+				var maxDate = ionic.Platform.isIOS() ? new Date() : (new Date(new Date().getTime() + 48 * 60 * 60 * 1000)).valueOf();
+			}else{
+				var maxDate = ionic.Platform.isIOS() ? new Date() : (new Date(new Date().getTime() + 24 * 60 * 60 * 1000)).valueOf();
+			}
 		}
 		
 		var options = {
