@@ -232,10 +232,11 @@ angular.module('starter.controllers', [])
 		
 		if($rootScope.IOS==true){
 			if(today.getDay()==6){
-				var maxDate = ionic.Platform.isAndroid() ? new Date() : (new Date(new Date().getTime() + 48 * 60 * 60 * 1000)).valueOf();
+				var startDate = ionic.Platform.isAndroid() ? new Date() : (new Date(new Date().getTime() + 48 * 60 * 60 * 1000)).valueOf();
 			}else{
-				var maxDate = ionic.Platform.isAndroid() ? new Date() : (new Date(new Date().getTime() + 24 * 60 * 60 * 1000)).valueOf();
+				var startDate = ionic.Platform.isAndroid() ? new Date() : (new Date(new Date().getTime() + 24 * 60 * 60 * 1000)).valueOf();
 			}
+			var maxDate=Date.parse(startDate)
 		}else{
 			if(today.getDay()==6){
 				var maxDate = ionic.Platform.isIOS() ? new Date() : (new Date(new Date().getTime() + 48 * 60 * 60 * 1000)).valueOf();
@@ -247,7 +248,7 @@ angular.module('starter.controllers', [])
 		var options = {
 			date: new Date(),
 			mode: 'date', // or 'time'
-			minDate: new Date() - 1
+			minDate: maxDate
 		}
 		$ionicPlatform.ready(function(){
 			$cordovaDatePicker.show(options).then(function(date){
