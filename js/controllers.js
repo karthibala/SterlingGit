@@ -231,12 +231,12 @@ angular.module('starter.controllers', [])
 		//var maxDate = ionic.Platform.isIOS() ? new Date() : (new Date()).valueOf()+1493998268893;
 		
 		if($rootScope.IOS==true){
-			if(today.getDay()==6){
-				var startDate = ionic.Platform.isAndroid() ? new Date() : (new Date(new Date().getTime() + 48 * 60 * 60 * 1000)).valueOf();
-			}else{
-				var startDate = ionic.Platform.isAndroid() ? new Date() : (new Date(new Date().getTime() + 24 * 60 * 60 * 1000)).valueOf();
-			}
-			var maxDate=Date.parse(startDate)
+			// if(today.getDay()==6){
+				// var startDate = ionic.Platform.isAndroid() ? new Date() : (new Date(new Date().getTime() + 48 * 60 * 60 * 1000)).valueOf();
+			// }else{
+				// var startDate = ionic.Platform.isAndroid() ? new Date() : (new Date(new Date().getTime() + 24 * 60 * 60 * 1000)).valueOf();
+			// }
+			var maxDate = ionic.Platform.isIOS() ? new Date() : (new Date()).valueOf();
 		}else{
 			if(today.getDay()==6){
 				var maxDate = ionic.Platform.isIOS() ? new Date() : (new Date(new Date().getTime() + 48 * 60 * 60 * 1000)).valueOf();
