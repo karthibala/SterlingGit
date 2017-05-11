@@ -2719,14 +2719,12 @@ angular.module('starter.controllers', [])
 	
 	if($rootScope.planCode=='DCA'){
 		$scope.getTransDate=function(){
-			var today = new Date();
-			var _minDate = new Date();
-			_minDate.setMonth(today.getMonth() -1000);
-			var mindate = ionic.Platform.isIOS() ? new Date(_minDate.getFullYear(), _minDate.getMonth(), _minDate.getDay()) :
-			(new Date(_minDate.getFullYear(), _minDate.getMonth(), _minDate.getDay())).valueOf();
-			var maxDate = ionic.Platform.isIOS() ? new Date() : (new Date()).valueOf();
-
-			$cordovaDatePicker.show({date: today}).then
+			var options = {
+				date: new Date(),
+				mode: 'date', // or 'time'
+			}
+			
+			$cordovaDatePicker.show(options).then
 			(function(date)
 			{
 				var date1=date.toString();
@@ -2747,14 +2745,12 @@ angular.module('starter.controllers', [])
 			});
 		};
 		$scope.EndgetTransDate=function(){
-			var today = new Date();
-			var _minDate = new Date();
-			_minDate.setMonth(today.getMonth() -1000);
-			var mindate = ionic.Platform.isIOS() ? new Date(_minDate.getFullYear(), _minDate.getMonth(), _minDate.getDay()) :
-			(new Date(_minDate.getFullYear(), _minDate.getMonth(), _minDate.getDay())).valueOf();
-			var maxDate = ionic.Platform.isIOS() ? new Date() : (new Date()).valueOf();
+			var options = {
+				date: new Date(),
+				mode: 'date', // or 'time'
+			}
 
-			$cordovaDatePicker.show({date: today}).then
+			$cordovaDatePicker.show(options).then
 			(function(date)
 			{
 				var date1=date.toString();
