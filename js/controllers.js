@@ -2830,9 +2830,9 @@ angular.module('starter.controllers', [])
 	}
 	
 	$scope.newclaimsubmit=function(){
-		// if($rootScope.planCode=='TRN' || $rootScope.planCode=='PKG'){
-			// $scope.imgCheck='';
-		// }
+		if($rootScope.planCode=='TRN' || $rootScope.planCode=='PKG'){
+			$scope.imgCheck='';
+		}
 		if($scope.newclaimvalues.amount == 0){
 			if($rootScope.IOS==true){
 				var alertPopup = $ionicPopup.alert({
@@ -2878,7 +2878,7 @@ angular.module('starter.controllers', [])
 				});
 			}
 
-		}else if($scope.imgSrc==undefined){
+		}else if($scope.imgCheck==undefined){
 			if($rootScope.IOS==true){
 				var alertPopup = $ionicPopup.alert({
 					title: 'Sorry',
@@ -3315,6 +3315,7 @@ angular.module('starter.controllers', [])
 					};
 					$cordovaCamera.getPicture(options).then(function(imageData) {
 						$scope.imgSrc=imageData;
+						$scope.imgCheck=imageData;
 						$scope.randomFile=Math.floor((Math.random() * 10000000000) + 1)+".jpg";
 					}, function(err) {
 					});	
@@ -3331,6 +3332,7 @@ angular.module('starter.controllers', [])
 					};
 					$cordovaCamera.getPicture(options).then(function(imageData) {
 						$scope.imgSrc=imageData;
+						$scope.imgCheck=imageData;
 						$scope.randomFile=Math.floor((Math.random() * 10000000000) + 1)+".jpg";
 					}, function(err) {
 					});
@@ -3352,6 +3354,7 @@ angular.module('starter.controllers', [])
 					};
 					$cordovaCamera.getPicture(options).then(function(imageData) {
 						$scope.imgSrc=imageData;
+						$scope.imgCheck=imageData;
 						$scope.randomFile=Math.floor((Math.random() * 10000000000) + 1)+".jpg";
 					}, function(err) {
 					});
@@ -3368,6 +3371,7 @@ angular.module('starter.controllers', [])
 					};
 					$cordovaCamera.getPicture(options).then(function(imageData) {
 						$scope.imgSrc=imageData;
+						$scope.imgCheck=imageData;
 						$scope.randomFile=Math.floor((Math.random() * 10000000000) + 1)+".jpg";
 					}, function(err) {
 					});
@@ -3378,6 +3382,9 @@ angular.module('starter.controllers', [])
 	}
 	
 	$scope.newclaimFsa=function(){
+		if($rootScope.planCode=='TRN' || $rootScope.planCode=='PKG'){
+			$scope.imgCheck='';
+		}
 		if($scope.newclaimvalues.amount == 0){
 			$cordovaDialogs.alert('Please enter the amount greater than 0','Sorry','OK')
 			.then(function() {
@@ -3413,7 +3420,7 @@ angular.module('starter.controllers', [])
 				});
 			}
 
-		}else if($scope.imgSrc==undefined){
+		}else if($scope.imgCheck==undefined){
 			if($rootScope.IOS==true){
 				var alertPopup = $ionicPopup.alert({
 					title: 'Sorry',
