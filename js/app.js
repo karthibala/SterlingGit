@@ -1,6 +1,6 @@
 angular.module('starter', ['ionic', 'starter.controllers','ngCordova'])
 
-.run(function($ionicPlatform,$rootScope,$location,$state,$cordovaToast,$timeout,$interval) {
+.run(function($ionicPlatform,$rootScope,$location,$state,$cordovaToast,$timeout,$interval,$location,$cordovaToast) {
 	$ionicPlatform.ready(function() {
 		if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
 			cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
@@ -11,11 +11,23 @@ angular.module('starter', ['ionic', 'starter.controllers','ngCordova'])
 		}
 	});
 	$ionicPlatform.registerBackButtonAction(function () {
-	if (condition) {
-		//navigator.app.exitApp();
-	} else {
-		
-	}
+		//alert($location.url())
+		if($location.url()=='/login'){
+			if ($rootScope.backButtonPressedOnceToExit) {
+				ionic.Platform.exitApp();
+			}else{
+				$rootScope.backButtonPressedOnceToExit = true;
+				$cordovaToast.showShortBottom('Press again to exit').then(function(success) {
+				// success
+				}, function (error) {
+				// error
+				});
+				setTimeout(function(){
+					$rootScope.backButtonPressedOnceToExit = false;
+				},2000);
+			}
+			//navigator.app.exitApp();
+		}
 	}, 100);
 })
 
