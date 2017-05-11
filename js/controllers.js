@@ -2576,6 +2576,7 @@ angular.module('starter.controllers', [])
 					};
 					$cordovaCamera.getPicture(options).then(function(imageData) {
 						 $scope.imgSrc=imageData;
+						 $scope.imgCheck=imageData;
 						 $scope.randomFile=Math.floor((Math.random() * 10000000000) + 1)+".jpg";
 					}, function(err) {
 					});
@@ -2593,6 +2594,7 @@ angular.module('starter.controllers', [])
 					};
 					$cordovaCamera.getPicture(options).then(function(imageData) {
 						$scope.imgSrc=imageData;
+						$scope.imgCheck=imageData;
 						$scope.randomFile=Math.floor((Math.random() * 10000000000) + 1)+".jpg";
 					}, function(err) {
 					});
@@ -2614,6 +2616,7 @@ angular.module('starter.controllers', [])
 					};
 					$cordovaCamera.getPicture(options).then(function(imageData) {
 						$scope.imgSrc=imageData;
+						$scope.imgCheck=imageData;
 						$scope.randomFile=Math.floor((Math.random() * 10000000000) + 1)+".jpg";
 					}, function(err) {
 					});
@@ -2630,6 +2633,7 @@ angular.module('starter.controllers', [])
 					};
 					$cordovaCamera.getPicture(options).then(function(imageData) {
 						$scope.imgSrc=imageData;
+						$scope.imgCheck=imageData;
 						$scope.randomFile=Math.floor((Math.random() * 10000000000) + 1)+".jpg";
 					}, function(err) {
 					});
@@ -2712,64 +2716,127 @@ angular.module('starter.controllers', [])
 		});
 	}
 	
-    $scope.getTransDate=function(){
-		var today = new Date();
-		var _minDate = new Date();
-		_minDate.setMonth(today.getMonth() -1000);
-		var mindate = ionic.Platform.isIOS() ? new Date(_minDate.getFullYear(), _minDate.getMonth(), _minDate.getDay()) :
-		(new Date(_minDate.getFullYear(), _minDate.getMonth(), _minDate.getDay())).valueOf();
-		var maxDate = ionic.Platform.isIOS() ? new Date() : (new Date()).valueOf();
+	
+	if($rootScope.planCode=='DCA'){
+		$scope.getTransDate=function(){
+			var today = new Date();
+			var _minDate = new Date();
+			_minDate.setMonth(today.getMonth() -1000);
+			var mindate = ionic.Platform.isIOS() ? new Date(_minDate.getFullYear(), _minDate.getMonth(), _minDate.getDay()) :
+			(new Date(_minDate.getFullYear(), _minDate.getMonth(), _minDate.getDay())).valueOf();
+			var maxDate = ionic.Platform.isIOS() ? new Date() : (new Date()).valueOf();
 
-		$cordovaDatePicker.show({date: today,minDate: mindate,maxDate: maxDate}).then
-		(function(date)
-		{
-			var date1=date.toString();
-			var dataas=date1.split(" ");
-			var Month = ["App","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
-			var mon=""; 
-			if(Month.indexOf(dataas[1]).toString().length==1)
+			$cordovaDatePicker.show({date: today}).then
+			(function(date)
 			{
-				mon="0"+Month.indexOf(dataas[1]);
-			}
-			else
-			{
-				mon = Month.indexOf(dataas[1]);
-			}
-			var selectedDate=mon+'/'+dataas[2]+'/'+dataas[3];
-			$scope.newclaimvalues.startTransDate=selectedDate;
+				var date1=date.toString();
+				var dataas=date1.split(" ");
+				var Month = ["App","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+				var mon=""; 
+				if(Month.indexOf(dataas[1]).toString().length==1)
+				{
+					mon="0"+Month.indexOf(dataas[1]);
+				}
+				else
+				{
+					mon = Month.indexOf(dataas[1]);
+				}
+				var selectedDate=mon+'/'+dataas[2]+'/'+dataas[3];
+				$scope.newclaimvalues.startTransDate=selectedDate;
 
-		});
-	};
-	$scope.EndgetTransDate=function(){
-		var today = new Date();
-		var _minDate = new Date();
-		_minDate.setMonth(today.getMonth() -1000);
-		var mindate = ionic.Platform.isIOS() ? new Date(_minDate.getFullYear(), _minDate.getMonth(), _minDate.getDay()) :
-		(new Date(_minDate.getFullYear(), _minDate.getMonth(), _minDate.getDay())).valueOf();
-		var maxDate = ionic.Platform.isIOS() ? new Date() : (new Date()).valueOf();
+			});
+		};
+		$scope.EndgetTransDate=function(){
+			var today = new Date();
+			var _minDate = new Date();
+			_minDate.setMonth(today.getMonth() -1000);
+			var mindate = ionic.Platform.isIOS() ? new Date(_minDate.getFullYear(), _minDate.getMonth(), _minDate.getDay()) :
+			(new Date(_minDate.getFullYear(), _minDate.getMonth(), _minDate.getDay())).valueOf();
+			var maxDate = ionic.Platform.isIOS() ? new Date() : (new Date()).valueOf();
 
-		$cordovaDatePicker.show({date: today,minDate: mindate,maxDate: maxDate}).then
-		(function(date)
-		{
-			var date1=date.toString();
-			var dataas=date1.split(" ");
-			var Month = ["App","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
-			var mon=""; 
-			if(Month.indexOf(dataas[1]).toString().length==1)
+			$cordovaDatePicker.show({date: today}).then
+			(function(date)
 			{
-				mon="0"+Month.indexOf(dataas[1]);
-			}
-			else
-			{
-				mon = Month.indexOf(dataas[1]);
-			}
-			var selectedDate=mon+'/'+dataas[2]+'/'+dataas[3];
-			$scope.newclaimvalues.endTransDate=selectedDate;
+				var date1=date.toString();
+				var dataas=date1.split(" ");
+				var Month = ["App","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+				var mon=""; 
+				if(Month.indexOf(dataas[1]).toString().length==1)
+				{
+					mon="0"+Month.indexOf(dataas[1]);
+				}
+				else
+				{
+					mon = Month.indexOf(dataas[1]);
+				}
+				var selectedDate=mon+'/'+dataas[2]+'/'+dataas[3];
+				$scope.newclaimvalues.endTransDate=selectedDate;
 
-		});
-	};
+			});
+		};
+	}else{
+		$scope.getTransDate=function(){
+			var today = new Date();
+			var _minDate = new Date();
+			_minDate.setMonth(today.getMonth() -1000);
+			var mindate = ionic.Platform.isIOS() ? new Date(_minDate.getFullYear(), _minDate.getMonth(), _minDate.getDay()) :
+			(new Date(_minDate.getFullYear(), _minDate.getMonth(), _minDate.getDay())).valueOf();
+			var maxDate = ionic.Platform.isIOS() ? new Date() : (new Date()).valueOf();
+
+			$cordovaDatePicker.show({date: today,minDate: mindate,maxDate: maxDate}).then
+			(function(date)
+			{
+				var date1=date.toString();
+				var dataas=date1.split(" ");
+				var Month = ["App","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+				var mon=""; 
+				if(Month.indexOf(dataas[1]).toString().length==1)
+				{
+					mon="0"+Month.indexOf(dataas[1]);
+				}
+				else
+				{
+					mon = Month.indexOf(dataas[1]);
+				}
+				var selectedDate=mon+'/'+dataas[2]+'/'+dataas[3];
+				$scope.newclaimvalues.startTransDate=selectedDate;
+
+			});
+		};
+		$scope.EndgetTransDate=function(){
+			var today = new Date();
+			var _minDate = new Date();
+			_minDate.setMonth(today.getMonth() -1000);
+			var mindate = ionic.Platform.isIOS() ? new Date(_minDate.getFullYear(), _minDate.getMonth(), _minDate.getDay()) :
+			(new Date(_minDate.getFullYear(), _minDate.getMonth(), _minDate.getDay())).valueOf();
+			var maxDate = ionic.Platform.isIOS() ? new Date() : (new Date()).valueOf();
+
+			$cordovaDatePicker.show({date: today,minDate: mindate,maxDate: maxDate}).then
+			(function(date)
+			{
+				var date1=date.toString();
+				var dataas=date1.split(" ");
+				var Month = ["App","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+				var mon=""; 
+				if(Month.indexOf(dataas[1]).toString().length==1)
+				{
+					mon="0"+Month.indexOf(dataas[1]);
+				}
+				else
+				{
+					mon = Month.indexOf(dataas[1]);
+				}
+				var selectedDate=mon+'/'+dataas[2]+'/'+dataas[3];
+				$scope.newclaimvalues.endTransDate=selectedDate;
+
+			});
+		};
+	}
 	
 	$scope.newclaimsubmit=function(){
+		// if($rootScope.planCode=='TRN' || $rootScope.planCode=='PKG'){
+			// $scope.imgCheck='';
+		// }
 		if($scope.newclaimvalues.amount == 0){
 			if($rootScope.IOS==true){
 				var alertPopup = $ionicPopup.alert({
@@ -3476,62 +3543,122 @@ angular.module('starter.controllers', [])
 	}).error(function(err){
 	});
 	
-	$scope.getTransDate=function(){
-		var today = new Date();
-		var _minDate = new Date();
-		_minDate.setMonth(today.getMonth() -1000);
-		var mindate = ionic.Platform.isIOS() ? new Date(_minDate.getFullYear(), _minDate.getMonth(), _minDate.getDay()) :
-		(new Date(_minDate.getFullYear(), _minDate.getMonth(), _minDate.getDay())).valueOf();
-		var maxDate = ionic.Platform.isIOS() ? new Date() : (new Date()).valueOf();
+	if($rootScope.planCode=='DCA'){
+		$scope.getTransDate=function(){
+			var today = new Date();
+			var _minDate = new Date();
+			_minDate.setMonth(today.getMonth() -1000);
+			var mindate = ionic.Platform.isIOS() ? new Date(_minDate.getFullYear(), _minDate.getMonth(), _minDate.getDay()) :
+			(new Date(_minDate.getFullYear(), _minDate.getMonth(), _minDate.getDay())).valueOf();
+			var maxDate = ionic.Platform.isIOS() ? new Date() : (new Date()).valueOf();
 
-		$cordovaDatePicker.show({date: today,minDate: mindate,maxDate: maxDate}).then
-		(function(date)
-		{
-			var date1=date.toString();
-			var dataas=date1.split(" ");
-			var Month = ["App","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
-			var mon=""; 
-			if(Month.indexOf(dataas[1]).toString().length==1)
+			$cordovaDatePicker.show({date: today}).then
+			(function(date)
 			{
-				mon="0"+Month.indexOf(dataas[1]);
-			}
-			else
-			{
-				mon = Month.indexOf(dataas[1]);
-			}
-			var selectedDate=mon+'/'+dataas[2]+'/'+dataas[3];
-			$scope.newclaimvalues.startTransDate=selectedDate;
+				var date1=date.toString();
+				var dataas=date1.split(" ");
+				var Month = ["App","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+				var mon=""; 
+				if(Month.indexOf(dataas[1]).toString().length==1)
+				{
+					mon="0"+Month.indexOf(dataas[1]);
+				}
+				else
+				{
+					mon = Month.indexOf(dataas[1]);
+				}
+				var selectedDate=mon+'/'+dataas[2]+'/'+dataas[3];
+				$scope.newclaimvalues.startTransDate=selectedDate;
 
-		});
-	};
-	$scope.EndgetTransDate=function(){
-		var today = new Date();
-		var _minDate = new Date();
-		_minDate.setMonth(today.getMonth() -1000);
-		var mindate = ionic.Platform.isIOS() ? new Date(_minDate.getFullYear(), _minDate.getMonth(), _minDate.getDay()) :
-		(new Date(_minDate.getFullYear(), _minDate.getMonth(), _minDate.getDay())).valueOf();
-		var maxDate = ionic.Platform.isIOS() ? new Date() : (new Date()).valueOf();
+			});
+		};
+		$scope.EndgetTransDate=function(){
+			var today = new Date();
+			var _minDate = new Date();
+			_minDate.setMonth(today.getMonth() -1000);
+			var mindate = ionic.Platform.isIOS() ? new Date(_minDate.getFullYear(), _minDate.getMonth(), _minDate.getDay()) :
+			(new Date(_minDate.getFullYear(), _minDate.getMonth(), _minDate.getDay())).valueOf();
+			var maxDate = ionic.Platform.isIOS() ? new Date() : (new Date()).valueOf();
 
-		$cordovaDatePicker.show({date: today,minDate: mindate,maxDate: maxDate}).then
-		(function(date)
-		{
-			var date1=date.toString();
-			var dataas=date1.split(" ");
-			var Month = ["App","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
-			var mon=""; 
-			if(Month.indexOf(dataas[1]).toString().length==1)
+			$cordovaDatePicker.show({date: today}).then
+			(function(date)
 			{
-				mon="0"+Month.indexOf(dataas[1]);
-			}
-			else
-			{
-				mon = Month.indexOf(dataas[1]);
-			}
-			var selectedDate=mon+'/'+dataas[2]+'/'+dataas[3];
-			$scope.newclaimvalues.endTransDate=selectedDate;
+				var date1=date.toString();
+				var dataas=date1.split(" ");
+				var Month = ["App","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+				var mon=""; 
+				if(Month.indexOf(dataas[1]).toString().length==1)
+				{
+					mon="0"+Month.indexOf(dataas[1]);
+				}
+				else
+				{
+					mon = Month.indexOf(dataas[1]);
+				}
+				var selectedDate=mon+'/'+dataas[2]+'/'+dataas[3];
+				$scope.newclaimvalues.endTransDate=selectedDate;
 
-		});
-	};
+			});
+		};
+	}else{
+		$scope.getTransDate=function(){
+			var today = new Date();
+			var _minDate = new Date();
+			_minDate.setMonth(today.getMonth() -1000);
+			var mindate = ionic.Platform.isIOS() ? new Date(_minDate.getFullYear(), _minDate.getMonth(), _minDate.getDay()) :
+			(new Date(_minDate.getFullYear(), _minDate.getMonth(), _minDate.getDay())).valueOf();
+			var maxDate = ionic.Platform.isIOS() ? new Date() : (new Date()).valueOf();
+
+			$cordovaDatePicker.show({date: today,minDate: mindate,maxDate: maxDate}).then
+			(function(date)
+			{
+				var date1=date.toString();
+				var dataas=date1.split(" ");
+				var Month = ["App","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+				var mon=""; 
+				if(Month.indexOf(dataas[1]).toString().length==1)
+				{
+					mon="0"+Month.indexOf(dataas[1]);
+				}
+				else
+				{
+					mon = Month.indexOf(dataas[1]);
+				}
+				var selectedDate=mon+'/'+dataas[2]+'/'+dataas[3];
+				$scope.newclaimvalues.startTransDate=selectedDate;
+
+			});
+		};
+		$scope.EndgetTransDate=function(){
+			var today = new Date();
+			var _minDate = new Date();
+			_minDate.setMonth(today.getMonth() -1000);
+			var mindate = ionic.Platform.isIOS() ? new Date(_minDate.getFullYear(), _minDate.getMonth(), _minDate.getDay()) :
+			(new Date(_minDate.getFullYear(), _minDate.getMonth(), _minDate.getDay())).valueOf();
+			var maxDate = ionic.Platform.isIOS() ? new Date() : (new Date()).valueOf();
+
+			$cordovaDatePicker.show({date: today,minDate: mindate,maxDate: maxDate}).then
+			(function(date)
+			{
+				var date1=date.toString();
+				var dataas=date1.split(" ");
+				var Month = ["App","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+				var mon=""; 
+				if(Month.indexOf(dataas[1]).toString().length==1)
+				{
+					mon="0"+Month.indexOf(dataas[1]);
+				}
+				else
+				{
+					mon = Month.indexOf(dataas[1]);
+				}
+				var selectedDate=mon+'/'+dataas[2]+'/'+dataas[3];
+				$scope.newclaimvalues.endTransDate=selectedDate;
+
+			});
+		};
+	}
+	
 })
 
 .controller('HealthCtrl', function($scope,$ionicPlatform,$cordovaNetwork,$cordovaDatePicker,$http,$location,$ionicModal,$cordovaDialogs,$ionicLoading,$cordovaNetwork,$rootScope) {
