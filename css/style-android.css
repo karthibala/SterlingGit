@@ -1,4 +1,7 @@
 /* Empty. Add your own CSS if you like */
+span{
+	width:100% !important;
+}
 .accountcontent{
 	margin-left:20px; 
 	margin-top:32px;
@@ -324,7 +327,7 @@ hr{
 	font-family: 'Avenir Next LT Pro';
 	font-weight: normal;
 	font-style: normal;
-	font-size:22px;
+	font-size:20px;
 	
 }
 .ItemLinehr{
