@@ -87,7 +87,6 @@ angular.module('starter.controllers', [])
 							title: 'Sorry',
 							template: 'Username or password is incorrect'
 						});
-
 						alertPopup.then(function(res) {
 						});
 					}else{
@@ -1039,21 +1038,6 @@ angular.module('starter.controllers', [])
 				.then(function() {
 				});
 			}
-		}else if($scope.imgSrc==undefined){
-			if($rootScope.IOS==true){
-				var alertPopup = $ionicPopup.alert({
-					title: 'Sorry',
-					template: 'Please upload one receipt'
-				});
-
-				alertPopup.then(function(res) {
-				});
-			}else{
-				$cordovaDialogs.alert('Please upload one receipt')
-				.then(function() {
-				});
-			}
-
 		}else {	
 			$ionicLoading.show({
 			template: '<ion-spinner icon="ios"></ion-spinner><br>Loading...'
@@ -1404,21 +1388,6 @@ angular.module('starter.controllers', [])
 				.then(function() {
 				});
 			}
-		}else if($scope.imgSrc==undefined){
-			if($rootScope.IOS==true){
-				var alertPopup = $ionicPopup.alert({
-					title: 'Sorry',
-					template: 'Please upload one receipt'
-				});
-
-				alertPopup.then(function(res) {
-				});
-			}else{
-				$cordovaDialogs.alert('Please upload one receipt')
-				.then(function() {
-				});
-			}
-
 		}else{
 			$ionicLoading.show({
 			template: '<ion-spinner icon="ios"></ion-spinner><br>Loading...'
