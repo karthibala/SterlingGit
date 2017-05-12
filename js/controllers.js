@@ -254,10 +254,18 @@ angular.module('starter.controllers', [])
 			}else{
 				var maxDate = ionic.Platform.isIOS() ? new Date() : (new Date(new Date().getTime() + 24 * 60 * 60 * 1000)).valueOf();
 			}
-			var options = {
-				date: new Date(),
-				mode: 'date', // or 'time'
-				minDate: maxDate
+			if($scope.makecontribute.TransDate){
+				var options = {
+					date: new Date($scope.makecontribute.TransDate),
+					mode: 'date', // or 'time'
+					minDate: maxDate
+				}
+			}else{
+				var options = {
+					date: new Date(),
+					mode: 'date', // or 'time'
+					minDate: maxDate
+				}
 			}
 		}
 		
@@ -901,11 +909,20 @@ angular.module('starter.controllers', [])
 			}else{
 				var maxDate = ionic.Platform.isIOS() ? new Date() : (new Date(new Date().getTime() + 24 * 60 * 60 * 1000)).valueOf();
 			}
-			var options = {
-				date: new Date(),
-				mode: 'date', // or 'time'
-				minDate: maxDate
+			if($scope.paymeValues.TransDate){
+				var options = {
+					date: new Date($scope.paymeValues.TransDate),
+					mode: 'date', // or 'time'
+					minDate: maxDate
+				}
+			}else{
+				var options = {
+					date: new Date(),
+					mode: 'date', // or 'time'
+					minDate: maxDate
+				}
 			}
+			
 		}
 		
 		$ionicPlatform.ready(function(){
@@ -1307,10 +1324,18 @@ angular.module('starter.controllers', [])
 			}else{
 				var maxDate = ionic.Platform.isIOS() ? new Date() : (new Date(new Date().getTime() + 24 * 60 * 60 * 1000)).valueOf();
 			}
-			var options = {
-				date: new Date(),
-				mode: 'date', // or 'time'
-				minDate: maxDate
+			if($scope.payprovierValues.TransDate){
+				var options = {
+					date: new Date($scope.payprovierValues.TransDate),
+					mode: 'date', // or 'time'
+					minDate: maxDate
+				}
+			}else{
+				var options = {
+					date: new Date(),
+					mode: 'date', // or 'time'
+					minDate: maxDate
+				}
 			}
 		}
 		
