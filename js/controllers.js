@@ -241,10 +241,19 @@ angular.module('starter.controllers', [])
 				var maxDate = ionic.Platform.isAndroid() ? new Date() : (new Date(new Date().getTime() + 24 * 60 * 60 * 1000)).valueOf();
 				var startDate = new Date(new Date().getTime() + 24 * 60 * 60 * 1000);
 			}
-			var options = {
-				date: new Date(startDate),
-				mode: 'date', // or 'time'
-				minDate: maxDate
+			
+			if($scope.makecontribute.TransDate){
+				var options = {
+					date: new Date($scope.makecontribute.TransDate),
+					mode: 'date', // or 'time'
+					minDate: maxDate
+				}
+			}else{
+				var options = {
+					date: new Date(startDate),
+					mode: 'date', // or 'time'
+					minDate: maxDate
+				}
 			}
 		}else{
 			if(today.getDay()==5){
@@ -895,10 +904,18 @@ angular.module('starter.controllers', [])
 				var maxDate = ionic.Platform.isAndroid() ? new Date() : (new Date(new Date().getTime() + 24 * 60 * 60 * 1000)).valueOf();
 				var startDate = new Date(new Date().getTime() + 24 * 60 * 60 * 1000);
 			}
-			var options = {
-				date: new Date(startDate),
-				mode: 'date', // or 'time'
-				minDate: maxDate
+			if($scope.paymeValues.TransDate){
+				var options = {
+					date: new Date($scope.paymeValues.TransDate),
+					mode: 'date', // or 'time'
+					minDate: maxDate
+				}
+			}else{
+				var options = {
+					date: new Date(startDate),
+					mode: 'date', // or 'time'
+					minDate: maxDate
+				}
 			}
 		}else{
 			
@@ -1311,10 +1328,18 @@ angular.module('starter.controllers', [])
 				var maxDate = ionic.Platform.isAndroid() ? new Date() : (new Date(new Date().getTime() + 24 * 60 * 60 * 1000)).valueOf();
 				var startDate = new Date(new Date().getTime() + 24 * 60 * 60 * 1000);
 			}
-			var options = {
-				date: new Date(startDate),
-				mode: 'date', // or 'time'
-				minDate: maxDate
+			if($scope.payprovierValues.TransDate){
+				var options = {
+					date: new Date($scope.payprovierValues.TransDate),
+					mode: 'date', // or 'time'
+					minDate: maxDate
+				}
+			}else{
+				var options = {
+					date: new Date(startDate),
+					mode: 'date', // or 'time'
+					minDate: maxDate
+				}
 			}
 		}else{
 			if(today.getDay()==5){
