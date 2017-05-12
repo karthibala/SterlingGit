@@ -1056,7 +1056,9 @@ angular.module('starter.controllers', [])
 						});
 
 						alertPopup.then(function(res) {
-							$scope.imgSrc= '';
+							if($scope.imgSrc!=undefined){
+								$scope.imgSrc= '';
+							}
 						var myEl = angular.element( document.querySelector( '#receipt' ) );
 						myEl.removeAttr('src');
 						$scope.paymeValues={};
@@ -1066,7 +1068,9 @@ angular.module('starter.controllers', [])
 					}else{
 							$cordovaDialogs.alert('Please reference this Disbursement number'+ " " + $scope.transactionid +" "+'for further communication.', 'Disbursement Submitted Successfully', 'OK')
 							.then(function() {
-							$scope.imgSrc= '';
+							if($scope.imgSrc!=undefined){
+								$scope.imgSrc= '';
+							}
 							var myEl = angular.element( document.querySelector( '#receipt' ) );
 							myEl.removeAttr('src');
 							$scope.paymeValues={};
@@ -1074,36 +1078,74 @@ angular.module('starter.controllers', [])
 							$scope.floatlabel1=false;	
 						});
 						return false;
-					}		
+					}	
 				}else if(data.status == "FAILED"){
 					$ionicLoading.hide();
-					if($rootScope.IOS==true){
-						var alertPopup = $ionicPopup.alert({
-							title: 'Sorry',
-							template: data.error_message
-						});
+					$scope.transactionid = data.transaction_id;
+					if($scope.transactionid){
+						if($rootScope.IOS==true){
+							var alertPopup = $ionicPopup.alert({
+								title: 'Disbursement Submitted Successfully',
+								template: 'Please reference this Disbursement number'+ " " + $scope.transactionid +" "+'for further communication.'
+							});
 
-						alertPopup.then(function(res) {
-							$scope.imgSrc= '';
-						var myEl = angular.element( document.querySelector( '#receipt' ) );
-						myEl.removeAttr('src');
-						$scope.paymeValues={};
-						$scope.floatlabel=false;
-						$scope.floatlabel1=false;
-						});
+							alertPopup.then(function(res) {
+								if($scope.imgSrc!=undefined){
+									$scope.imgSrc= '';
+								}
+							var myEl = angular.element( document.querySelector( '#receipt' ) );
+							myEl.removeAttr('src');
+							$scope.paymeValues={};
+							$scope.floatlabel=false;
+							$scope.floatlabel1=false;
+							});
+						}else{
+								$cordovaDialogs.alert('Please reference this Disbursement number'+ " " + $scope.transactionid +" "+'for further communication.', 'Disbursement Submitted Successfully', 'OK')
+								.then(function() {
+								if($scope.imgSrc!=undefined){
+									$scope.imgSrc= '';
+								}
+								var myEl = angular.element( document.querySelector( '#receipt' ) );
+								myEl.removeAttr('src');
+								$scope.paymeValues={};
+								$scope.floatlabel=false;
+								$scope.floatlabel1=false;	
+							});
+							return false;
+						}
 					}else{
-						$cordovaDialogs.alert(data.error_message, 'Sorry', 'OK')
-						.then(function($setUntouched,$setPristine) {
-						$scope.imgSrc= '';
-						var myEl = angular.element( document.querySelector( '#receipt' ) );
-						myEl.removeAttr('src');
-						$scope.paymeValues={};
-						$scope.floatlabel=false;
-						$scope.floatlabel1=false;
-						
-						});
-						return false;
-						}	
+						if($rootScope.IOS==true){
+							var alertPopup = $ionicPopup.alert({
+								title: 'Sorry',
+								template: data.error_message
+							});
+
+							alertPopup.then(function(res) {
+								if($scope.imgSrc!=undefined){
+									$scope.imgSrc= '';
+								}
+							var myEl = angular.element( document.querySelector( '#receipt' ) );
+							myEl.removeAttr('src');
+							$scope.paymeValues={};
+							$scope.floatlabel=false;
+							$scope.floatlabel1=false;
+							});
+						}else{
+							$cordovaDialogs.alert(data.error_message, 'Sorry', 'OK')
+							.then(function($setUntouched,$setPristine) {
+							if($scope.imgSrc!=undefined){
+								$scope.imgSrc= '';
+							}
+							var myEl = angular.element( document.querySelector( '#receipt' ) );
+							myEl.removeAttr('src');
+							$scope.paymeValues={};
+							$scope.floatlabel=false;
+							$scope.floatlabel1=false;
+							
+							});
+							return false;
+						}
+					}
 				}
 			}).error(function(err){
 			});
@@ -1407,7 +1449,9 @@ angular.module('starter.controllers', [])
 						});
 
 						alertPopup.then(function(res) {
-							$scope.imgSrc= '';
+							if($scope.imgSrc!=undefined){
+								$scope.imgSrc= '';
+							}
 						var myEl = angular.element( document.querySelector( '#receipt' ) );
 						myEl.removeAttr('src');
 						$scope.payprovierValues={};
@@ -1416,7 +1460,9 @@ angular.module('starter.controllers', [])
 					}else{
 						$cordovaDialogs.alert('Your Tansaction ID '+ "--->" + $scope.transactionid , 'Submitted successsfully', 'OK')
 						.then(function() {
-							$scope.imgSrc= '';
+							if($scope.imgSrc!=undefined){
+								$scope.imgSrc= '';
+							}
 							var myEl = angular.element( document.querySelector( '#receipt' ) );
 							myEl.removeAttr('src');
 							$scope.payprovierValues={};
@@ -1424,35 +1470,67 @@ angular.module('starter.controllers', [])
 						});
 						return false;
 
-					}	
+					}
 					
 				}else if(data.status == "FAILED"){
 					$ionicLoading.hide();
-					if($rootScope.IOS==true){
-						var alertPopup = $ionicPopup.alert({
-							title: 'Sorry',
-							template: data.error_message
-						});
+					$scope.transactionid = data.transaction_id;
+					if($scope.transactionid){
+						if($rootScope.IOS==true){
+							var alertPopup = $ionicPopup.alert({
+								title: 'Submitted Successfully',
+								template: 'Your Tansaction ID '+ "--->" + $scope.transactionid
+							});
 
-						alertPopup.then(function(res) {
-							$scope.imgSrc= '';
+							alertPopup.then(function(res) {
+								if($scope.imgSrc!=undefined){
+									$scope.imgSrc= '';
+								}
 							var myEl = angular.element( document.querySelector( '#receipt' ) );
 							myEl.removeAttr('src');
 							$scope.payprovierValues={};
 							$scope.floatlabel=false;
-						});
+							});
+						}else{
+							$cordovaDialogs.alert('Your Tansaction ID '+ "--->" + $scope.transactionid , 'Submitted successsfully', 'OK')
+							.then(function() {
+								if($scope.imgSrc!=undefined){
+									$scope.imgSrc= '';
+								}
+								var myEl = angular.element( document.querySelector( '#receipt' ) );
+								myEl.removeAttr('src');
+								$scope.payprovierValues={};
+								$scope.floatlabel=false;
+							});
+							return false;
+
+						}
 					}else{
-						$cordovaDialogs.alert(data.error_message, 'Sorry', 'OK')
-					.then(function() {
-							$scope.imgSrc= '';
-							var myEl = angular.element( document.querySelector( '#receipt' ) );
-							myEl.removeAttr('src');
-							$scope.payprovierValues={};
-							$scope.floatlabel=false;
-						});
-						return false;
-					}	
-					
+						if($rootScope.IOS==true){
+							var alertPopup = $ionicPopup.alert({
+								title: 'Sorry',
+								template: data.error_message
+							});
+
+							alertPopup.then(function(res) {
+								$scope.imgSrc= '';
+								var myEl = angular.element( document.querySelector( '#receipt' ) );
+								myEl.removeAttr('src');
+								$scope.payprovierValues={};
+								$scope.floatlabel=false;
+							});
+						}else{
+							$cordovaDialogs.alert(data.error_message, 'Sorry', 'OK')
+						.then(function() {
+								$scope.imgSrc= '';
+								var myEl = angular.element( document.querySelector( '#receipt' ) );
+								myEl.removeAttr('src');
+								$scope.payprovierValues={};
+								$scope.floatlabel=false;
+							});
+							return false;
+						}
+					}
 				}
 			}).error(function(err){
 			});
