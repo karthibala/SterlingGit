@@ -412,7 +412,7 @@ angular.module('starter.controllers', [])
 				});
 
 			}	
-		}else if($scope.date >= $scope.makecontribute.TransDate){
+		}else if(new Date($scope.date) >= new Date($scope.makecontribute.TransDate)){
 			if($rootScope.IOS==true){
 				var alertPopup = $ionicPopup.alert({
 					title: 'Sorry',
@@ -1022,7 +1022,7 @@ angular.module('starter.controllers', [])
 				.then(function() {
 				});
 			}
-		}else if($scope.date >= $scope.paymeValues.TransDate){
+		}else if(new Date($scope.date) >= new Date($scope.paymeValues.TransDate)){
 			if($rootScope.IOS==true){
 				var alertPopup = $ionicPopup.alert({
 					title: 'Sorry',
@@ -1419,7 +1419,7 @@ angular.module('starter.controllers', [])
 				.then(function() {
 				});
 			}
-		}else if($scope.date >= $scope.payprovierValues.TransDate){
+		}else if(new Date($scope.date) >= new Date($scope.payprovierValues.TransDate)){
 			if($rootScope.IOS==true){
 				var alertPopup = $ionicPopup.alert({
 					title: 'Sorry',
@@ -2927,7 +2927,7 @@ angular.module('starter.controllers', [])
 				});
 			}
 		}
-		else if(new Date($scope.newclaimvalues.endTransDate) < $scope.date){
+		else if(new Date($scope.newclaimvalues.endTransDate) < new Date($scope.date)){
 			if($rootScope.IOS==true){
 				var alertPopup = $ionicPopup.alert({
 					title: 'Sorry',
@@ -3469,7 +3469,7 @@ angular.module('starter.controllers', [])
 				});
 			}
 		}
-		else if(new Date($scope.newclaimvalues.endTransDate) >$scope.date){
+		else if(new Date($scope.newclaimvalues.endTransDate) > new Date($scope.date)){
 			if($rootScope.IOS==true){
 				var alertPopup = $ionicPopup.alert({
 					title: 'Sorry',
@@ -5460,7 +5460,7 @@ angular.module('starter.controllers', [])
 				.then(function() {
 				});
 			}
-		}else if(new Date($scope.acoinde.endTransDate) < $scope.date){
+		}else if(new Date($scope.acoinde.endTransDate) < new Date($scope.date)){
 			if($rootScope.IOS==true){
 				var alertPopup = $ionicPopup.alert({
 					title: 'Sorry',
@@ -5705,7 +5705,7 @@ angular.module('starter.controllers', [])
 				.then(function() {
 				});
 			}
-		}else if(new Date($scope.provideracoinde.endTransDate) < $scope.date){
+		}else if(new Date($scope.provideracoinde.endTransDate) < new Date($scope.date)){
 			if($rootScope.IOS==true){
 				var alertPopup = $ionicPopup.alert({
 					title: 'Sorry',
