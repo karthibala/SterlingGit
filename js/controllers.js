@@ -2978,7 +2978,7 @@ angular.module('starter.controllers', [])
 				});
 			}
 		}
-		else if(new Date($scope.newclaimvalues.endTransDate) < $scope.date){
+		else if(new Date($scope.newclaimvalues.endTransDate) <= $scope.date){
 			if($rootScope.IOS==true){
 				var alertPopup = $ionicPopup.alert({
 					title: 'Sorry',
@@ -3520,7 +3520,7 @@ angular.module('starter.controllers', [])
 				});
 			}
 		}
-		else if(new Date($scope.newclaimvalues.endTransDate) > $scope.date){
+		else if(new Date($scope.newclaimvalues.endTransDate) <= $scope.date){
 			if($rootScope.IOS==true){
 				var alertPopup = $ionicPopup.alert({
 					title: 'Sorry',
