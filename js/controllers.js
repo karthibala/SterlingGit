@@ -429,7 +429,7 @@ angular.module('starter.controllers', [])
 				});
 
 			}	
-		}else if(new Date($scope.date) >= new Date($scope.makecontribute.TransDate)){
+		}else if($scope.date >= new Date($scope.makecontribute.TransDate)){
 			if($rootScope.IOS==true){
 				var alertPopup = $ionicPopup.alert({
 					title: 'Sorry',
@@ -596,7 +596,7 @@ angular.module('starter.controllers', [])
 				});
 
 				alertPopup.then(function(res) {
-					$location.path('activitystmnt');
+					//$location.path('activitystmnt');
 				});
 			}else{
 				$cordovaDialogs.confirm('Please select date', 'Sorry', 'ok')
@@ -604,7 +604,7 @@ angular.module('starter.controllers', [])
 				{
 					if(buttonIndex=="1")
 					{
-						$location.path('activitystmnt');
+						//$location.path('activitystmnt');
 					}
 				});
 				return false;
@@ -619,7 +619,7 @@ angular.module('starter.controllers', [])
 				});
 
 				alertPopup.then(function(res) {
-					$location.path('activitystmnt');
+					//$location.path('activitystmnt');
 				});
 			}else{
 				$cordovaDialogs.confirm('From date should be less then To date', 'Sorry', 'ok')
@@ -627,7 +627,7 @@ angular.module('starter.controllers', [])
 				{
 					if(buttonIndex=="1")
 					{
-						$location.path('activitystmnt');
+						//$location.path('activitystmnt');
 					}
 				});
 				return false;
@@ -1056,7 +1056,7 @@ angular.module('starter.controllers', [])
 				.then(function() {
 				});
 			}
-		}else if(new Date($scope.date) >= new Date($scope.paymeValues.TransDate)){
+		}else if($scope.date >= new Date($scope.paymeValues.TransDate)){
 			if($rootScope.IOS==true){
 				var alertPopup = $ionicPopup.alert({
 					title: 'Sorry',
@@ -1469,7 +1469,7 @@ angular.module('starter.controllers', [])
 				.then(function() {
 				});
 			}
-		}else if(new Date($scope.date) >= new Date($scope.payprovierValues.TransDate)){
+		}else if($scope.date >= new Date($scope.payprovierValues.TransDate)){
 			if($rootScope.IOS==true){
 				var alertPopup = $ionicPopup.alert({
 					title: 'Sorry',
@@ -1869,6 +1869,7 @@ angular.module('starter.controllers', [])
 					if(buttonIndex=="1")
 					{
 						$location.path("/activityContribution");
+						$ionicViewService
 					}
 				});
 			}
@@ -2977,7 +2978,7 @@ angular.module('starter.controllers', [])
 				});
 			}
 		}
-		else if(new Date($scope.newclaimvalues.endTransDate) < new Date($scope.date)){
+		else if(new Date($scope.newclaimvalues.endTransDate) < $scope.date){
 			if($rootScope.IOS==true){
 				var alertPopup = $ionicPopup.alert({
 					title: 'Sorry',
@@ -3519,7 +3520,7 @@ angular.module('starter.controllers', [])
 				});
 			}
 		}
-		else if(new Date($scope.newclaimvalues.endTransDate) > new Date($scope.date)){
+		else if(new Date($scope.newclaimvalues.endTransDate) > $scope.date){
 			if($rootScope.IOS==true){
 				var alertPopup = $ionicPopup.alert({
 					title: 'Sorry',
@@ -4526,15 +4527,19 @@ angular.module('starter.controllers', [])
 			if($scope.acctype.HSA!=null || $scope.acctype.HSA!=undefined){
 				$location.path('/app/hsa');
 				$scope.homePath="#/app/hsa";
+				localStorage.setItem('hsaPath','/app/hsa');
 			}else if($scope.acctype.FSA!=null || $scope.acctype.FSA!=undefined){
 				$location.path('/app/fsa');
 				$scope.homePath="#/app/fsa";
+				localStorage.setItem('fsaPath','/app/fsa');
 			}else if($scope.acctype.HRA!=null || $scope.acctype.HRA!=undefined){
 				$location.path('/app/hra');
 				$scope.homePath="#/app/hra";
+				localStorage.setItem('hraPath','/app/hra');
 			}else if($scope.acctype.COBRA!=null || $scope.acctype.COBRA!=undefined){
 				$location.path('/app/cobra');
 				$scope.homePath="#/app/cobra";
+				localStorage.setItem('cobraPath','/app/cobra');
 			}
 		}
 		
@@ -5510,7 +5515,7 @@ angular.module('starter.controllers', [])
 				.then(function() {
 				});
 			}
-		}else if(new Date($scope.acoinde.endTransDate) < new Date($scope.date)){
+		}else if(new Date($scope.acoinde.endTransDate) < $scope.date){
 			if($rootScope.IOS==true){
 				var alertPopup = $ionicPopup.alert({
 					title: 'Sorry',
@@ -5755,7 +5760,7 @@ angular.module('starter.controllers', [])
 				.then(function() {
 				});
 			}
-		}else if(new Date($scope.provideracoinde.endTransDate) < new Date($scope.date)){
+		}else if(new Date($scope.provideracoinde.endTransDate) < $scope.date){
 			if($rootScope.IOS==true){
 				var alertPopup = $ionicPopup.alert({
 					title: 'Sorry',
