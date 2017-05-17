@@ -1,6 +1,6 @@
 angular.module('starter', ['ionic', 'starter.controllers','ngCordova'])
 
-.run(function($ionicPlatform,$rootScope,$location,$state,$cordovaToast,$timeout,$interval,$location,$cordovaToast) {
+.run(function($ionicPlatform,$rootScope,$location,$state,$cordovaToast,$timeout,$interval,$location,$cordovaToast,$ionicHistory,$state) {
 	$ionicPlatform.ready(function() {
 		if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
 			cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
@@ -11,10 +11,11 @@ angular.module('starter', ['ionic', 'starter.controllers','ngCordova'])
 		}
 	});
 	$ionicPlatform.registerBackButtonAction(function () {
-		//alert($location.url())
+		//alert($location.url());
 		if($location.url()=='/login'){
 			if ($rootScope.backButtonPressedOnceToExit) {
 				ionic.Platform.exitApp();
+				localStorage.clear();
 			}else{
 				$rootScope.backButtonPressedOnceToExit = true;
 				$cordovaToast.showShortBottom('Press again to exit').then(function(success) {
@@ -27,6 +28,133 @@ angular.module('starter', ['ionic', 'starter.controllers','ngCordova'])
 				},2000);
 			}
 			//navigator.app.exitApp();
+		}else if($location.url()=='/app/hsa'){
+			if ($rootScope.backButtonPressedOnceToExit1) {
+				ionic.Platform.exitApp();
+				localStorage.clear();
+			}else{
+				$rootScope.backButtonPressedOnceToExit1 = true;
+				$cordovaToast.showShortBottom('Press again to exit').then(function(success) {
+				// success
+				}, function (error) {
+				// error
+				});
+				setTimeout(function(){
+					$rootScope.backButtonPressedOnceToExit1 = false;
+				},2000);
+			}
+			//navigator.app.exitApp();
+		}else if($location.url()=='/makecontribution'){
+			$state.go('app.hsa');
+		}else if($location.url()=='/app/fsa'){
+			if(localStorage.getItem('fsaPath')==null){
+				$state.go('app.hsa');
+			}else{
+				if ($rootScope.backButtonPressedOnceToExit2) {
+					ionic.Platform.exitApp();
+					localStorage.clear();
+				}else{
+					$rootScope.backButtonPressedOnceToExit2 = true;
+					$cordovaToast.showShortBottom('Press again to exit').then(function(success) {
+					// success
+					}, function (error) {
+					// error
+					});
+					setTimeout(function(){
+						$rootScope.backButtonPressedOnceToExit2 = false;
+					},2000);
+				}
+			}
+		}else if($location.url()=='/app/hra'){
+			if(localStorage.getItem('hraPath')==null){
+				if(localStorage.getItem('hsaPath')!=null){
+					$state.go('app.hsa');
+				}else if(localStorage.getItem('fsaPath')!=null){
+					$state.go('app.fsa');
+				}else{
+					if ($rootScope.backButtonPressedOnceToExit3) {
+						ionic.Platform.exitApp();
+						localStorage.clear();
+					}else{
+						$rootScope.backButtonPressedOnceToExit3 = true;
+						$cordovaToast.showShortBottom('Press again to exit').then(function(success) {
+						// success
+						}, function (error) {
+						// error
+						});
+						setTimeout(function(){
+							$rootScope.backButtonPressedOnceToExit3 = false;
+						},2000);
+					}
+				}
+			}else{
+				if ($rootScope.backButtonPressedOnceToExit3) {
+					ionic.Platform.exitApp();
+					localStorage.clear();
+				}else{
+					$rootScope.backButtonPressedOnceToExit3 = true;
+					$cordovaToast.showShortBottom('Press again to exit').then(function(success) {
+					// success
+					}, function (error) {
+					// error
+					});
+					setTimeout(function(){
+						$rootScope.backButtonPressedOnceToExit3 = false;
+					},2000);
+				}
+			}
+		}else if($location.url()=='/app/cobra'){
+			if(localStorage.getItem('cobraPath')==null){
+				//$state.go('app.hsa');
+				if(localStorage.getItem('hsaPath')!=null){
+					$state.go('app.hsa');
+				}else if(localStorage.getItem('fsaPath')!=null){
+					$state.go('app.fsa');
+				}else if(localStorage.getItem('hraPath')!=null){
+					$state.go('app.hra');
+				}else{
+					if ($rootScope.backButtonPressedOnceToExit3) {
+						ionic.Platform.exitApp();
+						localStorage.clear();
+					}else{
+						$rootScope.backButtonPressedOnceToExit3 = true;
+						$cordovaToast.showShortBottom('Press again to exit').then(function(success) {
+						// success
+						}, function (error) {
+						// error
+						});
+						setTimeout(function(){
+							$rootScope.backButtonPressedOnceToExit3 = false;
+						},2000);
+					}
+				}
+				
+			}else{
+				if ($rootScope.backButtonPressedOnceToExit4) {
+					ionic.Platform.exitApp();
+					localStorage.clear();
+				}else{
+					$rootScope.backButtonPressedOnceToExit4 = true;
+					$cordovaToast.showShortBottom('Press again to exit').then(function(success) {
+					// success
+					}, function (error) {
+					// error
+					});
+					setTimeout(function(){
+						$rootScope.backButtonPressedOnceToExit4 = false;
+					},2000);
+				}
+			}
+		}else if($location.url()=='/activityContribution'){
+			//$location.path("activity");
+			$state.go('activity');
+		}else if($location.url()=='/disbursement'){
+			//$location.path("activity");
+			$state.go('activity');
+		}else if($location.url()=='/activity'){
+			$state.go('app.hsa');
+		}else{
+			$ionicHistory.goBack();
 		}
 	}, 100);
 })
