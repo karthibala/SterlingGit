@@ -1,5 +1,5 @@
 /* Empty. Add your own CSS if you like */
-span{
+span,p{
 	width:100% !important;
 }
 .accountcontent{
