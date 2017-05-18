@@ -173,7 +173,7 @@ angular.module('starter.controllers', [])
 
 			alertPopup.then(function(res) {
 				localStorage.clear();
-				window.location='login.html#/login';
+				$location.path("/login");
 			});
 		}else{
 			$cordovaDialogs.confirm('Session expired, Please Login Again', 'Sorry', 'ok')
@@ -181,7 +181,7 @@ angular.module('starter.controllers', [])
 				if(buttonIndex=="1")
 				{
 					localStorage.clear();
-					window.location='login.html#/login';
+					$location.path("/login");
 				}
 			});
 			return false;
@@ -310,7 +310,7 @@ angular.module('starter.controllers', [])
 
 			alertPopup.then(function(res) {
 				localStorage.clear();
-				window.location='login.html#/login';
+				$location.path("/login");
 			});
 		}else{
 			$cordovaDialogs.confirm('Session expired, Please Login Again', 'Sorry', 'ok')
@@ -318,7 +318,7 @@ angular.module('starter.controllers', [])
 				if(buttonIndex=="1")
 				{
 					localStorage.clear();
-					window.location='login.html#/login';
+					$location.path("/login");
 				}
 			});
 			return false;
@@ -355,7 +355,7 @@ angular.module('starter.controllers', [])
 
 				alertPopup.then(function(res) {
 					localStorage.clear();
-					window.location='login.html#/login';
+					$location.path("/login");
 				});
 			}else{
 				$cordovaDialogs.confirm('Session expired, Please Login Again', 'Sorry', 'ok')
@@ -363,7 +363,7 @@ angular.module('starter.controllers', [])
 					if(buttonIndex=="1")
 					{
 						localStorage.clear();
-						window.location='login.html#/login';
+						$location.path("/login");
 					}
 				});
 				return false;
@@ -385,7 +385,7 @@ angular.module('starter.controllers', [])
 
 				alertPopup.then(function(res) {
 					localStorage.clear();
-					window.location='login.html#/login';
+					$location.path("/login");
 				});
 			}else{
 				$cordovaDialogs.confirm('Session expired, Please Login Again', 'Sorry', 'ok')
@@ -393,7 +393,7 @@ angular.module('starter.controllers', [])
 					if(buttonIndex=="1")
 					{
 						localStorage.clear();
-						window.location='login.html#/login';
+						$location.path("/login");
 					}
 				});
 				return false;
@@ -554,7 +554,7 @@ angular.module('starter.controllers', [])
 
 			alertPopup.then(function(res) {
 				localStorage.clear();
-				window.location='login.html#/login';
+				$location.path("/login");
 			});
 		}else{
 			$cordovaDialogs.confirm('Session expired, Please Login Again', 'Sorry', 'ok')
@@ -562,7 +562,7 @@ angular.module('starter.controllers', [])
 				if(buttonIndex=="1")
 				{
 					localStorage.clear();
-					window.location='login.html#/login';
+					$location.path("/login");
 				}
 			});
 			return false;
@@ -973,7 +973,7 @@ angular.module('starter.controllers', [])
 
 			alertPopup.then(function(res) {
 				localStorage.clear();
-				window.location='login.html#/login';
+				$location.path("/login");
 			});
 		}else{
 			$cordovaDialogs.alert('Please Connect with internet', 'Sorry', 'ok')
@@ -1012,7 +1012,7 @@ angular.module('starter.controllers', [])
 
 				alertPopup.then(function(res) {
 					localStorage.clear();
-					window.location='login.html#/login';
+					$location.path("/login");
 				});
 			}else{
 				$cordovaDialogs.confirm('Session expired, Please Login Again', 'Sorry', 'ok')
@@ -1020,7 +1020,7 @@ angular.module('starter.controllers', [])
 					if(buttonIndex=="1")
 					{
 						localStorage.clear();
-						window.location='login.html#/login';
+						$location.path("/login");
 					}
 				});
 				return false;
@@ -1395,7 +1395,7 @@ angular.module('starter.controllers', [])
 
 				alertPopup.then(function(res) {
 					localStorage.clear();
-					window.location='login.html#/login';
+					$location.path("/login");
 				});
 		}else{
 				$cordovaDialogs.confirm('Session expired, Please Login Again', 'Sorry', 'ok')
@@ -1403,7 +1403,7 @@ angular.module('starter.controllers', [])
 					if(buttonIndex=="1")
 					{
 						localStorage.clear();
-						window.location='login.html#/login';
+						$location.path("/login");
 					}
 				});
 				return false;
@@ -1628,7 +1628,7 @@ angular.module('starter.controllers', [])
 
 				alertPopup.then(function(res) {
 					localStorage.clear();
-					window.location='login.html#/login';
+					$location.path("/login");
 				});
 		}else{
 				$cordovaDialogs.confirm('Session expired, Please Login Again', 'Sorry', 'ok')
@@ -1636,7 +1636,7 @@ angular.module('starter.controllers', [])
 					if(buttonIndex=="1")
 					{
 						localStorage.clear();
-						window.location='login.html#/login';
+						$location.path("/login");
 					}
 				});
 				return false;
@@ -1659,7 +1659,7 @@ angular.module('starter.controllers', [])
 
 				alertPopup.then(function(res) {
 					localStorage.clear();
-					window.location='login.html#/login';
+					$location.path("/login");
 				});
 		}else{
 				$cordovaDialogs.confirm('Session expired, Please Login Again', 'Sorry', 'ok')
@@ -1667,7 +1667,7 @@ angular.module('starter.controllers', [])
 					if(buttonIndex=="1")
 					{
 						localStorage.clear();
-						window.location='login.html#/login';
+						$location.path("/login");
 					}
 				});
 				return false;
@@ -1886,7 +1886,7 @@ angular.module('starter.controllers', [])
 
 				alertPopup.then(function(res) {
 					localStorage.clear();
-					window.location='login.html#/login';
+					$location.path("/login");
 				});
 		}else{
 				$cordovaDialogs.confirm('Session expired, Please Login Again', 'Sorry', 'ok')
@@ -1894,7 +1894,7 @@ angular.module('starter.controllers', [])
 					if(buttonIndex=="1")
 					{
 						localStorage.clear();
-						window.location='login.html#/login';
+						$location.path("/login");
 					}
 				});
 				return false;
@@ -1944,7 +1944,7 @@ angular.module('starter.controllers', [])
 
 				alertPopup.then(function(res) {
 					localStorage.clear();
-					window.location='login.html#/login';
+					$location.path("/login");
 				});
 		}else{
 			
@@ -1953,7 +1953,7 @@ angular.module('starter.controllers', [])
 					if(buttonIndex=="1")
 					{
 						localStorage.clear();
-						window.location='login.html#/login';
+						$location.path("/login");
 					}
 				});
 				return false;
@@ -2024,7 +2024,7 @@ angular.module('starter.controllers', [])
 
 				alertPopup.then(function(res) {
 					localStorage.clear();
-					window.location='login.html#/login';
+					$location.path("/login");
 				});
 		}else{
 				$cordovaDialogs.confirm('Session expired, Please Login Again', 'Sorry', 'ok')
@@ -2032,7 +2032,7 @@ angular.module('starter.controllers', [])
 					if(buttonIndex=="1")
 					{
 						localStorage.clear();
-						window.location='login.html#/login';
+						$location.path("/login");
 					}
 				});
 				return false;
@@ -2050,7 +2050,7 @@ angular.module('starter.controllers', [])
 
 				alertPopup.then(function(res) {
 					localStorage.clear();
-					window.location='login.html#/login';
+					$location.path("/login");
 				});
 			}else{
 				$cordovaDialogs.confirm('Session expired, Please Login Again', 'Sorry', 'ok')
@@ -2058,7 +2058,7 @@ angular.module('starter.controllers', [])
 					if(buttonIndex=="1")
 					{
 						localStorage.clear();
-						window.location='login.html#/login';
+						$location.path("/login");
 					}
 				});
 				return false;
@@ -2089,7 +2089,7 @@ angular.module('starter.controllers', [])
 
 				alertPopup.then(function(res) {
 					localStorage.clear();
-					window.location='login.html#/login';
+					$location.path("/login");
 				});
 		}else{
 				$cordovaDialogs.confirm('Session expired, Please Login Again', 'Sorry', 'ok')
@@ -2097,7 +2097,7 @@ angular.module('starter.controllers', [])
 					if(buttonIndex=="1")
 					{
 						localStorage.clear();
-						window.location='login.html#/login';
+						$location.path("/login");
 					}
 				});
 				return false;
@@ -2141,7 +2141,7 @@ angular.module('starter.controllers', [])
 
 				alertPopup.then(function(res) {
 					localStorage.clear();
-					window.location='login.html#/login';
+					$location.path("/login");
 				});
 			}else{
 				$cordovaDialogs.confirm('Session expired, Please Login Again', 'Sorry', 'ok')
@@ -2149,7 +2149,7 @@ angular.module('starter.controllers', [])
 					if(buttonIndex=="1")
 					{
 						localStorage.clear();
-						window.location='login.html#/login';
+						$location.path("/login");
 					}
 				});
 				return false;
@@ -2180,7 +2180,7 @@ angular.module('starter.controllers', [])
 
 		alertPopup.then(function(res) {
 			localStorage.clear();
-			window.location='login.html#/login';
+			$location.path("/login");
 		});
 	}else{
 		$cordovaDialogs.confirm('Session expired, Please Login Again', 'Sorry', 'ok')
@@ -2188,7 +2188,7 @@ angular.module('starter.controllers', [])
 			if(buttonIndex=="1")
 			{
 				localStorage.clear();
-				window.location='login.html#/login';
+				$location.path("/login");
 			}
 		});
 		return false;
@@ -2231,7 +2231,7 @@ angular.module('starter.controllers', [])
 
 			alertPopup.then(function(res) {
 				localStorage.clear();
-				window.location='login.html#/login';
+				$location.path("/login");
 			});
 		}else{
 			$cordovaDialogs.confirm('Session expired, Please Login Again', 'Sorry', 'ok')
@@ -2239,7 +2239,7 @@ angular.module('starter.controllers', [])
 				if(buttonIndex=="1")
 				{
 					localStorage.clear();
-					window.location='login.html#/login';
+					$location.path("/login");
 				}
 			});
 			return false;
@@ -2298,7 +2298,7 @@ angular.module('starter.controllers', [])
 
 			alertPopup.then(function(res) {
 				localStorage.clear();
-				window.location='login.html#/login';
+				$location.path("/login");
 			});
 		}else{
 			$cordovaDialogs.confirm('Session expired, Please Login Again', 'Sorry', 'ok')
@@ -2306,7 +2306,7 @@ angular.module('starter.controllers', [])
 				if(buttonIndex=="1")
 				{
 					localStorage.clear();
-					window.location='login.html#/login';
+					$location.path("/login");
 				}
 			});
 			return false;
@@ -2336,7 +2336,7 @@ angular.module('starter.controllers', [])
 
 			alertPopup.then(function(res) {
 				localStorage.clear();
-				window.location='login.html#/login';
+				$location.path("/login");
 			});
 		}else{
 			$cordovaDialogs.confirm('Session expired, Please Login Again', 'Sorry', 'ok')
@@ -2344,7 +2344,7 @@ angular.module('starter.controllers', [])
 				if(buttonIndex=="1")
 				{
 					localStorage.clear();
-					window.location='login.html#/login';
+					$location.path("/login");
 				}
 			});
 			return false;
@@ -2388,7 +2388,7 @@ angular.module('starter.controllers', [])
 
 				alertPopup.then(function(res) {
 					localStorage.clear();
-					window.location='login.html#/login';
+					$location.path("/login");
 				});
 			}else{
 				$cordovaDialogs.confirm('Session expired, Please Login Again', 'Sorry', 'ok')
@@ -2396,7 +2396,7 @@ angular.module('starter.controllers', [])
 					if(buttonIndex=="1")
 					{
 						localStorage.clear();
-						window.location='login.html#/login';
+						$location.path("/login");
 					}
 				});
 				return false;
@@ -2427,7 +2427,7 @@ angular.module('starter.controllers', [])
 
 			alertPopup.then(function(res) {
 				localStorage.clear();
-				window.location='login.html#/login';
+				$location.path("/login");
 			});
 		}else{
 			$cordovaDialogs.confirm('Session expired, Please Login Again', 'Sorry', 'ok')
@@ -2435,7 +2435,7 @@ angular.module('starter.controllers', [])
 				if(buttonIndex=="1")
 				{
 					localStorage.clear();
-					window.location='login.html#/login';
+					$location.path("/login");
 				}
 			});
 			return false;
@@ -2479,7 +2479,7 @@ angular.module('starter.controllers', [])
 
 				alertPopup.then(function(res) {
 					localStorage.clear();
-					window.location='login.html#/login';
+					$location.path("/login");
 				});
 			}else{
 				$cordovaDialogs.confirm('Session expired, Please Login Again', 'Sorry', 'ok')
@@ -2487,7 +2487,7 @@ angular.module('starter.controllers', [])
 					if(buttonIndex=="1")
 					{
 						localStorage.clear();
-						window.location='login.html#/login';
+						$location.path("/login");
 					}
 				});
 				return false;
@@ -2552,7 +2552,7 @@ angular.module('starter.controllers', [])
 
 				alertPopup.then(function(res) {
 					localStorage.clear();
-					window.location='login.html#/login';
+					$location.path("/login");
 				});
 			}else{
 				$cordovaDialogs.confirm('Session expired, Please Login Again', 'Sorry', 'ok')
@@ -2560,7 +2560,7 @@ angular.module('starter.controllers', [])
 					if(buttonIndex=="1")
 					{
 						localStorage.clear();
-						window.location='login.html#/login';
+						$location.path("/login");
 					}
 				});
 				return false;
@@ -2592,7 +2592,7 @@ angular.module('starter.controllers', [])
 
 			alertPopup.then(function(res) {
 				localStorage.clear();
-				window.location='login.html#/login';
+				$location.path("/login");
 			});
 		}else{
 			$cordovaDialogs.confirm('Please Connect with internet', 'Sorry', 'ok')
@@ -2600,7 +2600,7 @@ angular.module('starter.controllers', [])
 				if(buttonIndex=="1")
 				{
 					localStorage.clear();
-					window.location='login.html#/login';
+					$location.path("/login");
 				}
 			});
 			return false;
@@ -2619,7 +2619,7 @@ angular.module('starter.controllers', [])
 
 				alertPopup.then(function(res) {
 					localStorage.clear();
-					window.location='login.html#/login';
+					$location.path("/login");
 				});
 			}else{
 				$cordovaDialogs.confirm('Session expired, Please Login Again', 'Sorry', 'ok')
@@ -2627,7 +2627,7 @@ angular.module('starter.controllers', [])
 					if(buttonIndex=="1")
 					{
 						localStorage.clear();
-						window.location='login.html#/login';
+						$location.path("/login");
 					}
 				});
 				return false;
@@ -2791,7 +2791,7 @@ angular.module('starter.controllers', [])
 
 				alertPopup.then(function(res) {
 					localStorage.clear();
-					window.location='login.html#/login';
+					$location.path("/login");
 				});
 			}else{
 				$cordovaDialogs.confirm('Session expired, Please Login Again', 'Sorry', 'ok')
@@ -2799,7 +2799,7 @@ angular.module('starter.controllers', [])
 					if(buttonIndex=="1")
 					{
 						localStorage.clear();
-						window.location='login.html#/login';
+						$location.path("/login");
 					}
 				});
 				return false;
@@ -2944,7 +2944,7 @@ angular.module('starter.controllers', [])
 		};
 	}
 	
-	$scope.newclaimsubmit=function(){
+	$scope.newclaimsubmit=function(myForm){
 		if($rootScope.planCode=='TRN' || $rootScope.planCode=='PKG'){
 			$scope.imgCheck='';
 		}
@@ -3820,7 +3820,7 @@ angular.module('starter.controllers', [])
 
 			alertPopup.then(function(res) {
 				localStorage.clear();
-				window.location='login.html#/login';
+				$location.path("/login");
 			});
 		}else{
 			$cordovaDialogs.confirm('Session expired, Please Login Again', 'Sorry', 'ok')
@@ -3828,7 +3828,7 @@ angular.module('starter.controllers', [])
 				if(buttonIndex=="1")
 				{
 					localStorage.clear();
-					window.location='login.html#/login';
+					$location.path("/login");
 				}
 			});
 			return false;
@@ -3872,7 +3872,7 @@ angular.module('starter.controllers', [])
 
 				alertPopup.then(function(res) {
 					localStorage.clear();
-					window.location='login.html#/login';
+					$location.path("/login");
 				});
 			}else{
 				$cordovaDialogs.confirm('Session expired, Please Login Again', 'Sorry', 'ok')
@@ -3880,7 +3880,7 @@ angular.module('starter.controllers', [])
 					if(buttonIndex=="1")
 					{
 						localStorage.clear();
-						window.location='login.html#/login';
+						$location.path("/login");
 					}
 				});
 				return false;
@@ -3912,7 +3912,7 @@ angular.module('starter.controllers', [])
 
 			alertPopup.then(function(res) {
 				localStorage.clear();
-				window.location='login.html#/login';
+				$location.path("/login");
 			});
 		}else{
 			$cordovaDialogs.confirm('Session expired, Please Login Again', 'Sorry', 'ok')
@@ -3920,7 +3920,7 @@ angular.module('starter.controllers', [])
 				if(buttonIndex=="1")
 				{
 					localStorage.clear();
-					window.location='login.html#/login';
+					$location.path("/login");
 				}
 			});
 			return false;
@@ -3964,7 +3964,7 @@ angular.module('starter.controllers', [])
 
 				alertPopup.then(function(res) {
 					localStorage.clear();
-					window.location='login.html#/login';
+					$location.path("/login");
 				});
 			}else{
 				$cordovaDialogs.confirm('Session expired, Please Login Again', 'Sorry', 'ok')
@@ -3972,7 +3972,7 @@ angular.module('starter.controllers', [])
 					if(buttonIndex=="1")
 					{
 						localStorage.clear();
-						window.location='login.html#/login';
+						$location.path("/login");
 					}
 				});
 				return false;
@@ -4011,7 +4011,7 @@ angular.module('starter.controllers', [])
 
 			alertPopup.then(function(res) {
 				localStorage.clear();
-				window.location='login.html#/login';
+				$location.path("/login");
 			});
 		}else{
 			$cordovaDialogs.confirm('Session expired, Please Login Again', 'Sorry', 'ok')
@@ -4019,7 +4019,7 @@ angular.module('starter.controllers', [])
 				if(buttonIndex=="1")
 				{
 					localStorage.clear();
-					window.location='login.html#/login';
+					$location.path("/login");
 				}
 			});
 			return false;
@@ -4067,7 +4067,7 @@ angular.module('starter.controllers', [])
 
 				alertPopup.then(function(res) {
 					localStorage.clear();
-					window.location='login.html#/login';
+					$location.path("/login");
 				});
 			}else{
 				$cordovaDialogs.confirm('Session expired, Please Login Again', 'Sorry', 'ok')
@@ -4075,7 +4075,7 @@ angular.module('starter.controllers', [])
 					if(buttonIndex=="1")
 					{
 						localStorage.clear();
-						window.location='login.html#/login';
+						$location.path("/login");
 					}
 				});
 				return false;
@@ -4172,7 +4172,7 @@ angular.module('starter.controllers', [])
 
 			alertPopup.then(function(res) {
 				localStorage.clear();
-				window.location='login.html#/login';
+				$location.path("/login");
 			});
 		}else{
 			$cordovaDialogs.confirm('Session expired, Please Login Again', 'Sorry', 'ok')
@@ -4180,7 +4180,7 @@ angular.module('starter.controllers', [])
 				if(buttonIndex=="1")
 				{
 					localStorage.clear();
-					window.location='login.html#/login';
+					$location.path("/login");
 				}
 			});
 			return false;
@@ -4224,7 +4224,7 @@ angular.module('starter.controllers', [])
 
 				alertPopup.then(function(res) {
 					localStorage.clear();
-					window.location='login.html#/login';
+					$location.path("/login");
 				});
 			}else{
 				$cordovaDialogs.confirm('Session expired, Please Login Again', 'Sorry', 'ok')
@@ -4232,7 +4232,7 @@ angular.module('starter.controllers', [])
 					if(buttonIndex=="1")
 					{
 						localStorage.clear();
-						window.location='login.html#/login';
+						$location.path("/login");
 					}
 				});
 				return false;
@@ -4484,7 +4484,7 @@ angular.module('starter.controllers', [])
 
 				alertPopup.then(function(res) {
 					//localStorage.clear();
-					//window.location='login.html#/login';
+					//$location.path("/login");
 				});
 			}else{
 				$cordovaDialogs.confirm('The benefit plans are not active at the moment, for details contact customer care', 'Sorry', 'ok')
@@ -4492,7 +4492,7 @@ angular.module('starter.controllers', [])
 					if(buttonIndex=="1")
 					{
 						//localStorage.clear();
-						//window.location='login.html#/login';
+						//$location.path("/login");
 					}
 				});
 				return false;
@@ -4553,7 +4553,7 @@ angular.module('starter.controllers', [])
 
 			alertPopup.then(function(res) {
 				localStorage.clear();
-				window.location='login.html#/login';
+				$location.path("/login");
 			});
 		}else{
 			$cordovaDialogs.confirm('Session expired, Please Login Again', 'Sorry', 'ok')
@@ -4561,7 +4561,7 @@ angular.module('starter.controllers', [])
 				if(buttonIndex=="1")
 				{
 					localStorage.clear();
-					window.location='login.html#/login';
+					$location.path("/login");
 				}
 			});
 			return false;
@@ -4651,7 +4651,7 @@ angular.module('starter.controllers', [])
 					console.log('You are not sure');
 				} else {
 					localStorage.clear();
-					window.location='login.html#/login';
+					$location.path("/login");
 				}
 			});
 		}else{
@@ -4660,7 +4660,7 @@ angular.module('starter.controllers', [])
 				if(buttonIndex=="1")
 				{
 				localStorage.clear();
-				window.location='login.html#/login';
+				$location.path("/login");
 				}
 				else{}
 			});
@@ -4694,35 +4694,35 @@ angular.module('starter.controllers', [])
 
 })
 .controller('HeaderCtrl', function($scope,$ionicPopup, $timeout ,$ionicModal,$location, $ionicHistory, $cordovaDialogs) {
-	$scope.logOut=function()
-	{
-		if($rootScope.IOS==true){
-				var confirmPopup = $ionicPopup.confirm({
-				title: 'Do you want to Logout',
-				template: 'Are you sure',
-				okText: 'No',
-				cancelText: 'Yes',
-			});
-			confirmPopup.then(function(res) {
-				if(res) {
-					console.log('You are not sure');
-				} else {
-					localStorage.clear();
-					window.location='login.html#/login';
-				}
-			});
-		}else{
-			$cordovaDialogs.confirm('Do you want to Logout', 'Are you sure', ['Yes','No'])
-			.then(function(buttonIndex) {
-				if(buttonIndex=="1")
-				{
-				localStorage.clear();
-				window.location='login.html#/login';
-				}
-				else{}
-			});
-		}
-	}
+	// $scope.logOut=function()
+	// {
+		// if($rootScope.IOS==true){
+				// var confirmPopup = $ionicPopup.confirm({
+				// title: 'Do you want to Logout',
+				// template: 'Are you sure',
+				// okText: 'No',
+				// cancelText: 'Yes',
+			// });
+			// confirmPopup.then(function(res) {
+				// if(res) {
+					// console.log('You are not sure');
+				// } else {
+					// localStorage.clear();
+					// $location.path("/login");
+				// }
+			// });
+		// }else{
+			// $cordovaDialogs.confirm('Do you want to Logout', 'Are you sure', ['Yes','No'])
+			// .then(function(buttonIndex) {
+				// if(buttonIndex=="1")
+				// {
+				// localStorage.clear();
+				// $location.path("/login");
+				// }
+				// else{}
+			// });
+		// }
+	// }
 	$scope.goBack = function()
 	{
 		if (localStorage.getItem("backCount")==1) {
@@ -4830,7 +4830,7 @@ angular.module('starter.controllers', [])
 
 			alertPopup.then(function(res) {
 				localStorage.clear();
-				window.location='login.html#/login';
+				$location.path("/login");
 			});
 		}else{
 			$cordovaDialogs.confirm('Please Connect with internet', 'Sorry', 'ok')
@@ -4838,7 +4838,7 @@ angular.module('starter.controllers', [])
 				if(buttonIndex=="1")
 				{
 					localStorage.clear();
-					window.location='login.html#/login';
+					$location.path("/login");
 				}
 			});
 			return false;
@@ -4859,7 +4859,7 @@ angular.module('starter.controllers', [])
 
 				alertPopup.then(function(res) {
 					localStorage.clear();
-					window.location='login.html#/login';
+					$location.path("/login");
 				});
 			}else{
 				$cordovaDialogs.confirm('Session expired, Please Login Again', 'Sorry', 'ok')
@@ -4867,7 +4867,7 @@ angular.module('starter.controllers', [])
 					if(buttonIndex=="1")
 					{
 						localStorage.clear();
-						window.location='login.html#/login';
+						$location.path("/login");
 					}
 				});
 				return false;
@@ -4895,7 +4895,7 @@ angular.module('starter.controllers', [])
 
 			alertPopup.then(function(res) {
 				localStorage.clear();
-				window.location='login.html#/login';
+				$location.path("/login");
 			});
 		}else{
 			$cordovaDialogs.confirm('Session expired, Please Login Again', 'Sorry', 'ok')
@@ -4903,7 +4903,7 @@ angular.module('starter.controllers', [])
 				if(buttonIndex=="1")
 				{
 					localStorage.clear();
-					window.location='login.html#/login';
+					$location.path("/login");
 				}
 			});
 			return false;
@@ -4948,7 +4948,7 @@ angular.module('starter.controllers', [])
 
 				alertPopup.then(function(res) {
 					localStorage.clear();
-					window.location='login.html#/login';
+					$location.path("/login");
 				});
 			}else{
 				$cordovaDialogs.confirm('Session expired, Please Login Again', 'Sorry', 'ok')
@@ -4956,7 +4956,7 @@ angular.module('starter.controllers', [])
 					if(buttonIndex=="1")
 					{
 						localStorage.clear();
-						window.location='login.html#/login';
+						$location.path("/login");
 					}
 				});
 				return false;
@@ -4986,7 +4986,7 @@ angular.module('starter.controllers', [])
 
 			alertPopup.then(function(res) {
 				localStorage.clear();
-				window.location='login.html#/login';
+				$location.path("/login");
 			});
 		}else{
 			$cordovaDialogs.confirm('Session expired, Please Login Again', 'Sorry', 'ok')
@@ -4994,7 +4994,7 @@ angular.module('starter.controllers', [])
 				if(buttonIndex=="1")
 				{
 					localStorage.clear();
-					window.location='login.html#/login';
+					$location.path("/login");
 				}
 			});
 			return false;
@@ -5041,7 +5041,7 @@ angular.module('starter.controllers', [])
 
 					alertPopup.then(function(res) {
 						localStorage.clear();
-						window.location='login.html#/login';
+						$location.path("/login");
 					});
 				}else{
 					$cordovaDialogs.confirm('Session expired, Please Login Again', 'Sorry', 'ok')
@@ -5049,7 +5049,7 @@ angular.module('starter.controllers', [])
 						if(buttonIndex=="1")
 						{
 							localStorage.clear();
-							window.location='login.html#/login';
+							$location.path("/login");
 						}
 					});
 					return false;
@@ -5233,7 +5233,7 @@ angular.module('starter.controllers', [])
 
 			alertPopup.then(function(res) {
 				localStorage.clear();
-				window.location='login.html#/login';
+				$location.path("/login");
 			});
 		}else{
 			$cordovaDialogs.confirm('Please Connect with internet', 'Sorry', 'ok')
@@ -5241,7 +5241,7 @@ angular.module('starter.controllers', [])
 				if(buttonIndex=="1")
 				{
 					localStorage.clear();
-					window.location='login.html#/login';
+					$location.path("/login");
 				}
 			});
 			return false;
@@ -5260,7 +5260,7 @@ angular.module('starter.controllers', [])
 
 				alertPopup.then(function(res){
 					localStorage.clear();
-					window.location='login.html#/login';
+					$location.path("/login");
 				});
 			}else{
 				$cordovaDialogs.confirm('Session expired, Please Login Again', 'Sorry', 'ok')
@@ -5268,7 +5268,7 @@ angular.module('starter.controllers', [])
 					if(buttonIndex=="1")
 					{
 						localStorage.clear();
-						window.location='login.html#/login';
+						$location.path("/login");
 					}
 				});
 				return false;
@@ -5414,7 +5414,7 @@ angular.module('starter.controllers', [])
 
 				alertPopup.then(function(res){
 					localStorage.clear();
-					window.location='login.html#/login';
+					$location.path("/login");
 				});
 		}else{
 				$cordovaDialogs.confirm('Session expired, Please Login Again', 'Sorry', 'ok')
@@ -5422,7 +5422,7 @@ angular.module('starter.controllers', [])
 					if(buttonIndex=="1")
 					{
 						localStorage.clear();
-						window.location='login.html#/login';
+						$location.path("/login");
 					}
 				});
 				return false;
@@ -5900,7 +5900,7 @@ angular.module('starter.controllers', [])
 
 				alertPopup.then(function(res){
 					localStorage.clear();
-					window.location='login.html#/login';
+					$location.path("/login");
 				});
 		}else{
 				$cordovaDialogs.confirm('Session expired, Please Login Again', 'Sorry', 'ok')
@@ -5908,7 +5908,7 @@ angular.module('starter.controllers', [])
 					if(buttonIndex=="1")
 					{
 						localStorage.clear();
-						window.location='login.html#/login';
+						$location.path("/login");
 					}
 				});
 				return false;
@@ -6010,7 +6010,7 @@ angular.module('starter.controllers', [])
 
 			alertPopup.then(function(res) {
 				localStorage.clear();
-				window.location='login.html#/login';
+				$location.path("/login");
 			});
 		}else{
 			$cordovaDialogs.confirm('Session expired, Please Login Again', 'Sorry', 'ok')
@@ -6018,7 +6018,7 @@ angular.module('starter.controllers', [])
 				if(buttonIndex=="1")
 				{
 					localStorage.clear();
-					window.location='login.html#/login';
+					$location.path("/login");
 				}
 			});
 			return false;
@@ -6062,7 +6062,7 @@ angular.module('starter.controllers', [])
 
 				alertPopup.then(function(res) {
 					localStorage.clear();
-					window.location='login.html#/login';
+					$location.path("/login");
 				});
 			}else{
 				$cordovaDialogs.confirm('Session expired, Please Login Again', 'Sorry', 'ok')
@@ -6070,7 +6070,7 @@ angular.module('starter.controllers', [])
 					if(buttonIndex=="1")
 					{
 						localStorage.clear();
-						window.location='login.html#/login';
+						$location.path("/login");
 					}
 				});
 				return false;
@@ -6102,7 +6102,7 @@ angular.module('starter.controllers', [])
 
 			alertPopup.then(function(res) {
 				localStorage.clear();
-				window.location='login.html#/login';
+				$location.path("/login");
 			});
 		}else{
 			$cordovaDialogs.confirm('Session expired, Please Login Again', 'Sorry', 'ok')
@@ -6110,7 +6110,7 @@ angular.module('starter.controllers', [])
 				if(buttonIndex=="1")
 				{
 					localStorage.clear();
-					window.location='login.html#/login';
+					$location.path("/login");
 				}
 			});
 			return false;
@@ -6154,7 +6154,7 @@ angular.module('starter.controllers', [])
 
 				alertPopup.then(function(res) {
 					localStorage.clear();
-					window.location='login.html#/login';
+					$location.path("/login");
 				});
 			}else{
 				$cordovaDialogs.confirm('Session expired, Please Login Again', 'Sorry', 'ok')
@@ -6162,7 +6162,7 @@ angular.module('starter.controllers', [])
 					if(buttonIndex=="1")
 					{
 						localStorage.clear();
-						window.location='login.html#/login';
+						$location.path("/login");
 					}
 				});
 				return false;
@@ -6201,7 +6201,7 @@ angular.module('starter.controllers', [])
 
 			alertPopup.then(function(res) {
 				localStorage.clear();
-				window.location='login.html#/login';
+				$location.path("/login");
 			});
 		}else{
 			$cordovaDialogs.confirm('Session expired, Please Login Again', 'Sorry', 'ok')
@@ -6209,7 +6209,7 @@ angular.module('starter.controllers', [])
 				if(buttonIndex=="1")
 				{
 					localStorage.clear();
-					window.location='login.html#/login';
+					$location.path("/login");
 				}
 			});
 			return false;
@@ -6253,7 +6253,7 @@ angular.module('starter.controllers', [])
 
 				alertPopup.then(function(res) {
 					localStorage.clear();
-					window.location='login.html#/login';
+					$location.path("/login");
 				});
 			}else{
 				$cordovaDialogs.confirm('Session expired, Please Login Again', 'Sorry', 'ok')
@@ -6261,7 +6261,7 @@ angular.module('starter.controllers', [])
 					if(buttonIndex=="1")
 					{
 						localStorage.clear();
-						window.location='login.html#/login';
+						$location.path("/login");
 					}
 				});
 				return false;
@@ -6300,7 +6300,7 @@ angular.module('starter.controllers', [])
 
 			alertPopup.then(function(res) {
 				localStorage.clear();
-				window.location='login.html#/login';
+				$location.path("/login");
 			});
 		}else{
 			$cordovaDialogs.confirm('Session expired, Please Login Again', 'Sorry', 'ok')
@@ -6308,7 +6308,7 @@ angular.module('starter.controllers', [])
 				if(buttonIndex=="1")
 				{
 					localStorage.clear();
-					window.location='login.html#/login';
+					$location.path("/login");
 				}
 			});
 			return false;
@@ -6353,7 +6353,7 @@ angular.module('starter.controllers', [])
 
 				alertPopup.then(function(res) {
 					localStorage.clear();
-					window.location='login.html#/login';
+					$location.path("/login");
 				});
 			}else{
 				$cordovaDialogs.confirm('Session expired, Please Login Again', 'Sorry', 'ok')
@@ -6361,7 +6361,7 @@ angular.module('starter.controllers', [])
 					if(buttonIndex=="1")
 					{
 						localStorage.clear();
-						window.location='login.html#/login';
+						$location.path("/login");
 					}
 				});
 				return false;
@@ -6692,7 +6692,7 @@ angular.module('starter.controllers', [])
 
 				alertPopup.then(function(res){
 					localStorage.clear();
-					window.location='login.html#/login';
+					$location.path("/login");
 				});
 		}else{
 				$cordovaDialogs.confirm('Session expired, Please Login Again', 'Sorry', 'ok')
@@ -6700,7 +6700,7 @@ angular.module('starter.controllers', [])
 					if(buttonIndex=="1")
 					{
 						localStorage.clear();
-						window.location='login.html#/login';
+						$location.path("/login");
 					}
 				});
 				return false;
@@ -6751,7 +6751,7 @@ angular.module('starter.controllers', [])
 
 				alertPopup.then(function(res){
 					localStorage.clear();
-					window.location='login.html#/login';
+					$location.path("/login");
 				});
 		}else{
 				$cordovaDialogs.confirm('Session expired, Please Login Again', 'Sorry', 'ok')
@@ -6759,7 +6759,7 @@ angular.module('starter.controllers', [])
 					if(buttonIndex=="1")
 					{
 						localStorage.clear();
-						window.location='login.html#/login';
+						$location.path("/login");
 					}
 				});
 				return false;
