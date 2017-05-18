@@ -47,7 +47,7 @@
 						
 						<label class="item item-input  item-floating-label formselect " ng-class="{ 'has-errors' :myForm.amount.$dirty && myForm.amount.$invalid ,'no-errors' :myForm.amount.$valid   }">
 							<span class="input-label ItemlineHead1">Enter Amount</span>
-							<input type="number"  class="input-box1 input-boxfocus1 formselect" id="forminput" name="amount" ng-model="paymeValues.amount" placeholder="Enter Amount"  required>
+							<input type="number"  class="input-box1 input-boxfocus1 formselect" id="forminput" name="amount" step="0.01" ng-model="paymeValues.amount" placeholder="Enter Amount"  required>
 						</label> 
 						<div class="row" >
 							<span style="color:red" ng-if="myForm.amount.$dirty && myForm.amount.$invalid">
