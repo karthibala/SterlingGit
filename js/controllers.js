@@ -4653,6 +4653,11 @@ angular.module('starter.controllers', [])
 						if(res) {
 							console.log('You are not sure');
 						} else {
+							$timeout(function () {
+							  $ionicHistory.clearCache();
+							  $ionicHistory.clearHistory();
+							  $log.debug('clearing cache')
+						  },300)
 							localStorage.clear();
 							$location.path("/login");
 						}
