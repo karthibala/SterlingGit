@@ -1,6 +1,6 @@
 angular.module('starter', ['ionic', 'starter.controllers','ngCordova'])
 
-.run(function($ionicPlatform,$rootScope,$location,$state,$cordovaToast,$timeout,$interval,$location,$cordovaToast,$ionicHistory,$state) {
+.run(function($ionicPlatform,$rootScope,$location,$state,$cordovaToast,$timeout,$interval,$location,$cordovaToast,$ionicHistory,$state,$cordovaDialogs) {
 	$ionicPlatform.ready(function() {
 		if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
 			cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
@@ -30,11 +30,18 @@ angular.module('starter', ['ionic', 'starter.controllers','ngCordova'])
 			//navigator.app.exitApp();
 		}else if($location.url()=='/app/hsa'){
 			if ($rootScope.backButtonPressedOnceToExit1) {
-				ionic.Platform.exitApp();
-				localStorage.clear();
+				$cordovaDialogs.confirm('You want to log off', 'Are you sure', ['Yes','No'])
+				.then(function(buttonIndex) {
+					if(buttonIndex=="1")
+					{
+						ionic.Platform.exitApp();
+						localStorage.clear();
+					}
+					else{}
+				});
 			}else{
 				$rootScope.backButtonPressedOnceToExit1 = true;
-				$cordovaToast.showShortBottom('Press again to exit').then(function(success) {
+				$cordovaToast.showShortBottom('Press again').then(function(success) {
 				// success
 				}, function (error) {
 				// error
@@ -51,11 +58,18 @@ angular.module('starter', ['ionic', 'starter.controllers','ngCordova'])
 				$state.go('app.hsa');
 			}else{
 				if ($rootScope.backButtonPressedOnceToExit2) {
-					ionic.Platform.exitApp();
-					localStorage.clear();
+					$cordovaDialogs.confirm('You want to log off', 'Are you sure', ['Yes','No'])
+					.then(function(buttonIndex) {
+						if(buttonIndex=="1")
+						{
+							ionic.Platform.exitApp();
+							localStorage.clear();
+						}
+						else{}
+					});
 				}else{
 					$rootScope.backButtonPressedOnceToExit2 = true;
-					$cordovaToast.showShortBottom('Press again to exit').then(function(success) {
+					$cordovaToast.showShortBottom('Press again').then(function(success) {
 					// success
 					}, function (error) {
 					// error
@@ -73,11 +87,18 @@ angular.module('starter', ['ionic', 'starter.controllers','ngCordova'])
 					$state.go('app.fsa');
 				}else{
 					if ($rootScope.backButtonPressedOnceToExit3) {
-						ionic.Platform.exitApp();
-						localStorage.clear();
+						$cordovaDialogs.confirm('You want to log off', 'Are you sure', ['Yes','No'])
+						.then(function(buttonIndex) {
+							if(buttonIndex=="1")
+							{
+								ionic.Platform.exitApp();
+								localStorage.clear();
+							}
+							else{}
+						});
 					}else{
 						$rootScope.backButtonPressedOnceToExit3 = true;
-						$cordovaToast.showShortBottom('Press again to exit').then(function(success) {
+						$cordovaToast.showShortBottom('Press again').then(function(success) {
 						// success
 						}, function (error) {
 						// error
@@ -89,11 +110,18 @@ angular.module('starter', ['ionic', 'starter.controllers','ngCordova'])
 				}
 			}else{
 				if ($rootScope.backButtonPressedOnceToExit3) {
-					ionic.Platform.exitApp();
-					localStorage.clear();
+					$cordovaDialogs.confirm('You want to log off', 'Are you sure', ['Yes','No'])
+					.then(function(buttonIndex) {
+						if(buttonIndex=="1")
+						{
+							ionic.Platform.exitApp();
+							localStorage.clear();
+						}
+						else{}
+					});
 				}else{
 					$rootScope.backButtonPressedOnceToExit3 = true;
-					$cordovaToast.showShortBottom('Press again to exit').then(function(success) {
+					$cordovaToast.showShortBottom('Press again').then(function(success) {
 					// success
 					}, function (error) {
 					// error
@@ -114,11 +142,18 @@ angular.module('starter', ['ionic', 'starter.controllers','ngCordova'])
 					$state.go('app.hra');
 				}else{
 					if ($rootScope.backButtonPressedOnceToExit3) {
-						ionic.Platform.exitApp();
-						localStorage.clear();
+						$cordovaDialogs.confirm('You want to log off', 'Are you sure', ['Yes','No'])
+						.then(function(buttonIndex) {
+							if(buttonIndex=="1")
+							{
+								ionic.Platform.exitApp();
+								localStorage.clear();
+							}
+							else{}
+						});
 					}else{
 						$rootScope.backButtonPressedOnceToExit3 = true;
-						$cordovaToast.showShortBottom('Press again to exit').then(function(success) {
+						$cordovaToast.showShortBottom('Press again').then(function(success) {
 						// success
 						}, function (error) {
 						// error
@@ -131,11 +166,18 @@ angular.module('starter', ['ionic', 'starter.controllers','ngCordova'])
 				
 			}else{
 				if ($rootScope.backButtonPressedOnceToExit4) {
-					ionic.Platform.exitApp();
-					localStorage.clear();
+					$cordovaDialogs.confirm('You want to log off', 'Are you sure', ['Yes','No'])
+					.then(function(buttonIndex) {
+						if(buttonIndex=="1")
+						{
+							ionic.Platform.exitApp();
+							localStorage.clear();
+						}
+						else{}
+					});
 				}else{
 					$rootScope.backButtonPressedOnceToExit4 = true;
-					$cordovaToast.showShortBottom('Press again to exit').then(function(success) {
+					$cordovaToast.showShortBottom('Press again').then(function(success) {
 					// success
 					}, function (error) {
 					// error
