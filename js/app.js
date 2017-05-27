@@ -195,8 +195,18 @@ angular.module('starter', ['ionic', 'starter.controllers','ngCordova'])
 			$state.go('activity');
 		}else if($location.url()=='/activity'){
 			$state.go('app.hsa');
+		}else if($location.url()=='/make'){
+			$state.go('app.hsa');
+		}else if($location.url()=='/health'){
+			$state.go('app.hsa');
+		}else if($location.url()=='/fsacardclaim'){
+			$state.go('app.fsa');
+		}else if($location.url()=='/fsacontribution'){
+			$state.go('app.fsa');
+		}else if($location.url()=='/fsapayme'){
+			$state.go('app.fsa');
 		}else{
-			$ionicHistory.goBack();
+			window.history.back();
 		}
 	}, 100);
 })
