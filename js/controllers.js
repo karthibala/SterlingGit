@@ -4465,7 +4465,7 @@ angular.module('starter.controllers', [])
 })
 
 // Other Controllers
-.controller('AppCtrl', function($scope,$ionicPopup, $timeout ,$ionicModal,$location,$cordovaDialogs, $rootScope,$http) {
+.controller('AppCtrl', function($scope,$ionicPopup, $ionicHistory,$timeout ,$ionicModal,$location,$cordovaDialogs, $rootScope,$http) {
 	$scope.username = localStorage.getItem('username');
 	$scope.access_token = localStorage.getItem('access_token');
 	
@@ -4662,6 +4662,11 @@ angular.module('starter.controllers', [])
 					.then(function(buttonIndex) {
 						if(buttonIndex=="1")
 						{
+							$timeout(function () {
+							  $ionicHistory.clearCache();
+							  $ionicHistory.clearHistory();
+							  $log.debug('clearing cache')
+						  },300) 
 							localStorage.clear();
 							$location.path("/login");
 						}
