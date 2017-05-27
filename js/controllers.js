@@ -73,7 +73,7 @@ angular.module('starter.controllers', [])
 		}
 		else
 		{
-			$http.post(' http://app.sterlinghsa.com/api/v1/user/login',{username:$scope.loginData.username,password:$scope.loginData.password},{headers: {'Content-Type':'application/json; charset=utf-8'} })     
+			$http.post('http://mobileapp.sterlinghsa.com/api/v1/user/login',{username:$scope.loginData.username,password:$scope.loginData.password},{headers: {'Content-Type':'application/json; charset=utf-8'} })     
 			.success(function(data) {
 				if(data.status == "SUCCESS"){
 					$ionicLoading.hide()
@@ -115,7 +115,7 @@ angular.module('starter.controllers', [])
  localStorage.setItem("backCount","2");
  $scope.username = localStorage.getItem('username');
  $scope.access_token = localStorage.getItem('access_token');
-  $http.get('http://app.sterlinghsa.com/api/v1/accounts/portfolio',{headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} })
+  $http.get('http://mobileapp.sterlinghsa.com/api/v1/accounts/portfolio',{headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} })
      .success(function(data){
     $rootScope.acctype=data.account_types;
     if(data.account_types.HSA!=undefined){
@@ -141,7 +141,7 @@ angular.module('starter.controllers', [])
      $rootScope.cobrassn=data.account_types.COBRA.SSN;
     }
 	
-		$http.get(' http://app.sterlinghsa.com/api/v1/accounts/list',{headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} })
+		$http.get(' http://mobileapp.sterlinghsa.com/api/v1/accounts/list',{headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} })
 		.success(function(data){
 			//alert(data.accounts.length)
 			for(var i=0;i<data.accounts.length;i++){
@@ -156,7 +156,7 @@ angular.module('starter.controllers', [])
 
 		});
     
-		$http.get(' http://app.sterlinghsa.com/api/v1/accounts/accountinfo',{params:{'type':'hsa','acc_num': data.account_types.HSA.ACCT_NUM},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} })
+		$http.get(' http://mobileapp.sterlinghsa.com/api/v1/accounts/accountinfo',{params:{'type':'hsa','acc_num': data.account_types.HSA.ACCT_NUM},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} })
 		.success(function(data){
 		$scope.contributions=data.total_contributions.CURRENT_YR_CONTRB;
 		}).error(function(err){
@@ -189,7 +189,7 @@ angular.module('starter.controllers', [])
    });
    
    $scope.debit=function(){
-		$http.get(" http://app.sterlinghsa.com/api/v1/accounts/debitcardpurchase",{params:{'acct_num':$scope.hsaaccno},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
+		$http.get(" http://mobileapp.sterlinghsa.com/api/v1/accounts/debitcardpurchase",{params:{'acct_num':$scope.hsaaccno},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
 		.success(function(data){
 			$ionicLoading.hide();
 				$scope.hsa_debit_card_list=data.debit_card_list[0];
@@ -324,7 +324,7 @@ angular.module('starter.controllers', [])
 			return false;
 		}	
 	}else{
-		$http.get("http://app.sterlinghsa.com/api/v1/accounts/bankdetails",{params:{'type':'hsa', 'acc_num':$scope.hsaaccno},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
+		$http.get("http://mobileapp.sterlinghsa.com/api/v1/accounts/bankdetails",{params:{'type':'hsa', 'acc_num':$scope.hsaaccno},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
 		.success(function(data){
 			$ionicLoading.hide();
 			if(data.status=="FAILED"){
@@ -371,7 +371,7 @@ angular.module('starter.controllers', [])
 		});
 	}
 	
-    $http.get(' http://app.sterlinghsa.com/api/v1/accounts/accountinfo',{params:{'type':'hsa','acc_num': $scope.acc_num},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} })
+    $http.get(' http://mobileapp.sterlinghsa.com/api/v1/accounts/accountinfo',{params:{'type':'hsa','acc_num': $scope.acc_num},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} })
 	.success(function(data){
 		$ionicLoading.hide();
 		$scope.total_contribution = data.total_contributions;
@@ -400,13 +400,13 @@ angular.module('starter.controllers', [])
 			}
 	});
  
-	$http.get(' http://app.sterlinghsa.com/api/v1/accounts/description',{headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} })
+	$http.get(' http://mobileapp.sterlinghsa.com/api/v1/accounts/description',{headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} })
 	.success(function(data){
 		$scope.description=data.description ;
 	}).error(function(err){
 	});
  
-	$http.get(" http://app.sterlinghsa.com/api/v1/accounts/balances",{params:{'type':'hra'},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
+	$http.get(" http://mobileapp.sterlinghsa.com/api/v1/accounts/balances",{params:{'type':'hra'},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
 	.success(function(data){
 		$ionicLoading.hide();
 		$scope.Availablebalance=data.balances.BALANCE;
@@ -463,7 +463,7 @@ angular.module('starter.controllers', [])
 			template: '<ion-spinner icon="ios"></ion-spinner><br>Loading...'
 			});
 			//alert(JSON.stringify($scope.makecontribute))
-			$http.post(" http://app.sterlinghsa.com/api/v1/accounts/makecontribution",{'acct_id':$scope.hsaaccId,'acct_type':$scope.hsaacctype,'bank_acct_id':$scope.makecontribute.selectAccount.BANK_ACC_ID,'amount':$scope.makecontribute.amount,'fee_amount':$scope.makecontribute.feeamount,'reason_code':$scope.makecontribute.selectdescription.FEE_CODE,'trans_date':$scope.makecontribute.TransDate},{headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
+			$http.post(" http://mobileapp.sterlinghsa.com/api/v1/accounts/makecontribution",{'acct_id':$scope.hsaaccId,'acct_type':$scope.hsaacctype,'bank_acct_id':$scope.makecontribute.selectAccount.BANK_ACC_ID,'amount':$scope.makecontribute.amount,'fee_amount':$scope.makecontribute.feeamount,'reason_code':$scope.makecontribute.selectdescription.FEE_CODE,'trans_date':$scope.makecontribute.TransDate},{headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
 			.success(function(data){
 				if(data.status == "SUCCESS")
 				{
@@ -536,7 +536,7 @@ angular.module('starter.controllers', [])
 	$scope.currentYear = $filter('date')(new Date(),'yyyy');
 	//alert($scope.currentYear)
 
-	$http.get(' http://app.sterlinghsa.com/api/v1/accounts/accountinfo',{params:{'type':'hsa','acc_num': $scope.acc_num},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} })
+	$http.get(' http://mobileapp.sterlinghsa.com/api/v1/accounts/accountinfo',{params:{'type':'hsa','acc_num': $scope.acc_num},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} })
 	.success(function(data){
 		$ionicLoading.hide();
 		localStorage.setItem('account_information',data.account_information);
@@ -638,7 +638,7 @@ angular.module('starter.controllers', [])
 			$ionicLoading.show({
 			template: '<ion-spinner icon="ios"></ion-spinner><br>Loading...'
 			});
-			// $http.post(' http://app.sterlinghsa.com/api/v1/accounts/activitystatementpdf',{fromdate:$rootScope.activity.startDate,todate:$rootScope.activity.EndtDate, 'account':$rootScope.hsaaccno },{headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} })
+			// $http.post(' http://mobileapp.sterlinghsa.com/api/v1/accounts/activitystatementpdf',{fromdate:$rootScope.activity.startDate,todate:$rootScope.activity.EndtDate, 'account':$rootScope.hsaaccno },{headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} })
 			// .success(function(data){
 				// $rootScope.summary_list=data.summary_list;
 				// $rootScope.activity_list=data.activity_list;
@@ -652,7 +652,7 @@ angular.module('starter.controllers', [])
 			
 			if($rootScope.IOS==true){
 				$http({
-					url : ' http://app.sterlinghsa.com/api/v1/accounts/activitystatementpdf',
+					url : ' http://mobileapp.sterlinghsa.com/api/v1/accounts/activitystatementpdf',
 					data:{fromdate:$scope.activity.startDate,todate:$scope.activity.EndtDate, account:$rootScope.hsaaccno},
 					method : 'POST',
 					responseType : 'arraybuffer',
@@ -683,7 +683,7 @@ angular.module('starter.controllers', [])
 				}).error(function(data){});
 			}else{
 				$http({
-					url : ' http://app.sterlinghsa.com/api/v1/accounts/activitystatementpdf',
+					url : ' http://mobileapp.sterlinghsa.com/api/v1/accounts/activitystatementpdf',
 					data:{fromdate:$scope.activity.startDate,todate:$scope.activity.EndtDate, account:$rootScope.hsaaccno},
 					method : 'POST',
 					responseType : 'arraybuffer',
@@ -982,7 +982,7 @@ angular.module('starter.controllers', [])
 			return false;
 		}
 	}else{
-		$http.get("http://app.sterlinghsa.com/api/v1/accounts/bankdetails",{params:{'type':'hsa', 'acc_num':$scope.hsaaccno},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
+		$http.get("http://mobileapp.sterlinghsa.com/api/v1/accounts/bankdetails",{params:{'type':'hsa', 'acc_num':$scope.hsaaccno},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
 		.success(function(data){
 			if(data.status=="FAILED"){
 				if($rootScope.IOS==true){
@@ -1028,13 +1028,13 @@ angular.module('starter.controllers', [])
 		});
 	}
 	 
-	$http.get('  http://app.sterlinghsa.com/api/v1/accounts/categories',{headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} })
+	$http.get('  http://mobileapp.sterlinghsa.com/api/v1/accounts/categories',{headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} })
 	.success(function(data){
 		$scope.categories=data.categories;
 		}).error(function(err){
     });
  
-	$http.get(" http://app.sterlinghsa.com/api/v1/accounts/balances",{params:{'type':'hsa'},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
+	$http.get(" http://mobileapp.sterlinghsa.com/api/v1/accounts/balances",{params:{'type':'hsa'},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
 	.success(function(data){
 		$scope.Availablebalance=data.balances.BALANCE;
 	}).error(function(err){
@@ -1090,7 +1090,7 @@ angular.module('starter.controllers', [])
 			});
 			
 			
-			$http.post("http://app.sterlinghsa.com/api/v1/accounts/payme",{'hsa_acct_id': $scope.hsaaccId,'bank_acct_id':$scope.paymeValues.selectAccount.BANK_ACC_ID,'amount':$scope.paymeValues.amount,'category':$scope.paymeValues.category.LOOKUP_CODE,'trans_date':$scope.paymeValues.TransDate,"receipt":$scope.imgSrc,"file_name":$scope.randomFile,"file_mime_type":'image/jpeg'},{headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
+			$http.post("http://mobileapp.sterlinghsa.com/api/v1/accounts/payme",{'hsa_acct_id': $scope.hsaaccId,'bank_acct_id':$scope.paymeValues.selectAccount.BANK_ACC_ID,'amount':$scope.paymeValues.amount,'category':$scope.paymeValues.category.LOOKUP_CODE,'trans_date':$scope.paymeValues.TransDate,"receipt":$scope.imgSrc,"file_name":$scope.randomFile,"file_mime_type":'image/jpeg'},{headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
 			.success(function(data){
 				if(data.status == "SUCCESS"){
 					$ionicLoading.hide();
@@ -1409,19 +1409,19 @@ angular.module('starter.controllers', [])
 				return false;
 			}
 	}else{
-		$http.get('  http://app.sterlinghsa.com/api/v1/accounts/categories',{headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} })
+		$http.get('  http://mobileapp.sterlinghsa.com/api/v1/accounts/categories',{headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} })
 		.success(function(data){
 			$scope.categories=data.categories;
 		}).error(function(err){
 		});
 	 
-		$http.get(' http://app.sterlinghsa.com/api/v1/accounts/description',{headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} })
+		$http.get(' http://mobileapp.sterlinghsa.com/api/v1/accounts/description',{headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} })
 		.success(function(data){
 			$scope.descriptions=data.description ;
 		}).error(function(err){
 		});
 		
-		$http.get('http://app.sterlinghsa.com/api/v1/accounts/payeeslist',{params:{'acc_num':$scope.hsaaccno},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} })
+		$http.get('http://mobileapp.sterlinghsa.com/api/v1/accounts/payeeslist',{params:{'acc_num':$scope.hsaaccno},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} })
 		.success(function(data){
 			//alert(data.payee.length)
 			if(data.payee==null){
@@ -1445,7 +1445,7 @@ angular.module('starter.controllers', [])
 		}).error(function(err){
 		});
 		
-		$http.get(" http://app.sterlinghsa.com/api/v1/accounts/balances",{params:{'type':'hsa'},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
+		$http.get(" http://mobileapp.sterlinghsa.com/api/v1/accounts/balances",{params:{'type':'hsa'},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
 		.success(function(data){
 			$scope.availablebalance=data.balances.BALANCE;
 		}).error(function(err){
@@ -1502,7 +1502,7 @@ angular.module('starter.controllers', [])
 			template: '<ion-spinner icon="ios"></ion-spinner><br>Loading...'
 			});
 
-			$http.post("http://app.sterlinghsa.com/api/v1/accounts/payprovider",{'hsa_acct_id':$scope.hsaaccId,'vendor_id':$scope.payprovierValues.selectPayee.VENDOR_ID,'amount':$scope.payprovierValues.amount,'patient_name':$scope.payprovierValues.patient_name,'trans_date':$scope.payprovierValues.TransDate,"receipt":$scope.imgSrc,"file_name":$scope.randomFile,"file_mime_type":'image/jpeg'},{headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
+			$http.post("http://mobileapp.sterlinghsa.com/api/v1/accounts/payprovider",{'hsa_acct_id':$scope.hsaaccId,'vendor_id':$scope.payprovierValues.selectPayee.VENDOR_ID,'amount':$scope.payprovierValues.amount,'patient_name':$scope.payprovierValues.patient_name,'trans_date':$scope.payprovierValues.TransDate,"receipt":$scope.imgSrc,"file_name":$scope.randomFile,"file_mime_type":'image/jpeg'},{headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
 			.success(function(data){
 
 				if(data.status == "SUCCESS")
@@ -1644,7 +1644,7 @@ angular.module('starter.controllers', [])
     }
 	else
 	{
-	$http.get(" http://app.sterlinghsa.com/api/v1/accounts/taxstatement",{params:{'acct_id':$rootScope.hsaaccId},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.      access_token} } )
+	$http.get(" http://mobileapp.sterlinghsa.com/api/v1/accounts/taxstatement",{params:{'acct_id':$rootScope.hsaaccId},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.      access_token} } )
 	.success(function(data){
 		$ionicLoading.hide();
 		$scope.tax_statement_list = data.tax_statement_list;
@@ -1678,7 +1678,7 @@ angular.module('starter.controllers', [])
 	$scope.form1099=function(){
 		if($rootScope.IOS==true){
 			$http({
-				url : 'http://app.sterlinghsa.com/api/v1/accounts/taxstatementpdf',
+				url : 'http://mobileapp.sterlinghsa.com/api/v1/accounts/taxstatementpdf',
 				params:{acct_num:$rootScope.hsaaccno,type:'1099',tax_year:$scope.tax_statement_list[0].TAX_YEAR},
 				method : 'GET',
 				responseType : 'arraybuffer',
@@ -1709,7 +1709,7 @@ angular.module('starter.controllers', [])
 			}).error(function(data){});
 		}else{
 			$http({
-				url : 'http://app.sterlinghsa.com/api/v1/accounts/taxstatementpdf',
+				url : 'http://mobileapp.sterlinghsa.com/api/v1/accounts/taxstatementpdf',
 				params:{acct_num:$rootScope.hsaaccno,type:'1099',tax_year:$scope.tax_statement_list[0].TAX_YEAR},
 				method : 'GET',
 				responseType : 'arraybuffer',
@@ -1740,7 +1740,7 @@ angular.module('starter.controllers', [])
 	$scope.form5498=function(){
 		if($rootScope.IOS==true){
 			$http({
-				url : 'http://app.sterlinghsa.com/api/v1/accounts/taxstatementpdf',
+				url : 'http://mobileapp.sterlinghsa.com/api/v1/accounts/taxstatementpdf',
 				params:{acct_num:$rootScope.hsaaccno,type:'5498',tax_year:$scope.tax_statement_list[0].TAX_YEAR},
 				method : 'GET',
 				responseType : 'arraybuffer',
@@ -1771,7 +1771,7 @@ angular.module('starter.controllers', [])
 			}).error(function(data){});
 		}else{
 			$http({
-				url : 'http://app.sterlinghsa.com/api/v1/accounts/taxstatementpdf',
+				url : 'http://mobileapp.sterlinghsa.com/api/v1/accounts/taxstatementpdf',
 				params:{acct_num:$rootScope.hsaaccno,type:'5498',tax_year:$scope.tax_statement_list[0].TAX_YEAR},
 				method : 'GET',
 				responseType : 'arraybuffer',
@@ -1850,7 +1850,7 @@ angular.module('starter.controllers', [])
 	$scope.hsaaccId=$rootScope.hsaaccId;
 	$scope.hsaaccno=$rootScope.hsaaccno;
 	
-	$http.get(" http://app.sterlinghsa.com/api/v1/accounts/schedule",{params:{'acc_num':$scope.hsaaccno,'trans_type':'c'},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
+	$http.get(" http://mobileapp.sterlinghsa.com/api/v1/accounts/schedule",{params:{'acc_num':$scope.hsaaccno,'trans_type':'c'},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
 	.success(function(data){
 		$ionicLoading.hide();
 		if(data.schedule_list==null || data.schedule_list==""){
@@ -1912,7 +1912,7 @@ angular.module('starter.controllers', [])
 	localStorage.setItem("backCount","2");
 	$scope.username = localStorage.getItem('username');
 	$scope.access_token = localStorage.getItem('access_token');
-	$http.get('http://app.sterlinghsa.com/api/v1/accounts/portfolio',{headers: {'Content-Type':'application/json;  charset=utf-8','Authorization':$scope.access_token} })
+	$http.get('http://mobileapp.sterlinghsa.com/api/v1/accounts/portfolio',{headers: {'Content-Type':'application/json;  charset=utf-8','Authorization':$scope.access_token} })
 	.success(function(data){
 		localStorage.setItem('account_types',data.account_types.FSA);
 		$rootScope.acctype=data.account_types;
@@ -1920,7 +1920,7 @@ angular.module('starter.controllers', [])
 		$rootScope.fsaaccno=data.account_types.FSA.ACCT_NUM;
 		$rootScope.fsaaccId=data.account_types.FSA.ACCT_ID;
 		
-		$http.get(' http://app.sterlinghsa.com/api/v1/accounts/list',{headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} })
+		$http.get(' http://mobileapp.sterlinghsa.com/api/v1/accounts/list',{headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} })
 		.success(function(data){
 			for(var i=0;i<data.accounts.length;i++){
 				if($rootScope.fsaaccno==data.accounts[i].ACC_NUM){
@@ -1960,7 +1960,7 @@ angular.module('starter.controllers', [])
 		}
 	});
 	$scope.debit=function(){
-		$http.get(" http://app.sterlinghsa.com/api/v1/accounts/debitcardpurchase",{params:{'acct_num':$scope.fsaaccno},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
+		$http.get(" http://mobileapp.sterlinghsa.com/api/v1/accounts/debitcardpurchase",{params:{'acct_num':$scope.fsaaccno},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
 		.success(function(data){
 			$ionicLoading.hide();
 				$scope.debit_card_list=data.debit_card_list[0];
@@ -2038,7 +2038,7 @@ angular.module('starter.controllers', [])
 				return false;
 		}
 	}else{
-		$http.get('  http://app.sterlinghsa.com/api/v1/accounts/categories',{headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} })
+		$http.get('  http://mobileapp.sterlinghsa.com/api/v1/accounts/categories',{headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} })
 		.success(function(data){
 		}).error(function(err){
 			$ionicLoading.hide();
@@ -2103,7 +2103,7 @@ angular.module('starter.controllers', [])
 				return false;
 		}
 	}else{
-		$http.get(" http://app.sterlinghsa.com/api/v1/accounts/recent-activity",{params:{'acct_id':$scope.hsaaccId,'trans_type':'c','plan_type':'hsa'},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
+		$http.get(" http://mobileapp.sterlinghsa.com/api/v1/accounts/recent-activity",{params:{'acct_id':$scope.hsaaccId,'trans_type':'c','plan_type':'hsa'},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
 		.success(function(data){
 			$ionicLoading.hide();
 			if(data.transcation_list==null || data.transcation_list==""){
@@ -2194,7 +2194,7 @@ angular.module('starter.controllers', [])
 		return false;
 	}
 	}else{
-	$http.get(" http://app.sterlinghsa.com/api/v1/accounts/recent-activity",{params:{'acct_id':$scope.hsaaccId,'trans_type':'d','plan_type':'hsa'},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
+	$http.get(" http://mobileapp.sterlinghsa.com/api/v1/accounts/recent-activity",{params:{'acct_id':$scope.hsaaccId,'trans_type':'d','plan_type':'hsa'},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
 	.success(function(data){
 		$ionicLoading.hide();
 		if(data.transcation_list==null || data.transcation_list==""){
@@ -2260,7 +2260,7 @@ angular.module('starter.controllers', [])
 	$scope.access_token = localStorage.getItem('access_token');
 	$scope.hsaaccId=$rootScope.hsaaccId;
 	
-	$http.get(" http://app.sterlinghsa.com/api/v1/accounts/schedule",{params:{'acct_id':$scope.hsaaccId,'trans_type':'d'},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
+	$http.get(" http://mobileapp.sterlinghsa.com/api/v1/accounts/schedule",{params:{'acct_id':$scope.hsaaccId,'trans_type':'d'},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
 	.success(function(data){ 
 		$ionicLoading.hide();
 		if(data.schedule_list==null || data.schedule_list==""){
@@ -2350,7 +2350,7 @@ angular.module('starter.controllers', [])
 			return false;
 		}
 	}else{
-		$http.get(" http://app.sterlinghsa.com/api/v1/accounts/recent-activity",{params:{'acct_id':$scope.fsaaccId,'trans_type':'d','plan_type':'fsa'},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
+		$http.get(" http://mobileapp.sterlinghsa.com/api/v1/accounts/recent-activity",{params:{'acct_id':$scope.fsaaccId,'trans_type':'d','plan_type':'fsa'},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
 		.success(function(data){
 			$ionicLoading.hide();
 			if(data.transcation_list==null || data.transcation_list==""){
@@ -2441,7 +2441,7 @@ angular.module('starter.controllers', [])
 			return false;
 		}
 	}else{
-		$http.get(" http://app.sterlinghsa.com/api/v1/accounts/recent-activity",{params:{'acct_id':$scope.fsaaccId,'trans_type':'c','plan_type':'fsa'},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
+		$http.get(" http://mobileapp.sterlinghsa.com/api/v1/accounts/recent-activity",{params:{'acct_id':$scope.fsaaccId,'trans_type':'c','plan_type':'fsa'},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
 		.success(function(data){
 			$ionicLoading.hide();
 			if(data.transcation_list==null || data.transcation_list==""){
@@ -2539,7 +2539,7 @@ angular.module('starter.controllers', [])
 			return false;
 		}
 	}else{	 
-		$http.get("http://app.sterlinghsa.com/api/v1/accounts/accountinfo",{params:{'type':'fsa','acc_num':$scope.acc},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
+		$http.get("http://mobileapp.sterlinghsa.com/api/v1/accounts/accountinfo",{params:{'type':'fsa','acc_num':$scope.acc},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
 		.success(function(data){ 
 			$scope.accnumber=data.account_information;
 		}).error(function(err){
@@ -2606,7 +2606,7 @@ angular.module('starter.controllers', [])
 			return false;
 		}
 	}else{
-		$http.get("http://app.sterlinghsa.com/api/v1/accounts/availablebalances",{params:{ 'acct_num':$scope.fsaccno},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
+		$http.get("http://mobileapp.sterlinghsa.com/api/v1/accounts/availablebalances",{params:{ 'acct_num':$scope.fsaccno},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
 		.success(function(data){
 			$rootScope.available_balances = data.available_balances;
 		}).error(function(err){
@@ -2759,7 +2759,7 @@ angular.module('starter.controllers', [])
 	}
 	
 	if($rootScope.claimMode='payme'){
-		$http.get("http://app.sterlinghsa.com/api/v1/accounts/bankdetails",{params:{'type':'fsa', 'acc_num':$scope.fsaaccno},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
+		$http.get("http://mobileapp.sterlinghsa.com/api/v1/accounts/bankdetails",{params:{'type':'fsa', 'acc_num':$scope.fsaaccno},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
 		.success(function(data){
 			$scope.bank_details=data.bank_details;
 			//alert("claimMode")
@@ -2806,7 +2806,7 @@ angular.module('starter.controllers', [])
 			}
 		});   
 	}else if($rootScope.claimMode='payprovider'){
-		$http.get('http://app.sterlinghsa.com/api/v1/accounts/payeeslist',{params:{'acc_num': $scope.fsaaccno},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} })
+		$http.get('http://mobileapp.sterlinghsa.com/api/v1/accounts/payeeslist',{params:{'acc_num': $scope.fsaaccno},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} })
 		.success(function(data){
 			$scope.payee=data.payee;
 			if(data.payee==null){
@@ -3014,7 +3014,7 @@ angular.module('starter.controllers', [])
 			template: '<ion-spinner icon="ios"></ion-spinner><br>Loading...'
 			});
 			
-			$http.post("http://app.sterlinghsa.com/api/v1/accounts/newclaimrequest_base64",{'acct_num':  $scope.fsaaccno,
+			$http.post("http://mobileapp.sterlinghsa.com/api/v1/accounts/newclaimrequest_base64",{'acct_num':  $scope.fsaaccno,
 			'acct_id':$scope.fsaaccId,
 			'bank_acct_id':$scope.newclaimvalues.Bankaccount.BANK_ACC_ID,
 			'amount':$scope.newclaimvalues.amount,
@@ -3129,12 +3129,12 @@ angular.module('starter.controllers', [])
 	$scope.fsaccno=$rootScope.fsaaccno;
 	$rootScope.claimMode='';
 	$rootScope.claimMode='payme';
-	$http.get("http://app.sterlinghsa.com/api/v1/accounts/availablebalances",{params:{ 'acct_num':$scope.fsaccno},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
+	$http.get("http://mobileapp.sterlinghsa.com/api/v1/accounts/availablebalances",{params:{ 'acct_num':$scope.fsaccno},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
 	.success(function(data){
 		$scope.available_balances = data.available_balances;
 	})
 
-	$http.get(" http://app.sterlinghsa.com/api/v1/accounts/plan-type",{params:{'acct_id':$scope.fsaaccId},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
+	$http.get(" http://mobileapp.sterlinghsa.com/api/v1/accounts/plan-type",{params:{'acct_id':$scope.fsaaccId},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
 	.success(function(data){
 		if(data.plan_types==null){
 			if($rootScope.IOS==true){
@@ -3262,12 +3262,12 @@ angular.module('starter.controllers', [])
 	$scope.fsaccno=$rootScope.fsaaccno;
 	$rootScope.claimMode='';
 	$rootScope.claimMode='payprovider';
-	$http.get("http://app.sterlinghsa.com/api/v1/accounts/availablebalances",{params:{ 'acct_num':$scope.fsaccno},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
+	$http.get("http://mobileapp.sterlinghsa.com/api/v1/accounts/availablebalances",{params:{ 'acct_num':$scope.fsaccno},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
 	.success(function(data){
 		$scope.available_balances = data.available_balances;
 	})
 
-	$http.get(" http://app.sterlinghsa.com/api/v1/accounts/plan-type",{params:{'acct_id':$scope.fsaaccId},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
+	$http.get(" http://mobileapp.sterlinghsa.com/api/v1/accounts/plan-type",{params:{'acct_id':$scope.fsaaccId},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
 	.success(function(data){
 		if(data.plan_types==null){
 			if($rootScope.IOS==true){
@@ -3555,7 +3555,7 @@ angular.module('starter.controllers', [])
 			template: '<ion-spinner icon="ios"></ion-spinner><br>Loading...'
 			});
 
-			$http.post("http://app.sterlinghsa.com/api/v1/accounts/newclaimrequest_base64",{'acct_num':  $scope.fsaaccno,
+			$http.post("http://mobileapp.sterlinghsa.com/api/v1/accounts/newclaimrequest_base64",{'acct_num':  $scope.fsaaccno,
 			'acct_id':$scope.fsaaccId,
 			'bank_acct_id':'',
 			'amount':$scope.newclaimvalues.amount,
@@ -3636,7 +3636,7 @@ angular.module('starter.controllers', [])
 	}
     
    
-	$http.get('http://app.sterlinghsa.com/api/v1/accounts/payeeslist',{params:{'acc_num': $scope.fsaaccno},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} })
+	$http.get('http://mobileapp.sterlinghsa.com/api/v1/accounts/payeeslist',{params:{'acc_num': $scope.fsaaccno},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} })
 	.success(function(data){
 		$scope.payee=data.payee ;
 		if($rootScope.claimMode='payprovider'){
@@ -3834,7 +3834,7 @@ angular.module('starter.controllers', [])
 			return false;
 		}
 	}else{ 
-		$http.get(" http://app.sterlinghsa.com/api/v1/accounts/debitcardpurchase",{params:{'acct_num':$scope.fsaaccno},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
+		$http.get(" http://mobileapp.sterlinghsa.com/api/v1/accounts/debitcardpurchase",{params:{'acct_num':$scope.fsaaccno},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
 		.success(function(data){
 			$ionicLoading.hide();
 			if(data.debit_card_list==null || data.debit_card_list==""){
@@ -3926,7 +3926,7 @@ angular.module('starter.controllers', [])
 			return false;
 		}
 	}else{ 
-		$http.get(" http://app.sterlinghsa.com/api/v1/accounts/debitcardpurchase",{params:{'acct_num':$scope.fsaaccno},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
+		$http.get(" http://mobileapp.sterlinghsa.com/api/v1/accounts/debitcardpurchase",{params:{'acct_num':$scope.fsaaccno},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
 		.success(function(data){
 			$ionicLoading.hide();
 			if(data.debit_card_list==null || data.debit_card_list==""){
@@ -4026,7 +4026,7 @@ angular.module('starter.controllers', [])
 		}
 	}else{
 		
-		$http.get(" http://app.sterlinghsa.com/api/v1/accounts/claimdetail",{params:{'trans_num':$scope.claimData.CLAIM_ID},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
+		$http.get(" http://mobileapp.sterlinghsa.com/api/v1/accounts/claimdetail",{params:{'trans_num':$scope.claimData.CLAIM_ID},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
 		.success(function(data){
 			$ionicLoading.hide();
 			if(data.payment_information==null){
@@ -4089,7 +4089,7 @@ angular.module('starter.controllers', [])
 		if($rootScope.IOS==true){
 			//alert("Http")
 			$http({
-				url : 'http://app.sterlinghsa.com/api/v1/accounts/downloadclaimdocument',
+				url : 'http://mobileapp.sterlinghsa.com/api/v1/accounts/downloadclaimdocument',
 				params:{id:doc.ATTACHMENT_ID},
 				method : 'GET',
 				responseType : 'arraybuffer',
@@ -4122,7 +4122,7 @@ angular.module('starter.controllers', [])
 			});
 		}else{
 			$http({
-				url : 'http://app.sterlinghsa.com/api/v1/accounts/downloadclaimdocument',
+				url : 'http://mobileapp.sterlinghsa.com/api/v1/accounts/downloadclaimdocument',
 				params:{id:doc.ATTACHMENT_ID},
 				method : 'GET',
 				responseType : 'arraybuffer',
@@ -4186,7 +4186,7 @@ angular.module('starter.controllers', [])
 			return false;
 		}
 	}else{ 
-		$http.get(" http://app.sterlinghsa.com/api/v1/accounts/debitcardpurchase",{params:{'acct_num':$scope.fsaaccno},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
+		$http.get(" http://mobileapp.sterlinghsa.com/api/v1/accounts/debitcardpurchase",{params:{'acct_num':$scope.fsaaccno},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
 		.success(function(data){
 			$ionicLoading.hide();
 			if(data.debit_card_list==null || data.debit_card_list==""){
@@ -4396,7 +4396,7 @@ angular.module('starter.controllers', [])
 			template: '<ion-spinner icon="ios"></ion-spinner><br>Loading...'
 			});
 			
-			$http.post("http://app.sterlinghsa.com/api/v1/accounts/uploadclaimdocument",{'claim_id':  $scope.trans_num,
+			$http.post("http://mobileapp.sterlinghsa.com/api/v1/accounts/uploadclaimdocument",{'claim_id':  $scope.trans_num,
 			"receipt":$scope.imgSrc,
 			"file_name":$scope.randomFile,
 			"file_mime_type":'image/jpeg'
@@ -4469,7 +4469,7 @@ angular.module('starter.controllers', [])
 	$scope.username = localStorage.getItem('username');
 	$scope.access_token = localStorage.getItem('access_token');
 	
-	$http.get('http://app.sterlinghsa.com/api/v1/accounts/portfolio',{headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} })
+	$http.get('http://mobileapp.sterlinghsa.com/api/v1/accounts/portfolio',{headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} })
 	.success(function(data){
 		$rootScope.acctype=data.account_types;
 		$scope.acctype=data.account_types;
@@ -4639,32 +4639,37 @@ angular.module('starter.controllers', [])
 
 	$scope.logOut=function()
 	{
-		if($rootScope.IOS==true){
-				var confirmPopup = $ionicPopup.confirm({
-				title: 'Do you want to Logout',
-				template: 'Are you sure',
-				okText: 'No',
-				cancelText: 'Yes',
-			});
-			confirmPopup.then(function(res) {
-				if(res) {
-					console.log('You are not sure');
-				} else {
-					localStorage.clear();
-					$location.path("/login");
+		$http.get('http://mobileapp.sterlinghsa.com/api/v1/user/logout',{headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} })
+		.success(function(data){
+			if(data.status=="SUCCESS"){
+				if($rootScope.IOS==true){
+					var confirmPopup = $ionicPopup.confirm({
+						title: 'Do you want to Logout',
+						template: 'Are you sure',
+						okText: 'No',
+						cancelText: 'Yes',
+					});
+					confirmPopup.then(function(res) {
+						if(res) {
+							console.log('You are not sure');
+						} else {
+							localStorage.clear();
+							$location.path("/login");
+						}
+					});
+				}else{
+					$cordovaDialogs.confirm('Do you want to Logout', 'Are you sure', ['Yes','No'])
+					.then(function(buttonIndex) {
+						if(buttonIndex=="1")
+						{
+							localStorage.clear();
+							$location.path("/login");
+						}
+						else{}
+					});
 				}
-			});
-		}else{
-			$cordovaDialogs.confirm('Do you want to Logout', 'Are you sure', ['Yes','No'])
-			.then(function(buttonIndex) {
-				if(buttonIndex=="1")
-				{
-				localStorage.clear();
-				$location.path("/login");
-				}
-				else{}
-			});
-		}
+			}
+		});
 	}
 	$scope.goback=function()
 	{
@@ -4771,12 +4776,12 @@ angular.module('starter.controllers', [])
 .controller('HraCtrl', function($scope,$ionicPlatform,$cordovaNetwork,$cordovaDatePicker,$http,$location,$ionicModal,$cordovaDialogs,$ionicLoading,$cordovaNetwork,$rootScope) {
 	$scope.username = localStorage.getItem('username');
 	$scope.access_token = localStorage.getItem('access_token');
-	$http.get('http://app.sterlinghsa.com/api/v1/accounts/portfolio',{headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} })
+	$http.get('http://mobileapp.sterlinghsa.com/api/v1/accounts/portfolio',{headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} })
 	.success(function(data){
 		$rootScope.hraaccno=data.account_types.HRA.ACCT_NUM; 
 		$rootScope.hraaccId=data.account_types.HRA.ACCT_ID;
 		
-		$http.get(' http://app.sterlinghsa.com/api/v1/accounts/list',{headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} })
+		$http.get(' http://mobileapp.sterlinghsa.com/api/v1/accounts/list',{headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} })
 		.success(function(data){
 			for(var i=0;i<data.accounts.length;i++){
 				if($rootScope.hraaccno==data.accounts[i].ACC_NUM){
@@ -4795,7 +4800,7 @@ angular.module('starter.controllers', [])
 	});
 
 	$scope.debit=function(){
-		$http.get(" http://app.sterlinghsa.com/api/v1/accounts/debitcardpurchase",{params:{'acct_num':$scope.hraaccno},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
+		$http.get(" http://mobileapp.sterlinghsa.com/api/v1/accounts/debitcardpurchase",{params:{'acct_num':$scope.hraaccno},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
 		.success(function(data){
 			$ionicLoading.hide();
 				$scope.hra_debit_card_list=data.debit_card_list[0];
@@ -4846,7 +4851,7 @@ angular.module('starter.controllers', [])
 	}
 	else
 	{	 
-		$http.get("http://app.sterlinghsa.com/api/v1/accounts/accountinfo",{params:{'type':'hra','acc_num':$scope.hraacc},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
+		$http.get("http://mobileapp.sterlinghsa.com/api/v1/accounts/accountinfo",{params:{'type':'hra','acc_num':$scope.hraacc},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
 		.success(function(data){ 
 			$scope.accnumber=data.account_information;
 		}).error(function(err){
@@ -4911,7 +4916,7 @@ angular.module('starter.controllers', [])
 	}
 	else
 	{
-		$http.get(" http://app.sterlinghsa.com/api/v1/accounts/recent-activity",{params:{'acct_id': $scope.hraid,'trans_type':'c','plan_type':'hra'},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
+		$http.get(" http://mobileapp.sterlinghsa.com/api/v1/accounts/recent-activity",{params:{'acct_id': $scope.hraid,'trans_type':'c','plan_type':'hra'},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
 		.success(function(data){
 			$ionicLoading.hide();
 			if(data.transcation_list==null || data.transcation_list==""){
@@ -5002,7 +5007,7 @@ angular.module('starter.controllers', [])
 	}
 	else
 	{
-		$http.get(" http://app.sterlinghsa.com/api/v1/accounts/recent-activity",{params:{'acct_id':$scope.hraid,'trans_type':'d','plan_type':'hra'},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
+		$http.get(" http://mobileapp.sterlinghsa.com/api/v1/accounts/recent-activity",{params:{'acct_id':$scope.hraid,'trans_type':'d','plan_type':'hra'},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
 		.success(function(data){
 			$ionicLoading.hide();
 			if(data.transcation_list==null || data.transcation_list=="")
@@ -5082,12 +5087,12 @@ angular.module('starter.controllers', [])
 	$scope.hraaccId= $rootScope.hraaccId;
 	$rootScope.claimMode='';
 	$rootScope.claimMode='payme';
-	$http.get("http://app.sterlinghsa.com/api/v1/accounts/availablebalances",{params:{ 'acct_num':$scope.hraacc},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
+	$http.get("http://mobileapp.sterlinghsa.com/api/v1/accounts/availablebalances",{params:{ 'acct_num':$scope.hraacc},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
 	.success(function(data){
 		$scope.available_balances = data.available_balances;
 	})
 	
-	$http.get(" http://app.sterlinghsa.com/api/v1/accounts/plan-type",{params:{'acct_id':$scope.hraid},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
+	$http.get(" http://mobileapp.sterlinghsa.com/api/v1/accounts/plan-type",{params:{'acct_id':$scope.hraid},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
 	.success(function(data){
 		if(data.plan_types==null){
 			if($rootScope.IOS==true){
@@ -5153,12 +5158,12 @@ angular.module('starter.controllers', [])
 	$scope.hraaccId= $rootScope.hraaccId;
 	$rootScope.claimMode='';
 	$rootScope.claimMode='payprovider';
-	$http.get("http://app.sterlinghsa.com/api/v1/accounts/availablebalances",{params:{ 'acct_num':$scope.hraacc},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
+	$http.get("http://mobileapp.sterlinghsa.com/api/v1/accounts/availablebalances",{params:{ 'acct_num':$scope.hraacc},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
 	.success(function(data){
 		$scope.available_balances = data.available_balances;
 	})
 	
-	$http.get(" http://app.sterlinghsa.com/api/v1/accounts/plan-type",{params:{'acct_id':$scope.hraid},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
+	$http.get(" http://mobileapp.sterlinghsa.com/api/v1/accounts/plan-type",{params:{'acct_id':$scope.hraid},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
 	.success(function(data){
 		if(data.plan_types==null){
 			if($rootScope.IOS==true){
@@ -5247,7 +5252,7 @@ angular.module('starter.controllers', [])
 			return false;
 		}
 	}else{
-		$http.get("http://app.sterlinghsa.com/api/v1/accounts/availablebalances",{params:{ 'acct_num':$scope.hraacc},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
+		$http.get("http://mobileapp.sterlinghsa.com/api/v1/accounts/availablebalances",{params:{ 'acct_num':$scope.hraacc},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
 		.success(function(data){
 			$rootScope.available_balances = data.available_balances;
 		}).error(function(err){
@@ -5382,7 +5387,7 @@ angular.module('starter.controllers', [])
 		}
 	}
 		
-	$http.get("http://app.sterlinghsa.com/api/v1/accounts/bankdetails",{params:{'type':'hra', 'acc_num':$scope.hraacc},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
+	$http.get("http://mobileapp.sterlinghsa.com/api/v1/accounts/bankdetails",{params:{'type':'hra', 'acc_num':$scope.hraacc},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
 	.success(function(data){
 		if($rootScope.claimMode='payme'){
 			if(data.status=="FAILED"){
@@ -5546,7 +5551,7 @@ angular.module('starter.controllers', [])
 			}
 
 		}else{
-			$http.post("http://app.sterlinghsa.com/api/v1/accounts/newclaimrequest_base64",{'acct_num':  $scope.hraaccno,
+			$http.post("http://mobileapp.sterlinghsa.com/api/v1/accounts/newclaimrequest_base64",{'acct_num':  $scope.hraaccno,
 			'acct_id':$scope.hraaccId,
 			'bank_acct_id':$scope.acoinde.Bankaccount.BANK_ACC_ID,
 			'amount':$scope.acoinde.amount,
@@ -5791,7 +5796,7 @@ angular.module('starter.controllers', [])
 			}
 
 		}else{
-			$http.post("http://app.sterlinghsa.com/api/v1/accounts/newclaimrequest_base64",{'acct_num': $scope.hraaccno,
+			$http.post("http://mobileapp.sterlinghsa.com/api/v1/accounts/newclaimrequest_base64",{'acct_num': $scope.hraaccno,
 			'acct_id':$scope.hraaccId,
 			'bank_acct_id':'',
 			'amount':$scope.provideracoinde.amount,
@@ -5869,7 +5874,7 @@ angular.module('starter.controllers', [])
 		}
 	}
  
-	$http.get('http://app.sterlinghsa.com/api/v1/accounts/payeeslist',{params:{'acc_num': $scope.hraacc},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} })
+	$http.get('http://mobileapp.sterlinghsa.com/api/v1/accounts/payeeslist',{params:{'acc_num': $scope.hraacc},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} })
 	.success(function(data){
 		$scope.payee=data.payee ;
 		if($rootScope.claimMode='payprovider'){
@@ -6024,7 +6029,7 @@ angular.module('starter.controllers', [])
 			return false;
 		}
 	}else{ 
-		$http.get(" http://app.sterlinghsa.com/api/v1/accounts/debitcardpurchase",{params:{'acct_num':$scope.hraaccno},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
+		$http.get(" http://mobileapp.sterlinghsa.com/api/v1/accounts/debitcardpurchase",{params:{'acct_num':$scope.hraaccno},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
 		.success(function(data){
 			$ionicLoading.hide();
 			if(data.debit_card_list==null || data.debit_card_list==""){
@@ -6116,7 +6121,7 @@ angular.module('starter.controllers', [])
 			return false;
 		}
 	}else{ 
-		$http.get(" http://app.sterlinghsa.com/api/v1/accounts/debitcardpurchase",{params:{'acct_num':$scope.hraaccno},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
+		$http.get(" http://mobileapp.sterlinghsa.com/api/v1/accounts/debitcardpurchase",{params:{'acct_num':$scope.hraaccno},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
 		.success(function(data){
 			$ionicLoading.hide();
 			if(data.debit_card_list==null || data.debit_card_list==""){
@@ -6215,7 +6220,7 @@ angular.module('starter.controllers', [])
 			return false;
 		}
 	}else{ 
-		$http.get(" http://app.sterlinghsa.com/api/v1/accounts/debitcardpurchase",{params:{'acct_num':$scope.hraaccno},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
+		$http.get(" http://mobileapp.sterlinghsa.com/api/v1/accounts/debitcardpurchase",{params:{'acct_num':$scope.hraaccno},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
 		.success(function(data){
 			$ionicLoading.hide();
 			if(data.debit_card_list==null || data.debit_card_list==""){
@@ -6314,7 +6319,7 @@ angular.module('starter.controllers', [])
 			return false;
 		}
 	}else{
-		$http.get(" http://app.sterlinghsa.com/api/v1/accounts/claimdetail",{params:{'trans_num':$scope.hra_trans_num},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
+		$http.get(" http://mobileapp.sterlinghsa.com/api/v1/accounts/claimdetail",{params:{'trans_num':$scope.hra_trans_num},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
 		.success(function(data){
 			$ionicLoading.hide();
 			if(data.payment_information==null){
@@ -6374,7 +6379,7 @@ angular.module('starter.controllers', [])
 		if($rootScope.IOS==true){
 			//alert("Http")
 			$http({
-				url : 'http://app.sterlinghsa.com/api/v1/accounts/downloadclaimdocument',
+				url : 'http://mobileapp.sterlinghsa.com/api/v1/accounts/downloadclaimdocument',
 				params:{id:doc.ATTACHMENT_ID},
 				method : 'GET',
 				responseType : 'arraybuffer',
@@ -6407,7 +6412,7 @@ angular.module('starter.controllers', [])
 			});
 		}else{
 			$http({
-				url : 'http://app.sterlinghsa.com/api/v1/accounts/downloadclaimdocument',
+				url : 'http://mobileapp.sterlinghsa.com/api/v1/accounts/downloadclaimdocument',
 				params:{id:doc.ATTACHMENT_ID},
 				method : 'GET',
 				responseType : 'arraybuffer',
@@ -6584,7 +6589,7 @@ angular.module('starter.controllers', [])
 			template: '<ion-spinner icon="ios"></ion-spinner><br>Loading...'
 			});
 			
-			$http.post("http://app.sterlinghsa.com/api/v1/accounts/uploadclaimdocument",{'claim_id':  $scope.hra_trans_num,
+			$http.post("http://mobileapp.sterlinghsa.com/api/v1/accounts/uploadclaimdocument",{'claim_id':  $scope.hra_trans_num,
 			"receipt":$scope.imgSrc,
 			"file_name":$scope.randomFile,
 			"file_mime_type":'image/jpeg'
@@ -6655,7 +6660,7 @@ angular.module('starter.controllers', [])
 // Cobra controller
 .controller('CobraCtrl', function($scope,$location,$rootScope, $stateParams, $http,$cordovaDialogs,$location) {
 	$scope.access_token = localStorage.getItem('access_token');
-	$http.get('http://app.sterlinghsa.com/api/v1/accounts/portfolio',{headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} })
+	$http.get('http://mobileapp.sterlinghsa.com/api/v1/accounts/portfolio',{headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} })
 	.success(function(data){
 		$rootScope.cobrassn=data.account_types.COBRA.SSN;
 	}).error(function(err){
@@ -6677,7 +6682,7 @@ angular.module('starter.controllers', [])
 .controller('CobraaccountCtrl', function($scope,$location,$rootScope, $stateParams, $http,$ionicLoading,$cordovaDialogs,$ionicPopup) {
 	$scope.access_token = localStorage.getItem('access_token');
 	$scope.ssn=$rootScope.cobrassn;
-	$http.get(' http://app.sterlinghsa.com/api/v1/accounts/accountinfo',{params:{'type':'cobra','ssn': $scope.ssn},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} })
+	$http.get(' http://mobileapp.sterlinghsa.com/api/v1/accounts/accountinfo',{params:{'type':'cobra','ssn': $scope.ssn},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} })
 	.success(function(data){
 		$ionicLoading.hide();
 		$scope.account_information=data.account_information;
@@ -6716,7 +6721,7 @@ angular.module('starter.controllers', [])
 .controller('CobraPaymentCtrl', function($scope,$location,$rootScope, $stateParams, $http,$ionicLoading,$cordovaDialogs,$location,$ionicPopup) {
 	$scope.access_token = localStorage.getItem('access_token');
 	$scope.ssn=$rootScope.cobrassn;
-	$http.get(" http://app.sterlinghsa.com/api/v1/accounts/recent-cobra-payments",{params:{'ssn': $scope.ssn},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
+	$http.get(" http://mobileapp.sterlinghsa.com/api/v1/accounts/recent-cobra-payments",{params:{'ssn': $scope.ssn},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
 	.success(function(data){
 		$ionicLoading.hide();
 		if(data.payment_information.length==0){
