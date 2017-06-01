@@ -3016,7 +3016,7 @@ angular.module('starter.controllers', [])
 			
 			$http.post("http://mobileapp.sterlinghsa.com/api/v1/accounts/newclaimrequest_base64",{'acct_num':  $scope.fsaaccno,
 			'acct_id':$scope.fsaaccId,
-			'bank_acct_id':$scope.newclaimvalues.Bankaccount.BANK_ACC_ID,
+			'bank_acct_id':$scope.newclaimvalues.selectAccount.BANK_ACC_ID,
 			'amount':$scope.newclaimvalues.amount,
 			'service_start_date':$scope.newclaimvalues.startTransDate,
 			'service_end_date':$scope.newclaimvalues.endTransDate,
@@ -4636,50 +4636,53 @@ angular.module('starter.controllers', [])
 		$scope.isHra=false;
 		console.log('make sure toggleSomething() is firing*');
 	}
+	
+	$scope.contactPage=function(){
+		$location.path("/contact");
+	}
 
 	$scope.logOut=function()
 	{
-		$http.get('http://mobileapp.sterlinghsa.com/api/v1/user/logout',{headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} })
-		.success(function(data){
-			if(data.status=="SUCCESS"){
-				if($rootScope.IOS==true){
-					var confirmPopup = $ionicPopup.confirm({
-						title: 'Do you want to Logout',
-						template: 'Are you sure',
-						okText: 'No',
-						cancelText: 'Yes',
-					});
-					confirmPopup.then(function(res) {
-						if(res) {
-							console.log('You are not sure');
-						} else {
-							$timeout(function () {
-							  $ionicHistory.clearCache();
-							  $ionicHistory.clearHistory();
-							  $log.debug('clearing cache')
-						  },300)
-							localStorage.clear();
-							$location.path("/login");
-						}
-					});
-				}else{
-					$cordovaDialogs.confirm('Do you want to Logout', 'Are you sure', ['Yes','No'])
-					.then(function(buttonIndex) {
-						if(buttonIndex=="1")
-						{
-							$timeout(function () {
-							  $ionicHistory.clearCache();
-							  $ionicHistory.clearHistory();
-							  $log.debug('clearing cache')
-						  },300) 
-							localStorage.clear();
-							$location.path("/login");
-						}
-						else{}
-					});
+		if($rootScope.IOS==true){
+			var confirmPopup = $ionicPopup.confirm({
+				title: 'Do you want to Logout',
+				template: 'Are you sure',
+				okText: 'No',
+				cancelText: 'Yes',
+			});
+			confirmPopup.then(function(res) {
+				if(res) {
+					console.log('You are not sure');
+				} else {
+					$timeout(function () {
+					  $ionicHistory.clearCache();
+					  $ionicHistory.clearHistory();
+					  $log.debug('clearing cache')
+				  },300)
+					localStorage.clear();
+					$location.path("/login");
+					$http.get('http://mobileapp.sterlinghsa.com/api/v1/user/logout',{headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} })
+					.success(function(data){});
 				}
-			}
-		});
+			});
+		}else{
+			$cordovaDialogs.confirm('Do you want to Logout', 'Are you sure', ['Yes','No'])
+			.then(function(buttonIndex) {
+				if(buttonIndex=="1")
+				{
+					$timeout(function () {
+					  $ionicHistory.clearCache();
+					  $ionicHistory.clearHistory();
+					  $log.debug('clearing cache');
+				  },300) 
+					localStorage.clear();
+					$location.path("/login");
+					$http.get('http://mobileapp.sterlinghsa.com/api/v1/user/logout',{headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} })
+					.success(function(data){});
+				}
+				else{}
+			});
+		}
 	}
 	$scope.goback=function()
 	{
@@ -5563,7 +5566,7 @@ angular.module('starter.controllers', [])
 		}else{
 			$http.post("http://mobileapp.sterlinghsa.com/api/v1/accounts/newclaimrequest_base64",{'acct_num':  $scope.hraaccno,
 			'acct_id':$scope.hraaccId,
-			'bank_acct_id':$scope.acoinde.Bankaccount.BANK_ACC_ID,
+			'bank_acct_id':$scope.acoinde.selectAccount.BANK_ACC_ID,
 			'amount':$scope.acoinde.amount,
 			'service_start_date':$scope.acoinde.startTransDate,
 			'service_end_date':$scope.acoinde.endTransDate,
