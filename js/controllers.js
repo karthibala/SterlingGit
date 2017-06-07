@@ -790,6 +790,7 @@ angular.module('starter.controllers', [])
 	$scope.msghide=true;
 	$scope.floatlabel=false;
 	$scope.floatlabel1=false;
+	$scope.bankStatus=false;
 	$scope.date = $filter('date')(new Date(),'MM/dd/yyyy');
 	
 	$scope.SelectFloat = function ()
@@ -986,6 +987,7 @@ angular.module('starter.controllers', [])
 		.success(function(data){
 			if(data.status=="FAILED"){
 				if($rootScope.IOS==true){
+					$scope.bankStatus=true;
 					var alertPopup = $ionicPopup.alert({
 						title: 'Sorry',
 						template: 'You do not have a bank account on record.You must add a bank account by logging into www.sterlingadministration.com to schedule disbursements'
@@ -1037,6 +1039,27 @@ angular.module('starter.controllers', [])
 	$http.get(" http://mobileapp.sterlinghsa.com/api/v1/accounts/balances",{params:{'type':'hsa'},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
 	.success(function(data){
 		$scope.Availablebalance=data.balances.BALANCE;
+		setTimeout(function(){
+			if($scope.Availablebalance < 0){
+				if($scope.bankStatus!=true){
+					if($rootScope.IOS==true){
+						var alertPopup = $ionicPopup.alert({
+							title: 'Sorry',
+							template: 'You do not have sufficient balance to schedule this disbursement'
+						});
+
+						alertPopup.then(function(res) {
+							window.history.back();
+						});
+					}else{
+						$cordovaDialogs.alert('You do not have sufficient balance to schedule this disbursement','Sorry','OK')
+						.then(function() {
+							window.history.back();
+						});
+					}
+				}
+			}
+		},500);
 	}).error(function(err){
 
 	});
@@ -1218,6 +1241,7 @@ angular.module('starter.controllers', [])
 	$scope.hsaaccno=$rootScope.hsaaccno;
 	$scope.payprovierValues={selectPayee:'',patient_name:'',amount:'',TransDate:'',description:''};
 	$scope.floatlabel=false;
+	$scope.bankStatus=false;
 	$scope.date = $filter('date')(new Date(),'MM/dd/yyyy');
 	
 	$scope.SelectFloat = function ()
@@ -1425,6 +1449,7 @@ angular.module('starter.controllers', [])
 		.success(function(data){
 			//alert(data.payee.length)
 			if(data.payee==null){
+				$scope.bankStatus=true;
 				if($rootScope.IOS==true){
 					var alertPopup = $ionicPopup.alert({
 						title: 'Sorry',
@@ -1448,6 +1473,27 @@ angular.module('starter.controllers', [])
 		$http.get(" http://mobileapp.sterlinghsa.com/api/v1/accounts/balances",{params:{'type':'hsa'},headers: {'Content-Type':'application/json; charset=utf-8','Authorization':$scope.access_token} } )
 		.success(function(data){
 			$scope.availablebalance=data.balances.BALANCE;
+			setTimeout(function(){
+				if($scope.availablebalance < 0){
+					if($scope.bankStatus!=true){
+						if($rootScope.IOS==true){
+							var alertPopup = $ionicPopup.alert({
+								title: 'Sorry',
+								template: 'You do not have sufficient balance to schedule this disbursement'
+							});
+
+							alertPopup.then(function(res) {
+								window.history.back();
+							});
+						}else{
+							$cordovaDialogs.alert('You do not have sufficient balance to schedule this disbursement','Sorry','OK')
+							.then(function() {
+								window.history.back();
+							});
+						}
+					}
+				}
+			},500);
 		}).error(function(err){
 
 		});
@@ -2651,6 +2697,28 @@ angular.module('starter.controllers', [])
 	$scope.plan_types=$rootScope.plan_types;
 	$scope.newclaim_plantype=$rootScope.newclaim_plantype;
 	$scope.newclaim_balance=$rootScope.newclaim_balance;
+	$scope.bankStatus=false;
+	setTimeout(function(){
+		if($scope.newclaim_balance < 0){
+			if($scope.bankStatus!=true){
+				if($rootScope.IOS==true){
+					var alertPopup = $ionicPopup.alert({
+						title: 'Sorry',
+						template: 'You do not have sufficient balance to this claim'
+					});
+
+					alertPopup.then(function(res) {
+						window.history.back();
+					});
+				}else{
+					$cordovaDialogs.alert('You do not have sufficient balance to this claim','Sorry','OK')
+					.then(function() {
+						window.history.back();
+					});
+				}
+			}
+		}
+	},500);
 	$scope.newclaimvalues={taxid:'',amount:'',dependent:'',patient:'',Bankaccount:'',startTransDate:'',endTransDate:''};
 	$scope.imgSrc;
 	//$scope.imgSrc=[];
@@ -2765,6 +2833,7 @@ angular.module('starter.controllers', [])
 			//alert("claimMode")
 			//alert($rootScope.claimMode)
 			if(data.status=="FAILED"){
+				$scope.bankStatus=true;
 				if($rootScope.IOS==true){
 					var alertPopup = $ionicPopup.alert({
 						title: 'Sorry',
@@ -2810,6 +2879,7 @@ angular.module('starter.controllers', [])
 		.success(function(data){
 			$scope.payee=data.payee;
 			if(data.payee==null){
+				$scope.bankStatus=true;
 				if($rootScope.IOS==true){
 					var alertPopup = $ionicPopup.alert({
 						title: 'Sorry',
@@ -3391,6 +3461,28 @@ angular.module('starter.controllers', [])
 	$scope.plan_types=$rootScope.plan_types;
 	$scope.newclaim_plantype=$rootScope.newclaim_plantype;
 	$scope.newclaim_balance=$rootScope.newclaim_balance;
+	$scope.bankStatus=false;
+	setTimeout(function(){
+		if($scope.newclaim_balance < 0){
+			if($scope.bankStatus!=true){
+				if($rootScope.IOS==true){
+					var alertPopup = $ionicPopup.alert({
+						title: 'Sorry',
+						template: 'You do not have sufficient balance to this claim'
+					});
+
+					alertPopup.then(function(res) {
+						window.history.back();
+					});
+				}else{
+					$cordovaDialogs.alert('You do not have sufficient balance to this claim','Sorry','OK')
+					.then(function() {
+						window.history.back();
+					});
+				}
+			}
+		}
+	},500);
     $scope.newclaimvalues={taxid:'',amount:'',dependent:'',patient:'',Bankaccount:'',startTransDate:'',endTransDate:''};
 	$scope.imgSrc;
 	//$scope.imgSrc=[];
@@ -3641,6 +3733,7 @@ angular.module('starter.controllers', [])
 		$scope.payee=data.payee ;
 		if($rootScope.claimMode='payprovider'){
 			if(data.payee==null){
+				$scope.bankStatus=true;
 				if($rootScope.IOS==true){
 					var alertPopup = $ionicPopup.alert({
 						title: 'Sorry',
@@ -5302,6 +5395,28 @@ angular.module('starter.controllers', [])
 	$scope.username = localStorage.getItem('username');
 	$scope.access_token = localStorage.getItem('access_token');
 	$scope.newclaim_balance=$rootScope.newclaim_balance;
+	$scope.bankStatus=false;
+	setTimeout(function(){
+		if($scope.newclaim_balance < 0){
+			if($scope.bankStatus!=true){
+				if($rootScope.IOS==true){
+					var alertPopup = $ionicPopup.alert({
+						title: 'Sorry',
+						template: 'You do not have sufficient balance to this claim'
+					});
+
+					alertPopup.then(function(res) {
+						window.history.back();
+					});
+				}else{
+					$cordovaDialogs.alert('You do not have sufficient balance to this claim','Sorry','OK')
+					.then(function() {
+						window.history.back();
+					});
+				}
+			}
+		}
+	},500);
 	$scope.hraacc= $rootScope.hraaccno;
 	$scope.hsaaccno=$rootScope.hsaaccno;
 	$scope.hraaccId= $rootScope.hraaccId;
@@ -5404,6 +5519,7 @@ angular.module('starter.controllers', [])
 	.success(function(data){
 		if($rootScope.claimMode='payme'){
 			if(data.status=="FAILED"){
+				$scope.bankStatus=true;
 				if($rootScope.IOS==true){
 					var alertPopup = $ionicPopup.alert({
 						title: 'Sorry',
@@ -5653,6 +5769,28 @@ angular.module('starter.controllers', [])
 	$scope.newclaim_balance=$rootScope.newclaim_balance;
 	$scope.hraaccno= $rootScope.hraaccno;
 	$scope.hraaccId= $rootScope.hraaccId;
+	$scope.bankStatus=false;
+	setTimeout(function(){
+		if($scope.newclaim_balance < 0){
+			if($scope.bankStatus!=true){
+				if($rootScope.IOS==true){
+					var alertPopup = $ionicPopup.alert({
+						title: 'Sorry',
+						template: 'You do not have sufficient balance to this claim'
+					});
+
+					alertPopup.then(function(res) {
+						window.history.back();
+					});
+				}else{
+					$cordovaDialogs.alert('You do not have sufficient balance to this claim','Sorry','OK')
+					.then(function() {
+						window.history.back();
+					});
+				}
+			}
+		}
+	},500);
 	$scope.provideracoinde={selectpayee:'',amount:'',description:'',startTransDate:'',endTransDate:'',patient:''};
 	$scope.imgSrc;
 	//$scope.imgSrc=[];
@@ -5892,6 +6030,7 @@ angular.module('starter.controllers', [])
 		$scope.payee=data.payee ;
 		if($rootScope.claimMode='payprovider'){
 			if(data.payee==null){
+				$scope.bankStatus=true;
 				if($rootScope.IOS==true){
 					var alertPopup = $ionicPopup.alert({
 						title: 'Sorry',
