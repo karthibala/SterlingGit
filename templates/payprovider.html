@@ -49,7 +49,7 @@
 
 						<label class="item item-input item-floating-label formselect "  ng-class="{ 'has-errors' :myForm.amount.$dirty && myForm.amount.$invalid ,'no-errors' :myForm.amount.$valid   }">
 							<span class="input-label ItemlineHead1">Enter Amount</span>
-							<input type="number" step="0.01"  id="forminput " name="amount" ng-model="payprovierValues.amount" placeholder="Enter Amount"  ng-pattern='\\d+' required>
+							<input type="number" step="0.01"  id="forminput " name="amount" ng-change="myAvlBalance()" ng-model="payprovierValues.amount" placeholder="Enter Amount"  ng-pattern='\\d+' required>
 						</label> 
 						<div class="row">
 							<span style="color:red" ng-show="myForm.amount.$dirty && myForm.amount.$invalid">
